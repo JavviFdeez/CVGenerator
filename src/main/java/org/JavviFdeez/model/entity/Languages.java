@@ -1,15 +1,19 @@
-package org.JavviFdeez.model;
+package org.JavviFdeez.model.entity;
 
 public class Languages {
 
+    // =============
     // Attributes
+    // =============
     private int lang_id;
     private int contact_id;
     private int spanish;
     private int english;
     private int french;
 
+    // ==============
     // Constructor
+    // ==============
     public Languages(int lang_id, int contact_id, int spanish, int english, int french) {
         this.lang_id = lang_id;
         this.contact_id = contact_id;
@@ -18,7 +22,9 @@ public class Languages {
         this.french = french;
     }
 
+    // ======================
     // Getters and Setters
+    // ======================
     public int getLang_id() {
         return lang_id;
     }

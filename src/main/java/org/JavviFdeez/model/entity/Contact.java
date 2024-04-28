@@ -1,8 +1,9 @@
-package org.JavviFdeez.model;
+package org.JavviFdeez.model.entity;
 
 public class Contact {
-
+    // ==============
     // Attributes
+    // ==============
     private int contact_id;
     private String name;
     private String last_name;
@@ -13,7 +14,9 @@ public class Contact {
     private String location;
     private String extra;
 
+    // ==============
     // Constructor
+    // ==============
     public Contact(int contact_id, String name, String last_name, String image, String mobile, String email, String linkedin, String location, String extra) {
         this.contact_id = contact_id;
         this.name = name;
@@ -26,7 +29,9 @@ public class Contact {
         this.extra = extra;
     }
 
+    // ======================
     // Getters and Setters
+    // ======================
     public int getContact_id() {
         return contact_id;
     }

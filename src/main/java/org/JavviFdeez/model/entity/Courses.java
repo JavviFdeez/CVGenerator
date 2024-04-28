@@ -1,16 +1,20 @@
-package org.JavviFdeez.model;
+package org.JavviFdeez.model.entity;
 
 public class Courses {
 
+    // =============
     // Attributes
+    // =============
     private int course_id;
     private int contact_id;
     private String name;
-    private String duration;
+    private int duration;
     private int position;
 
+    // ==============
     // Constructor
-    public Courses(int course_id, int contact_id, String name, String duration, int position) {
+    // ==============
+    public Courses(int course_id, int contact_id, String name, int duration, int position) {
         this.course_id = course_id;
         this.contact_id = contact_id;
         this.name = name;
@@ -18,7 +22,9 @@ public class Courses {
         this.position = position;
     }
 
+    // ======================
     // Getters and Setters
+    // ======================
     public int getCourse_id() {
         return course_id;
     }
@@ -43,11 +49,11 @@ public class Courses {
         this.name = name;
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 

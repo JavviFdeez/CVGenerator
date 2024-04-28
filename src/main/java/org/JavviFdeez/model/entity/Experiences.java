@@ -1,33 +1,42 @@
-package org.JavviFdeez.model;
+package org.JavviFdeez.model.entity;
 
-public class Academies {
+public class Experiences {
 
+    // =============
     // Attributes
-    private int academy_id;
+    // =============
+    private int experience_id;
     private int contact_id;
     private String name;
+    private String duration;
     private String entity;
     private String location;
     private int year;
+    private String position;
 
+    // ==============
     // Constructor
-    public Academies(int academy_id, int contact_id, String name, String entity, String location, int year) {
-        this.academy_id = academy_id;
+    // ==============
+    public Experiences(int experience_id, int contact_id, String name, String duration, String entity, String location, int year, String position) {
+        this.experience_id = experience_id;
         this.contact_id = contact_id;
         this.name = name;
+        this.duration = duration;
         this.entity = entity;
         this.location = location;
         this.year = year;
+        this.position = position;
     }
 
+    // ======================
     // Getters and Setters
-
-    public int getAcademy_id() {
-        return academy_id;
+    // ======================
+    public int getExperience_id() {
+        return experience_id;
     }
 
-    public void setAcademy_id(int academy_id) {
-        this.academy_id = academy_id;
+    public void setExperience_id(int experience_id) {
+        this.experience_id = experience_id;
     }
 
     public int getContact_id() {
@@ -44,6 +53,14 @@ public class Academies {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     public String getEntity() {
@@ -68,5 +85,13 @@ public class Academies {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 }

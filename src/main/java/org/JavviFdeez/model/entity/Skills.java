@@ -1,18 +1,24 @@
-package org.JavviFdeez.model;
+package org.JavviFdeez.model.entity;
 
 public class Skills {
 
+    // =============
     // Attributes
+    // =============
     private int skill_id;
     private String name;
 
+    // ==============
     // Constructor
+    // ==============
     public Skills(int skill_id, String name) {
         this.skill_id = skill_id;
         this.name = name;
     }
 
+    // ======================
     // Getters and Setters
+    // ======================
     public int getSkill_id() {
         return skill_id;
     }

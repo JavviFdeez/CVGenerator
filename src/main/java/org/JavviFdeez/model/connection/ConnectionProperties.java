@@ -8,6 +8,9 @@ import java.io.Serializable;
 @XmlRootElement(name="connection")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ConnectionProperties implements Serializable {
+    // ============
+    // Atributos
+    // ============
     private static final long serialVersionUID=1L;
     private String server;
     private String port;
@@ -15,6 +18,9 @@ public class ConnectionProperties implements Serializable {
     private String user;
     private String password;
 
+    // =================
+    // Constructor
+    // =================
     public ConnectionProperties(String server, String port, String database, String user, String password) {
         this.server = server;
         this.port = port;
@@ -23,6 +29,9 @@ public class ConnectionProperties implements Serializable {
         this.password = password;
     }
 
+    // ====================
+    // Getters y Setters
+    // ====================
     public ConnectionProperties() {
     }
 
@@ -66,6 +75,13 @@ public class ConnectionProperties implements Serializable {
         this.password = password;
     }
 
+    public String getURL(){
+        return "jdbc:mariadb://"+server+":"+port+"/"+database;
+    }
+
+    // =================
+    // ToString
+    // =================
     @Override
     public String toString() {
         return "ConnectionProperties{" +
@@ -75,9 +91,5 @@ public class ConnectionProperties implements Serializable {
                 ", user='" + user + '\'' +
                 ", password='" + password + '\'' +
                 '}';
-    }
-
-    public String getURL(){
-        return "jdbc:mariadb://"+server+":"+port+"/"+database;
     }
 }

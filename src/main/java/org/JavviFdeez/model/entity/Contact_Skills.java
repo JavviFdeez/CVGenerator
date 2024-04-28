@@ -1,14 +1,17 @@
-package org.JavviFdeez.model;
+package org.JavviFdeez.model.entity;
 
 public class Contact_Skills {
-
+    // =============
     // Attributes
+    // =============
     private int cskill_id;
     private int contact_id;
     private int skill_id;
     private int value;
 
+    // ===============
     // Constructor
+    // ===============
     public Contact_Skills(int cskill_id, int contact_id, int skill_id, int value) {
         this.cskill_id = cskill_id;
         this.contact_id = contact_id;
@@ -16,7 +19,9 @@ public class Contact_Skills {
         this.value = value;
     }
 
+    // ======================
     // Getters and Setters
+    // ======================
     public int getCskill_id() {
         return cskill_id;
     }
