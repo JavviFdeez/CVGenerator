@@ -106,9 +106,13 @@ public class AcademiesDAO implements iAcademiesDAO {
             // Ejecutar la consulta
             // =======================
             int rowsAffected = pst.executeUpdate();
+
             // ===============================================
             // Verificar si se actualizó al menos una fila
             // ===============================================
+            if (rowsAffected == 0) {
+                throw new SQLException("❌ Error al actualizar, no se actualizo ninguna academia.");
+            }
         }
 
         return a;

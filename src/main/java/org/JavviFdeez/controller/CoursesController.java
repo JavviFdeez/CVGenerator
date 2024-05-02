@@ -1,140 +1,135 @@
 package org.JavviFdeez.controller;
 
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
-import org.JavviFdeez.model.dao.ContactDAO;
-import org.JavviFdeez.model.entity.Contact;
+import org.JavviFdeez.model.dao.CoursesDAO;
+import org.JavviFdeez.model.entity.Courses;
 
 import java.sql.SQLException;
 
-public class ContactController {
-    // =============
+public class CoursesController {
+    // ============
     // Atributos
-    // =============
-
-    private ContactDAO contactDAO;
+    // ============
+    private CoursesDAO coursesDAO;
 
     // ==============
     // Constructor
     // ==============
-    public ContactController() {
-        this.contactDAO = new ContactDAO(ConnectionMariaDB.getConnection());
+    public CoursesController() {
+        this.coursesDAO = new CoursesDAO(ConnectionMariaDB.getConnection());
     }
 
     /**
-     * @param contact el contacto que se va a guardar
+     * @param c el curso que se va a guardar
      * @Author: JavviFdeez
-     * Metodo para mostrar un mensaje de INSERTAR una nuevo contacto en la base de datos
+     * Metodo para mostrar un mensaje de INSERTAR un nuevo curso en la base de datos
      */
-    public void saveContact(Contact contact) {
+    public void saveCourses(Courses c) {
         try {
             // ==========================================
-            // Guardar el contacto en la base de datos
+            // Guardar el curso en la base de datos
             // ==========================================
-            contactDAO.save(contact);
+            coursesDAO.save(c);
             // ======================================================
-            // Si el guardado es exitoso, mostrar mensaje de éxito.
+            // Si el guardado es exitoso, mostrar mensaje de exito.
             // ======================================================
-            System.out.println("✅ Contacto guardada exitosamente.");
+            System.out.println("✅ Cursos guardados exitosamente.");
         } catch (SQLException e) {
             // =============================================
             // En caso de error, mostrar mensaje de error.
             // =============================================
-            System.err.println("❌ Error al guardar el contacto: " + e.getMessage());
+            System.err.println("❌ Error al guardar el curso: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * @param contact el contacto que se va a actualizar
+     * @param c el curso que se va a actualizar
      * @Author: JavviFdeez
-     * Metodo para mostrar un mensaje de ACTUALIZAR un contacto en la base de datos
+     * Metodo para mostrar un mensaje de ACTUALIZAR un nuevo curso en la base de datos
      */
-    public void updateContact(Contact contact) {
+    public void updateCourses(Courses c) {
         try {
             // ==========================================
-            // Actualizar el contacto en la base de datos
+            // Actualizar el curso en la base de datos
             // ==========================================
-            contactDAO.update(contact);
-            // ======================================================
+            coursesDAO.update(c);
+            // ===========================================================
             // Si la actualizacion es exitosa, mostrar mensaje de exito.
-            // ======================================================
-            System.out.println("✅ Contacto actualizado exitosamente.");
+            // ===========================================================
         } catch (SQLException e) {
             // =============================================
             // En caso de error, mostrar mensaje de error.
             // =============================================
-            System.err.println("❌ Error al actualizar el contacto: " + e.getMessage());
+            System.err.println("❌ Error al actualizar el curso: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * @param contact el contacto que se va a eliminar
+     * @param c el curso que se va a eliminar
      * @Author: JavviFdeez
-     * Metodo para mostrar un mensaje de ELIMINAR un contacto en la base de datos
+     * Metodo para mostrar un mensaje de ELIMINAR un nuevo curso en la base de datos
      */
-    public void deleteContact(Contact contact) {
+    public void deleteCourses(Courses c) {
         try {
             // ==========================================
-            // Eliminar el contacto de la base de datos
+            // Eliminar el curso de la base de datos
             // ==========================================
-            contactDAO.delete(contact);
+            coursesDAO.delete(c);
             // ======================================================
             // Si la eliminación es exitosa, mostrar mensaje de exito.
             // ======================================================
-            System.out.println("✅ Contacto eliminado exitosamente.");
         } catch (SQLException e) {
             // =============================================
             // En caso de error, mostrar mensaje de error.
             // =============================================
-            System.err.println("❌ Error al eliminar el contacto: " + e.getMessage());
+            System.err.println("❌ Error al eliminar el curso: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * @param id el contacto que se va a buscar
+     * @param id el curso que se va a buscar
      * @Author: JavviFdeez
-     * Metodo para mostrar un mensaje de buscar un contacto por ID en la base de datos
+     * Metodo para mostrar un mensaje de BUSCAR un nuevo curso en la base de datos
      */
-    public void getIDContact(int id) {
+    public void getCourses(int id) {
         try {
             // ==========================================
-            // Buscar el contacto en la base de datos
+            // Buscar el curso en la base de datos
             // ==========================================
-            contactDAO.findById(id);
+            coursesDAO.findById(id);
             // ======================================================
             // Si la busqueda es exitosa, mostrar mensaje de exito.
             // ======================================================
-            System.out.println("✅ Contacto encontrado exitosamente.");
         } catch (SQLException e) {
             // =============================================
             // En caso de error, mostrar mensaje de error.
             // =============================================
-            System.err.println("❌ Error al buscar el contacto: " + e.getMessage());
+            System.err.println("❌ Error al buscar el curso: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
      * @Author: JavviFdeez
-     * Metodo para mostrar un mensaje de buscar todos los contactos en la base de datos
+     * Metodo para mostrar un mensaje de BUSCAR todos los cursos en la base de datos
      */
-    public void getAllContact() {
+    public void getAllCourses() {
         try {
             // ==========================================
-            // Buscar todos los contactos en la base de datos
+            // Buscar todos los cursos en la base de datos
             // ==========================================
-            contactDAO.findAll();
+            coursesDAO.findAll();
             // ======================================================
             // Si la busqueda es exitosa, mostrar mensaje de exito.
             // ======================================================
-            System.out.println("✅ Contactos encontrados exitosamente.");
         } catch (SQLException e) {
             // =============================================
             // En caso de error, mostrar mensaje de error.
             // =============================================
-            System.err.println("❌ Error al buscar los contactos: " + e.getMessage());
+            System.err.println("❌ Error al buscar los cursos: " + e.getMessage());
             e.printStackTrace();
         }
     }

@@ -9,7 +9,7 @@ public class Experiences {
     private int contact_id;
     private String name;
     private String duration;
-    private String entity;
+    private String company;
     private String location;
     private int year;
     private String position;
@@ -22,7 +22,7 @@ public class Experiences {
         this.contact_id = contact_id;
         this.name = name;
         this.duration = duration;
-        this.entity = entity;
+        this.company = entity;
         this.location = location;
         this.year = year;
         this.position = position;
@@ -63,12 +63,12 @@ public class Experiences {
         this.duration = duration;
     }
 
-    public String getEntity() {
-        return entity;
+    public String getCompany() {
+        return company;
     }
 
-    public void setEntity(String entity) {
-        this.entity = entity;
+    public void setCompany(String entity) {
+        this.company = entity;
     }
 
     public String getLocation() {
