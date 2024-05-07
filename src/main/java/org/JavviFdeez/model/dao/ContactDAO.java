@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class ContactDAO implements iContactDAO{
+public class ContactDAO implements iContactDAO {
     // =======================================
     // Sentencias SQL para la base de datos
     // =======================================
@@ -35,12 +35,11 @@ public class ContactDAO implements iContactDAO{
     }
 
     /**
-     * @Author: JavviFdeez
-     * Método para GUARDAR un contacto en la base de datos.
-     *
      * @param c el contacto a ser guardado
      * @return el contacto guardado, incluyendo su ID generado
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
+     * @Author: JavviFdeez
+     * Método para GUARDAR un contacto en la base de datos.
      */
     @Override
     public Contact save(Contact c) throws SQLException {
@@ -97,12 +96,11 @@ public class ContactDAO implements iContactDAO{
     }
 
     /**
-     * @author: JavviFdeez
-     * Método para ACTUALIZAR la información de un contacto en la base de datos.
-     *
      * @param c el contacto que se va a actualizar
      * @return true si se actualizo correctamente, false en caso contrario
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
+     * @author: JavviFdeez
+     * Método para ACTUALIZAR la información de un contacto en la base de datos.
      */
     @Override
     public Contact update(Contact c) throws SQLException {
@@ -132,7 +130,7 @@ public class ContactDAO implements iContactDAO{
     }
 
     /**
-     * @param  c el contacto que se va a eliminar
+     * @param c el contacto que se va a eliminar
      * @return true si el contacto se elimina correctamente, false en caso contrario
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
      * @Author: JavviFdeez
@@ -166,12 +164,11 @@ public class ContactDAO implements iContactDAO{
     }
 
     /**
-     * @Author: JavviFdeez
-     * Método para BUSCAR un contacto por su ID en la base de datos.
-     *
      * @param id el ID del contacto a buscar
      * @return el contacto encontrado, o null si no se encuentra
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
+     * @Author: JavviFdeez
+     * Método para BUSCAR un contacto por su ID en la base de datos.
      */
     @Override
     public Contact findById(int id) throws SQLException {
@@ -215,18 +212,17 @@ public class ContactDAO implements iContactDAO{
     }
 
     /**
-     * @Author: JavviFdeez
-     * Método para BUSCAR todos los contactos en la base de datos.
-     *
      * @return una lista con todos los contactos encontrados en la base de datos
      * @throws SQLException si ocurre un error de acceso a la base de datos
+     * @Author: JavviFdeez
+     * Método para BUSCAR todos los contactos en la base de datos.
      */
     @Override
     public List<Contact> findAll() throws SQLException {
         // ====================================================
         // Lista de contactos encontrados, o vacía si no hay
         // ====================================================
-        List <Contact> cList = new ArrayList<>();
+        List<Contact> cList = new ArrayList<>();
 
         // ===================================================
         // Buscar todos los contactos en la base de datos

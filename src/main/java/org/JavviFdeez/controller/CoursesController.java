@@ -99,10 +99,18 @@ public class CoursesController {
             // ==========================================
             // Buscar el curso en la base de datos
             // ==========================================
-            coursesDAO.findById(id);
-            // ======================================================
-            // Si la busqueda es exitosa, mostrar mensaje de exito.
-            // ======================================================
+            Courses foundCourses = coursesDAO.findById(id);
+            if (foundCourses != null) {
+                // ======================================================
+                // Si la busqueda es exitosa, mostrar mensaje de exito.
+                // ======================================================
+                System.out.println("✅ Cursos encontrado exitosamente.");
+            } else {
+                // ======================================================
+                // Si la busqueda es exitosa, mostrar mensaje de exito.
+                // ======================================================
+                System.out.println("⚠️ No se encontró ningun curso con el ID proporcionado.");
+            }
         } catch (SQLException e) {
             // =============================================
             // En caso de error, mostrar mensaje de error.

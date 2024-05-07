@@ -135,6 +135,7 @@ public class CoursesDAO implements iCoursesDAO {
         } catch (SQLException e) {
             throw new SQLException("❌ Error al insertar, no se guardó ningun curso.");
         }
+
         return c;
     }
 
@@ -153,7 +154,7 @@ public class CoursesDAO implements iCoursesDAO {
         Courses foundCourse = null;
 
         // ==================================================
-        // Consulta SQL para buscar un curso por su ID
+        // Consulta para buscar un curso por su ID
         // ==================================================
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_ID)) {
             pst.setInt(1, id);

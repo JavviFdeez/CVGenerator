@@ -108,12 +108,15 @@ public class AcademiesController {
      */
     public void findAcademiesById(int id) {
         try {
+            // ===================================================
+            // Buscar la academia por su ID en la base de datos
+            // ===================================================
             Academies foundAcademies = academiesDAO.findById(id);
             if (foundAcademies != null) {
                 // ==================================================
                 // Si se encontró la academia, mostrar los detalles
                 // ==================================================
-                System.out.println("Academia encontrada:");
+                System.out.println("✅ Academia encontrada:");
                 System.out.println(foundAcademies);
             } else {
                 // ================================================================
@@ -135,7 +138,6 @@ public class AcademiesController {
      * Método para BUSCAR todas las academias de la base de datos y muestra un mensaje de exito o error.
      */
     public void findAllAcademies() {
-
         try {
             List<Academies> academiesList = academiesDAO.findAll();
             if (!academiesList.isEmpty()) {

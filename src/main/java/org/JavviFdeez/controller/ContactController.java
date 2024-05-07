@@ -102,11 +102,18 @@ public class ContactController {
             // ==========================================
             // Buscar el contacto en la base de datos
             // ==========================================
-            contactDAO.findById(id);
-            // ======================================================
-            // Si la busqueda es exitosa, mostrar mensaje de exito.
-            // ======================================================
-            System.out.println("✅ Contacto encontrado exitosamente.");
+            Contact foundContact = contactDAO.findById(id);
+            if (foundContact != null) {
+                // ======================================================
+                // Si la busqueda es exitosa, mostrar mensaje de exito.
+                // ======================================================
+                System.out.println("✅ Contacto encontrado exitosamente: " + foundContact);
+            } else {
+                // ======================================================
+                // Si la busqueda es exitosa, mostrar mensaje de exito.
+                // ======================================================
+                System.out.println("⚠️ No se encontró ningun contacto con el ID proporcionado.");
+            }
         } catch (SQLException e) {
             // =============================================
             // En caso de error, mostrar mensaje de error.

@@ -100,18 +100,26 @@ public class Contact_SkillsController {
     public void getIDContact_Skill(int id) {
         try {
             // =============================================
-            // Consultar la relacion en la base de datos
+            // Buscar la relacion en la base de datos
             // =============================================
-            csDAO.findById(id);
-            // ======================================================
-            // Si la consulta es exitosa, mostrar mensaje de exito.
-            // ======================================================
-            System.out.println("✅ Relacion consultada exitosamente.");
+            Contact_Skills foundCs = csDAO.findById(id);
+            if (foundCs != null) {
+                // ======================================================
+                // Si la consulta es exitosa, mostrar mensaje de exito.
+                // ======================================================
+                System.out.println("✅ Relacion consultada exitosamente.");
+            } else {
+                // ======================================================
+                // Si la consulta es exitosa, mostrar mensaje de exito.
+                // ======================================================
+                System.out.println("⚠️ No se encontró ninguna relacion con el ID proporcionado.");
+            }
         } catch (SQLException e) {
             // =============================================
             // En caso de error, mostrar mensaje de error.
             // =============================================
             System.err.println("❌ Error al consultar la relacion: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
