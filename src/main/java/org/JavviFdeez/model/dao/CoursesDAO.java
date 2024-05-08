@@ -1,5 +1,6 @@
 package org.JavviFdeez.model.dao;
 
+import org.JavviFdeez.model.dao.interfaces.iCoursesDAO;
 import org.JavviFdeez.model.entity.Courses;
 
 import java.sql.*;
@@ -11,7 +12,7 @@ public class CoursesDAO implements iCoursesDAO {
     // =======================================
     // Sentencias SQL para la base de datos
     // =======================================
-    private static final String INSERT = "INSERT INTO cvv_courses (course_id, contact_id, name, year) VALUES (?, ?, ?, ?)";
+    private static final String INSERT = "INSERT INTO cvv_courses (contact_id, name, duration, position) VALUES (?, ?, ?, ?)";
     private static final String UPDATE = "UPDATE cvv_courses SET contact_id=?, name=?, year=? WHERE course_id=?";
     private static final String DELETE = "DELETE FROM cvv_courses WHERE course_id=?";
     private static final String FIND_BY_ID = "SELECT * FROM cvv_courses WHERE course_id=?";
@@ -168,7 +169,6 @@ public class CoursesDAO implements iCoursesDAO {
                     // Crear un objeto de curso con los datos obtenidos de la base de datos
                     // =====================================================================
                     foundCourse = new Courses(
-                            res.getInt("course_id"),
                             res.getInt("contact_id"),
                             res.getString("name"),
                             res.getInt("duration"),
@@ -205,7 +205,6 @@ public class CoursesDAO implements iCoursesDAO {
                     // Crear un objeto de curso con los datos obtenidos de la base de datos
                     // ======================================================
                     Courses c = new Courses(
-                            res.getInt("course_id"),
                             res.getInt("contact_id"),
                             res.getString("name"),
                             res.getInt("duration"),

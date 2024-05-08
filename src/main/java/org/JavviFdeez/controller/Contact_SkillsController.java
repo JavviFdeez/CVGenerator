@@ -49,12 +49,12 @@ public class Contact_SkillsController {
      * Metodo para mostrar un mensaje de actualizar una relacion entre un Contact y una Skill en la base de datos
      */
 
-    public void updateContact_Skill(Contact_Skills cs) {
+    public void updateContact_Skill(int id, Contact_Skills cs) {
         try {
             // ===========================================
             // Actualizar la relacion en la base de datos
             // ===========================================
-            csDAO.update(cs);
+            csDAO.update(id, cs);
             // ======================================================
             // Si la actualizacion es exitosa, mostrar mensaje de exito.
             // ======================================================
@@ -69,16 +69,16 @@ public class Contact_SkillsController {
     }
 
     /**
-     * @param cs la relacion a ser eliminada de la base de datos
+     * @param id la relacion a ser eliminada de la base de datos
      * @Author: JavviFdeez
      * Metodo para mostrar un mensaje de eliminar una relacion entre un Contact y una Skill en la base de datos
      */
-    public void deleteContact_Skill(Contact_Skills cs) {
+    public void deleteContact_Skill(int id) {
         try {
             // =============================================
             // Eliminar la relacion en la base de datos
             // =============================================
-            csDAO.delete(cs);
+            csDAO.delete(id);
             // ======================================================
             // Si la eliminación es exitosa, mostrar mensaje de exito.
             // ======================================================

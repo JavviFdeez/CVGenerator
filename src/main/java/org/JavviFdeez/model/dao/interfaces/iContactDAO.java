@@ -1,4 +1,4 @@
-package org.JavviFdeez.model.dao;
+package org.JavviFdeez.model.dao.interfaces;
 
 import org.JavviFdeez.model.entity.Contact;
 import java.sql.SQLException;
@@ -17,20 +17,20 @@ public interface iContactDAO {
     /**
      * @Author: JavviFdeez
      * Metodo para ACTUALIZAR un contacto
-     * @param contact
+     * @param c
      * @return
      * @throws SQLException
      */
-    Contact update(Contact contact) throws SQLException;
+    Contact update(int id, Contact c) throws SQLException;
 
     /**
      * @Author: JavviFdeez
      * Metodo para ELIMINAR un contacto
-     * @param contact
+     * @param id
      * @return
      * @throws SQLException
      */
-    Contact delete(Contact contact) throws SQLException;
+    void delete(int id) throws SQLException;
 
     /**
      * @Author: JavviFdeez

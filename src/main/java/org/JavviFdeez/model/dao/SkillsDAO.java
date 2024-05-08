@@ -1,5 +1,6 @@
 package org.JavviFdeez.model.dao;
 
+import org.JavviFdeez.model.dao.interfaces.iSkillsDAO;
 import org.JavviFdeez.model.entity.Skills;
 
 import java.sql.*;
@@ -149,7 +150,6 @@ public class SkillsDAO implements iSkillsDAO {
                     // Crear un objeto de skill con los datos obtenidos
                     // =================================================
                     foundSkill = new Skills(
-                            rs.getInt("skill_id"),
                             rs.getString("name"));
                 }
             }
@@ -189,7 +189,7 @@ public class SkillsDAO implements iSkillsDAO {
                     // =================================================
                     // Crear un objeto de skill con los datos obtenidos
                     // =================================================
-                    Skills s = new Skills(skill_id, name);
+                    Skills s = new Skills(name);
                     foundSkills.add(s);
                 }
             } catch (SQLException e) {

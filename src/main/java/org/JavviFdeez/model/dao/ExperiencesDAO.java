@@ -1,5 +1,6 @@
 package org.JavviFdeez.model.dao;
 
+import org.JavviFdeez.model.dao.interfaces.iExperiencesDAO;
 import org.JavviFdeez.model.entity.Experiences;
 
 import java.sql.*;
@@ -47,7 +48,7 @@ public class ExperiencesDAO implements iExperiencesDAO {
             pst.setString(4, exp.getCompany());
             pst.setString(5, exp.getLocation());
             pst.setInt(6, exp.getYear());
-            pst.setString(7, exp.getPosition());
+            pst.setInt(7, exp.getPosition());
             // =======================
             // Ejecutar la consulta
             // =======================
@@ -97,7 +98,7 @@ public class ExperiencesDAO implements iExperiencesDAO {
             pst.setString(4, exp.getCompany());
             pst.setString(5, exp.getLocation());
             pst.setInt(6, exp.getYear());
-            pst.setString(7, exp.getPosition());
+            pst.setInt(7, exp.getPosition());
 
             // =======================
             // Ejecutar la consulta
@@ -166,14 +167,13 @@ public class ExperiencesDAO implements iExperiencesDAO {
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
                     foundExperience = new Experiences(
-                            rs.getInt("experience_id"),
                             rs.getInt("contact_id"),
                             rs.getString("name"),
                             rs.getString("duration"),
                             rs.getString("company"),
                             rs.getString("location"),
                             rs.getInt("year"),
-                            rs.getString("position")
+                            rs.getInt("position")
                     );
                 }
 
@@ -206,14 +206,13 @@ public class ExperiencesDAO implements iExperiencesDAO {
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
                     foundExperiences.add(new Experiences(
-                            rs.getInt("experience_id"),
                             rs.getInt("contact_id"),
                             rs.getString("name"),
                             rs.getString("duration"),
                             rs.getString("company"),
                             rs.getString("location"),
                             rs.getInt("year"),
-                            rs.getString("position")
+                            rs.getInt("position")
                     ));
                 }
 

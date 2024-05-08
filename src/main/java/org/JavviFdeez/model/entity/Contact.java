@@ -1,13 +1,16 @@
 package org.JavviFdeez.model.entity;
 
+import org.JavviFdeez.utils.EmailValidator;
+
 public class Contact {
     // ==============
     // Attributes
     // ==============
     private int contact_id;
     private String name;
-    private String last_name;
+    private String lastname;
     private String image;
+    private String occupation;
     private String mobile;
     private String email;
     private String linkedin;
@@ -17,13 +20,18 @@ public class Contact {
     // ==============
     // Constructor
     // ==============
-    public Contact(int contact_id, String name, String last_name, String image, String mobile, String email, String linkedin, String location, String extra) {
-        this.contact_id = contact_id;
+    public Contact(String name, String lastname, String image, String occupation, String mobile, String email, String linkedin, String location, String extra) {
+        this.contact_id = 0;
         this.name = name;
-        this.last_name = last_name;
+        this.lastname = lastname;
         this.image = image;
+        this.occupation = occupation;
         this.mobile = mobile;
-        this.email = email;
+        if (EmailValidator.isValidEmail(email)) {
+            this.email = email;
+        } else {
+            throw new IllegalArgumentException("❌ Correo electrónico no válido");
+        }
         this.linkedin = linkedin;
         this.location = location;
         this.extra = extra;
@@ -48,16 +56,24 @@ public class Contact {
         this.name = name;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastname(String last_name) {
+        this.lastname = last_name;
     }
 
     public String getImage() {
         return image;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 
     public void setImage(String image) {
@@ -102,5 +118,23 @@ public class Contact {
 
     public void setExtra(String extra) {
         this.extra = extra;
+    }
+
+    // =================
+    // toString
+    // =================
+    public String toString() {
+       return "Contact{" +
+               "contact_id=" + contact_id +
+               ", name='" + name + '\'' +
+               ", last_name='" + lastname + '\'' +
+               ", image='" + image + '\'' +
+               ", occupation='" + occupation + '\'' +
+               ", mobile='" + mobile + '\'' +
+               ", email='" + email + '\'' +
+               ", linkedin='" + linkedin + '\'' +
+               ", location='" + location + '\'' +
+               ", extra='" + extra + '\'' +
+               '}';
     }
 }

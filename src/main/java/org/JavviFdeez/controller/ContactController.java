@@ -45,16 +45,16 @@ public class ContactController {
     }
 
     /**
-     * @param contact el contacto que se va a actualizar
+     * @param id el contacto que se va a actualizar
      * @Author: JavviFdeez
      * Metodo para mostrar un mensaje de ACTUALIZAR un contacto en la base de datos
      */
-    public void updateContact(Contact contact) {
+    public void updateContact(int id, Contact updatedContact) {
         try {
             // ==========================================
             // Actualizar el contacto en la base de datos
             // ==========================================
-            contactDAO.update(contact);
+            contactDAO.update(id, updatedContact);
             // ======================================================
             // Si la actualizacion es exitosa, mostrar mensaje de exito.
             // ======================================================
@@ -69,16 +69,16 @@ public class ContactController {
     }
 
     /**
-     * @param contact el contacto que se va a eliminar
+     * @param id el contacto que se va a eliminar
      * @Author: JavviFdeez
      * Metodo para mostrar un mensaje de ELIMINAR un contacto en la base de datos
      */
-    public void deleteContact(Contact contact) {
+    public void deleteContact(int id) {
         try {
             // ==========================================
             // Eliminar el contacto de la base de datos
             // ==========================================
-            contactDAO.delete(contact);
+            contactDAO.delete(id);
             // ======================================================
             // Si la eliminación es exitosa, mostrar mensaje de exito.
             // ======================================================

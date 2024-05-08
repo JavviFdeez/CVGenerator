@@ -12,13 +12,13 @@ public class Experiences {
     private String company;
     private String location;
     private int year;
-    private String position;
+    private int position;
 
     // ==============
     // Constructor
     // ==============
-    public Experiences(int experience_id, int contact_id, String name, String duration, String entity, String location, int year, String position) {
-        this.experience_id = experience_id;
+    public Experiences(int contact_id, String name, String duration, String entity, String location, int year, int position) {
+        this.experience_id = 0;
         this.contact_id = contact_id;
         this.name = name;
         this.duration = duration;
@@ -87,11 +87,11 @@ public class Experiences {
         this.year = year;
     }
 
-    public String getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 }

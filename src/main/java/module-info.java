@@ -6,4 +6,5 @@ module org.JavviFdeez {
 
     opens org.JavviFdeez to javafx.fxml;
     exports org.JavviFdeez;
+    opens org.JavviFdeez.model.connection to java.xml.bind;
 }

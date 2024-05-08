@@ -1,6 +1,7 @@
 package org.JavviFdeez.model.dao;
 
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
+import org.JavviFdeez.model.dao.interfaces.iMainDAO;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,7 +17,7 @@ public class MainDAO implements iMainDAO {
     // ================================================
     // Constructor para inicializar la base de datos
     // ================================================
-    public MainDAO(Connection con) {
+    public MainDAO() {
         conn = ConnectionMariaDB.getConnection();
     }
 
@@ -35,14 +36,13 @@ public class MainDAO implements iMainDAO {
             // ===================
             if (conn != null && !conn.isClosed()) {
                 conn.close();
-                System.out.println("Conexión cerrada correctamente.");
+                System.out.println("✅ Conexión cerrada correctamente.");
             }
         } catch (SQLException e) {
             // ===================
             // Mensaje de error
             // ===================
-            System.err.println("Error al cerrar la conexión: " + e.getMessage());
-            throw new IOException("Error al cerrar la conexión.", e);
+            throw new IOException("❌ Error al cerrar la conexión." + e.getMessage());
         }
     }
 }

@@ -1,4 +1,4 @@
-package org.JavviFdeez.model.dao;
+package org.JavviFdeez.model.dao.interfaces;
 
 import java.io.Closeable;
 import java.io.IOException;

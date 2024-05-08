@@ -12,7 +12,7 @@ CREATE TABLE cvv_contact (
                             email VARCHAR(255),
                             linkedin VARCHAR(255),
                             location VARCHAR(255),
-                            extra TEXT
+                            extra varchar(255)
 );
 
 CREATE TABLE cvv_academies (

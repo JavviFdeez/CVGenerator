@@ -1,6 +1,6 @@
 package org.JavviFdeez.model.dao;
 
-import org.JavviFdeez.model.connection.ConnectionMariaDB;
+import org.JavviFdeez.model.dao.interfaces.iContactDAO;
 import org.JavviFdeez.model.entity.Contact;
 
 import java.sql.*;
@@ -16,11 +16,11 @@ public class ContactDAO implements iContactDAO {
     // =======================================
     // Sentencias SQL para la base de datos
     // =======================================
-    private static final String INSERT = "INSERT INTO contacts (name, email, phone_number) VALUES (?, ?, ?)";
-    private static final String UPDATE = "UPDATE contacts SET name=?, email=?, phone_number=? WHERE id=?";
-    private static final String DELETE = "DELETE FROM contacts WHERE id=?";
-    private static final String FIND_BY_ID = "SELECT * FROM contacts WHERE id = ?";
-    private static final String FIND_ALL = "SELECT * FROM contacts";
+    private static final String INSERT = "INSERT INTO cvv_contact (name, lastname, image, occupation, mobile, email, linkedin, location, extra) VALUES (?,?,?,?,?,?,?,?,?)";
+    private static final String UPDATE = "UPDATE cvv_contact SET name=?, lastname=?, image=?, occupation=?, mobile=?, email=?, linkedin=?, location=?, extra=? WHERE contact_id=?";
+    private static final String DELETE = "DELETE FROM cvv_contact WHERE contact_id=?";
+    private static final String FIND_BY_ID = "SELECT * FROM cvv_contact WHERE contact_id=?";
+    private static final String FIND_ALL = "SELECT * FROM cvv_contact";
 
     // =======================================
     // Sentencias SQL para la base de datos
@@ -51,8 +51,14 @@ public class ContactDAO implements iContactDAO {
         try {
             pst = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, c.getName());
-            pst.setString(2, c.getEmail());
-            pst.setString(3, c.getMobile());
+            pst.setString(2, c.getLastname());
+            pst.setString(3, c.getImage());
+            pst.setString(4, c.getOccupation());
+            pst.setString(5, c.getMobile());
+            pst.setString(6, c.getEmail());
+            pst.setString(7, c.getLinkedin());
+            pst.setString(8, c.getLocation());
+            pst.setString(9, c.getExtra());
 
             // =======================
             // Ejecutar la consulta
@@ -96,22 +102,32 @@ public class ContactDAO implements iContactDAO {
     }
 
     /**
-     * @param c el contacto que se va a actualizar
+     * @param id el contacto que se va a actualizar
      * @return true si se actualizo correctamente, false en caso contrario
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
      * @author: JavviFdeez
      * Método para ACTUALIZAR la información de un contacto en la base de datos.
      */
     @Override
-    public Contact update(Contact c) throws SQLException {
+    public Contact update(int id, Contact updatedContact) throws SQLException {
+        // Habilitar la transacción
+        conn.setAutoCommit(false);
+
         // ============================================
         // Actualizar el contacto en la base de datos
         // ============================================
         try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
-            pst.setString(1, c.getName());
-            pst.setString(2, c.getEmail());
-            pst.setString(3, c.getMobile());
-            pst.setInt(4, c.getContact_id());
+            // Establecer los valores de los parámetros en la consulta SQL
+            pst.setString(1, updatedContact.getName());
+            pst.setString(2, updatedContact.getLastname());
+            pst.setString(3, updatedContact.getImage());
+            pst.setString(4, updatedContact.getOccupation());
+            pst.setString(5, updatedContact.getMobile());
+            pst.setString(6, updatedContact.getEmail());
+            pst.setString(7, updatedContact.getLinkedin());
+            pst.setString(8, updatedContact.getLocation());
+            pst.setString(9, updatedContact.getExtra());
+            pst.setInt(10, id);
 
             // =======================
             // Ejecutar la consulta
@@ -124,20 +140,38 @@ public class ContactDAO implements iContactDAO {
             if (rowsAffected == 0) {
                 throw new SQLException("❌ Error al actualizar el contacto, ninguna fila afectada.");
             }
+
+            // Realizar commit
+            conn.commit();
+
+        } catch (SQLException e) {
+            // En caso de error, hacer rollback
+            conn.rollback();
+            throw new SQLException("Error al actualizar el contacto: " + e.getMessage(), e);
+        } finally {
+            try {
+                // Restaurar la autoconfirmación
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
+            }
         }
 
-        return c;
+        return updatedContact;
     }
 
     /**
-     * @param c el contacto que se va a eliminar
+     * @param id el contacto que se va a eliminar
      * @return true si el contacto se elimina correctamente, false en caso contrario
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
      * @Author: JavviFdeez
      * Método para ELIMINAR un contacto de la base de datos y retorna true si la operación es exitosa.
      */
     @Override
-    public Contact delete(Contact c) throws SQLException {
+    public void delete(int id) throws SQLException {
+        // Habilitar la transacción
+        conn.setAutoCommit(false);
+
         // ===========================================
         // Eliminar el contacto de la base de datos
         // ===========================================
@@ -145,22 +179,34 @@ public class ContactDAO implements iContactDAO {
             // ========================================================
             // Establecer el parámetro de ID del contacto a eliminar
             // ========================================================
-            pst.setInt(1, c.getContact_id());
-
+            pst.setInt(1, id);
             // ==========================================
             // Ejecutar la consulta SQL de eliminación
             // ==========================================
             int rowsAffected = pst.executeUpdate();
 
-            // ============================================================
-            // Si no se borro ningun contacto, mostrar mensaje de error
-            // ============================================================
-        } catch (SQLException e) {
-            System.err.println("❌ Error al eliminar el contacto: " + e.getMessage());
-            throw e;
-        }
+            // ==============================================================
+            // Si no se elimino ningun contacto, mostrar mensaje de error
+            // ==============================================================
+            if (rowsAffected == 0) {
+                throw new SQLException("No se eliminó ningun contacto con el ID: " + id);
+            }
 
-        return c;
+            // Realizar commit
+            conn.commit();
+        } catch (SQLException e) {
+            // En caso de error, hacer rollback
+            conn.rollback();
+            throw new SQLException("Error al eliminar el contacto: " + e.getMessage(), e);
+        } finally {
+            try {
+                // Restaurar la autoconfirmación
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                // Manejar cualquier excepción al restaurar la autoconfirmación
+                throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
+            }
+        }
     }
 
     /**
@@ -192,10 +238,10 @@ public class ContactDAO implements iContactDAO {
                     // Crear un objeto Contacto con los datos obtenidos
                     // ==================================================
                     foundContact = new Contact(
-                            rs.getInt("contact_id"),
                             rs.getString("name"),
-                            rs.getString("last_name"),
+                            rs.getString("lastname"),
                             rs.getString("image"),
+                            rs.getString("occupation"),
                             rs.getString("mobile"),
                             rs.getString("email"),
                             rs.getString("linkedin"),
@@ -235,8 +281,9 @@ public class ContactDAO implements iContactDAO {
                     // ===================================================
                     int contact_id = rs.getInt("contact_id");
                     String name = rs.getString("name");
-                    String last_name = rs.getString("last_name");
+                    String lastname = rs.getString("lastname");
                     String image = rs.getString("image");
+                    String occupation = rs.getString("occupation");
                     String mobile = rs.getString("mobile");
                     String email = rs.getString("email");
                     String linkedin = rs.getString("linkedin");
@@ -246,7 +293,7 @@ public class ContactDAO implements iContactDAO {
                     // ===================================================
                     // Crear un objeto Contacto con los datos obtenidos
                     // ===================================================
-                    Contact foundContact = new Contact(contact_id, name, last_name, image, mobile, email, linkedin, location, extra);
+                    Contact foundContact = new Contact(name, lastname, image, occupation, mobile, email, linkedin, location, extra);
                     cList.add(foundContact);
                 }
             } catch (SQLException e) {

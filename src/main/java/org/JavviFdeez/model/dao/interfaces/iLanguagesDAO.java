@@ -1,4 +1,4 @@
-package org.JavviFdeez.model.dao;
+package org.JavviFdeez.model.dao.interfaces;
 
 import org.JavviFdeez.model.entity.Languages;
 

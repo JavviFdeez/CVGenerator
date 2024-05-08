@@ -14,8 +14,8 @@ public class Courses {
     // ==============
     // Constructor
     // ==============
-    public Courses(int course_id, int contact_id, String name, int duration, int position) {
-        this.course_id = course_id;
+    public Courses(int contact_id, String name, int duration, int position) {
+        this.course_id = 0;
         this.contact_id = contact_id;
         this.name = name;
         this.duration = duration;

@@ -1,6 +1,6 @@
 package org.JavviFdeez.model.dao;
 
-import org.JavviFdeez.model.connection.ConnectionMariaDB;
+import org.JavviFdeez.model.dao.interfaces.iContact_SkillsDAO;
 import org.JavviFdeez.model.entity.Contact_Skills;
 
 import java.sql.*;
@@ -12,10 +12,10 @@ public class Contact_SkillsDAO implements iContact_SkillsDAO {
     // =======================================
     // Sentencias SQL para la base de datos
     // =======================================
-    private static final String INSERT = "INSERT INTO cvv_contact_skills (contact_id, skills_id) VALUES (?, ?)";
-    private static final String UPDATE = "UPDATE cvv_contact_skills SET contact_id=?, skills_id=? WHERE contact_skills_id=?";
-    private static final String DELETE = "DELETE FROM cvv_contact_skills WHERE contact_skills_id=?";
-    private static final String FIND_BY_ID = "SELECT * FROM cvv_contact_skills WHERE contact_skills_id=?";
+    private static final String INSERT = "INSERT INTO cvv_contact_skills (contact_id, skill_id, value) VALUES (?, ?, ?)";
+    private static final String UPDATE = "UPDATE cvv_contact_skills SET value=? WHERE cskill_id=?";
+    private static final String DELETE = "DELETE FROM cvv_contact_skills WHERE cskill_id=?";
+    private static final String FIND_BY_ID = "SELECT * FROM cvv_contact_skills WHERE cskill_id=?";
     private static final String FIND_ALL = "SELECT * FROM cvv_contact_skills";
 
     // ===============================================
@@ -39,12 +39,10 @@ public class Contact_SkillsDAO implements iContact_SkillsDAO {
      */
     @Override
     public Contact_Skills save(Contact_Skills cs) throws SQLException {
-
         // ===========================================
         // Insertar la relacion en la base de datos
         // ===========================================
         try (PreparedStatement pst = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS)) {
-            pst.setInt(1, cs.getContact_id());
             pst.setInt(2, cs.getSkill_id());
             pst.setInt(3, cs.getValue());
 
@@ -52,6 +50,11 @@ public class Contact_SkillsDAO implements iContact_SkillsDAO {
             // Ejecutar la consulta
             // =======================
             int rowsAffected = pst.executeUpdate();
+
+            // ===================
+            // Realizar commit
+            // ===================
+            conn.commit();
 
             // ==============================================================
             // Si no se insertó ninguna relacion, mostrar mensaje de error
@@ -63,65 +66,102 @@ public class Contact_SkillsDAO implements iContact_SkillsDAO {
                         cs.setCskill_id(generatedId);
                     }
                 }
+            } else {
+                throw new SQLException("❌ Error al guardar la relación entre contacto y habilidad");
             }
         } catch (SQLException e) {
-            throw new SQLException("❌ Error al guardar la relación entre contacto y habilidad");
+            throw new SQLException("❌ Error al guardar la relación entre contacto y habilidad", e);
         }
 
         return cs;
     }
 
+
     /**
-     * @param cs la relacion a ser actualizada
+     * @param id la relacion a ser actualizada
      * @return true si la actualización fue exitosa, false de lo contrario
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
      * @Author JavviFdeez
      * Metodo para ACTUALIZAR una relacion entre un Contact y una Skill en la base de datos.
      */
     @Override
-    public Contact_Skills update(Contact_Skills cs) throws SQLException {
-        // =============================================
-        // Actualizar la relacion en la base de datos
-        // =============================================
-        try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
-            pst.setInt(1, cs.getValue());
-            pst.setInt(2, cs.getContact_id());
-            pst.setInt(3, cs.getSkill_id());
+    public Contact_Skills update(int id, Contact_Skills updatedCS) throws SQLException {
+        // Habilitar la transacción
+        conn.setAutoCommit(false);
 
-            // =======================
-            // Ejecutar la consulta
-            // =======================
+        try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
+            // Establecer los valores de los parámetros en la consulta SQL
+            pst.setInt(1, updatedCS.getValue());
+            pst.setInt(2, id);
+
+            // Ejecutar la consulta SQL de actualización
             int rowsAffected = pst.executeUpdate();
 
+            if (rowsAffected == 0) {
+                // Si no se afectaron filas, lanzar una excepción
+                throw new SQLException("No se pudo actualizar la relación con ID: " + id);
+            }
 
+            // Realizar commit
+            conn.commit();
+
+        } catch (SQLException e) {
+            // En caso de error, hacer rollback
+            conn.rollback();
+            throw new SQLException("Error al actualizar la relación: " + e.getMessage(), e);
+        } finally {
+            try {
+                // Restaurar la autoconfirmación
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                // Manejar cualquier excepción al restaurar la autoconfirmación
+                throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
+            }
         }
-        return cs;
+
+        return updatedCS;
     }
 
     /**
-     * @param cs la relacion a ser eliminada
+     * @param id la relacion a ser eliminada
      * @return true si la eliminación fue exitosa, false de lo contrario
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
      * @Author JavviFdeez
      * Metodo para ELIMINAR una relacion entre un Contact y una Skill en la base de datos.
      */
     @Override
-    public Contact_Skills delete(Contact_Skills cs) throws SQLException {
-
+    public void delete(int id) throws SQLException {
+        // Habilitar la transacción
+        conn.setAutoCommit(false);
         // =============================================
         // Eliminar la relacion en la base de datos
         // =============================================
         try (PreparedStatement pst = conn.prepareStatement(DELETE)) {
-            pst.setInt(1, cs.getContact_id());
-            pst.setInt(2, cs.getSkill_id());
+            pst.setInt(1, id);
 
             // =======================
             // Ejecutar la consulta
             // =======================
             int rowsAffected = pst.executeUpdate();
-        }
+            if (rowsAffected == 0) {
+                throw new SQLException("No se eliminó ninguna academia con el ID: " + id);
+            }
 
-        return cs;
+            // Realizar commit
+            conn.commit();
+        } catch (SQLException e) {
+            // En caso de error, hacer rollback
+            conn.rollback();
+            throw new SQLException("Error al eliminar la academia: " + e.getMessage(), e);
+        } finally {
+            try {
+                // Restaurar la autoconfirmación
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                // Manejar cualquier excepción al restaurar la autoconfirmación
+                throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
+            }
+        }
     }
 
     /**
@@ -157,7 +197,7 @@ public class Contact_SkillsDAO implements iContact_SkillsDAO {
                     // =======================
                     // Crear la relacion
                     // =======================
-                    cs = new Contact_Skills(cskill_id, contact_id, skill_id, value);
+                    cs = new Contact_Skills(contact_id, skill_id, value);
                 }
             }
         }
@@ -183,7 +223,6 @@ public class Contact_SkillsDAO implements iContact_SkillsDAO {
                     // ===========================
                     // Crear una nueva relacion
                     // ===========================
-                    int cskill_id = rs.getInt("cskill_id");
                     int contact_id = rs.getInt("contact_id");
                     int skill_id = rs.getInt("skill_id");
                     int value = rs.getInt("value");
@@ -191,7 +230,7 @@ public class Contact_SkillsDAO implements iContact_SkillsDAO {
                     // =======================
                     // Crear la relacion
                     // =======================
-                    Contact_Skills cs = new Contact_Skills(cskill_id, contact_id, skill_id, value);
+                    Contact_Skills cs = new Contact_Skills(contact_id, skill_id, value);
                     csList.add(cs);
                 }
             }

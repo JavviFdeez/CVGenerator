@@ -1,6 +1,8 @@
 package org.JavviFdeez.model.dao;
 
+import org.JavviFdeez.model.dao.interfaces.iLanguagesDAO;
 import org.JavviFdeez.model.entity.Languages;
+import org.JavviFdeez.utils.LanguageValidator;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ public class LanguagesDAO implements iLanguagesDAO {
     // =======================================
     // Sentencias SQL para la base de datos
     // =======================================
-    private static final String INSERT = "INSERT INTO cvv_languages (lang_id, contact_id, spanish, english, french) VALUES (?, ?, ?, ?, ?)";
+    private static final String INSERT = "INSERT INTO cvv_languages (contact_id, spanish, english, french) VALUES (?, ?, ?, ?)";
     private static final String UPDATE = "UPDATE cvv_languages SET contact_id=?, spanish=?, english=?, french=? WHERE lang_id=?";
     private static final String DELETE = "DELETE FROM cvv_languages WHERE lang_id=?";
     private static final String FIND_BY_ID = "SELECT * FROM cvv_languages WHERE lang_id=?";
@@ -37,15 +39,23 @@ public class LanguagesDAO implements iLanguagesDAO {
      */
     @Override
     public Languages save(Languages lang) throws SQLException {
-        // =========================================
-        // Insertar el lenguaje en la base de datos
-        // =========================================
+        // ===========================================================
+        // Validar que los valores estén dentro del rango permitido
+        // ===========================================================
+        if (!LanguageValidator.isValidLanguageRange(lang.getSpanish()) ||
+                !LanguageValidator.isValidLanguageRange(lang.getEnglish()) ||
+                !LanguageValidator.isValidLanguageRange(lang.getFrench())) {
+            throw new IllegalArgumentException("❌ Error al insertar, los valores de los idiomas deben estar en el rango de 0 a 5.");
+        }
+
+        // =============================================================
+        // Preparar la sentencia SQL para insertar un nuevo lenguaje
+        // =============================================================
         try (PreparedStatement pst = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS)) {
             pst.setInt(1, lang.getContact_id());
-            pst.setInt(2, lang.getContact_id());
-            pst.setInt(3, lang.getSpanish());
-            pst.setInt(4, lang.getEnglish());
-            pst.setInt(5, lang.getFrench());
+            pst.setInt(2, lang.getSpanish());
+            pst.setInt(3, lang.getEnglish());
+            pst.setInt(4, lang.getFrench());
 
             // =======================
             // Ejecutar la consulta
@@ -89,6 +99,14 @@ public class LanguagesDAO implements iLanguagesDAO {
      */
     @Override
     public Languages update(Languages lang) throws SQLException {
+        // ============================================================
+        // Validar que los valores estén dentro del rango permitido
+        // ============================================================
+        if (!LanguageValidator.isValidLanguageRange(lang.getSpanish()) ||
+                !LanguageValidator.isValidLanguageRange(lang.getEnglish()) ||
+                !LanguageValidator.isValidLanguageRange(lang.getFrench())) {
+            throw new IllegalArgumentException("❌ Error al actualizar, los valores de los idiomas deben estar en el rango de 0 a 5.");
+        }
         // ==========================================
         // Actualizar el lenguaje en la base de datos
         // ==========================================
@@ -97,7 +115,6 @@ public class LanguagesDAO implements iLanguagesDAO {
             pst.setInt(2, lang.getSpanish());
             pst.setInt(3, lang.getEnglish());
             pst.setInt(4, lang.getFrench());
-            pst.setInt(5, lang.getLang_id());
 
             // =======================
             // Ejecutar la consulta
@@ -166,7 +183,6 @@ public class LanguagesDAO implements iLanguagesDAO {
                     // Crear un nuevo lenguaje con los datos obtenidos
                     // =================================================
                     foundlang = new Languages(
-                            rs.getInt("lang_id"),
                             rs.getInt("contact_id"),
                             rs.getInt("spanish"),
                             rs.getInt("english"),
@@ -203,7 +219,6 @@ public class LanguagesDAO implements iLanguagesDAO {
                     // Crear un nuevo lenguaje con los datos obtenidos
                     // =================================================
                     Languages lang = new Languages(
-                            rs.getInt("lang_id"),
                             rs.getInt("contact_id"),
                             rs.getInt("spanish"),
                             rs.getInt("english"),

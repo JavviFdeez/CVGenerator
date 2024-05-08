@@ -11,8 +11,8 @@ public class Skills {
     // ==============
     // Constructor
     // ==============
-    public Skills(int skill_id, String name) {
-        this.skill_id = skill_id;
+    public Skills(String name) {
+        this.skill_id = 0;
         this.name = name;
     }
 

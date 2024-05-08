@@ -12,8 +12,8 @@ public class Contact_Skills {
     // ===============
     // Constructor
     // ===============
-    public Contact_Skills(int cskill_id, int contact_id, int skill_id, int value) {
-        this.cskill_id = cskill_id;
+    public Contact_Skills(int contact_id, int skill_id, int value) {
+        this.cskill_id = 0;
         this.contact_id = contact_id;
         this.skill_id = skill_id;
         this.value = value;
@@ -52,5 +52,18 @@ public class Contact_Skills {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    // ================
+    // toString
+    // =================
+    @Override
+    public String toString() {
+        return "Contact_Skills{" +
+                "cskill_id=" + cskill_id +
+                ", contact_id=" + contact_id +
+                ", skill_id=" + skill_id +
+                ", value=" + value +
+                '}';
     }
 }

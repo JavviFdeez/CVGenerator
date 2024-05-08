@@ -14,14 +14,13 @@ public class AcademiesController {
     // Constructor
     // ==============
     public AcademiesController() {
-        this.academiesDAO = new AcademiesDAO(ConnectionMariaDB.getConnection() );
+        this.academiesDAO = new AcademiesDAO(ConnectionMariaDB.getConnection());
     }
 
     /**
-      * @Author: JavviFdeez
-      * Metodo para mostrar un mensaje de INSERTAR una nueva academia en la base de datos
-      *
-      * @param academies la academia que se va a guardar
+     * @param academies la academia que se va a guardar
+     * @Author: JavviFdeez
+     * Metodo para mostrar un mensaje de INSERTAR una nueva academia en la base de datos
      */
     public void saveAcademies(Academies academies) {
         try {
@@ -43,54 +42,42 @@ public class AcademiesController {
     }
 
     /**
+     * @param id la academia que se va a actualizar
      * @Author: JavviFdeez
      * Método que ACTUALIZAR una academia en la base de datos y muestra un mensaje de éxito o error.
-     *
-     * @param academies la academia que se va a actualizar
      */
-    public void updateAcademies(Academies academies) {
+    public void updateAcademies(int id, Academies updatedAcademies) {
         try {
-            Academies updatedAcademies = academiesDAO.update(academies);
-            if (updatedAcademies != null) {
-                // =========================================================
-                // La actualización fue exitosa, mostrar mensaje de éxito
-                // =========================================================
-                System.out.println("✅ Academia actualizada exitosamente.");
-            } else {
-                // ===============================================================
-                // No se actualizó ninguna fila, mostrar mensaje de advertencia
-                // ===============================================================
-                System.out.println("⚠️ No se encontró ninguna academia para actualizar.");
-            }
+            // Intentar actualizar la academia
+            academiesDAO.update(id, updatedAcademies);
+
+            // Mostrar mensaje de actualización exitosa
+            System.out.println("✅ Academia actualizada exitosamente.");
         } catch (SQLException e) {
-            // ==================================================================================================
-            // Ocurrió un error al actualizar la academia, mostrar mensaje de error y detalles de la excepción
-            // ==================================================================================================
+            // En caso de error SQL, registrar el error y mostrar un mensaje al usuario
             System.err.println("❌ Error al actualizar la academia: " + e.getMessage());
             e.printStackTrace();
+
+            // En caso de cualquier otro tipo de error, mostrar un mensaje de error
+            System.out.println("❌ Ocurrió un error al actualizar la academia. Por favor, inténtelo de nuevo más tarde.");
         }
     }
 
     /**
+     * @param id la academia que se va a eliminar
      * @Author: JavviFdeez
      * Método para ELIMINAR una academia de la base de datos y muestra un mensaje de éxito o error.
-     *
-     * @param academies la academia que se va a eliminar
      */
-    public void deleteAcademies(Academies academies) {
+    public void deleteAcademies(int id) {
         try {
-            Academies deletedAcademies = academiesDAO.delete(academies);
-            if (deletedAcademies != null) {
-                // =========================================================
-                // Si la eliminación es exitosa, mostrar mensaje de éxito
-                // =========================================================
-                System.out.println("✅ Academia eliminada exitosamente.");
-            } else {
-                // ================================================================
-                // Si no se eliminó ninguna fila, mostrar mensaje de advertencia
-                // ================================================================
-                System.out.println("⚠️ No se encontró ninguna academia para eliminar.");
-            }
+            // =========================================================
+            // Eliminar la academia de la base de datos
+            // =========================================================
+            academiesDAO.delete(id);
+            // =========================================================
+            // Si la eliminación es exitosa, mostrar mensaje de éxito
+            // =========================================================
+            System.out.println("✅ Academia eliminada exitosamente.");
         } catch (SQLException e) {
             // ========================================================================
             // En caso de error, mostrar mensaje de error y detalles de la excepción
@@ -101,10 +88,9 @@ public class AcademiesController {
     }
 
     /**
+     * @param id el ID de la academia que se va a buscar
      * @Author: JavviFdeez
      * Método para BUSCAR una academia por su ID en la base de datos y muestra un mensaje de éxito o error.
-     *
-     * @param id el ID de la academia que se va a buscar
      */
     public void findAcademiesById(int id) {
         try {

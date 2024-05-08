@@ -13,7 +13,8 @@ public class ExperiencesController {
     // ================
     private ExperiencesDAO experiencesDAO;
 
-    // ==============    // Constructor
+    // ==============
+    // Constructor
     // ==============
     public ExperiencesController() {
         this.experiencesDAO = new ExperiencesDAO(ConnectionMariaDB.getConnection());
@@ -122,9 +123,9 @@ public class ExperiencesController {
                 // ==================================================
                 System.out.println("✅ Experiencia encontrada.");
             } else {
-                // ================================================================
+                // ==============================================================================================
                 // No se encontró ninguna experiencia con el ID proporcionado, mostrar mensaje de advertencia
-                // ================================================================
+                // ==============================================================================================
                 System.out.println("⚠️ No se encontró ninguna experiencia con el ID proporcionado.");
             }
         } catch (SQLException e) {

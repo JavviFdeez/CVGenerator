@@ -1,4 +1,4 @@
-package org.JavviFdeez.model.dao;
+package org.JavviFdeez.model.dao.interfaces;
 
 import org.JavviFdeez.model.entity.Contact_Skills;
 
@@ -19,20 +19,20 @@ public interface iContact_SkillsDAO {
     /**
      * @Author: JavviFdeez
      * Método para ACTUALIZAR una relacion entre un Contact y una Skill
-     * @param Contact_Skills
+     * @param id
      * @return
      * @throws SQLException
      */
-    Contact_Skills update(Contact_Skills Contact_Skills) throws SQLException;
+    Contact_Skills update(int id, Contact_Skills cs) throws SQLException;
 
     /**
      * @Author: JavviFdeez
      * Método para ELIMINAR una relacion entre un Contact y una Skill
-     * @param Contact_Skills
+     * @param id
      * @return
      * @throws SQLException
      */
-    Contact_Skills delete(Contact_Skills Contact_Skills) throws SQLException;
+    void delete(int id) throws SQLException;
 
     /**
      * @Author: JavviFdeez

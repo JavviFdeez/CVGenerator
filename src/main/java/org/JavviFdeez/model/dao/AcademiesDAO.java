@@ -4,14 +4,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.JavviFdeez.model.dao.interfaces.iAcademiesDAO;
 import org.JavviFdeez.model.entity.Academies;
 
 public class AcademiesDAO implements iAcademiesDAO {
     // =======================================
     // Sentencias SQL para la base de datos
     // =======================================
-    private static final String INSERT = "INSERT INTO cvv_academies (academies_id, contact_id, name, entity, location, year) VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE = "UPDATE cvv_academies SET contact_id=?, name=?, entity=?, location=?, year=? WHERE academies_id=?";
+    private static final String INSERT = "INSERT INTO cvv_academies (contact_id, name, entity, location, year) VALUES (?,?,?,?,?)";
+    private static final String UPDATE = "UPDATE cvv_academies SET name=?, entity=?, location=?, year=? WHERE academies_id=?";
     private static final String DELETE = "DELETE FROM cvv_academies WHERE academies_id=?";
     private static final String FIND_BY_ID = "SELECT * FROM cvv_academies WHERE academies_id=?";
     private static final String FIND_ALL = "SELECT * FROM cvv_academies";
@@ -29,12 +30,11 @@ public class AcademiesDAO implements iAcademiesDAO {
     }
 
     /**
-     * @Author: JavviFdeez
-     * Método para GUARDAR una academia en la base de datos.
-     *
      * @param a la academia a ser guardada
      * @return la academia guardada, incluyendo su ID generado
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
+     * @Author: JavviFdeez
+     * Método para GUARDAR una academia en la base de datos.
      */
     @Override
     public Academies save(Academies a) throws SQLException {
@@ -42,17 +42,21 @@ public class AcademiesDAO implements iAcademiesDAO {
         // Insertar la academia en la base de datos
         // ===========================================
         try (PreparedStatement pst = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS)) {
-            pst.setInt(1, a.getAcademies_id());
-            pst.setInt(2, a.getContact_id());
-            pst.setString(3, a.getName());
-            pst.setString(4, a.getEntity());
-            pst.setString(5, a.getLocation());
-            pst.setInt(6, a.getYear());
+            pst.setInt(1, a.getContact_id());
+            pst.setString(2, a.getName());
+            pst.setString(3, a.getEntity());
+            pst.setString(4, a.getLocation());
+            pst.setInt(5, a.getYear());
 
             // =======================
             // Ejecutar la consulta
             // =======================
             int rowsAffected = pst.executeUpdate();
+
+            // ===================
+            // Realizar commit
+            // ===================
+            conn.commit();
 
             // ==============================================================
             // Si no se insertó ninguna academia, mostrar mensaje de error
@@ -83,65 +87,93 @@ public class AcademiesDAO implements iAcademiesDAO {
     }
 
     /**
-     * @param a la academia con la información actualizada
-     * @return true si la actualización fue exitosa, false si no se pudo actualizar
+     * @param id la academia con la información actualizada
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
      * @author: JavviFdeez
      * Método para ACTUALIZAR la información de una academia en la base de datos.
      */
-    @Override
-    public Academies update(Academies a) throws SQLException {
-        // ============================================
-        // Actualizar la academia en la base de datos
-        // ============================================
-        try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
-            pst.setInt(1, a.getContact_id());
-            pst.setString(2, a.getName());
-            pst.setString(3, a.getEntity());
-            pst.setString(4, a.getLocation());
-            pst.setInt(5, a.getYear());
-            pst.setInt(6, a.getAcademies_id());
+    public Academies update(int id, Academies updatedAcademies) throws SQLException {
+        // Habilitar la transacción
+        conn.setAutoCommit(false);
 
-            // =======================
-            // Ejecutar la consulta
-            // =======================
+        try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
+            // Establecer los valores de los parámetros en la consulta SQL
+            pst.setString(1, updatedAcademies.getName());
+            pst.setString(2, updatedAcademies.getEntity());
+            pst.setString(3, updatedAcademies.getLocation());
+            pst.setInt(4, updatedAcademies.getYear());
+            pst.setInt(5, id);
+
+            // Ejecutar la consulta SQL de actualización
             int rowsAffected = pst.executeUpdate();
 
-            // ===============================================
-            // Verificar si se actualizó al menos una fila
-            // ===============================================
             if (rowsAffected == 0) {
-                throw new SQLException("❌ Error al actualizar, no se actualizo ninguna academia.");
+                // Si no se afectaron filas, lanzar una excepción
+                throw new SQLException("No se pudo actualizar la academia con ID: " + id);
+            }
+
+            // Realizar commit
+            conn.commit();
+        } catch (SQLException e) {
+            // En caso de error, hacer rollback
+            conn.rollback();
+            throw new SQLException("Error al actualizar la academia: " + e.getMessage(), e);
+        } finally {
+            try {
+                // Restaurar la autoconfirmación
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
             }
         }
 
-        return a;
+        return updatedAcademies;
     }
 
     /**
+     * @param id la academia que se va a eliminar
+     * @throws SQLException si ocurre un error al ejecutar la consulta SQL
      * @Author: JavviFdeez
      * Método para ELIMINAR una academia de la base de datos y retorna true si la operación es exitosa.
-     *
-     * @param a la academia que se va a eliminar
-     * @return true si la academia se elimina correctamente, false en caso contrario
-     * @throws SQLException si ocurre un error al ejecutar la consulta SQL
      */
     @Override
-    public Academies delete(Academies a) throws SQLException {
-        // ===========================================
+    public void delete(int id) throws SQLException {
+        // Habilitar la transacción
+        conn.setAutoCommit(false);
+
+        // ============================================
         // Eliminar la academia de la base de datos
-        // ===========================================
+        // ============================================
         try (PreparedStatement pst = conn.prepareStatement(DELETE)) {
-            pst.setInt(1, a.getAcademies_id());
+            pst.setInt(1, id);
 
             // =======================
             // Ejecutar la consulta
             // =======================
             int rowsAffected = pst.executeUpdate();
 
-        }
+            // ==============================================================
+            // Si no se elimino ninguna academia, mostrar mensaje de error
+            // ==============================================================
+            if (rowsAffected == 0) {
+                throw new SQLException("No se eliminó ninguna academia con el ID: " + id);
+            }
 
-        return a;
+            // Realizar commit
+            conn.commit();
+        } catch (SQLException e) {
+            // En caso de error, hacer rollback
+            conn.rollback();
+            throw new SQLException("Error al eliminar la academia: " + e.getMessage(), e);
+        } finally {
+            try {
+                // Restaurar la autoconfirmación
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                // Manejar cualquier excepción al restaurar la autoconfirmación
+                throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
+            }
+        }
     }
 
     /**
@@ -173,7 +205,6 @@ public class AcademiesDAO implements iAcademiesDAO {
                     // Crear un objeto de academia con los datos obtenidos de la base de datos
                     // ==========================================================================
                     foundAcademy = new Academies(
-                            res.getInt("academies_id"),
                             res.getInt("contact_id"),
                             res.getString("name"),
                             res.getString("entity"),
@@ -190,11 +221,10 @@ public class AcademiesDAO implements iAcademiesDAO {
     }
 
     /**
-     * @author: JavviFdeez
-     * Método para BUSCAR todas las academias de la base de datos.
-     *
      * @return una lista de academias encontradas, o una lista vacía si no se encuentran
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
+     * @author: JavviFdeez
+     * Método para BUSCAR todas las academias de la base de datos.
      */
     @Override
     public List<Academies> findAll() throws SQLException {
@@ -206,14 +236,13 @@ public class AcademiesDAO implements iAcademiesDAO {
         // ===============================================
         // Ejecutar la consulta y obtener el resultado
         // ===============================================
-        try (PreparedStatement pst = conn.prepareStatement (FIND_ALL)) {
+        try (PreparedStatement pst = conn.prepareStatement(FIND_ALL)) {
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
                     // ==============================
                     // Crear un objeto de academia
                     // ==============================
                     Academies academies = new Academies(
-                            rs.getInt("academies_id"),
                             rs.getInt("contact_id"),
                             rs.getString("name"),
                             rs.getString("entity"),

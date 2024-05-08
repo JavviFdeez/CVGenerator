@@ -1,4 +1,4 @@
-package org.JavviFdeez.model.dao;
+package org.JavviFdeez.model.dao.interfaces;
 
 
 import org.JavviFdeez.model.entity.Academies;
@@ -16,22 +16,20 @@ public interface iAcademiesDAO {
     Academies save(Academies academies) throws SQLException;
 
     /**
-     * @param academies
-     * @return
+     * @param id
      * @throws SQLException
      * @Author: JavviFdeez
      * Método para ACTUALIZAR una academia
      */
-    Academies update(Academies academies) throws SQLException;
+    Academies update(int id, Academies updatedAcademies) throws SQLException;
 
     /**
-     * @param academies
-     * @return
+     * @param id
      * @throws SQLException
      * @Author: JavviFdeez
      * Método para ELIMINAR una academia
      */
-    Academies delete(Academies academies) throws SQLException;
+    void delete(int id) throws SQLException;
 
     /**
      * @param id

@@ -16,8 +16,8 @@ public class Academies {
     // ==============
     // Constructor
     // ==============
-    public Academies(int academies_id, int contact_id, String name, String entity, String location, int year) {
-        this.academies_id = academies_id;
+    public Academies(int contact_id, String name, String entity, String location, int year) {
+        this.academies_id = 0;
         this.contact_id = contact_id;
         this.name = name;
         this.entity = entity;
@@ -74,5 +74,19 @@ public class Academies {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    // ===========
+    // toString
+    // ===========
+    public String toString() {
+        return "Academia{" +
+                "academies_id=" + academies_id +
+                "Contact_id=" + contact_id +
+                ", Nombre='" + name + '\'' +
+                ", Entidad='" + entity + '\'' +
+                ", Ubicación='" + location + '\'' +
+                ", Año=" + year +
+                '}';
     }
 }
