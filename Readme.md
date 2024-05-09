@@ -15,7 +15,7 @@ Este proyecto es un GENERADOR de CURRÍCULMS desarrollado en Java que permite a 
     - Proporciona una interfaz intuitiva para gestionar y organizar la información del currículum.
 
 3. **📤 Exportación de Currículums:**
-    - Permite exportar los currículums en formatos populares como PDF, Word o HTML para facilitar su uso y distribución.
+    - Permite exportar los currículums en formato PDF para facilitar su uso y distribución.
 
 4. **💻 Interfaz de Usuario Amigable:**
     - Diseño moderno y fácil de usar que proporciona una experiencia fluida para el usuario.
@@ -32,4 +32,4 @@ Este proyecto es un GENERADOR de CURRÍCULMS desarrollado en Java que permite a 
 - draw.io (Herramienta para crear y diseñar el diagrama de clases, el diagrama de entidad-relación (E/R) y el diagrama de pantallas)
 - IntelliJ (como IDE).
 
-Este proyecto ha sido desarrollado utilizando tecnologías modernas para garantizar un rendimiento óptimo y una experiencia de usuario satisfactoria.
+📝 Este proyecto ha sido desarrollado utilizando tecnologías modernas para garantizar un rendimiento óptimo y una experiencia de usuario satisfactoria.
