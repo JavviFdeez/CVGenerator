@@ -94,4 +94,22 @@ public class Experiences {
     public void setPosition(int position) {
         this.position = position;
     }
+
+
+    // ================
+    // toString
+    // =================
+    @Override
+    public String toString() {
+       return "Experiences{" +
+                "experience_id=" + experience_id +
+                ", contact_id=" + contact_id +
+                ", name='" + name + '\'' +
+                ", duration='" + duration + '\'' +
+                ", company='" + company + '\'' +
+                ", location='" + location + '\'' +
+                ", year=" + year +
+                ", position=" + position +
+                '}';
+    }
 }

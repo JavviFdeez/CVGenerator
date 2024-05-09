@@ -64,4 +64,18 @@ public class Courses {
     public void setPosition(int position) {
         this.position = position;
     }
+
+    // ================
+    // toString
+    // =================
+    @Override
+    public String toString() {
+       return "Courses{" +
+                "course_id=" + course_id +
+                ", contact_id=" + contact_id +
+                ", name='" + name + '\'' +
+                ", duration=" + duration +
+                ", position=" + position +
+                '}';
+    }
 }

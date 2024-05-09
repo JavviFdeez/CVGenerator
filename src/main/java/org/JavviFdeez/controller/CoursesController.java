@@ -44,16 +44,16 @@ public class CoursesController {
     }
 
     /**
-     * @param c el curso que se va a actualizar
+     * @param id el curso que se va a actualizar
      * @Author: JavviFdeez
      * Metodo para mostrar un mensaje de ACTUALIZAR un nuevo curso en la base de datos
      */
-    public void updateCourses(Courses c) {
+    public void updateCourses(int id, Courses updatedCourses) {
         try {
             // ==========================================
             // Actualizar el curso en la base de datos
             // ==========================================
-            coursesDAO.update(c);
+            coursesDAO.update(id, updatedCourses);
             // ===========================================================
             // Si la actualizacion es exitosa, mostrar mensaje de exito.
             // ===========================================================
@@ -67,16 +67,16 @@ public class CoursesController {
     }
 
     /**
-     * @param c el curso que se va a eliminar
+     * @param id el curso que se va a eliminar
      * @Author: JavviFdeez
      * Metodo para mostrar un mensaje de ELIMINAR un nuevo curso en la base de datos
      */
-    public void deleteCourses(Courses c) {
+    public void deleteCourses(int id) {
         try {
             // ==========================================
             // Eliminar el curso de la base de datos
             // ==========================================
-            coursesDAO.delete(c);
+            coursesDAO.delete(id);
             // ======================================================
             // Si la eliminación es exitosa, mostrar mensaje de exito.
             // ======================================================

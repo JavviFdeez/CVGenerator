@@ -112,15 +112,11 @@ public class AcademiesTest {
             AcademiesDAO academiesDAO = new AcademiesDAO(connection);
 
             // Obtener la academia por su ID
-            try {
-                Academies foundAcademy = academiesDAO.findById(academiaIdToFind);
-                if (foundAcademy != null) {
-                    System.out.println("✅ Academia encontrada: " + foundAcademy);
-                } else {
-                    System.out.println("❌ No se encontró ninguna academia con el ID: " + academiaIdToFind);
-                }
-            } catch (SQLException e) {
-                System.out.println("❌ Error al buscar la academia por su ID: " + e.getMessage());
+            Academies foundAcademy = academiesDAO.findById(academiaIdToFind);
+            if (foundAcademy != null) {
+                System.out.println("✅ Academia encontrada: " + foundAcademy);
+            } else {
+                System.out.println("❌ No se encontró ninguna academia con el ID: " + academiaIdToFind);
             }
         } catch (SQLException e) {
             System.out.println("❌ Error al establecer la conexión con la base de datos: " + e.getMessage());

@@ -12,7 +12,7 @@ public class ExperiencesDAO implements iExperiencesDAO {
     // Sentencias SQL para la base de datos
     // =======================================
     private static final String INSERT = "INSERT INTO cvv_experiences (contact_id, name, duration, company, location, year, position) VALUES (?,?,?,?,?,?,?)";
-    private static final String UPDATE = "UPDATE cvv_experiences SET contact_id=?, name=?, duration=?, company=?, location=?, year=?, position=? WHERE experience_id=?";
+    private static final String UPDATE = "UPDATE cvv_experiences SET name=?, duration=?, company=?, location=?, year=?, position=? WHERE experience_id=?";
     private static final String DELETE = "DELETE FROM cvv_experiences WHERE experience_id=?";
     private static final String FIND_BY_ID = "SELECT * FROM cvv_experiences WHERE experience_id=?";
     private static final String FIND_ALL = "SELECT * FROM cvv_experiences";
@@ -54,6 +54,11 @@ public class ExperiencesDAO implements iExperiencesDAO {
             // =======================
             int rowsAffected = pst.executeUpdate();
 
+            // ===================
+            // Realizar commit
+            // ===================
+            conn.commit();
+
             // ==============================================================
             // Si no se insertó ninguna experiencia, mostrar mensaje de error
             // ==============================================================
@@ -87,18 +92,21 @@ public class ExperiencesDAO implements iExperiencesDAO {
      * Método para ACTUALIZAR una experiencia en la base de datos.
      */
     @Override
-    public Experiences update(Experiences exp) throws SQLException {
+    public Experiences update(int id, Experiences exp) throws SQLException {
+        // Habilitar la transacción
+        conn.setAutoCommit(false);
+
         // ==============================================
         // Actualizar la experiencia en la base de datos
         // ==============================================
         try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
-            pst.setInt(1, exp.getContact_id());
-            pst.setString(2, exp.getName());
-            pst.setString(3, exp.getDuration());
-            pst.setString(4, exp.getCompany());
-            pst.setString(5, exp.getLocation());
-            pst.setInt(6, exp.getYear());
-            pst.setInt(7, exp.getPosition());
+            pst.setString(1, exp.getName());
+            pst.setString(2, exp.getDuration());
+            pst.setString(3, exp.getCompany());
+            pst.setString(4, exp.getLocation());
+            pst.setInt(5, exp.getYear());
+            pst.setInt(6, exp.getPosition());
+            pst.setInt(7, id);
 
             // =======================
             // Ejecutar la consulta
@@ -118,27 +126,50 @@ public class ExperiencesDAO implements iExperiencesDAO {
     }
 
     /**
-     * @param exp
+     * @param id
      * @return
      * @throws SQLException
      * @Author: JavviFdeez
      * Método para ELIMINAR una experiencia de la base de datos.
      */
     @Override
-    public Experiences delete(Experiences exp) throws SQLException {
+    public void delete(int id) throws SQLException {
+        // Habilitar la transacción
+        conn.setAutoCommit(false);
+
         // ==============================================
         // Eliminar la experiencia de la base de datos
         // ==============================================
         try (PreparedStatement pst = conn.prepareStatement(DELETE)) {
-            pst.setInt(1, exp.getExperience_id());
+            pst.setInt(1, id);
 
             // =======================
             // Ejecutar la consulta
             // =======================
             int rowsAffected = pst.executeUpdate();
-        }
 
-        return exp;
+            // ==============================================================
+            // Si no se elimino ninguna experiencia, mostrar mensaje de error
+            // ==============================================================
+            if (rowsAffected == 0) {
+                throw new SQLException("No se eliminó ninguna experiencia con el ID: " + id);
+            }
+
+            // Realizar commit
+            conn.commit();
+        } catch (SQLException e) {
+            // En caso de error, hacer rollback
+            conn.rollback();
+            throw new SQLException("Error al eliminar la experiencia: " + e.getMessage(), e);
+        } finally {
+            try {
+                // Restaurar la autoconfirmación
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                // Manejar cualquier excepción al restaurar la autoconfirmación
+                throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
+            }
+        }
     }
 
     /**
@@ -150,20 +181,9 @@ public class ExperiencesDAO implements iExperiencesDAO {
      */
     @Override
     public Experiences findById(int id) throws SQLException {
-        // =====================================================
-        // Experiences encontrada, o null si no se encuentra
-        // =====================================================
         Experiences foundExperience = null;
-
-        // =================================================
-        // Experiencia encontrada, o null si no se encuentra
-        // =================================================
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_ID)) {
             pst.setInt(1, id);
-
-            // ===============================
-            // Ejecutar la consulta
-            // ================================
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
                     foundExperience = new Experiences(
@@ -176,14 +196,11 @@ public class ExperiencesDAO implements iExperiencesDAO {
                             rs.getInt("position")
                     );
                 }
-
-            } catch (SQLException e) {
-                throw new SQLException("❌ Error al buscar una experiencia por su ID.", e);
             }
-
-            return foundExperience;
-
+        } catch (SQLException e) {
+            throw new SQLException("❌ Error al buscar una experiencia por su ID.", e);
         }
+        return foundExperience;
     }
 
     /**
@@ -194,18 +211,11 @@ public class ExperiencesDAO implements iExperiencesDAO {
      */
     @Override
     public List<Experiences> findAll() throws SQLException {
-        // ================================================
-        // Lista de experiencias encontradas, o una lista vacía
-        // ================================================
-        List<Experiences> foundExperiences = new ArrayList<>();
-
-        // ===============================================
-        // Ejecutar la consulta y obtener el resultado
-        // ===============================================
+        List<Experiences> experiencesList = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FIND_ALL)) {
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
-                    foundExperiences.add(new Experiences(
+                    Experiences experience = new Experiences(
                             rs.getInt("contact_id"),
                             rs.getString("name"),
                             rs.getString("duration"),
@@ -213,13 +223,13 @@ public class ExperiencesDAO implements iExperiencesDAO {
                             rs.getString("location"),
                             rs.getInt("year"),
                             rs.getInt("position")
-                    ));
+                    );
+                    experiencesList.add(experience);
                 }
-
-            } catch (SQLException e) {
-                throw new SQLException("❌ Error al buscar todas las experiencias.", e);
             }
+        } catch (SQLException e) {
+            throw new SQLException("❌ Error al buscar todas las experiencias.", e);
         }
-        return foundExperiences;
+        return experiencesList;
     }
 }

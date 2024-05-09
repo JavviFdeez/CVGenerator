@@ -50,9 +50,9 @@ public class ExperiencesController {
      * @Author: JavviFdeez
      * Metodo para ACTUALIZAR una experiencia en la base de datos y mostrar un mensaje de exito o error
      */
-    public void updateExperiences(Experiences exp) {
+    public void updateExperiences(int id, Experiences exp) {
         try {
-            Experiences updatedExperiences = experiencesDAO.update(exp);
+            Experiences updatedExperiences = experiencesDAO.update(id, exp);
             if (updatedExperiences != null) {
                 // =========================================================
                 // La actualización fue exitosa, mostrar mensaje de exito
@@ -74,28 +74,21 @@ public class ExperiencesController {
     }
 
     /**
-     * @param exp
+     * @param id
      * @return
      * @Author: JavviFdeez
      * Metodo para ELIMINAR una experiencia de la base de datos y mostrar un mensaje de exito o error
      */
-    public void deleteExperiences(Experiences exp) {
+    public void deleteExperiences(int id) {
         try {
             // ==============================================
             // Eliminar la experiencia de la base de datos
             // ==============================================
-            Experiences deletedExperiences = experiencesDAO.delete(exp);
-            if (deletedExperiences != null) {
-                // ======================================================
-                // Si la eliminación es exitosa, mostrar mensaje de exito
-                // ======================================================
-                System.out.println("✅ Experiencia eliminada exitosamente.");
-            } else {
-                // ================================================================
-                // No se encontró ninguna experiencia para eliminar, mostrar mensaje de advertencia
-                // ================================================================
-                System.out.println("⚠️ No se encontró ninguna experiencia para eliminar.");
-            }
+            experiencesDAO.delete(id);
+            // ======================================================
+            // Si la eliminación es exitosa, mostrar mensaje de exito
+            // ======================================================
+            System.out.println("✅ Experiencia eliminada exitosamente.");
         } catch (SQLException e) {
             // =============================================
             // En caso de error, mostrar mensaje de error

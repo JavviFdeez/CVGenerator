@@ -9,6 +9,14 @@ import java.sql.SQLException;
 
 public class LanguagesTest {
     public static void main(String[] args) {
+        testSaveLanguages();
+        // testUpdateLanguages();
+        // testDeleteLanguages();
+        // testFindLanguagesById();
+        // testFindAllLanguages();
+    }
+
+    private static void testSaveLanguages() {
         // Crear una nueva instancia de lenguaje con los datos necesarios
         Languages lang = new Languages(4, 5, 3, 2);
 

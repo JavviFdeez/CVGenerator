@@ -163,25 +163,11 @@ public class LanguagesDAO implements iLanguagesDAO {
 
     @Override
     public Languages findById(int id) throws SQLException {
-        // =================================================
-        // Lenguaje encontrado, o null si no lo encuentra
-        // =================================================
         Languages foundlang = null;
-
-        // =================================================
-        // Consultar para obtener un lenguaje por su ID
-        // =================================================
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_ID)) {
             pst.setInt(1, id);
-
-            // ==============================================
-            // Ejecutar la consulta y obtener el resultado
-            // ==============================================
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
-                    // =================================================
-                    // Crear un nuevo lenguaje con los datos obtenidos
-                    // =================================================
                     foundlang = new Languages(
                             rs.getInt("contact_id"),
                             rs.getInt("spanish"),
@@ -196,6 +182,7 @@ public class LanguagesDAO implements iLanguagesDAO {
         return foundlang;
     }
 
+
     /**
      * @return
      * @throws SQLException
@@ -204,36 +191,23 @@ public class LanguagesDAO implements iLanguagesDAO {
      */
     @Override
     public List<Languages> findAll() throws SQLException {
-        // ================================================
-        // Lenguajes encontradas, o null si no se encuentran
-        // =================================================
         List<Languages> languagesList = new ArrayList<>();
-
-        // ==============================================
-        // Ejecutar la consulta y obtener el resultado
-        // ==============================================
         try (PreparedStatement pst = conn.prepareStatement(FIND_ALL)) {
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
-                    // =================================================
-                    // Crear un nuevo lenguaje con los datos obtenidos
-                    // =================================================
                     Languages lang = new Languages(
                             rs.getInt("contact_id"),
                             rs.getInt("spanish"),
                             rs.getInt("english"),
                             rs.getInt("french")
                     );
-                    // =================================================
-                    // Agregar el lenguaje a la lista de lenguajes
-                    // =================================================
                     languagesList.add(lang);
                 }
             }
         } catch (SQLException e) {
             throw new SQLException("❌ Error al buscar los lenguajes");
         }
-
-    return languagesList;
+        return languagesList;
     }
+
 }

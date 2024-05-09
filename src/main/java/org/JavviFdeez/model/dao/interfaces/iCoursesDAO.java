@@ -16,22 +16,22 @@ public interface iCoursesDAO {
     Courses save(Courses course) throws SQLException;
 
     /**
-     * @param course
+     * @param id
      * @return
      * @throws SQLException
      * @Author: JavviFdeez
      * Método para ACTUALIZAR un curso
      */
-    Courses update(Courses course) throws SQLException;
+    Courses update(int id, Courses upsateCourse) throws SQLException;
 
     /**
-     * @param course
+     * @param id
      * @return
      * @throws SQLException
      * @Author: JavviFdeez
      * Método para ELIMINAR un curso
      */
-    Courses delete(Courses course) throws SQLException;
+    void delete(int id) throws SQLException;
 
     /**
      * @param id

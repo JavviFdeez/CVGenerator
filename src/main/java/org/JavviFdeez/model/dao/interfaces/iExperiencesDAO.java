@@ -22,16 +22,16 @@ public interface iExperiencesDAO {
      * @Author: JavviFdeez
      * Método para ACTUALIZAR una experiencia
      */
-    Experiences update(Experiences exp) throws SQLException;
+    Experiences update(int id, Experiences exp) throws SQLException;
 
     /**
-     * @param exp
+     * @param id
      * @return
      * @throws SQLException
      * @Author: JavviFdeez
      * Método para ELIMINAR una experiencia
      */
-    Experiences delete(Experiences exp) throws SQLException;
+    void delete(int id) throws SQLException;
 
     /**
      * @param id

@@ -64,4 +64,18 @@ public class Languages {
     public void setFrench(int french) {
         this.french = french;
     }
+
+    // =================
+    // toString
+    // =================
+    @Override
+    public String toString() {
+        return "Languages{" +
+                "lang_id=" + lang_id +
+                ", contact_id=" + contact_id +
+                ", spanish=" + spanish +
+                ", english=" + english +
+                ", french=" + french +
+                '}';
+    }
 }

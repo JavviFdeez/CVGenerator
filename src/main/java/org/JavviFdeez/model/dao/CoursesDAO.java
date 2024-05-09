@@ -13,7 +13,7 @@ public class CoursesDAO implements iCoursesDAO {
     // Sentencias SQL para la base de datos
     // =======================================
     private static final String INSERT = "INSERT INTO cvv_courses (contact_id, name, duration, position) VALUES (?, ?, ?, ?)";
-    private static final String UPDATE = "UPDATE cvv_courses SET contact_id=?, name=?, year=? WHERE course_id=?";
+    private static final String UPDATE = "UPDATE cvv_courses SET name=?, duration=?, position=? WHERE course_id=?";
     private static final String DELETE = "DELETE FROM cvv_courses WHERE course_id=?";
     private static final String FIND_BY_ID = "SELECT * FROM cvv_courses WHERE course_id=?";
     private static final String FIND_ALL = "SELECT * FROM cvv_courses";
@@ -82,22 +82,25 @@ public class CoursesDAO implements iCoursesDAO {
     }
 
     /**
-     * @param c el curso a ser actualizado
+     * @param id el curso a ser actualizado
      * @return el curso actualizado
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
      * @Author: JavviFdeez
      * Método para ACTUALIZAR un curso en la base de datos.
      */
     @Override
-    public Courses update(Courses c) throws SQLException {
+    public Courses update(int id, Courses upsateCourse) throws SQLException {
+        // Habilitar la transacción
+        conn.setAutoCommit(false);
+
         // ==========================================
         // Actualizar el curso en la base de datos
         // ==========================================
         try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
-            pst.setInt(1, c.getContact_id());
-            pst.setString(2, c.getName());
-            pst.setInt(3, c.getDuration());
-            pst.setInt(4, c.getPosition());
+            pst.setString(1, upsateCourse.getName());
+            pst.setInt(2, upsateCourse.getDuration());
+            pst.setInt(3, upsateCourse.getPosition());
+            pst.setInt(4, id);
 
             // =======================
             // Ejecutar la consulta
@@ -107,11 +110,24 @@ public class CoursesDAO implements iCoursesDAO {
             // Si no se actualizó ningun curso, mostrar mensaje de error
             // ==============================================================
             if (rowsAffected == 0) {
-                throw new SQLException("❌ Error al insertar, no se guardó ningun curso.");
+                throw new SQLException("No se pudo actualizar el curso con ID: " + id);
             }
-
+            // Realizar commit
+            conn.commit();
+        } catch (SQLException e) {
+            // En caso de error, hacer rollback
+            conn.rollback();
+            throw new SQLException("Error al actualizar el curso: " + e.getMessage(), e);
+        } finally {
+            try {
+                // Restaurar la autoconfirmación
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
+            }
         }
-        return c;
+
+        return upsateCourse;
     }
 
     /**
@@ -122,22 +138,43 @@ public class CoursesDAO implements iCoursesDAO {
      * Método para ELIMINAR un curso de la base de datos y retorna true si la operación es exitosa.
      */
     @Override
-    public Courses delete(Courses c) throws SQLException {
+    public void delete(int id) throws SQLException {
+        // Habilitar la transacción
+        conn.setAutoCommit(false);
+
         // ===========================================
         // Eliminar el curso de la base de datos
         // ===========================================
         try (PreparedStatement pst = conn.prepareStatement(DELETE)) {
-            pst.setInt(1, c.getCourse_id());
+            pst.setInt(1, id);
 
             // =======================
             // Ejecutar la consulta
             // =======================
             int rowsAffected = pst.executeUpdate();
-        } catch (SQLException e) {
-            throw new SQLException("❌ Error al insertar, no se guardó ningun curso.");
-        }
 
-        return c;
+            // ==============================================================
+            // Si no se elimino ninguna academia, mostrar mensaje de error
+            // ==============================================================
+            if (rowsAffected == 0) {
+                throw new SQLException("No se eliminó ningun curso con el ID: " + id);
+            }
+
+            // Realizar commit
+            conn.commit();
+        } catch (SQLException e) {
+            // En caso de error, hacer rollback
+            conn.rollback();
+            throw new SQLException("Error al eliminar el curso: " + e.getMessage(), e);
+        } finally {
+            try {
+                // Restaurar la autoconfirmación
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                // Manejar cualquier excepción al restaurar la autoconfirmación
+                throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
+            }
+        }
     }
 
     /**
@@ -149,26 +186,21 @@ public class CoursesDAO implements iCoursesDAO {
      */
     @Override
     public Courses findById(int id) throws SQLException {
-        // =================================================
-        // Curso encontrado, o null si no se encuentra
-        // =================================================
+        // ===========================================
+        // Buscar el curso en la base de datos
+        // ===========================================
         Courses foundCourse = null;
-
-        // ==================================================
-        // Consulta para buscar un curso por su ID
-        // ==================================================
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_ID)) {
+            // =======================
+            // Ejecutar la consulta
+            // =======================
             pst.setInt(1, id);
-
-            // ==============================================
-            // Ejecutar la consulta y obtener el resultado
-            // ==============================================
             try (ResultSet res = pst.executeQuery()) {
                 if (res.next()) {
-                    // =====================================================================
-                    // Crear un objeto de curso con los datos obtenidos de la base de datos
-                    // =====================================================================
                     foundCourse = new Courses(
+                            // =======================
+                            // Obtener los datos del curso
+                            // =======================
                             res.getInt("contact_id"),
                             res.getString("name"),
                             res.getInt("duration"),
@@ -183,6 +215,7 @@ public class CoursesDAO implements iCoursesDAO {
         return foundCourse;
     }
 
+
     /**
      * @return una lista vacía de cursos
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
@@ -191,34 +224,32 @@ public class CoursesDAO implements iCoursesDAO {
      */
     @Override
     public List<Courses> findAll() throws SQLException {
-        // =================================================
-        // Lista de cursos encontrados, o vacía si no hay
-        // =================================================
-        List<Courses> coursesLIst = new ArrayList<>();
-        // ================================================
-        // Ejecutar la consulta y obtener el resultado
-        // ================================================
+        // =========================================
+        // Lista de cursos, o vacía si no hay
+        // =========================================
+        List<Courses> coursesList = new ArrayList<>();
+        // =============================================
+        // Consulta SQL para buscar todos los cursos
+        // =============================================
         try (PreparedStatement pst = conn.prepareStatement(FIND_ALL)) {
-            try (ResultSet res = pst.executeQuery()) {
-                while (res.next()) {
-                    // ======================================================
-                    // Crear un objeto de curso con los datos obtenidos de la base de datos
-                    // ======================================================
-                    Courses c = new Courses(
-                            res.getInt("contact_id"),
-                            res.getString("name"),
-                            res.getInt("duration"),
-                            res.getInt("position")
+            // =======================
+            // Ejecutar la consulta
+            // =======================
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Courses course = new Courses(
+                            rs.getInt("contact_id"),
+                            rs.getString("name"),
+                            rs.getInt("duration"),
+                            rs.getInt("position")
                     );
-                    // ======================================================
-                    // Agregar los cursos encontrados a la lista de cursos
-                    // ======================================================
-                    coursesLIst.add(c);
+                    coursesList.add(course);
                 }
-            } catch (SQLException e) {
-                throw new SQLException("❌ Error al buscar los cursos");
             }
+        } catch (SQLException e) {
+            throw new SQLException("❌ Error al buscar los cursos");
         }
-        return coursesLIst;
+
+        return coursesList;
     }
 }
