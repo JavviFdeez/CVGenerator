@@ -124,7 +124,7 @@ public class Contact {
     // toString
     // =================
     public String toString() {
-       return "Contact{" +
+       return "Contact: {" +
                "contact_id=" + contact_id +
                ", name='" + name + '\'' +
                ", last_name='" + lastname + '\'' +

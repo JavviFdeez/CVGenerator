@@ -1,9 +1,7 @@
 package org.JavviFdeez.test;
 
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
-import org.JavviFdeez.model.dao.AcademiesDAO;
 import org.JavviFdeez.model.dao.ExperiencesDAO;
-import org.JavviFdeez.model.entity.Academies;
 import org.JavviFdeez.model.entity.Experiences;
 
 

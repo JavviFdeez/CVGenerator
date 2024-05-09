@@ -80,7 +80,7 @@ public class Academies {
     // toString
     // ===========
     public String toString() {
-        return "Academia{" +
+        return "Academia: {" +
                 "academies_id=" + academies_id +
                 "Contact_id=" + contact_id +
                 ", Nombre='" + name + '\'' +

@@ -28,6 +28,7 @@ public class AcademiesController extends AcademiesControllerAbstract {
             // Guardar la academia en la base de datos
             // ==========================================
             academiesDAO.save(academies);
+
             // ======================================================
             // Si el guardado es exitoso, mostrar mensaje de éxito.
             // ======================================================
@@ -48,10 +49,14 @@ public class AcademiesController extends AcademiesControllerAbstract {
      */
     public void updateAcademies(int id, Academies updatedAcademies) {
         try {
-            // Intentar actualizar la academia
+            // =========================================
+            // Actualizar el academia en la base de datos
+            // =========================================
             academiesDAO.update(id, updatedAcademies);
 
-            // Mostrar mensaje de actualización exitosa
+            // ======================================================
+            // Si el guardado es exitoso, mostrar mensaje de exito.
+            // ======================================================
             System.out.println("✅ Academia actualizada exitosamente.");
         } catch (SQLException e) {
             // En caso de error SQL, registrar el error y mostrar un mensaje al usuario
@@ -125,12 +130,16 @@ public class AcademiesController extends AcademiesControllerAbstract {
      */
     public void findAllAcademies() {
         try {
+            // =================================================
+            // Buscar todas las academias en la base de datos
+            // =================================================
             List<Academies> academiesList = academiesDAO.findAll();
+
             if (!academiesList.isEmpty()) {
                 // =============================================================
                 // Si se encontró al menos una academia, mostrar sus detalles
                 // =============================================================
-                System.out.println("Academias encontradas:");
+                System.out.println("✅ Lista de academias encontradas:");
                 for (Academies academies : academiesList) {
                     System.out.println(academies);
                 }

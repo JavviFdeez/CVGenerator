@@ -70,7 +70,7 @@ public class Languages {
     // =================
     @Override
     public String toString() {
-        return "Languages{" +
+        return "Languages: {" +
                 "lang_id=" + lang_id +
                 ", contact_id=" + contact_id +
                 ", spanish=" + spanish +

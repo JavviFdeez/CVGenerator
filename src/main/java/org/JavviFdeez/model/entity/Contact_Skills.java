@@ -59,7 +59,7 @@ public class Contact_Skills {
     // =================
     @Override
     public String toString() {
-        return "Contact_Skills{" +
+        return "Contact_Skills: {" +
                 "cskill_id=" + cskill_id +
                 ", contact_id=" + contact_id +
                 ", skill_id=" + skill_id +

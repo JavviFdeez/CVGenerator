@@ -2,6 +2,16 @@ CREATE DATABASE curriculums;
 
 USE curriculums;
 
+CREATE TABLE cvv_academies (
+                               academy_id INT AUTO_INCREMENT PRIMARY KEY,
+                               contact_id INT,
+                               name VARCHAR(255),
+                               entity VARCHAR(255),
+                               location VARCHAR(255),
+                               year INT,
+                               FOREIGN KEY (contact_id) REFERENCES cvv_contact(contact_id)
+);
+
 CREATE TABLE cvv_contact (
                             contact_id INT AUTO_INCREMENT PRIMARY KEY,
                             name VARCHAR(255),
@@ -15,15 +25,7 @@ CREATE TABLE cvv_contact (
                             extra varchar(255)
 );
 
-CREATE TABLE cvv_academies (
-                            academy_id INT AUTO_INCREMENT PRIMARY KEY,
-                            contact_id INT,
-                            name VARCHAR(255),
-                            entity VARCHAR(255),
-                            location VARCHAR(255),
-                            year INT,
-                            FOREIGN KEY (contact_id) REFERENCES cvv_contact(contact_id)
-);
+
 
 CREATE TABLE cvv_contact_skills (
                             cskill_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -67,4 +69,10 @@ CREATE TABLE cvv_languages (
 CREATE TABLE cvv_skills (
                             skill_id INT AUTO_INCREMENT PRIMARY KEY,
                             name VARCHAR(255)
+);
+
+CREATE TABLE cvv_users (
+                                  users_id INT AUTO_INCREMENT PRIMARY KEY,
+                                  email VARCHAR(100) NOT NULL,
+                                  password VARCHAR(255) NOT NULL
 );

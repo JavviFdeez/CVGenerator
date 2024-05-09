@@ -13,7 +13,7 @@ public class SkillsTest {
         // testUpdateSkills();
         // testDeleteSkills();
         // testFindSkillsById();
-        testFindAllSkills();
+        // testFindAllSkills();
     }
 
     private static void testSaveSkills() {

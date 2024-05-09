@@ -13,7 +13,7 @@ public class ContactTest {
     public static void main(String[] args) {
         // testSaveContact();
         // testUpdateContact();
-         testDeleteContact();
+        // testDeleteContact();
         // testFindContactById();
         // testFindAllContacts();
     }

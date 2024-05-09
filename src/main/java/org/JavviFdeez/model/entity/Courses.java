@@ -70,7 +70,7 @@ public class Courses {
     // =================
     @Override
     public String toString() {
-       return "Courses{" +
+        return "Courses: {" +
                 "course_id=" + course_id +
                 ", contact_id=" + contact_id +
                 ", name='" + name + '\'' +

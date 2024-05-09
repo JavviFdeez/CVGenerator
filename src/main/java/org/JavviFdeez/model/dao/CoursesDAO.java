@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoursesDAO implements iCoursesDAO {
-
     // =======================================
     // Sentencias SQL para la base de datos
     // =======================================
@@ -106,21 +105,30 @@ public class CoursesDAO implements iCoursesDAO {
             // Ejecutar la consulta
             // =======================
             int rowsAffected = pst.executeUpdate();
+
             // ==============================================================
             // Si no se actualizó ningun curso, mostrar mensaje de error
             // ==============================================================
             if (rowsAffected == 0) {
                 throw new SQLException("No se pudo actualizar el curso con ID: " + id);
             }
+
+            // ==================
             // Realizar commit
+            // ==================
             conn.commit();
+
         } catch (SQLException e) {
+            // ====================================
             // En caso de error, hacer rollback
+            // ====================================
             conn.rollback();
             throw new SQLException("Error al actualizar el curso: " + e.getMessage(), e);
         } finally {
             try {
+                // ================================
                 // Restaurar la autoconfirmación
+                // ================================
                 conn.setAutoCommit(true);
             } catch (SQLException ex) {
                 throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
@@ -131,7 +139,7 @@ public class CoursesDAO implements iCoursesDAO {
     }
 
     /**
-     * @param c el curso que se va a eliminar
+     * @param id el curso que se va a eliminar
      * @return true si el curso se elimina correctamente, false en caso contrario
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
      * @Author: JavviFdeez
@@ -160,18 +168,24 @@ public class CoursesDAO implements iCoursesDAO {
                 throw new SQLException("No se eliminó ningun curso con el ID: " + id);
             }
 
+            // ==================
             // Realizar commit
+            // ==================
             conn.commit();
+
         } catch (SQLException e) {
+            // ====================================
             // En caso de error, hacer rollback
+            // ====================================
             conn.rollback();
             throw new SQLException("Error al eliminar el curso: " + e.getMessage(), e);
         } finally {
             try {
+                // ================================
                 // Restaurar la autoconfirmación
+                // ================================
                 conn.setAutoCommit(true);
             } catch (SQLException ex) {
-                // Manejar cualquier excepción al restaurar la autoconfirmación
                 throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
             }
         }
@@ -190,6 +204,7 @@ public class CoursesDAO implements iCoursesDAO {
         // Buscar el curso en la base de datos
         // ===========================================
         Courses foundCourse = null;
+
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_ID)) {
             // =======================
             // Ejecutar la consulta
@@ -198,9 +213,9 @@ public class CoursesDAO implements iCoursesDAO {
             try (ResultSet res = pst.executeQuery()) {
                 if (res.next()) {
                     foundCourse = new Courses(
-                            // =======================
+                            // ==============================
                             // Obtener los datos del curso
-                            // =======================
+                            // ==============================
                             res.getInt("contact_id"),
                             res.getString("name"),
                             res.getInt("duration"),
@@ -228,6 +243,7 @@ public class CoursesDAO implements iCoursesDAO {
         // Lista de cursos, o vacía si no hay
         // =========================================
         List<Courses> coursesList = new ArrayList<>();
+
         // =============================================
         // Consulta SQL para buscar todos los cursos
         // =============================================

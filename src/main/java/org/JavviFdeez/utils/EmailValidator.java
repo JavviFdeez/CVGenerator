@@ -8,6 +8,7 @@ public class EmailValidator {
 
     // ==============================
     // Método para validar un correo
+    // ==============================
     public static boolean isValidEmail(String email) {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
