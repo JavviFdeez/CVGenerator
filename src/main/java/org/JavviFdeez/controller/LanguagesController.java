@@ -43,13 +43,13 @@ public class LanguagesController {
     }
 
     /**
-     * @param languages la lengua que se va a actualizar
+     * @param id la lengua que se va a actualizar
      * @Author: JavviFdeez
      * Método que ACTUALIZAR una lengua en la base de datos y muestra un mensaje de إxito o error.
      */
-    public void updateLanguages(Languages languages) {
+    public void updateLanguages(int id, Languages updateLanguages) {
         try {
-            Languages updatedLanguages = languagesDAO.update(languages);
+            Languages updatedLanguages = languagesDAO.update(id, updateLanguages);
             if (updatedLanguages != null) {
                 // =========================================================
                 // La actualización fue exitosa, mostrar mensaje de إxito
@@ -71,24 +71,17 @@ public class LanguagesController {
     }
 
     /**
-     * @param languages la lengua que se va a eliminar
+     * @param id la lengua que se va a eliminar
      * @Author: JavviFdeez
      * Método que ELIMINAR una lengua de la base de datos y muestra un mensaje de exito o error.
      */
-    public void deleteLanguages(Languages languages) {
+    public void deleteLanguages(int id) {
         try {
-            Languages deletedLanguages = languagesDAO.delete(languages);
-            if (deletedLanguages != null) {
-                // =========================================================
-                // Si la eliminación es exitosa, mostrar mensaje de إxito
-                // =========================================================
-                System.out.println("✅ Lengua eliminada exitosamente.");
-            } else {
-                // ================================================================
-                // Si no se eliminó ninguna fila, mostrar mensaje de advertencia
-                // ================================================================
-                System.out.println("⚠️ No se encontró ninguna lengua para eliminar.");
-            }
+            languagesDAO.delete(id);
+            // =========================================================
+            // Si el borrado es exitoso, mostrar mensaje de exito
+            // =========================================================
+            System.out.println("✅ Lengua eliminada exitosamente.");
         } catch (SQLException e) {
             // ========================================================================
             // En caso de error, mostrar mensaje de error y detalles de la excepción

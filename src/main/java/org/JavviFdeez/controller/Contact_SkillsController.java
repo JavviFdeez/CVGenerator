@@ -6,7 +6,7 @@ import org.JavviFdeez.model.entity.Contact_Skills;
 
 import java.sql.SQLException;
 
-public class Contact_SkillsController {
+public class Contact_SkillsController extends Contact_SkillsControllerAbstract {
     // ================
     // Atributos
     // =================

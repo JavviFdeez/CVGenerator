@@ -11,7 +11,7 @@ public class SkillsDAO implements iSkillsDAO {
     // =======================================
     // Sentencias SQL para la base de datos
     // ========================================
-    private static final String INSERT = "INSERT INTO cvv_skills (skill_id, name) VALUES (?, ?)";
+    private static final String INSERT = "INSERT INTO cvv_skills (name) VALUES (?)";
     private static final String UPDATE = "UPDATE cvv_skills SET name=? WHERE skill_id=?";
     private static final String DELETE = "DELETE FROM cvv_skills WHERE skill_id=?";
     private static final String FIND_BY_ID = "SELECT * FROM cvv_skills WHERE skill_id=?";
@@ -41,8 +41,7 @@ public class SkillsDAO implements iSkillsDAO {
         // Insertar la skill en la base de datos
         // ===========================================
         try (PreparedStatement pst = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS)) {
-            pst.setInt(1, s.getSkill_id());
-            pst.setString(2, s.getName());
+            pst.setString(1, s.getName());
 
             // =======================
             // Ejecutar la consulta
@@ -70,19 +69,19 @@ public class SkillsDAO implements iSkillsDAO {
     }
 
     /**
-     * @param s la skill a ser actualizada
+     * @param id la skill a ser actualizada
      * @return la skill actualizada
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
      * @Author: JavviFdeez
      * Método para ACTUALIZAR una skill en la base de datos.
      */
-    public Skills update(Skills s) throws SQLException {
+    public Skills update(int id, Skills updatedSkill) throws SQLException {
         // ===========================================
         // Actualizar la skill en la base de datos
         // ===========================================
         try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
-            pst.setString(1, s.getName());
-            pst.setInt(2, s.getSkill_id());
+            pst.setString(1, updatedSkill.getName());
+            pst.setInt(2, id);
 
             // =======================
             // Ejecutar la consulta
@@ -93,33 +92,65 @@ public class SkillsDAO implements iSkillsDAO {
             // Verificar si se actualizó al menos una fila
             // ===============================================================
             if (rowsAffected == 0) {
-                throw new SQLException("❌ Error al actualizar, no se actualizo ninguna skill.");
+                throw new SQLException("No se pudo actualizar la skill con ID: " + id);
+            }
+            // Realizar commit
+            conn.commit();
+        } catch (SQLException e) {
+            // En caso de error, hacer rollback
+            conn.rollback();
+            throw new SQLException("Error al actualizar la skill: " + e.getMessage(), e);
+        } finally {
+            try {
+                // Restaurar la autoconfirmación
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
             }
         }
 
-        return s;
+        return updatedSkill;
     }
 
     /**
-     * @param s la skill a ser eliminada
+     * @param id la skill a ser eliminada
      * @throws SQLException si ocurre un error al ejecutar la consulta SQL
      * @Author: JavviFdeez
      * Método para ELIMINAR una skill de la base de datos.
      */
-    public Skills delete(Skills s) throws SQLException {
+    public void delete(int id) throws SQLException {
         // ===========================================
         // Eliminar la skill de la base de datos
         // ===========================================
         try (PreparedStatement pst = conn.prepareStatement(DELETE)) {
-            pst.setInt(1, s.getSkill_id());
+            pst.setInt(1, id);
 
             // =======================
             // Ejecutar la consulta
             // =======================
-            pst.executeUpdate();
-        }
+            int rowsAffected = pst.executeUpdate();
+            // ==============================================================
+            // Si no se elimino ninguna skill, mostrar mensaje de error
+            // ==============================================================
+            if (rowsAffected == 0) {
+                throw new SQLException("No se eliminó ninguna skill con el ID: " + id);
+            }
 
-        return s;
+            // Realizar commit
+            conn.commit();
+        } catch (SQLException e) {
+            // En caso de error, hacer rollback
+            conn.rollback();
+            throw new SQLException("Error al eliminar la skill: " + e.getMessage(), e);
+        } finally {
+            try {
+                // Restaurar la autoconfirmación
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                // Manejar cualquier excepción al restaurar la autoconfirmación
+                throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
+            }
+        }
     }
 
     /**

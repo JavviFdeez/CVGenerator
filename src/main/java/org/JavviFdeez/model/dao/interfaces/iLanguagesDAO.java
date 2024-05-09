@@ -22,16 +22,16 @@ public interface iLanguagesDAO {
      * @Author: JavviFdeez
      * Método para ACTUALIZAR un idioma
      */
-    Languages update(Languages lang) throws SQLException;
+    Languages update(int id, Languages lang) throws SQLException;
 
     /**
-     * @param lang
+     * @param id
      * @return
      * @throws SQLException
      * @Author: JavviFdeez
      * Método para ELIMINAR un idioma
      */
-    Languages delete(Languages lang) throws SQLException;
+    void delete(int id) throws SQLException;
 
     /**
      * @param id

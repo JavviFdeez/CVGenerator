@@ -17,22 +17,22 @@ public interface iSkillsDAO {
     Skills save(Skills skill) throws SQLException;
 
     /**
-     * @param skill
+     * @param id
      * @return
      * @throws SQLException
      * @Author: JavviFdeez
      * Método para ACTUALIZAR una skill
      */
-    Skills update(Skills skill) throws SQLException;
+    Skills update(int id, Skills skill) throws SQLException;
 
     /**
-     * @param skill
+     * @param id
      * @return
      * @throws SQLException
      * @Author: JavviFdeez
      * Método para ELIMINAR una skill
      */
-    Skills delete(Skills skill) throws SQLException;
+    void delete(int id) throws SQLException;
 
     /**
      * @param id

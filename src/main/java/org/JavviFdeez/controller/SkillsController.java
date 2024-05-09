@@ -45,16 +45,16 @@ public class SkillsController {
     }
 
     /**
-     * @param s la habilidad que se va a actualizar
+     * @param id la habilidad que se va a actualizar
      * @Author: JavviFdeez
      * Metodo para mostrar un mensaje de ACTUALIZAR una nueva habilidad en la base de datos
      */
-    public void updateSkills(Skills s) {
+    public void updateSkills(int id, Skills updatedSkills) {
         try {
             // ==========================================
             // Actualizar la habilidad en la base de datos
             // ==========================================
-            skillsDAO.update(s);
+            skillsDAO.update(id, updatedSkills);
             // ===========================================================
             // Si la actualizacion es exitosa, mostrar mensaje de exito.
             // ===========================================================
@@ -68,16 +68,16 @@ public class SkillsController {
     }
 
     /**
-     * @param s la habilidad que se va a eliminar
+     * @param id la habilidad que se va a eliminar
      * @Author: JavviFdeez
      * Metodo para mostrar un mensaje de ElIMINAR una nueva habilidad en la base de datos
      */
-    public void deleteSkills(Skills s) {
+    public void deleteSkills(int id) {
         try {
             // ==========================================
             // Eliminar la habilidad de la base de datos
             // ==========================================
-            skillsDAO.delete(s);
+            skillsDAO.delete(id);
             // ======================================================
             // Si la eliminación es exitosa, mostrar mensaje de exito.
             // ======================================================

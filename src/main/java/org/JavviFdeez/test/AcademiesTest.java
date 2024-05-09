@@ -15,7 +15,7 @@ public class AcademiesTest {
         // testUpdateAcademy();
         // testDeleteAcademies();
         // testFindAcademyById();
-        testFindAllAcademies();
+        // testFindAllAcademies();
     }
 
     private static void testSaveAcademy() {

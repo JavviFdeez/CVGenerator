@@ -7,7 +7,7 @@ import org.JavviFdeez.model.entity.Academies;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AcademiesController {
+public class AcademiesController extends AcademiesControllerAbstract {
     private AcademiesDAO academiesDAO;
 
     // ==============
