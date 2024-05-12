@@ -4,7 +4,9 @@ module org.JavviFdeez {
     requires java.sql;
     requires java.xml.bind;
 
-    opens org.JavviFdeez to javafx.fxml;
+    opens org.JavviFdeez.controller.view to javafx.fxml;
     exports org.JavviFdeez;
     opens org.JavviFdeez.model.connection to java.xml.bind;
+    exports org.JavviFdeez.test.view;
+    exports org.JavviFdeez.controller.view;
 }

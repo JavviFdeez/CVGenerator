@@ -1,12 +1,15 @@
 package org.JavviFdeez.controller;
 
+import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.SkillsDAO;
 import org.JavviFdeez.model.entity.Skills;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class SkillsController {
+public class SkillsController implements Initializable {
 
     // ============
     // Atributos
@@ -143,5 +146,9 @@ public class SkillsController {
             System.err.println("❌ Error al consultar las habilidades: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 }

@@ -1,0 +1,21 @@
+#rootBorderPane {
+    -fx-background-color: black;
+
+}
+
+#image {
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-padding: 50px;
+    -fx-width: 200px;
+    -fx-height: 200px
+}
+
+#name {
+    -fx-text-fill: white
+}
+
+#lastName {
+    -fx-text-fill: white
+}

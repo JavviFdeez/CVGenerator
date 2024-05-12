@@ -1,14 +1,16 @@
 package org.JavviFdeez.controller;
 
+import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.LanguagesDAO;
-import org.JavviFdeez.model.entity.Experiences;
 import org.JavviFdeez.model.entity.Languages;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class LanguagesController {
+public class LanguagesController implements Initializable {
     private LanguagesDAO languagesDAO;
 
     // ==============
@@ -149,5 +151,10 @@ public class LanguagesController {
             System.err.println("❌ Error al buscar las lenguas: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

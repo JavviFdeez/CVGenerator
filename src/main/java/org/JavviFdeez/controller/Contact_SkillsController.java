@@ -1,12 +1,15 @@
 package org.JavviFdeez.controller;
 
+import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.Contact_SkillsDAO;
 import org.JavviFdeez.model.entity.Contact_Skills;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class Contact_SkillsController extends Contact_SkillsControllerAbstract {
+public class Contact_SkillsController extends Contact_SkillsControllerAbstract implements Initializable {
     // ================
     // Atributos
     // =================
@@ -143,5 +146,9 @@ public class Contact_SkillsController extends Contact_SkillsControllerAbstract {
             // =============================================
             System.err.println("❌ Error al consultar las relaciones: " + e.getMessage());
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 }

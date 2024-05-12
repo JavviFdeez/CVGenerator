@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane fx:id="rootBorderPane" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.JavviFdeez.controller.view.TemplateController"
+            GridPane.columnIndex="0" styleClass="container">
+
+    <!-- Panel de contenido general -->
+    <GridPane GridPane.columnIndex="0" styleClass="container">
+        <!-- Subpanel para la imagen -->
+        <GridPane GridPane.columnIndex="0" styleClass="col-md-6">
+            <ImageView fx:id="image">
+            </ImageView>
+        </GridPane>
+
+        <!-- Subpanel para el nombre y apellidos -->
+        <GridPane GridPane.columnIndex="1" styleClass="col-md-6">
+            <!-- Fila para el nombre -->
+            <Label fx:id="name" text="Nombre" styleClass="h1" GridPane.rowIndex="0" />
+            <!-- Fila para los apellidos -->
+            <Label fx:id="lastName" text="Apellidos" styleClass="h1" GridPane.rowIndex="1" />
+        </GridPane>
+    </GridPane>
+</BorderPane>

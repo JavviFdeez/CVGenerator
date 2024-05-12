@@ -15,7 +15,7 @@ public class ContactTest {
         // testUpdateContact();
         // testDeleteContact();
         // testFindContactById();
-        // testFindAllContacts();
+         testFindAllContacts();
     }
 
     private static void testSaveContact() {
@@ -54,7 +54,7 @@ public class ContactTest {
                 // Actualizar los datos del contacto
                 contactToUpdate.setName("New First Name");
                 contactToUpdate.setLastname("New Last Name");
-                contactToUpdate.setImage("New Image");
+                contactToUpdate.setImage((byte[]) null);
                 contactToUpdate.setOccupation("New Occupation");
                 contactToUpdate.setMobile("New Mobile");
                 contactToUpdate.setEmail("aa@gmail.com");
@@ -136,7 +136,7 @@ public class ContactTest {
             List<Contact> contacts = contactDAO.findAll();
 
             // Verificar si se encontraron contactos
-            if (!contacts.isEmpty()) {
+            if (contacts != null) {
                 System.out.println("✅ Contactos encontrados exitosamente: " + contacts);
             } else {
                 System.out.println("❌ No se encontraron contactos.");

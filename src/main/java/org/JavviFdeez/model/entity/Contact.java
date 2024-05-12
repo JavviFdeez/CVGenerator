@@ -9,7 +9,7 @@ public class Contact {
     private int contact_id;
     private String name;
     private String lastname;
-    private String image;
+    private byte[] image;
     private String occupation;
     private String mobile;
     private String email;
@@ -20,7 +20,7 @@ public class Contact {
     // ==============
     // Constructor
     // ==============
-    public Contact(String name, String lastname, String image, String occupation, String mobile, String email, String linkedin, String location, String extra) {
+    public Contact(String name, String lastname, byte[] image, String occupation, String mobile, String email, String linkedin, String location, String extra) {
         this.contact_id = 0;
         this.name = name;
         this.lastname = lastname;
@@ -64,7 +64,7 @@ public class Contact {
         this.lastname = last_name;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
@@ -76,8 +76,9 @@ public class Contact {
         this.occupation = occupation;
     }
 
-    public void setImage(String image) {
+    public byte[] setImage(byte[] image) {
         this.image = image;
+        return image;
     }
 
     public String getMobile() {

@@ -1,14 +1,16 @@
 package org.JavviFdeez.controller;
 
+import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.UsersDAO;
-import org.JavviFdeez.model.entity.Academies;
 import org.JavviFdeez.model.entity.Users;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class UsersController {
+public class UsersController implements Initializable {
     // ============
     // Atributes
     // ============
@@ -159,5 +161,9 @@ public class UsersController {
             System.err.println("❌ Error al encontrar los usuarios: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 }

@@ -1,13 +1,16 @@
 package org.JavviFdeez.controller;
 
+import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.AcademiesDAO;
 import org.JavviFdeez.model.entity.Academies;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class AcademiesController extends AcademiesControllerAbstract {
+public class AcademiesController extends AcademiesControllerAbstract  implements Initializable {
     private AcademiesDAO academiesDAO;
 
     // ==============
@@ -156,5 +159,9 @@ public class AcademiesController extends AcademiesControllerAbstract {
             System.err.println("❌ Error al buscar las academias: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 }

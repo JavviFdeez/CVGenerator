@@ -52,7 +52,7 @@ public class ContactDAO implements iContactDAO {
             pst = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, c.getName());
             pst.setString(2, c.getLastname());
-            pst.setString(3, c.getImage());
+            pst.setBytes(3, c.getImage());
             pst.setString(4, c.getOccupation());
             pst.setString(5, c.getMobile());
             pst.setString(6, c.getEmail());
@@ -88,16 +88,9 @@ public class ContactDAO implements iContactDAO {
 
             return c;
 
-            // ====================================
-            // Cerrar los objetos de la consulta
-            // ====================================
-        } finally {
-            if (pst != null) {
-                pst.close();
-            }
-            if (generatedKeys != null) {
-                generatedKeys.close();
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -120,7 +113,7 @@ public class ContactDAO implements iContactDAO {
             // Establecer los valores de los parámetros en la consulta SQL
             pst.setString(1, updatedContact.getName());
             pst.setString(2, updatedContact.getLastname());
-            pst.setString(3, updatedContact.getImage());
+            pst.setBytes(3, updatedContact.getImage());
             pst.setString(4, updatedContact.getOccupation());
             pst.setString(5, updatedContact.getMobile());
             pst.setString(6, updatedContact.getEmail());
@@ -240,7 +233,7 @@ public class ContactDAO implements iContactDAO {
                     foundContact = new Contact(
                             rs.getString("name"),
                             rs.getString("lastname"),
-                            rs.getString("image"),
+                            rs.getBytes("image"),
                             rs.getString("occupation"),
                             rs.getString("mobile"),
                             rs.getString("email"),
@@ -276,25 +269,18 @@ public class ContactDAO implements iContactDAO {
         try (PreparedStatement pst = conn.prepareStatement(FIND_ALL)) {
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
-                    // ===================================================
-                    // Crear un objeto Contacto con los datos obtenidos
-                    // ===================================================
-                    int contact_id = rs.getInt("contact_id");
-                    String name = rs.getString("name");
-                    String lastname = rs.getString("lastname");
-                    String image = rs.getString("image");
-                    String occupation = rs.getString("occupation");
-                    String mobile = rs.getString("mobile");
-                    String email = rs.getString("email");
-                    String linkedin = rs.getString("linkedin");
-                    String location = rs.getString("location");
-                    String extra = rs.getString("extra");
-
-                    // ===================================================
-                    // Crear un objeto Contacto con los datos obtenidos
-                    // ===================================================
-                    Contact foundContact = new Contact(name, lastname, image, occupation, mobile, email, linkedin, location, extra);
-                    cList.add(foundContact);
+                   Contact contact = new Contact(
+                           rs.getString("name"),
+                           rs.getString("lastname"),
+                           rs.getBytes("image"),
+                           rs.getString("occupation"),
+                           rs.getString("mobile"),
+                           rs.getString("email"),
+                           rs.getString("linkedin"),
+                           rs.getString("location"),
+                           rs.getString("extra")
+                   );
+                   cList.add(contact);
                 }
             } catch (SQLException e) {
                 throw new SQLException("❌ Error al buscar todos los contactos: " + e.getMessage());

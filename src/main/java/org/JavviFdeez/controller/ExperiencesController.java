@@ -1,13 +1,16 @@
 package org.JavviFdeez.controller;
 
+import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.ExperiencesDAO;
 import org.JavviFdeez.model.entity.Experiences;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class ExperiencesController {
+public class ExperiencesController implements Initializable {
     // ================
     // Atributos
     // ================
@@ -159,5 +162,10 @@ public class ExperiencesController {
             System.err.println("❌ Error al buscar las experiencias: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

@@ -1,12 +1,15 @@
 package org.JavviFdeez.controller;
 
+import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.ContactDAO;
 import org.JavviFdeez.model.entity.Contact;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class ContactController {
+public class ContactController implements Initializable {
     // =============
     // Atributos
     // =============
@@ -144,5 +147,9 @@ public class ContactController {
             System.err.println("❌ Error al buscar los contactos: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 }

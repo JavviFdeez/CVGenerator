@@ -1,12 +1,15 @@
 package org.JavviFdeez.controller;
 
+import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.CoursesDAO;
 import org.JavviFdeez.model.entity.Courses;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class CoursesController {
+public class CoursesController implements Initializable {
     // ============
     // Atributos
     // ============
@@ -140,5 +143,10 @@ public class CoursesController {
             System.err.println("❌ Error al buscar los cursos: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }
