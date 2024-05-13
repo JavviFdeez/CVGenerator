@@ -11,35 +11,34 @@ import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.ContactDAO;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
+import java.util.ResourceBundle;
 
 public class TemplateBasicTest extends Application {
     public void start(Stage primaryStage) throws IOException {
         try {
-            // Crear una instancia de ContactDAO con la conexión a la base de datos
-            Connection connection = ConnectionMariaDB.getConnection();
-            ContactDAO contactDAO = new ContactDAO(connection);
-
             // Cargar el archivo FXML de la pantalla principal
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/templatesCVV/TemplateBasic.fxml"));
+
+            // Cargar el controlador asociado al archivo FXML
             Parent root = loader.load();
 
-            // Obtener el controlador del archivo FXML y inicializarlo
+            // Obtener el controlador del archivo FXML
             TemplateController controller = loader.getController();
-            controller.initialize(contactDAO);
 
             // Configurar la escena
-            Scene scene = new Scene(root, 1080, 1920);
+            Scene scene = new Scene(root, 793.7, 1122.5);
 
             // Establecer ícono de la aplicación con un tamaño específico
-            Image appIcon = new Image(getClass().getResourceAsStream("/org/JavviFdeez/images/logo.png"));
+            Image appIcon = new Image(getClass().getResourceAsStream("/org/JavviFdeez/images/Logo.png"));
             primaryStage.getIcons().add(appIcon);
 
             // Establecer título de la ventana
             primaryStage.setTitle("Generator CVV");
 
             // Maximizar la ventana
-            primaryStage.setMaximized(true);
+            //primaryStage.setMaximized(true);
 
             // Establecer la escena y mostrar la pantalla principal
             primaryStage.setScene(scene);
