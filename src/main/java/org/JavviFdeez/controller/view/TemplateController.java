@@ -5,16 +5,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.*;
 import org.JavviFdeez.model.entity.*;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
@@ -121,6 +117,72 @@ public class TemplateController implements Initializable {
     private ImageView Hexagon10;
 
     @FXML
+    private ImageView Hexagonnull11;
+
+    @FXML
+    private ImageView Hexagon11;
+
+    @FXML
+    private ImageView Hexagonnull12;
+
+    @FXML
+    private ImageView Hexagon12;
+
+    @FXML
+    private ImageView Hexagonnull13;
+
+    @FXML
+    private ImageView Hexagon13;
+
+    @FXML
+    private ImageView Hexagon14;
+
+    @FXML
+    private ImageView Hexagonnull14;
+
+    @FXML
+    private ImageView Hexagonnull15;
+
+    @FXML
+    private ImageView Hexagon15;
+
+    @FXML
+    private Label Skills1;
+
+    @FXML
+    private Label Skills2;
+
+    @FXML
+    private Label Skills3;
+
+    @FXML
+    private Label Skills4;
+
+    @FXML
+    private Label Skills5;
+
+    @FXML
+    private Label Skills6;
+
+    @FXML
+    private Label Skills7;
+
+    @FXML
+    private Label Skills8;
+
+    @FXML
+    private Label Skills9;
+
+    @FXML
+    private Label Skills10;
+
+    @FXML
+    private Label Skills11;
+
+    @FXML
+    private Label Skills12;
+
+    @FXML
     private GridPane leftPane;
 
 
@@ -164,12 +226,12 @@ public class TemplateController implements Initializable {
                 Contact contact = contactList.get(0);
                 // Obtener el nombre del contacto
                 // Verificar si el nombre no es nulo
-                /*if (contact.getName() !=null) {
+                if (contact.getName() !=null) {
                     // Si el nombre no es nulo, muestralo
                     name.setText(contact.getName());
                 } else {
                     // Si el nombre es nulo, mostrar una cadena vacía
-                    name.setText("");
+                    name.setText("-");
                 }
 
 
@@ -180,9 +242,9 @@ public class TemplateController implements Initializable {
                     lastName.setText(contact.getLastname());
                 } else {
                     // Si los apellidos son nulos, mostrar una cadena vacía
-                    lastName.setText("");
+                    lastName.setText("-");
                 }
-*/
+
 
                 // Obtener la ocupación del contacto
                 // Verificar si la ocupación no es nula
@@ -191,7 +253,7 @@ public class TemplateController implements Initializable {
                     occupation.setText(contact.getOccupation());
                 } else {
                     // Si la ocupación es nula, mostrar una cadena vacía
-                    occupation.setText("");
+                    occupation.setText("-");
                 }
 
                 // Obtener la imagen del contacto
@@ -216,7 +278,7 @@ public class TemplateController implements Initializable {
                     mobile.setText(contact.getMobile());
                 } else {
                     // Si el mobil es nulo, mostrar una cadena vacía
-                    mobile.setText("");
+                    mobile.setText("-");
                 }
 
                 // Obtener el email del contacto
@@ -236,7 +298,7 @@ public class TemplateController implements Initializable {
                     linkedin.setText(contact.getLinkedin());
                 } else {
                     // Si el linkedin es nulo, mostrar una cadena vacía
-                    linkedin.setText("");
+                    linkedin.setText("-");
                 }
 
                 // Obtener la ubicación del contacto
@@ -246,10 +308,9 @@ public class TemplateController implements Initializable {
                     location.setText(contact.getLocation());
                 } else {
                     // Si la ubicación es nula, mostrar una cadena vacía
-                    location.setText("");
+                    location.setText("-");
                 }
 
-                /*
                 // Obtener el extra del contacto
                 // Verificar si el extra no es nulo
                 if (contact.getExtra() != null) {
@@ -257,10 +318,8 @@ public class TemplateController implements Initializable {
                     extra.setText(contact.getExtra());
                 } else {
                     // Si el extra es nulo, mostrar una cadena vacía
-                    extra.setText("");
+                    extra.setText("-");
                 }
-
-                 */
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -284,18 +343,30 @@ public class TemplateController implements Initializable {
                     // Actualizar las imágenes de las estrellas según el valor del idioma español
                     updateStarsSpanish(spanishValue);
                 } else {
-                    // Si el valor del idioma español es nulo, asignar cero estrellas
+                    // Si el valor del idioma Español es nulo, mostrar una cadena vacía
                     updateStarsSpanish(0);
                 }
+
                 // Obtener el valor del idioma ingles
                 Integer englishValue = languages.getEnglish();
                 // Verificar si el valor del idioma ingles es nulo
                 if (englishValue != null) {
-                    // Actualizar las imágenes de las estrellas según el valor del idioma español
+                    // Actualizar las imágenes de las estrellas según el valor del idioma ingles
                     updateStarsEnglish(englishValue);
                 } else {
-                    // Si el valor del idioma ingles es nulo, asignar cero estrellas
+                    // Si el valor del idioma ingles es nulo, mostrar una cadena vacía
                     updateStarsEnglish(0);
+                }
+
+                // Obtener el valor del idioma francés
+                Integer frenchValue = languages.getFrench();
+                // Verificar si el valor del idioma francés es nulo
+                if (frenchValue != null) {
+                    // Actualizar las imágenes de las estrellas según el valor del idioma francés
+                    updateStarsFrench(frenchValue);
+                } else {
+                    // Si el valor del idioma francés es nulo, mostrar una cadena vacía
+                    updateStarsFrench(0);
                 }
             }
         } catch (SQLException e) {
@@ -304,92 +375,100 @@ public class TemplateController implements Initializable {
     }
 
     public void updateStarsSpanish(int rating) {
-        // Verificar si el valor del idioma está entre 0 y 5
-        if (rating >= 0) {
-            Hexagonnull1.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull2.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull3.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull4.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull5.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-        } if (rating >= 1) {
-            Hexagon1.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagonnull2.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull3.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull4.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull5.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
+        // Obtener las imagenes de los hexágonos
+        String hexagon = getClass().getResource("/org/JavviFdeez/images/hexagon.png").toExternalForm();
+        String hexagonNull = getClass().getResource("/org/JavviFdeez/images/hexagonNull.png").toExternalForm();
+
+        // Obtener las imagenes de los hexágonos
+        ImageView[] hexagonImages = {Hexagon1, Hexagon2, Hexagon3, Hexagon4, Hexagon5};
+        ImageView[] hexagonNullImages = {Hexagonnull1, Hexagonnull2, Hexagonnull3, Hexagonnull4, Hexagonnull5};
+
+        for (int i = 0; i < hexagonImages.length; i++) {
+            if (rating > i) {
+                hexagonImages[i].setImage(new Image(hexagon));
+            } else {
+                hexagonImages[i].setImage(new Image(hexagonNull));
+            }
         }
-        if (rating >= 2) {
-            Hexagon1.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon2.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagonnull3.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull4.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull5.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-        }
-        if (rating >= 3) {
-            Hexagon1.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon2.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon3.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagonnull4.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull5.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-        }
-        if (rating >= 4) {
-            Hexagon1.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon2.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon3.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon4.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagonnull5.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-        }
-        if (rating >= 5) {
-            Hexagon1.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon2.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon3.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon4.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon5.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
+
+        for (int i = 0; i < hexagonNullImages.length; i++) {
+            hexagonNullImages[i].setImage(new Image(hexagonNull));
         }
     }
 
     public void updateStarsEnglish(int rating) {
+        // Obtener las imagenes de los hexágonos
+        String hexagon = getClass().getResource("/org/JavviFdeez/images/hexagon.png").toExternalForm();
+        String hexagonNull = getClass().getResource("/org/JavviFdeez/images/hexagonNull.png").toExternalForm();
+
+        // Obtener las imagenes de los hexágonos
+        ImageView[] hexagonImages = {Hexagon6, Hexagon7, Hexagon8, Hexagon9, Hexagon10};
+        ImageView[] hexagonNullImages = {Hexagonnull6, Hexagonnull7, Hexagonnull8, Hexagonnull9, Hexagonnull10};
+
         // Verificar si el valor del idioma está entre 0 y 5
-        if (rating >= 0) {
-            Hexagonnull6.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull7.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull8.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull9.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull10.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-        } if (rating >= 1) {
-            Hexagon6.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagonnull7.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull8.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull9.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull10.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
+        for (int i = 0; i < hexagonImages.length; i++) {
+            if (rating > i) {
+                hexagonImages[i].setImage(new Image(hexagon));
+            } else {
+                hexagonImages[i].setImage(new Image(hexagonNull));
+            }
         }
-        if (rating >= 2) {
-            Hexagon6.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon7.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagonnull8.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull9.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull10.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-        }
-        if (rating >= 3) {
-            Hexagon6.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon7.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon8.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagonnull9.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-            Hexagonnull10.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-        }
-        if (rating >= 4) {
-            Hexagon6.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon7.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon8.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon9.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagonnull10.setImage(new Image("/resources/org/JavviFdeez/images/Hexagonnull.png"));
-        }
-        if (rating >= 5) {
-            Hexagon6.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon7.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon8.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon9.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
-            Hexagon10.setImage(new Image("/resources/org/JavviFdeez/images/Hexagon.png"));
+
+        for (int i = 0; i < hexagonNullImages.length; i++) {
+            hexagonNullImages[i].setImage(new Image(hexagonNull));
         }
     }
+
+    public void updateStarsFrench(int rating) {
+        // Obtener las imagenes de los hexágonos
+        String hexagon = getClass().getResource("/org/JavviFdeez/images/hexagon.png").toExternalForm();
+        String hexagonNull = getClass().getResource("/org/JavviFdeez/images/hexagonNull.png").toExternalForm();
+
+        // Obtener las imagenes de los hexágonos
+        ImageView[] hexagonImages = {Hexagon11, Hexagon12, Hexagon13, Hexagon14, Hexagon15};
+        ImageView[] hexagonNullImages = {Hexagonnull11, Hexagonnull12, Hexagonnull13, Hexagonnull14, Hexagonnull15};
+
+        for (int i = 0; i < hexagonImages.length; i++) {
+            if (hexagonImages[i] != null) {
+                if (rating > i) {
+                    hexagonImages[i].setImage(new Image(hexagon));
+                } else {
+                    hexagonImages[i].setImage(new Image(hexagonNull));
+                }
+            }
+        }
+
+        for (int i = 0; i < hexagonNullImages.length; i++) {
+            hexagonNullImages[i].setImage(new Image(hexagonNull));
+        }
+    }
+
+    // Metodo datos SKills
+    /*
+    public void dataSkills() {
+        try {
+            List<Skills> skillList = skillsDAO.findAll();
+
+
+            // Verificar si se encontraron skills
+            if (!skillList.isEmpty()) {
+                for (Skills skill : skillList) {
+                    // Obtener el valor de la habilidad
+                    Integer skillValue = skill.getName();
+
+                    // Verificar si el valor de la habilidad es nulo
+                    if (skillValue != null) {
+                        // Si el valor de la habilidad no es nulo, mostrarlo
+                        switch (skillValue) {
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+             */
+
+
 }
