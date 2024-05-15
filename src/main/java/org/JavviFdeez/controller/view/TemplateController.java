@@ -558,10 +558,13 @@ public class TemplateController implements Initializable {
             // Coordenadas iniciales para posicionar los elementos
             double yearX = 264.0;
             double nameAndYearY = 135.0;
-            double nameX = 329.0;
+            double nameAndEntityAndLocationX = 329.0;
+            double entityY = 153;
+            double locationY = 166.0;
             double iconSize = 20.0;
-            double spacing = 20.0;
+            double spacing = 30.0;
             double iconX = yearX + 50;
+
 
             // Recorrer la lista de academias y mostrar los datos dinámicamente
             for (int i = 0; i < academiesList.size(); i++) {
@@ -572,49 +575,63 @@ public class TemplateController implements Initializable {
 
                 // Crear la fuente
                 Font regularFont = new Font("Myanmar Text", 12);
-                Font boldFont = Font.font("Myanmar Text", FontWeight.BOLD, 12);
 
                 // Color del texto en negro
-                Color textColor = Color.BLACK;
+                Color textColorBlack = Color.BLACK;
+                Color textColorGray = Color.GRAY;
 
                 // Crear y configurar el Label para el año (year)
                 Label yearLabel = new Label(String.valueOf(academy.getYear()));
                 yearLabel.setFont(regularFont);
-                yearLabel.setTextFill(textColor);
-                yearLabel.setFont(boldFont);
+                yearLabel.setTextFill(textColorBlack);
                 yearLabel.setLayoutX(yearX);
                 yearLabel.setLayoutY(nameAndYearY);
 
-// Crear y configurar el Label para el nombre (name)
+                // Crear y configurar el Label para el nombre (name)
                 Label nameLabel = new Label(academy.getName());
-                nameLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 15));
-                nameLabel.setTextFill(textColor);
-                nameLabel.setLayoutX(nameX - 15);
-                nameLabel.setLayoutY(nameAndYearY - 3);
+                nameLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 14));
+                nameLabel.setTextFill(textColorBlack);
+                nameLabel.setLayoutX(nameAndEntityAndLocationX - 17);
+                nameLabel.setLayoutY(nameAndYearY);
                 nameLabel.setWrapText(true);
-                nameLabel.setMaxWidth(150);
+                nameLabel.setMaxHeight(20);
+
+                // Crear y configurar el Label para la entidad (entity)
+                Label entityLabel = new Label(academy.getEntity());
+                entityLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 14));
+                entityLabel.setFont(regularFont);
+                entityLabel.setTextFill(textColorBlack);
+                entityLabel.setLayoutX(nameAndEntityAndLocationX - 15.5);
+                entityLabel.setLayoutY(entityY);
+
+                // Crear y configurar el Label para la ubicación (location)
+                Label locationLabel = new Label(academy.getLocation());
+                locationLabel.setFont(regularFont);
+                locationLabel.setTextFill(textColorGray);
+                locationLabel.setLayoutX(nameAndEntityAndLocationX - 16);
+                locationLabel.setLayoutY(locationY);
 
                 // Crear y configurar el ImageView para el icono
                 ImageView iconImageView = new ImageView(new Image(getClass().getResource("/org/JavviFdeez/images/Point.png").toExternalForm()));
                 iconImageView.setFitHeight(iconSize);
                 iconImageView.setFitWidth(iconSize);
                 iconImageView.setLayoutX(iconX - 20);
-                iconImageView.setLayoutY(nameAndYearY + 5);
+                iconImageView.setLayoutY(nameAndYearY + 10);
 
                 // Crear y configurar la línea vertical
-                if (i > 0) { // Solo crear la línea si no es el primer elemento
+                if (i > 0) {
                     Line verticalLine = new Line();
                     verticalLine.setStartX(iconX + iconSize / 2 - 20);
                     verticalLine.setStartY(nameAndYearY - spacing - (iconSize / 2) + iconSize - 10);
                     verticalLine.setEndX(iconX + iconSize / 2 - 20);
-                    verticalLine.setEndY(nameAndYearY - (iconSize / 2) + iconSize + 3);
+                    verticalLine.setEndY(nameAndYearY - (iconSize / 2) + iconSize + 5);
                     verticalLine.setStrokeWidth(2.0);
                     verticalLine.setStroke(Color.BLACK);
                     academyPane.getChildren().add(verticalLine);
                 }
 
                 // Añadir los elementos al contenedor Pane
-                academyPane.getChildren().addAll(yearLabel, iconImageView, nameLabel);
+                academyPane.getChildren().addAll(yearLabel, iconImageView, nameLabel, entityLabel, locationLabel);
 
                 // Verificar si el AnchorPane ya contiene el Pane
                 if (!anchorPane.getChildren().contains(academyPane)) {
@@ -624,6 +641,8 @@ public class TemplateController implements Initializable {
 
                 // Incrementar la posición en y para la próxima academia
                 nameAndYearY += iconSize + spacing;
+                entityY += spacing * 1.7;
+                locationY += spacing * 1.7;
             }
         } catch (SQLException e) {
             // Manejar cualquier excepción SQL mostrando un mensaje de error

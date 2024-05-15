@@ -33,7 +33,7 @@
                   <Image url="@../images/FlowbiteMobilePhoneSolid.png" />
                </image>
             </ImageView>
-            <Line endX="147.6000213623047" layoutX="85.0" layoutY="276.0" startX="-63.399986267089844" stroke="WHITE" strokeLineCap="ROUND" style="-fx-stroke-width: 1.6;" />
+            <Line endX="147.6000213623047" layoutX="85.0" layoutY="273.0" startX="-63.399986267089844" stroke="WHITE" strokeLineCap="ROUND" style="-fx-stroke-width: 1.6;" />
             <Label alignment="TOP_CENTER" layoutX="32.0" layoutY="268.0" prefHeight="17.0" prefWidth="190.0" text="CONTACTO" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font name="Myanmar Text Bold" size="22.0" />
@@ -44,7 +44,7 @@
                   <Image url="@../images/MaterialSymbolsLightLocationOnOutlineRounded.png" />
                </image>
             </ImageView>
-            <Label fx:id="location" layoutX="52.0" layoutY="374.0" prefHeight="27.0" prefWidth="204.0" text="" textFill="WHITE">
+            <Label fx:id="location" layoutX="52.0" layoutY="376.0" prefHeight="27.0" prefWidth="204.0" text="" textFill="WHITE">
                <font>
                   <Font name="Yu Gothic UI Semibold" size="17.0" />
                </font>
@@ -175,7 +175,7 @@
                   <Image url="@../images/hexagon.png" />
                </image>
             </ImageView>
-            <Label fx:id="occupation" alignment="TOP_CENTER" graphicTextGap="0.0" layoutX="22.0" layoutY="224.0" prefHeight="44.0" prefWidth="204.0" textFill="WHITE" textOverrun="CLIP">
+            <Label fx:id="occupation" alignment="TOP_CENTER" graphicTextGap="0.0" layoutX="22.0" layoutY="234.0" prefHeight="44.0" prefWidth="204.0" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font name="Berlin Sans FB Demi Bold" size="24.0" />
                </font>
