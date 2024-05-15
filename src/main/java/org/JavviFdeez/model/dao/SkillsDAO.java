@@ -2,6 +2,7 @@ package org.JavviFdeez.model.dao;
 
 import org.JavviFdeez.model.dao.interfaces.iSkillsDAO;
 import org.JavviFdeez.model.entity.Skills;
+import org.JavviFdeez.utils.SkillsMax;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,12 +22,14 @@ public class SkillsDAO implements iSkillsDAO {
     // Atributo para la conexión a la base de datos
     // ===============================================
     private Connection conn;
+    private SkillsMax skillsMax;
 
     // ================================================
     // Constructor para inicializar la base de datos
     // ================================================
     public SkillsDAO(Connection conn) {
         this.conn = conn;
+        this.skillsMax = new SkillsMax();
     }
 
     /**
@@ -63,6 +66,9 @@ public class SkillsDAO implements iSkillsDAO {
                     }
                 }
             }
+
+            // Agregar la habilidad a la lista con límite de 12
+            skillsMax.addSkill(s);
         }
 
         return s;

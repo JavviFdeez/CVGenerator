@@ -28,7 +28,7 @@ public class TemplateBasicTest extends Application {
             TemplateController controller = loader.getController();
 
             // Configurar la escena
-            Scene scene = new Scene(root, 793.7, 1122.5);
+            Scene scene = new Scene(root, 595, 842);
 
             // Establecer ícono de la aplicación con un tamaño específico
             Image appIcon = new Image(getClass().getResourceAsStream("/org/JavviFdeez/images/Logo.png"));

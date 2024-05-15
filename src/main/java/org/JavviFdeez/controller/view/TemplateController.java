@@ -1,15 +1,24 @@
 package org.JavviFdeez.controller.view;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Separator;
+import javafx.scene.image.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.*;
 import org.JavviFdeez.model.entity.*;
-
+import javafx.scene.paint.Color;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
@@ -147,44 +156,43 @@ public class TemplateController implements Initializable {
     private ImageView Hexagon15;
 
     @FXML
-    private Label Skills1;
+    private Label skills1;
 
     @FXML
-    private Label Skills2;
+    private Label skills2;
 
     @FXML
-    private Label Skills3;
+    private Label skills3;
 
     @FXML
-    private Label Skills4;
+    private Label skills4;
 
     @FXML
-    private Label Skills5;
+    private Label skills5;
 
     @FXML
-    private Label Skills6;
+    private Label skills6;
 
     @FXML
-    private Label Skills7;
+    private ProgressBar value1;
 
     @FXML
-    private Label Skills8;
+    private ProgressBar value2;
 
     @FXML
-    private Label Skills9;
+    private ProgressBar value3;
 
     @FXML
-    private Label Skills10;
+    private ProgressBar value4;
 
     @FXML
-    private Label Skills11;
+    private ProgressBar value5;
 
     @FXML
-    private Label Skills12;
+    private ProgressBar value6;
 
     @FXML
-    private GridPane leftPane;
-
+    private AnchorPane academiesAnchorPane;
 
     // ==============================
     // Constructore sin argumentos
@@ -206,6 +214,8 @@ public class TemplateController implements Initializable {
         this.contactDAO = new ContactDAO(ConnectionMariaDB.getConnection());
         dataContact();
         dataLanguages();
+        dataSkills();
+        dataAcademies(academiesAnchorPane);
     }
 
     // ==============
@@ -226,7 +236,7 @@ public class TemplateController implements Initializable {
                 Contact contact = contactList.get(0);
                 // Obtener el nombre del contacto
                 // Verificar si el nombre no es nulo
-                if (contact.getName() !=null) {
+                if (contact.getName() != null) {
                     // Si el nombre no es nulo, muestralo
                     name.setText(contact.getName());
                 } else {
@@ -250,7 +260,7 @@ public class TemplateController implements Initializable {
                 // Verificar si la ocupación no es nula
                 if (contact.getOccupation() != null) {
                     // Si la ocupación no es nula, mostrarla
-                    occupation.setText(contact.getOccupation());
+                    occupation.setText("· " + contact.getOccupation() + " ·");
                 } else {
                     // Si la ocupación es nula, mostrar una cadena vacía
                     occupation.setText("-");
@@ -326,8 +336,9 @@ public class TemplateController implements Initializable {
         }
     }
 
-    //private void dataAcademies() {
-
+    /**
+     *  Método para obtener los datos de los idiomas
+     */
     public void dataLanguages() {
         try {
             List<Languages> languageList = languagesDAO.findAll();
@@ -428,6 +439,7 @@ public class TemplateController implements Initializable {
         ImageView[] hexagonImages = {Hexagon11, Hexagon12, Hexagon13, Hexagon14, Hexagon15};
         ImageView[] hexagonNullImages = {Hexagonnull11, Hexagonnull12, Hexagonnull13, Hexagonnull14, Hexagonnull15};
 
+        // Verificar si el valor del idioma está entre 0 y 5
         for (int i = 0; i < hexagonImages.length; i++) {
             if (hexagonImages[i] != null) {
                 if (rating > i) {
@@ -438,37 +450,184 @@ public class TemplateController implements Initializable {
             }
         }
 
+        // Verificar si el valor del idioma está entre 0 y 5
         for (int i = 0; i < hexagonNullImages.length; i++) {
             hexagonNullImages[i].setImage(new Image(hexagonNull));
         }
     }
 
-    // Metodo datos SKills
-    /*
+    /**
+     * Metodo para actualizar las barras de progreso y etiquetas de habilidad
+     */
     public void dataSkills() {
         try {
             List<Skills> skillList = skillsDAO.findAll();
+            List<Contact_Skills> contactSkillsList = contact_SkillsDAO.findAll();
 
+            // Verificar si hay habilidades disponibles
+            if (!skillList.isEmpty() && !contactSkillsList.isEmpty()) {
+                // Iterar sobre cada habilidad en la lista
+                // Iterar sobre todas las barras de progreso y etiquetas de habilidad
+                for (int i = 0; i < 6; i++) {
+                    Label skillLabel = getSkillLabel(i);
+                    ProgressBar progressBar = getProgressBar(i);
 
-            // Verificar si se encontraron skills
-            if (!skillList.isEmpty()) {
-                for (Skills skill : skillList) {
-                    // Obtener el valor de la habilidad
-                    Integer skillValue = skill.getName();
+                    // Verificar si el nombre de la habilidad y su valor son ambos no nulos
+                    if (skillLabel != null && progressBar != null && skillList.size() > i && contactSkillsList.size() > i) {
+                        String skillName = skillList.get(i).getName();
+                        Integer skillValue = contactSkillsList.get(i).getValue();
 
-                    // Verificar si el valor de la habilidad es nulo
-                    if (skillValue != null) {
-                        // Si el valor de la habilidad no es nulo, mostrarlo
-                        switch (skillValue) {
-
+                        // Verificar si el nombre de la habilidad y su valor son ambos no nulos
+                        if (skillName != null && skillValue != null && skillValue >= 0 && skillValue <= 100) {
+                            // Si ambos son no nulos, mostrar la etiqueta y la barra de progreso correspondientes
+                            skillLabel.setText(skillName);
+                            progressBar.setProgress(skillValue / 100.0);
+                            skillLabel.setVisible(true);
+                            progressBar.setVisible(true);
+                        } else {
+                            // Si cualquiera de ellos es nulo, ocultar la etiqueta y la barra de progreso correspondientes
+                            skillLabel.setVisible(false);
+                            progressBar.setVisible(false);
+                        }
+                    } else {
+                        // Si no hay habilidad disponible, ocultar la etiqueta y la barra de progreso correspondientes
+                        if (skillLabel != null) {
+                            skillLabel.setVisible(false);
+                        }
+                        if (progressBar != null) {
+                            progressBar.setVisible(false);
+                        }
+                    }
+                }
             }
-
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            // Manejar cualquier excepción SQL mostrando un mensaje de error
+            throw new RuntimeException("❌ Error al obtener las habilidades: " + e.getMessage(), e);
         }
     }
 
-             */
+    // Método para obtener la etiqueta de habilidad en la posición especificada
+    private Label getSkillLabel(int index) {
+        switch (index) {
+            case 0:
+                return skills1;
+            case 1:
+                return skills2;
+            case 2:
+                return skills3;
+            case 3:
+                return skills4;
+            case 4:
+                return skills5;
+            case 5:
+                return skills6;
+            default:
+                return null;
+        }
+    }
 
+    // Método para obtener la barra de progreso en la posición especificada
+    private ProgressBar getProgressBar(int index) {
+        switch (index) {
+            case 0:
+                return value1;
+            case 1:
+                return value2;
+            case 2:
+                return value3;
+            case 3:
+                return value4;
+            case 4:
+                return value5;
+            case 5:
+                return value6;
+            default:
+                return null;
+        }
+    }
 
+    /**
+     * Metodo para mostrar los datos de las academias
+     * @param anchorPane
+     */
+    public void dataAcademies(AnchorPane anchorPane) {
+        try {
+            // Obtener la lista de academias desde la base de datos
+            List<Academies> academiesList = academiesDAO.findAll();
+
+            // Coordenadas iniciales para posicionar los elementos
+            double yearX = 264.0;
+            double nameAndYearY = 135.0;
+            double nameX = 329.0;
+            double iconSize = 20.0;
+            double spacing = 20.0;
+            double iconX = yearX + 50;
+
+            // Recorrer la lista de academias y mostrar los datos dinámicamente
+            for (int i = 0; i < academiesList.size(); i++) {
+                Academies academy = academiesList.get(i);
+
+                // Crear un contenedor Pane para organizar los elementos
+                Pane academyPane = new Pane();
+
+                // Crear la fuente
+                Font regularFont = new Font("Myanmar Text", 12);
+                Font boldFont = Font.font("Myanmar Text", FontWeight.BOLD, 12);
+
+                // Color del texto en negro
+                Color textColor = Color.BLACK;
+
+                // Crear y configurar el Label para el año (year)
+                Label yearLabel = new Label(String.valueOf(academy.getYear()));
+                yearLabel.setFont(regularFont);
+                yearLabel.setTextFill(textColor);
+                yearLabel.setFont(boldFont);
+                yearLabel.setLayoutX(yearX);
+                yearLabel.setLayoutY(nameAndYearY);
+
+// Crear y configurar el Label para el nombre (name)
+                Label nameLabel = new Label(academy.getName());
+                nameLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 15));
+                nameLabel.setTextFill(textColor);
+                nameLabel.setLayoutX(nameX - 15);
+                nameLabel.setLayoutY(nameAndYearY - 3);
+                nameLabel.setWrapText(true);
+                nameLabel.setMaxWidth(150);
+
+                // Crear y configurar el ImageView para el icono
+                ImageView iconImageView = new ImageView(new Image(getClass().getResource("/org/JavviFdeez/images/Point.png").toExternalForm()));
+                iconImageView.setFitHeight(iconSize);
+                iconImageView.setFitWidth(iconSize);
+                iconImageView.setLayoutX(iconX - 20);
+                iconImageView.setLayoutY(nameAndYearY + 5);
+
+                // Crear y configurar la línea vertical
+                if (i > 0) { // Solo crear la línea si no es el primer elemento
+                    Line verticalLine = new Line();
+                    verticalLine.setStartX(iconX + iconSize / 2 - 20);
+                    verticalLine.setStartY(nameAndYearY - spacing - (iconSize / 2) + iconSize - 10);
+                    verticalLine.setEndX(iconX + iconSize / 2 - 20);
+                    verticalLine.setEndY(nameAndYearY - (iconSize / 2) + iconSize + 3);
+                    verticalLine.setStrokeWidth(2.0);
+                    verticalLine.setStroke(Color.BLACK);
+                    academyPane.getChildren().add(verticalLine);
+                }
+
+                // Añadir los elementos al contenedor Pane
+                academyPane.getChildren().addAll(yearLabel, iconImageView, nameLabel);
+
+                // Verificar si el AnchorPane ya contiene el Pane
+                if (!anchorPane.getChildren().contains(academyPane)) {
+                    // Agregar el Pane solo si no está presente
+                    anchorPane.getChildren().add(academyPane);
+                }
+
+                // Incrementar la posición en y para la próxima academia
+                nameAndYearY += iconSize + spacing;
+            }
+        } catch (SQLException e) {
+            // Manejar cualquier excepción SQL mostrando un mensaje de error
+            throw new RuntimeException("❌ Error al obtener las academias: " + e.getMessage(), e);
+        }
+    }
 }
