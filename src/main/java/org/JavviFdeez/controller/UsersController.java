@@ -4,6 +4,7 @@ import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.UsersDAO;
 import org.JavviFdeez.model.entity.Users;
+import org.JavviFdeez.utils.PasswordValidator;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -30,24 +31,21 @@ public class UsersController implements Initializable {
      * @Author: JavviFdeez
      * Método para GUARDAR un usuario en la base de datos.
      */
-    public void saveUser(Users user) throws SQLException {
+    public void saveUser(Users user) throws SQLException, IllegalArgumentException {
         try {
-            // =========================================
+            // Validar la contraseña
+            if (!PasswordValidator.isValidPassword(user.getPassword())) {
+                throw new IllegalArgumentException("Contraseña no válida. \n" +
+                        "Debe tener un mínimo de 10 caracteres y que incluya: MINUSCULAS, MAYUSCULAS, NUMEROS");
+            }
             // Guardar el usuario en la base de datos
-            // =========================================
             usersDAO.save(user);
 
-            // ======================================================
-            // Si el guardado es exitoso, mostrar mensaje de exito.
-            // ======================================================
-            System.out.println("✅ Usuario guardado exitosamente.");
-
+            // Mostrar mensaje de éxito
+            System.out.println("Usuario guardado exitosamente.");
         } catch (SQLException e) {
-            // =============================================
-            // En caso de error, mostrar mensaje de error.
-            // =============================================
-            System.err.println("❌ Error al guardar el usuario: " + e.getMessage());
-            e.printStackTrace();
+            // Lanzar una excepción SQLException con el mensaje de error
+            throw new SQLException("Error al guardar el usuario: " + e.getMessage());
         }
     }
 
@@ -67,11 +65,11 @@ public class UsersController implements Initializable {
             // ======================================================
             // Si el guardado es exitoso, mostrar mensaje de exito.
             // ======================================================
-            System.out.println("✅ Usuario actualizado exitosamente.");
+            System.out.println("Usuario actualizado exitosamente.");
 
         } catch (SQLException e) {
             // En caso de error SQL, registrar el error y mostrar un mensaje al usuario
-            System.err.println("❌ Error al actualizar el usuario: " + e.getMessage());
+            System.err.println("Error al actualizar el usuario: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -92,10 +90,10 @@ public class UsersController implements Initializable {
             // ======================================================
             // Si el guardado es exitoso, mostrar mensaje de exito.
             // ======================================================
-            System.out.println("✅ Usuario eliminado exitosamente.");
+            System.out.println("Usuario eliminado exitosamente.");
         } catch (SQLException e) {
             // En caso de error SQL, registrar el error y mostrar un mensaje al usuario
-            System.err.println("❌ Error al eliminar el usuario: " + e.getMessage());
+            System.err.println("Error al eliminar el usuario: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -117,7 +115,7 @@ public class UsersController implements Initializable {
                 // ======================================================
                 // Si el guardado es exitoso, mostrar mensaje de exito.
                 // ======================================================
-                System.out.println("✅ Usuario encontrado exitosamente.");
+                System.out.println("Usuario encontrado exitosamente.");
             } else {
                 // ======================================================
                 // Si el guardado es exitoso, mostrar mensaje de exito.
@@ -127,7 +125,7 @@ public class UsersController implements Initializable {
 
         } catch (SQLException e) {
             // En caso de error SQL, registrar el error y mostrar un mensaje al usuario
-            System.err.println("❌ Error al encontrar el usuario: " + e.getMessage());
+            System.err.println("Error al encontrar el usuario: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -153,12 +151,12 @@ public class UsersController implements Initializable {
                 // ======================================================
                 // Si el guardado es exitoso, mostrar mensaje de exito.
                 // ======================================================
-                System.out.println("⚠️ No se encontró ninguém usuario.");
+                System.out.println("No se encontró ninguém usuario.");
             }
 
         } catch (SQLException e) {
             // En caso de error SQL, registrar el error y mostrar un mensaje al usuario
-            System.err.println("❌ Error al encontrar los usuarios: " + e.getMessage());
+            System.err.println("Error al encontrar los usuarios: " + e.getMessage());
             e.printStackTrace();
         }
     }

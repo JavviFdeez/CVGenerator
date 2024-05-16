@@ -6,24 +6,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import org.JavviFdeez.controller.view.TemplateController;
-
+import org.JavviFdeez.controller.view.RegisterController;
 import java.io.IOException;
 
-public class TemplateBasicTest extends Application {
+public class RegisterTest extends Application {
     public void start(Stage primaryStage) throws IOException {
         try {
             // Cargar el archivo FXML de la pantalla principal
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/templatesCVV/TemplateBasic.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/Register.fxml"));
 
             // Cargar el controlador asociado al archivo FXML
             Parent root = loader.load();
 
             // Obtener el controlador del archivo FXML
-            TemplateController controller = loader.getController();
-
-            // Configurar la escena
-            Scene scene = new Scene(root, 595, 842);
+            RegisterController controller = loader.getController();
 
             // Establecer ícono de la aplicación con un tamaño específico
             Image appIcon = new Image(getClass().getResourceAsStream("/org/JavviFdeez/images/Logo.png"));
@@ -33,10 +29,10 @@ public class TemplateBasicTest extends Application {
             primaryStage.setTitle("CVV Generator");
 
             // Maximizar la ventana
-            //primaryStage.setMaximized(true);
+            primaryStage.setMaximized(true);
 
             // Establecer la escena y mostrar la pantalla principal
-            primaryStage.setScene(scene);
+            primaryStage.setScene(new Scene(root));
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();

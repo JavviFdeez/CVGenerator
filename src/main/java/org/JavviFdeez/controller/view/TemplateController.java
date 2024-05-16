@@ -1,17 +1,12 @@
 package org.JavviFdeez.controller.view;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.Separator;
 import javafx.scene.image.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -23,6 +18,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -194,6 +190,12 @@ public class TemplateController implements Initializable {
     @FXML
     private AnchorPane academiesAnchorPane;
 
+    @FXML
+    private AnchorPane experiencesAnchorPane;
+
+    @FXML
+    private AnchorPane coursesAnchorPane;
+
     // ==============================
     // Constructore sin argumentos
     // ==============================
@@ -216,6 +218,8 @@ public class TemplateController implements Initializable {
         dataLanguages();
         dataSkills();
         dataAcademies(academiesAnchorPane);
+        dataExperience(experiencesAnchorPane);
+        dataCourses(coursesAnchorPane);
     }
 
     // ==============
@@ -337,7 +341,7 @@ public class TemplateController implements Initializable {
     }
 
     /**
-     *  Método para obtener los datos de los idiomas
+     * Método para obtener los datos de los idiomas
      */
     public void dataLanguages() {
         try {
@@ -548,6 +552,7 @@ public class TemplateController implements Initializable {
 
     /**
      * Metodo para mostrar los datos de las academias
+     *
      * @param anchorPane
      */
     public void dataAcademies(AnchorPane anchorPane) {
@@ -558,13 +563,12 @@ public class TemplateController implements Initializable {
             // Coordenadas iniciales para posicionar los elementos
             double yearX = 264.0;
             double nameAndYearY = 135.0;
-            double nameAndEntityAndLocationX = 329.0;
-            double entityY = 153;
-            double locationY = 166.0;
+            double nameAndEntityAndLocationX = 331.0;
+            double entityY = 148;
+            double locationY = 164;
             double iconSize = 20.0;
             double spacing = 30.0;
             double iconX = yearX + 50;
-
 
             // Recorrer la lista de academias y mostrar los datos dinámicamente
             for (int i = 0; i < academiesList.size(); i++) {
@@ -589,23 +593,23 @@ public class TemplateController implements Initializable {
 
                 // Crear y configurar el Label para el nombre (name)
                 Label nameLabel = new Label(academy.getName());
-                nameLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 14));
+                nameLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 16));
                 nameLabel.setTextFill(textColorBlack);
                 nameLabel.setLayoutX(nameAndEntityAndLocationX - 17);
-                nameLabel.setLayoutY(nameAndYearY);
+                nameLabel.setLayoutY(nameAndYearY - 4);
                 nameLabel.setWrapText(true);
                 nameLabel.setMaxHeight(20);
 
                 // Crear y configurar el Label para la entidad (entity)
                 Label entityLabel = new Label(academy.getEntity());
                 entityLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 14));
-                entityLabel.setFont(regularFont);
                 entityLabel.setTextFill(textColorBlack);
                 entityLabel.setLayoutX(nameAndEntityAndLocationX - 15.5);
                 entityLabel.setLayoutY(entityY);
 
                 // Crear y configurar el Label para la ubicación (location)
                 Label locationLabel = new Label(academy.getLocation());
+                locationLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 15));
                 locationLabel.setFont(regularFont);
                 locationLabel.setTextFill(textColorGray);
                 locationLabel.setLayoutX(nameAndEntityAndLocationX - 16);
@@ -615,16 +619,16 @@ public class TemplateController implements Initializable {
                 ImageView iconImageView = new ImageView(new Image(getClass().getResource("/org/JavviFdeez/images/Point.png").toExternalForm()));
                 iconImageView.setFitHeight(iconSize);
                 iconImageView.setFitWidth(iconSize);
-                iconImageView.setLayoutX(iconX - 20);
-                iconImageView.setLayoutY(nameAndYearY + 10);
+                iconImageView.setLayoutX(iconX - 25);
+                iconImageView.setLayoutY(nameAndYearY + 5);
 
                 // Crear y configurar la línea vertical
                 if (i > 0) {
                     Line verticalLine = new Line();
-                    verticalLine.setStartX(iconX + iconSize / 2 - 20);
-                    verticalLine.setStartY(nameAndYearY - spacing - (iconSize / 2) + iconSize - 10);
-                    verticalLine.setEndX(iconX + iconSize / 2 - 20);
-                    verticalLine.setEndY(nameAndYearY - (iconSize / 2) + iconSize + 5);
+                    verticalLine.setStartX(iconX + iconSize / 2 - 25);
+                    verticalLine.setStartY(nameAndYearY - (iconSize / 2) + iconSize - 40);
+                    verticalLine.setEndX(iconX + iconSize / 2 - 25);
+                    verticalLine.setEndY(nameAndYearY - (iconSize / 2) + iconSize);
                     verticalLine.setStrokeWidth(2.0);
                     verticalLine.setStroke(Color.BLACK);
                     academyPane.getChildren().add(verticalLine);
@@ -647,6 +651,178 @@ public class TemplateController implements Initializable {
         } catch (SQLException e) {
             // Manejar cualquier excepción SQL mostrando un mensaje de error
             throw new RuntimeException("❌ Error al obtener las academias: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Metodo para actualizar las barras de progreso y etiquetas de experiencia
+     */
+    public void dataExperience(AnchorPane anchorPane) {
+        try {
+            // Obtener la lista de academias desde la base de datos
+            List<Experiences> experienceList = experiencesDAO.findAll();
+
+            // Ordenar la lista de experiencias por posición
+            Collections.sort(experienceList, (exp1, exp2) -> exp1.getPosition() - exp2.getPosition());
+
+            // Cordenadas iniciales
+            double nameAndCompanyAndLocationX = 309;
+            double nameAndYearAndDurationY = 319;
+            double durationX = nameAndCompanyAndLocationX + 200;
+            double companyY = 334;
+            double locationY = 353;
+            double yearX = 264;
+            double iconSize = 20.0;
+            double spacing = 35.0;
+            double iconX = yearX + 50;
+
+            // Variable para almacenar la posición de la experiencia anterior
+            int previousPosition = -1;
+
+            // Recorrer la lista de experiencias y mostrar los datos dinámicamente
+            for (int i = 0; i < experienceList.size(); i++) {
+                Experiences experiences = experienceList.get(i);
+
+                if (experiences.getPosition() != previousPosition) {
+                    // Crear un contenedor Pane para organizar los elementos
+                    Pane experiencePane = new Pane();
+
+                    // Crear la fuente
+                    Font regularFont = new Font("Myanmar Text", 12);
+
+                    // Color del texto en negro
+                    Color textColorBlack = Color.BLACK;
+                    Color textColorGray = Color.GRAY;
+
+                    // Crear y configurar el Label para el nombre (name)
+                    Label nameLabel = new Label(experiences.getName());
+                    nameLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 19));
+                    nameLabel.setTextFill(textColorBlack);
+                    nameLabel.setLayoutX(nameAndCompanyAndLocationX);
+                    nameLabel.setLayoutY(nameAndYearAndDurationY - 6.5);
+
+                    // Crear y configurar el Label para el nombre (duration)
+                    Label durationLabel = new Label("(" + experiences.getDuration() + " meses)");
+                    durationLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 15));
+                    durationLabel.setTextFill(textColorGray);
+                    durationLabel.setLayoutX(durationX);
+                    durationLabel.setLayoutY(nameAndYearAndDurationY);
+
+                    // Crear y configurar el Label para el nombre (company)
+                    Label companyLabel = new Label(experiences.getCompany());
+                    companyLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 15));
+                    companyLabel.setTextFill(textColorBlack);
+                    companyLabel.setLayoutX(nameAndCompanyAndLocationX);
+                    companyLabel.setLayoutY(companyY);
+
+                    // Crear y configurar el Label para el nombre (location)
+                    Label locationLabel = new Label(experiences.getLocation());
+                    locationLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 12));
+                    locationLabel.setTextFill(textColorGray);
+                    locationLabel.setLayoutX(nameAndCompanyAndLocationX + 0.5);
+                    locationLabel.setLayoutY(locationY);
+
+                    // Crear y configurar el Label para el nombre (year)
+                    Label yearLabel = new Label(String.valueOf(experiences.getYear()));
+                    yearLabel.setFont(regularFont);
+                    yearLabel.setTextFill(textColorBlack);
+                    yearLabel.setLayoutX(yearX);
+                    yearLabel.setLayoutY(nameAndYearAndDurationY + 3);
+
+                    // Crear y configurar el ImageView para el icono
+                    ImageView iconImageView = new ImageView(new Image(getClass().getResource("/org/JavviFdeez/images/Point.png").toExternalForm()));
+                    iconImageView.setFitHeight(iconSize);
+                    iconImageView.setFitWidth(iconSize);
+                    iconImageView.setLayoutX(iconX - 25);
+                    iconImageView.setLayoutY(nameAndYearAndDurationY + 7);
+
+                    // Crear y configurar la línea vertical
+                    if (i > 0) {
+                        Line verticalLine = new Line();
+                        verticalLine.setStartX(iconX + iconSize / 2 - 25);
+                        verticalLine.setStartY(nameAndCompanyAndLocationX - (iconSize / 2) + iconSize + 14);
+                        verticalLine.setEndX(iconX + iconSize / 2 - 25);
+                        verticalLine.setEndY(nameAndCompanyAndLocationX - (iconSize / 2) + iconSize + spacing + 33);
+                        verticalLine.setStrokeWidth(2.0);
+                        verticalLine.setStroke(Color.BLACK);
+                        experiencePane.getChildren().add(verticalLine);
+                    }
+
+                    // Añadir los elementos al contenedor Pane
+                    experiencePane.getChildren().addAll(nameLabel, durationLabel, companyLabel, locationLabel, yearLabel, iconImageView);
+
+                    // Verificar si el AnchorPane ya contiene el Pane
+                    if (!anchorPane.getChildren().contains(experiencePane)) {
+                        // Agregar el Pane solo si no está presente
+                        anchorPane.getChildren().add(experiencePane);
+                    }
+
+                    // Incrementar la posición en y para la próxima academia
+                    nameAndYearAndDurationY += iconSize + spacing;
+                    companyY += spacing * 1.6;
+                    locationY += spacing * 1.6;
+                }
+            }
+        } catch (SQLException e) {
+            // Manejar cualquier excepción SQL mostrando un mensaje de error
+            throw new RuntimeException("❌ Error al obtener las academias: " + e.getMessage(), e);
+        }
+    }
+
+    public void dataCourses(AnchorPane anchorPane) {
+        try {
+            // Obtener la lista de cursos desde la base de datos
+            List<Courses> coursesList = coursesDAO.findAll();
+
+            // Ordenar la lista de cursos según la posición
+            Collections.sort(coursesList, (course1, course2) -> course1.getPosition() - course2.getPosition());
+
+            // Coordenadas iniciales
+            double nameX = 300;
+            double nameY = 650;
+            double durationY = nameY + 1;
+            double durationX = nameX + 240;
+            double iconX = 272;
+            double iconY = 658;
+            double iconSize = 22.0;
+            double spacing = 5.0;
+
+            // Recorrer la lista de cursos y mostrar los datos dinámicamente
+            for (Courses course : coursesList) {
+                // Crear y configurar los elementos del curso
+
+                // Crear y configurar el Label para el nombre (name)
+                Label nameLabel = new Label(course.getName());
+                nameLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 15));
+                nameLabel.setTextFill(Color.BLACK);
+                nameLabel.setLayoutX(nameX);
+                nameLabel.setLayoutY(nameY);
+
+                // Crear y configurar el Label para la duración (duration)
+                Label durationLabel = new Label("( " + course.getDuration() + " h)");
+                durationLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 15));
+                durationLabel.setTextFill(Color.GRAY);
+                durationLabel.setLayoutX(durationX);
+                durationLabel.setLayoutY(durationY);
+
+                // Crear y configurar el ImageView para el icono
+                ImageView iconImageView = new ImageView(new Image(getClass().getResource("/org/JavviFdeez/images/FourPoints.png").toExternalForm()));
+                iconImageView.setFitHeight(iconSize);
+                iconImageView.setFitWidth(iconSize);
+                iconImageView.setLayoutX(iconX);
+                iconImageView.setLayoutY(iconY);
+
+                // Añadir los elementos al AnchorPane
+                anchorPane.getChildren().addAll(iconImageView, nameLabel, durationLabel);
+
+                // Incrementar la posición en y para el próximo curso
+                nameY += iconSize + spacing;
+                durationY += iconSize + spacing;
+                iconY += iconSize + spacing;
+            }
+        } catch (SQLException e) {
+            // Manejar cualquier excepción SQL mostrando un mensaje de error
+            throw new RuntimeException("❌ Error al obtener los cursos: " + e.getMessage(), e);
         }
     }
 }

@@ -3,6 +3,7 @@ module org.JavviFdeez {
     requires javafx.fxml;
     requires java.sql;
     requires java.xml.bind;
+    requires java.desktop;
 
     opens org.JavviFdeez.controller.view to javafx.fxml;
     exports org.JavviFdeez;

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1538.0" style="-fx-background-color: #242424;" stylesheets="@../css/Register.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.JavviFdeez.controller.view.RegisterController">
+   <children>
+      <ImageView fitHeight="795.0" fitWidth="1550.0">
+         <image>
+            <Image url="@../images/abstract-black-and-silver-backgr.png" />
+         </image>
+      </ImageView>
+      <Pane opacity="0.95" prefHeight="113.0" prefWidth="1538.0" style="-fx-background-color: #404040;">
+         <children>
+            <Line endX="1423.0" layoutX="115.0" layoutY="113.0" startX="-115.0" stroke="#c3c1c1" strokeWidth="2.0" />
+            <ImageView fx:id="oneNoCheck" fitHeight="30.0" fitWidth="30.0" layoutX="367.0" layoutY="42.0">
+               <image>
+                  <Image url="@../images/PhNumberCircleOne.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="oneCheck" fitHeight="30.0" fitWidth="30.0" layoutX="397.0" layoutY="42.0">
+               <image>
+                  <Image url="@../images/PhNumberCircleOneFill.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="formDataText" layoutX="622.0" layoutY="42.0" text="Form Data" textFill="#a896cd">
+               <font>
+                  <Font name="Roboto Bold" size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="selectorText1" layoutX="842.0" layoutY="42.0" prefHeight="29.0" prefWidth="124.0" text="Customize" textFill="#a896cd">
+               <font>
+                  <Font name="Roboto Bold" size="23.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="twoNoCheck" fitHeight="30.0" fitWidth="30.0" layoutX="580.0" layoutY="42.0">
+               <image>
+                  <Image url="@../images/PhNumberCircleTwoFill.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="thereeNoCheck" fitHeight="30.0" fitWidth="30.0" layoutX="800.0" layoutY="42.0">
+               <image>
+                  <Image url="@../images/PhNumberCircleThreeFill%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1017.0" layoutY="42.0">
+               <image>
+                  <Image url="@../images/PhNumberCircleFourFill.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="selectorText11" layoutX="1057.0" layoutY="42.0" prefHeight="29.0" prefWidth="91.0" text="Preview" textFill="#a896cd">
+               <font>
+                  <Font name="Roboto Bold" size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="LogInText" layoutX="448.0" layoutY="42.0" text="Sign up" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Bold" size="23.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="388.0" layoutY="291.0" opacity="0.99" prefHeight="450.0" prefWidth="763.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #a896cd; -fx-border-radius: 25;">
+         <children>
+            <Label layoutX="457.0" layoutY="70.0" text="Hi, Welcome to CVV Generator" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="17.0" />
+               </font>
+            </Label>
+            <Line endX="1248.0" layoutX="-513.0" layoutY="113.0" startX="919.0" stroke="WHITE" />
+            <Label layoutX="494.0" layoutY="26.0" text="REGISTER" textFill="#a896cd">
+               <font>
+                  <Font name="Roboto Bold" size="34.0" />
+               </font>
+            </Label>
+            <Label layoutX="121.0" layoutY="29.0" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Bold" size="35.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailTextField" layoutX="406.0" layoutY="165.0" prefHeight="53.0" prefWidth="330.0" style="-fx-background-color: #777777; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-padding: 15;" />
+            <PasswordField fx:id="passwordField" layoutX="406.0" layoutY="262.0" prefHeight="53.0" prefWidth="330.0" style="-fx-background-color: #777777; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-padding: 15;" />
+            <ImageView fx:id="emailNoVisible" fitHeight="25.0" fitWidth="25.0" layoutX="427.0" layoutY="134.0">
+               <image>
+                  <Image url="@../images/PhUserBold.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="passwordNoVisible" fitHeight="25.0" fitWidth="25.0" layoutX="427.0" layoutY="229.0">
+               <image>
+                  <Image url="@../images/UilPadlock.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="buttonRegister" layoutX="455.0" layoutY="335.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="231.0" text="REGISTER" textFill="#f7f7f7">
+               <font>
+                  <Font name="Roboto Bold" size="26.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="450.0" fitWidth="374.0">
+               <image>
+                  <Image url="@../images/Captura%20de%20pantalla%202024-05-16%20150257.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="emailLabelNoVisible" layoutX="461.0" layoutY="132.0" prefHeight="30.0" prefWidth="46.0" text="Email" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="passwordLabelNoVisible" layoutX="461.0" layoutY="228.0" prefHeight="17.0" prefWidth="144.0" text="Password" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="emailLabelNoVisible1" layoutX="511.0" layoutY="132.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="emailLabelNoVisible11" layoutX="545.0" layoutY="230.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="407.0" layoutY="406.0" text="Do you already have an account?" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="buttonLogIn" layoutX="615.0" layoutY="401.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Sign in here" textFill="#f7f7f7" onAction="#handleButtonLogin">
+               <font>
+                  <Font name="Roboto Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Label layoutX="652.0" layoutY="182.0" text="CVV GENERATOR" textFill="WHITE">
+         <font>
+            <Font name="Roboto Bold" size="45.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="550.0" layoutY="169.0">
+         <image>
+            <Image url="@../images/Logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

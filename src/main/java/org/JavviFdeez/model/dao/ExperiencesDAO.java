@@ -49,15 +49,13 @@ public class ExperiencesDAO implements iExperiencesDAO {
             pst.setString(5, exp.getLocation());
             pst.setInt(6, exp.getYear());
             pst.setInt(7, exp.getPosition());
+
             // =======================
             // Ejecutar la consulta
             // =======================
             int rowsAffected = pst.executeUpdate();
 
-            // ===================
-            // Realizar commit
-            // ===================
-            conn.commit();
+
 
             // ==============================================================
             // Si no se insertó ninguna experiencia, mostrar mensaje de error
