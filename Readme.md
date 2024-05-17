@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Este proyecto es un GENERADOR de CURRÍCULMS desarrollado en Java que permite a los usuarios crear y gestionar currículums de manera eficiente. Ofrece diferentes plantillas y opciones de personalización para adaptarse a las necesidades de cada usuario.
+Este aplicación es un GENERADOR de CURRÍCULMS desarrollado en Java que permite a los usuarios crear y gestionar currículums de manera eficiente. Ofrece diferentes plantillas y opciones de personalización para adaptarse a las necesidades de cada usuario.
 
 ## Funcionalidades
 
