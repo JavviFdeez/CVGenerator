@@ -35,9 +35,6 @@ public class RegisterController implements Initializable {
     @FXML
     private Button buttonRegister;
 
-    @FXML
-    private Button buttonLogin;
-
     private UsersController usersController;
 
     private UsersDAO usersDAO;
@@ -83,7 +80,7 @@ public class RegisterController implements Initializable {
             showAlert("Éxito", "Usuario guardado exitosamente", Alert.AlertType.INFORMATION);
 
             // Cambiar a la escena de inicio de sesión después de guardar el usuario
-            //changeSceneToLogIn();
+            changeSceneToFormData();
         } catch (SQLException e) {
             // Mostrar mensaje de error de SQL
             showAlert("Error", "Error al guardar el usuario: " + e.getMessage(), Alert.AlertType.ERROR);
@@ -96,7 +93,7 @@ public class RegisterController implements Initializable {
     private void changeSceneToFormData() {
         try {
             // Cargar la nueva escena desde el archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ruta/a/LogIn.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataContact.fxml"));
             Parent root = loader.load();
 
             // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)

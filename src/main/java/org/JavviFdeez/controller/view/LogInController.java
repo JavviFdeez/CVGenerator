@@ -62,15 +62,13 @@ public class LogInController implements Initializable {
         String email = emailTextField.getText().trim();
         String password = passwordField.getText().trim();
 
-        System.out.println("Email ingresado: " + email);
-        System.out.println("Password ingresado: " + password);
         try {
             boolean isAuthenticated = usersController.authenticate(email, password);
 
             if (isAuthenticated) {
                 showAlert("Éxito", "Inicio de sesión exitoso.", Alert.AlertType.INFORMATION);
                 // Cambiar a la escena de inicio de sesión después de guardar el usuario
-                // changeSceneToLogIn();
+                changeSceneToFormData();
             } else {
                 showAlert("Error", "Correo electrónico o contraseña incorrectos.", Alert.AlertType.ERROR);
             }
@@ -80,12 +78,10 @@ public class LogInController implements Initializable {
         }
     }
 
-
-
     private void changeSceneToFormData() {
         try {
             // Cargar la nueva escena desde el archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ruta/a/LogIn.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataContact.fxml"));
             Parent root = loader.load();
 
             // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)

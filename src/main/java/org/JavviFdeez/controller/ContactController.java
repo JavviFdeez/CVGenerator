@@ -6,6 +6,9 @@ import org.JavviFdeez.model.dao.ContactDAO;
 import org.JavviFdeez.model.entity.Contact;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -16,11 +19,14 @@ public class ContactController implements Initializable {
 
     private ContactDAO contactDAO;
 
+    private Connection conn;
+
     // ==============
     // Constructor
     // ==============
     public ContactController() {
         this.contactDAO = new ContactDAO(ConnectionMariaDB.getConnection());
+        this.conn = ConnectionMariaDB.getConnection();
     }
 
     /**
@@ -146,6 +152,35 @@ public class ContactController implements Initializable {
             // =============================================
             System.err.println("❌ Error al buscar los contactos: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    public boolean saveDataToDatabase(String name, String lastname, String image, String occupation, String mobile, String email, String linkedin, String location, String extra) throws SQLException {
+        // Guardar los datos en la base de datos
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = ConnectionMariaDB.getConnection();
+            }
+
+            // Preparar la consulta SQL para insertar los datos
+            String query = "INSERT INTO cvv_contact (name, lastname, image, occupation, mobile, email, linkedin, location, extra) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement pst = conn.prepareStatement(query)) {
+                pst.setString(1, name);
+                pst.setString(2, lastname);
+                pst.setString(3, image);
+                pst.setString(4, occupation);
+                pst.setString(5, mobile);
+                pst.setString(6, email);
+                pst.setString(7, linkedin);
+                pst.setString(8, location);
+                pst.setString(9, extra);
+                pst.execute();
+                try (ResultSet rs = pst.executeQuery()) {
+                    return rs.next();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

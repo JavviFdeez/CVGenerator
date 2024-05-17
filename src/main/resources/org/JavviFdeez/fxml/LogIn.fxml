@@ -90,7 +90,10 @@
                   <Font name="Leelawadee UI Semilight" size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="emailTextField" layoutX="36.0" layoutY="180.0" prefHeight="53.0" prefWidth="313.0" style="-fx-background-color: #777777; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-padding: 15;" />
+            <TextField fx:id="emailTextField" layoutX="36.0" layoutY="180.0" prefHeight="53.0" prefWidth="313.0" style="-fx-background-color: #777777; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-padding: 15;">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="14.0" />
+               </font></TextField>
             <PasswordField fx:id="passwordField" layoutX="36.0" layoutY="280.0" prefHeight="53.0" prefWidth="313.0" style="-fx-background-color: #777777; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-padding: 15;" />
             <Button fx:id="buttonRegister" layoutX="474.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleButtonRegister" prefHeight="53.0" prefWidth="213.0" text="REGISTER" textFill="#f7f7f7">
                <font>
