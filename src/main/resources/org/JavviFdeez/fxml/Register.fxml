@@ -30,22 +30,22 @@
                   <Image url="@../images/PhNumberCircleOneFill.png" />
                </image>
             </ImageView>
-            <Label fx:id="formDataText" layoutX="622.0" layoutY="42.0" text="Form Data" textFill="#a896cd">
+            <Label layoutX="624.0" layoutY="42.0" text="Form Data" textFill="#a896cd">
                <font>
                   <Font name="Roboto Bold" size="23.0" />
                </font>
             </Label>
-            <Label fx:id="selectorText1" layoutX="842.0" layoutY="42.0" prefHeight="29.0" prefWidth="124.0" text="Customize" textFill="#a896cd">
+            <Label layoutX="843.0" layoutY="42.0" prefHeight="29.0" prefWidth="124.0" text="Customize" textFill="#a896cd">
                <font>
                   <Font name="Roboto Bold" size="23.0" />
                </font>
             </Label>
-            <ImageView fx:id="twoNoCheck" fitHeight="30.0" fitWidth="30.0" layoutX="580.0" layoutY="42.0">
+            <ImageView fx:id="twoNoCheck" fitHeight="30.0" fitWidth="30.0" layoutX="582.0" layoutY="42.0">
                <image>
                   <Image url="@../images/PhNumberCircleTwoFill.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="thereeNoCheck" fitHeight="30.0" fitWidth="30.0" layoutX="800.0" layoutY="42.0">
+            <ImageView fx:id="thereeNoCheck" fitHeight="30.0" fitWidth="30.0" layoutX="801.0" layoutY="42.0">
                <image>
                   <Image url="@../images/PhNumberCircleThreeFill%20(1).png" />
                </image>
@@ -55,12 +55,12 @@
                   <Image url="@../images/PhNumberCircleFourFill.png" />
                </image>
             </ImageView>
-            <Label fx:id="selectorText11" layoutX="1057.0" layoutY="42.0" prefHeight="29.0" prefWidth="91.0" text="Preview" textFill="#a896cd">
+            <Label layoutX="1057.0" layoutY="42.0" prefHeight="29.0" prefWidth="91.0" text="Preview" textFill="#a896cd">
                <font>
                   <Font name="Roboto Bold" size="23.0" />
                </font>
             </Label>
-            <Label fx:id="LogInText" layoutX="448.0" layoutY="42.0" text="Sign up" textFill="WHITE">
+            <Label layoutX="448.0" layoutY="42.0" text="Sign up" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="23.0" />
                </font>
@@ -74,8 +74,8 @@
                   <Font name="Leelawadee UI Semilight" size="17.0" />
                </font>
             </Label>
-            <Line endX="1248.0" layoutX="-513.0" layoutY="113.0" startX="919.0" stroke="WHITE" />
-            <Label layoutX="494.0" layoutY="26.0" text="REGISTER" textFill="#a896cd">
+            <Line endX="1248.0" layoutX="-513.0" layoutY="112.0" startX="919.0" stroke="WHITE" />
+            <Label layoutX="490.0" layoutY="28.0" text="WELCOME" textFill="#a896cd">
                <font>
                   <Font name="Roboto Bold" size="34.0" />
                </font>
@@ -85,19 +85,19 @@
                   <Font name="Roboto Bold" size="35.0" />
                </font>
             </Label>
-            <TextField fx:id="emailTextField" layoutX="406.0" layoutY="165.0" prefHeight="53.0" prefWidth="330.0" style="-fx-background-color: #777777; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-padding: 15;" />
-            <PasswordField fx:id="passwordField" layoutX="406.0" layoutY="262.0" prefHeight="53.0" prefWidth="330.0" style="-fx-background-color: #777777; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-padding: 15;" />
-            <ImageView fx:id="emailNoVisible" fitHeight="25.0" fitWidth="25.0" layoutX="427.0" layoutY="134.0">
+            <TextField fx:id="emailTextField" layoutX="406.0" layoutY="164.0" prefHeight="53.0" prefWidth="330.0" style="-fx-background-color: #777777; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-padding: 15;" />
+            <PasswordField fx:id="passwordField" layoutX="406.0" layoutY="261.0" prefHeight="53.0" prefWidth="330.0" style="-fx-background-color: #777777; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-padding: 15;" />
+            <ImageView fx:id="emailNoVisible" fitHeight="25.0" fitWidth="25.0" layoutX="427.0" layoutY="132.0">
                <image>
                   <Image url="@../images/PhUserBold.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="passwordNoVisible" fitHeight="25.0" fitWidth="25.0" layoutX="427.0" layoutY="229.0">
+            <ImageView fx:id="passwordNoVisible" fitHeight="25.0" fitWidth="25.0" layoutX="427.0" layoutY="228.0">
                <image>
                   <Image url="@../images/UilPadlock.png" />
                </image>
             </ImageView>
-            <Button fx:id="buttonRegister" layoutX="455.0" layoutY="335.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="231.0" text="REGISTER" textFill="#f7f7f7">
+            <Button fx:id="buttonRegister" layoutX="455.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="231.0" text="REGISTER" textFill="#f7f7f7">
                <font>
                   <Font name="Roboto Bold" size="26.0" />
                </font>
@@ -107,12 +107,12 @@
                   <Image url="@../images/Captura%20de%20pantalla%202024-05-16%20150257.png" />
                </image>
             </ImageView>
-            <Label fx:id="emailLabelNoVisible" layoutX="461.0" layoutY="132.0" prefHeight="30.0" prefWidth="46.0" text="Email" textFill="WHITE">
+            <Label fx:id="emailLabelNoVisible" layoutX="461.0" layoutY="130.0" prefHeight="30.0" prefWidth="46.0" text="Email" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="passwordLabelNoVisible" layoutX="461.0" layoutY="228.0" prefHeight="17.0" prefWidth="144.0" text="Password" textFill="WHITE">
+            <Label fx:id="passwordLabelNoVisible" layoutX="461.0" layoutY="227.0" prefHeight="17.0" prefWidth="144.0" text="Password" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
@@ -127,12 +127,12 @@
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="407.0" layoutY="406.0" text="Do you already have an account?" textFill="WHITE">
+            <Label layoutX="415.0" layoutY="404.0" text="Do you already have an account?" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI Semilight" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="buttonLogIn" layoutX="615.0" layoutY="401.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Sign in here" textFill="#f7f7f7" onAction="#handleButtonLogin">
+            <Button fx:id="buttonLogIn" layoutX="630.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleButtonLogin" prefHeight="30.0" prefWidth="100.0" text="Sign in here" textFill="#f7f7f7">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>

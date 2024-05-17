@@ -125,7 +125,7 @@
                   <Font name="Yu Gothic UI Semibold" size="17.0" />
                </font>
             </Label>
-            <ImageView fx:id="Hexagon6" fitHeight="20.0" fitWidth="20.0" layoutX="138.0" layoutY="529.0">
+            <ImageView fx:id="Hexagon6" fitHeight="20.0" fitWidth="20.0" layoutX="118.0" layoutY="529.0">
                <image>
                   <Image url="@../images/hexagon.png" />
                </image>
@@ -155,7 +155,7 @@
                   <Image url="@../images/hexagonNull.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="Hexagon7" fitHeight="20.0" fitWidth="20.0" layoutX="118.0" layoutY="529.0">
+            <ImageView fx:id="Hexagon7" fitHeight="20.0" fitWidth="20.0" layoutX="138.0" layoutY="529.0">
                <image>
                   <Image url="@../images/hexagon.png" />
                </image>

@@ -10,12 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.JavviFdeez.controller.UsersController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.UsersDAO;
 import org.JavviFdeez.model.entity.Users;
-
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -53,12 +52,9 @@ public class RegisterController implements Initializable {
     // Constructor sin argumentos
     // =============================
     public RegisterController() {
-        this.usersController = new UsersController(); // Inicializa UsersController
+        this.usersController = new UsersController();
         this.usersDAO = new UsersDAO(ConnectionMariaDB.getConnection());
-    }
-
-    public void setConnection(Connection conn) {
-        this.conn = conn;
+        this.conn = ConnectionMariaDB.getConnection();
     }
 
     @Override
@@ -85,12 +81,35 @@ public class RegisterController implements Initializable {
 
             // Mostrar mensaje de éxito
             showAlert("Éxito", "Usuario guardado exitosamente", Alert.AlertType.INFORMATION);
+
+            // Cambiar a la escena de inicio de sesión después de guardar el usuario
+            //changeSceneToLogIn();
         } catch (SQLException e) {
             // Mostrar mensaje de error de SQL
             showAlert("Error", "Error al guardar el usuario: " + e.getMessage(), Alert.AlertType.ERROR);
         } catch (IllegalArgumentException e) {
             // Mostrar mensaje de error de correo electrónico no válido
             showAlert("Error", "Error: " + e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    private void changeSceneToFormData() {
+        try {
+            // Cargar la nueva escena desde el archivo FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ruta/a/LogIn.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
+            Stage stage = (Stage) emailTextField.getScene().getWindow();
+
+            // Establecer la nueva escena en el escenario
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejar cualquier error de carga del archivo FXML
+            showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
         }
     }
 

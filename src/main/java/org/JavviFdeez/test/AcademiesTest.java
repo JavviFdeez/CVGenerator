@@ -11,7 +11,7 @@ import java.util.List;
 public class AcademiesTest {
 
     public static void main(String[] args) {
-        // testSaveAcademy();
+         testSaveAcademy();
         // testUpdateAcademy();
         // testDeleteAcademies();
         // testFindAcademyById();

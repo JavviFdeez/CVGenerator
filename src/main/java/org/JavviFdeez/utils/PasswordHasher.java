@@ -14,19 +14,13 @@ public class PasswordHasher {
      */
     public static String hashPassword(String password) {
         try {
-            // ======================================================
             // Obtener una instancia de MessageDigest para SHA-256
-            // ======================================================
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
 
-            // ===============================================
             // Aplicar el algoritmo de hash a la contraseña
-            // ===============================================
             byte[] hashBytes = digest.digest(password.getBytes());
 
-            // ==============================================================
             // Convertir los bytes del hash a una representación en base64
-            // ==============================================================
             String hashedPassword = Base64.getEncoder().encodeToString(hashBytes);
 
             return hashedPassword;

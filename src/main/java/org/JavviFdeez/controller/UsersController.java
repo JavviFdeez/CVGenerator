@@ -4,9 +4,13 @@ import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.UsersDAO;
 import org.JavviFdeez.model.entity.Users;
+import org.JavviFdeez.utils.PasswordHasher;
 import org.JavviFdeez.utils.PasswordValidator;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -17,10 +21,16 @@ public class UsersController implements Initializable {
     // ============
     private UsersDAO usersDAO;
 
+    // ===============================================
+    // Atributo para la conexión a la base de datos
+    // ===============================================
+    private Connection conn;
+
     // ==============
     // Constructor
     // ==============
     public UsersController() {
+        this.conn = conn;
         this.usersDAO = new UsersDAO(ConnectionMariaDB.getConnection());
     }
 
@@ -33,18 +43,18 @@ public class UsersController implements Initializable {
      */
     public void saveUser(Users user) throws SQLException, IllegalArgumentException {
         try {
-            // Validar la contraseña
             if (!PasswordValidator.isValidPassword(user.getPassword())) {
                 throw new IllegalArgumentException("Contraseña no válida. \n" +
                         "Debe tener un mínimo de 10 caracteres y que incluya: MINUSCULAS, MAYUSCULAS, NUMEROS");
             }
-            // Guardar el usuario en la base de datos
-            usersDAO.save(user);
 
-            // Mostrar mensaje de éxito
+
+            user.setPassword(user.getPassword());
+            System.out.println("Contraseña hasheada al guardar: " + user.getPassword());
+
+            usersDAO.save(user);
             System.out.println("Usuario guardado exitosamente.");
         } catch (SQLException e) {
-            // Lanzar una excepción SQLException con el mensaje de error
             throw new SQLException("Error al guardar el usuario: " + e.getMessage());
         }
     }
@@ -160,6 +170,39 @@ public class UsersController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Método para autenticar un usuario en la base de datos.
+     *
+     * @param email    El correo electrónico del usuario.
+     * @param password La contraseña del usuario.
+     * @return El usuario si la autenticación es exitosa, o null si las credenciales son incorrectas.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
+     */
+    public boolean authenticate(String email, String password) throws SQLException {
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = ConnectionMariaDB.getConnection();
+            }
+
+            // Obtener el hash SHA-256 de la contraseña ingresada
+            String hashedPassword = PasswordHasher.hashPassword(password);
+            System.out.println("Contraseña hasheada al autenticar: " + hashedPassword);
+
+            String query = "SELECT * FROM cvv_users WHERE email = ? AND password = ?";
+            try (PreparedStatement pst = conn.prepareStatement(query)) {
+                pst.setString(1, email);
+                pst.setString(2, hashedPassword); // Usar la contraseña hasheada aquí
+                try (ResultSet rs = pst.executeQuery()) {
+                    return rs.next();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Error al autenticar el usuario: " + e.getMessage());
+        }
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

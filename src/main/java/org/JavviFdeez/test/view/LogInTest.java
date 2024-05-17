@@ -7,10 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.JavviFdeez.controller.view.LogInController;
-import org.JavviFdeez.model.connection.ConnectionMariaDB;
-
 import java.io.IOException;
-import java.sql.Connection;
+
 
 public class LogInTest extends Application {
     public void start(Stage primaryStage) throws IOException {
@@ -20,13 +18,6 @@ public class LogInTest extends Application {
 
             // Cargar el controlador asociado al archivo FXML
             Parent root = loader.load();
-
-            // Obtener una conexion a la base de datos
-            try (Connection conn = ConnectionMariaDB.getConnection()) {
-                // Establecer la base de datos en el controlador
-                LogInController controller = loader.getController();
-                controller.setConnection(conn);
-            }
 
             // Obtener el controlador del archivo FXML
             LogInController controller = loader.getController();

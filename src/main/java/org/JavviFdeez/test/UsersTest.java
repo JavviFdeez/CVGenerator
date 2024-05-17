@@ -11,7 +11,7 @@ import java.util.List;
 public class UsersTest {
 
     public static void main(String[] args) {
-        // testSaveUser();
+        testSaveUser();
         // testUpdateUser();
         // testDeleteUser();
         // testFindUserById();

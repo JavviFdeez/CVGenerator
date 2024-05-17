@@ -54,7 +54,7 @@ public class ContactTest {
                 // Actualizar los datos del contacto
                 contactToUpdate.setName("New First Name");
                 contactToUpdate.setLastname("New Last Name");
-                contactToUpdate.setImage((byte[]) null);
+                contactToUpdate.setImage(("New Image"));
                 contactToUpdate.setOccupation("New Occupation");
                 contactToUpdate.setMobile("New Mobile");
                 contactToUpdate.setEmail("aa@gmail.com");

@@ -15,6 +15,7 @@ import org.JavviFdeez.model.dao.*;
 import org.JavviFdeez.model.entity.*;
 import javafx.scene.paint.Color;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
@@ -241,6 +242,7 @@ public class TemplateController implements Initializable {
                 // Obtener el nombre del contacto
                 // Verificar si el nombre no es nulo
                 if (contact.getName() != null) {
+                    System.out.println(contact.getName());
                     // Si el nombre no es nulo, muestralo
                     name.setText(contact.getName());
                 } else {
@@ -270,15 +272,16 @@ public class TemplateController implements Initializable {
                     occupation.setText("-");
                 }
 
-                // Obtener la imagen del contacto
-                // Verificar si la imagen no es nula
-                byte[] imageData = contact.getImage();
-                if (imageData != null) {
-                    // Si hay una imagen, cargarla
-                    Image profileImage = new Image(new ByteArrayInputStream(imageData));
+                // Obtener la ruta de la imagen del contacto
+                String imagePath = contact.getImage();
+
+                // Verificar si la ruta de la imagen no es nula
+                if (imagePath != null && !imagePath.isEmpty()) {
+                    // Si hay una ruta de imagen válida, cargarla
+                    Image profileImage = new Image(new File(imagePath).toURI().toString());
                     image.setImage(profileImage);
                 } else {
-                    // Si la imagen es nula, cargar una imagen predeterminada desde los recursos
+                    // Si la ruta de la imagen es nula o vacía, cargar una imagen predeterminada desde los recursos
                     String defaultImagePath = "/org/JavviFdeez/images/image_default.png";
                     InputStream inputStream = getClass().getResourceAsStream(defaultImagePath);
                     Image defaultImage = new Image(inputStream);

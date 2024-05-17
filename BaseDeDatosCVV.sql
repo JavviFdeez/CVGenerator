@@ -16,7 +16,7 @@ CREATE TABLE cvv_contact (
                             contact_id INT AUTO_INCREMENT PRIMARY KEY,
                             name VARCHAR(255),
                             lastname VARCHAR(255),
-                            image BLOB,
+                            image VARCHAR(255),
                             occupation VARCHAR(255),
                             mobile VARCHAR(20),
                             email VARCHAR(255),
@@ -76,3 +76,4 @@ CREATE TABLE cvv_users (
                                   email VARCHAR(100) NOT NULL,
                                   password VARCHAR(255) NOT NULL
 );
+

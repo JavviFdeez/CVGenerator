@@ -52,7 +52,7 @@ public class ContactDAO implements iContactDAO {
             pst = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, c.getName());
             pst.setString(2, c.getLastname());
-            pst.setBytes(3, c.getImage());
+            pst.setString(3, c.getImage());
             pst.setString(4, c.getOccupation());
             pst.setString(5, c.getMobile());
             pst.setString(6, c.getEmail());
@@ -113,7 +113,7 @@ public class ContactDAO implements iContactDAO {
             // Establecer los valores de los parámetros en la consulta SQL
             pst.setString(1, updatedContact.getName());
             pst.setString(2, updatedContact.getLastname());
-            pst.setBytes(3, updatedContact.getImage());
+            pst.setString(3, updatedContact.getImage());
             pst.setString(4, updatedContact.getOccupation());
             pst.setString(5, updatedContact.getMobile());
             pst.setString(6, updatedContact.getEmail());
@@ -233,7 +233,7 @@ public class ContactDAO implements iContactDAO {
                     foundContact = new Contact(
                             rs.getString("name"),
                             rs.getString("lastname"),
-                            rs.getBytes("image"),
+                            rs.getString("image"),
                             rs.getString("occupation"),
                             rs.getString("mobile"),
                             rs.getString("email"),
@@ -272,7 +272,7 @@ public class ContactDAO implements iContactDAO {
                    Contact contact = new Contact(
                            rs.getString("name"),
                            rs.getString("lastname"),
-                           rs.getBytes("image"),
+                           rs.getString("image"),
                            rs.getString("occupation"),
                            rs.getString("mobile"),
                            rs.getString("email"),
