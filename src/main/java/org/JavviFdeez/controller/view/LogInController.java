@@ -33,7 +33,6 @@ public class LogInController implements Initializable {
 
     private UsersController usersController;
 
-    private UsersDAO usersDAO;
 
     // ===============================================
     // Atributo para la conexión a la base de datos

@@ -174,13 +174,15 @@ public class ContactController implements Initializable {
                 pst.setString(7, linkedin);
                 pst.setString(8, location);
                 pst.setString(9, extra);
-                pst.execute();
-                try (ResultSet rs = pst.executeQuery()) {
-                    return rs.next();
-                }
+                // Ejecutar la inserción
+                pst.executeUpdate();
+
+                // Si se ejecuta sin excepciones, devuelve true
+                return true;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            // Manejar cualquier excepción de SQL aquí
+            throw e;
         }
     }
 

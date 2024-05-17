@@ -67,6 +67,7 @@ public class FormDataContactController implements Initializable {
 
 
     public FormDataContactController() {
+        this.contactController = new ContactController();
     }
 
     @Override
@@ -74,7 +75,6 @@ public class FormDataContactController implements Initializable {
         // Asegurarse de que ningún campo de texto esté seleccionado al inicio con una pequeña demora
         Platform.runLater(() -> nameTextField.getParent().requestFocus());
         handleFormData();
-        handleUploadImage();
         buttonSaveData.setOnAction(event -> handleFormaDataSave());
     }
 
@@ -98,27 +98,31 @@ public class FormDataContactController implements Initializable {
 
     private void handleFormaDataSave() {
         // Obtener los valores de los campos de texto
-        String name = nameTextField.getText();
-        String lastName = LastNameTextField.getText();
-        String occupation = occupationTextField.getText();
-        String mobile = mobileTextField.getText();
-        String email = emailTextField.getText();
-        String linkedin = linkedinTextField.getText();
-        String location = locationTextField.getText();
-        String extra = extraTextField.getText();
+        String name = nameTextField.getText().trim();
+        String lastName = LastNameTextField.getText().trim();
+        String occupation = occupationTextField.getText().trim();
+        String mobile = mobileTextField.getText().trim();
+        String email = emailTextField.getText().trim();
+        String linkedin = linkedinTextField.getText().trim();
+        String location = locationTextField.getText().trim();
+        String extra = extraTextField.getText().trim();
 
         try {
             boolean saveDataToDatabase = contactController.saveDataToDatabase(name, lastName, imageRelativePath, occupation, mobile, email, linkedin, location, extra);
-            if (saveDataToDatabase) {
-                showAlert("Exito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
-            } else {
-                showAlert("Error", "No se han podido guardar los datos", Alert.AlertType.ERROR);
-            }
+
+                if (saveDataToDatabase) {
+                    showAlert("Exito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
+                    // Cambiar a la escena de inicio de sesión después de guardar el usuario
+                    // changeSceneToFormData();
+                } else {
+                    showAlert("Error", "No se han podido guardar los datos", Alert.AlertType.ERROR);
+                }
         } catch (SQLException e) {
             e.printStackTrace();
             showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
     private void showAlert(String error, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(error);
@@ -147,7 +151,7 @@ public class FormDataContactController implements Initializable {
 
                 // Guardar la ruta relativa
                 imageRelativePath = outputPath.toString();
-                System.out.println("Imagen guardada en: " + imageRelativePath);
+                showAlert("Exito", "Imagen guardada",  Alert.AlertType.INFORMATION);
             } catch (IOException e) {
                 e.printStackTrace();
             }
