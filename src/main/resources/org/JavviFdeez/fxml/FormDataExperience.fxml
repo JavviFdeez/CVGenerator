@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1538.0" style="-fx-background-color: #242424;" stylesheets="@../css/FormDataAcademies.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.JavviFdeez.controller.view.FormDataAcademiesController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1538.0" style="-fx-background-color: #242424;" stylesheets="@../css/FormDataExperience.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.JavviFdeez.controller.view.FormDataExperienceController">
    <children>
       <ImageView fitHeight="795.0" fitWidth="1550.0" layoutX="-6.0">
          <image>
@@ -84,11 +84,6 @@
             <Font name="Roboto Bold" size="20.0" />
          </font>
       </Label>
-      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="633.0" layoutY="114.0">
-         <image>
-            <Image url="@../images/IconParkOutlineDot.png" />
-         </image>
-      </ImageView>
       <Label fx:id="experienceText" layoutX="609.0" layoutY="179.0" text="EXPERIENCE" textFill="#a896cd">
          <font>
             <Font name="Roboto Bold" size="23.0" />
@@ -104,11 +99,6 @@
             <Font name="Roboto Bold" size="23.0" />
          </font>
       </Label>
-      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="1033.0" layoutY="114.0">
-         <image>
-            <Image url="@../images/IconParkOutlineDot.png" />
-         </image>
-      </ImageView>
       <Label fx:id="languagesText" layoutX="1011.0" layoutY="179.0" text="LANGUAGES" textFill="#a896cd">
          <font>
             <Font name="Roboto Bold" size="23.0" />
@@ -131,7 +121,7 @@
       <Pane layoutX="457.0" layoutY="225.0" prefHeight="551.0" prefWidth="1034.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
          <children>
 
-            <Label layoutX="101.0" layoutY="27.0" text="Academies Details" textFill="WHITE">
+            <Label layoutX="101.0" layoutY="27.0" text="Experience Details" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="34.0" />
                </font>
@@ -150,7 +140,7 @@
 
             <HBox />
 
-            <Label layoutX="53.0" layoutY="74.0" prefHeight="26.0" prefWidth="322.0" text="Fill in the academies information" textFill="WHITE">
+            <Label layoutX="53.0" layoutY="74.0" prefHeight="26.0" prefWidth="322.0" text="Fill in the experience information" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
@@ -160,13 +150,13 @@
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="entityText" layoutX="307.0" layoutY="128.0" text="Entity" textFill="WHITE">
+            <Label fx:id="entityText" layoutX="307.0" layoutY="128.0" text="Duration" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
             <Line endX="-70.0" endY="522.0" layoutX="96.0" layoutY="29.0" startX="-70.0" startY="-29.0" stroke="#a896cd" strokeWidth="3.0" />
-            <Label fx:id="locationText" layoutX="575.0" layoutY="128.0" text="Location" textFill="WHITE">
+            <Label fx:id="locationText" layoutX="575.0" layoutY="128.0" text="Company" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
@@ -182,11 +172,6 @@
                   <Font name="Roboto Bold" size="26.0" />
                </font>
             </Button>
-            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="49.0" layoutY="27.0">
-               <image>
-                  <Image url="@../images/MakiCollege11.png" />
-               </image>
-            </ImageView>
 
             <HBox />
 
@@ -212,80 +197,44 @@
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="nameText1" layoutX="64.0" layoutY="257.0" opacity="0.0" text="Name" textFill="WHITE">
+            <Label fx:id="nameText2" layoutX="64.0" layoutY="377.0" text="Name" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="entityText1" layoutX="303.0" layoutY="256.0" opacity="0.0" text="Entity" textFill="WHITE">
+            <Label fx:id="entityText2" layoutX="307.0" layoutY="377.0" text="Entity" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="locationText1" layoutX="575.0" layoutY="256.0" opacity="0.0" text="Location" textFill="WHITE">
+            <Label fx:id="locationText2" layoutX="575.0" layoutY="377.0" text="Location" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="yearText1" layoutX="807.0" layoutY="257.0" opacity="0.0" text="Year" textFill="WHITE">
+            <Label fx:id="yearText2" layoutX="811.0" layoutY="377.0" text="Year" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <ComboBox fx:id="yearComboBox1" layoutX="807.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="205.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <TextField fx:id="locationTextField1" layoutX="576.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="13.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="entityTextField1" layoutX="308.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="13.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="nameTextField1" layoutX="58.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="13.0" />
-               </font>
-            </TextField>
-            <Label fx:id="nameText2" layoutX="64.0" layoutY="377.0" opacity="0.0" text="Name" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="entityText2" layoutX="307.0" layoutY="377.0" opacity="0.0" text="Entity" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="locationText2" layoutX="575.0" layoutY="377.0" opacity="0.0" text="Location" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="yearText2" layoutX="811.0" layoutY="377.0" opacity="0.0" text="Year" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="yearComboBox2" layoutX="802.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="205.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
+            <ComboBox fx:id="yearComboBox2" layoutX="802.0" layoutY="412.0" prefHeight="31.0" prefWidth="205.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
 
             <ImageView fx:id="iconAdd" fitHeight="30.0" fitWidth="30.0" layoutX="63.0" layoutY="215.0">
                <image>
                   <Image url="@../images/MdiPlusCircleOutline%20(1).png" />
                </image>
             </ImageView>
-            <TextField fx:id="locationTextField2" layoutX="571.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
+            <TextField fx:id="locationTextField2" layoutX="571.0" layoutY="412.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="entityTextField2" layoutX="303.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
+            <TextField fx:id="entityTextField2" layoutX="303.0" layoutY="412.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="nameTextField2" layoutX="53.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
+            <TextField fx:id="nameTextField2" layoutX="53.0" layoutY="412.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
@@ -300,12 +249,12 @@
                   <Image url="@../images/MdiPlusCircleOutline%20(1).png" />
                </image>
             </ImageView>
-            <ImageView fx:id="iconDelete2" fitHeight="30.0" fitWidth="30.0" layoutX="815.0" layoutY="458.0" opacity="0.0">
+            <ImageView fx:id="iconDelete2" fitHeight="30.0" fitWidth="30.0" layoutX="815.0" layoutY="458.0">
                <image>
                   <Image url="@../images/MaterialSymbolsDelete.png" />
                </image>
             </ImageView>
-            <Button fx:id="academicadd" layoutX="58.0" layoutY="215.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="   Add Academic Data" textFill="#a896cd">
+            <Button fx:id="academicadd" layoutX="49.0" layoutY="215.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Add Experience" textFill="#a896cd">
                <font>
                   <Font size="15.0" />
                </font>
@@ -315,16 +264,16 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="academicdelete" layoutX="800.0" layoutY="338.0" mnemonicParsing="false" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Delete Academic Data" textFill="#a896cd">
+            <Button fx:id="academicdelete1" layoutX="811.0" layoutY="458.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Delete Academic Data" textFill="#a896cd">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="academicdelete1" layoutX="814.0" layoutY="458.0" mnemonicParsing="false" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Delete Academic Data" textFill="#a896cd">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="53.0" layoutY="25.0">
+               <image>
+                  <Image url="@../images/MaterialSymbolsWork1.png" />
+               </image>
+            </ImageView>
 
          </children>
       </Pane>
@@ -341,9 +290,19 @@
             <Image url="@../images/TeenyiconsTickCircleSolid.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="checkAcademies" fitHeight="40.0" fitWidth="40.0" layoutX="433.0" layoutY="131.0">
+      <ImageView fx:id="checkAcademies" fitHeight="40.0" fitWidth="40.0" layoutX="437.0" layoutY="132.0">
          <image>
-            <Image url="@../images/PhNumberCircleTwoFill%20(1).png" />
+            <Image url="@../images/TeenyiconsTickCircleSolid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="checkExperience" fitHeight="49.0" fitWidth="49.0" layoutX="643.0" layoutY="128.0">
+         <image>
+            <Image url="@../images/PhNumberCircleThreeFill.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="1033.0" layoutY="117.0">
+         <image>
+            <Image url="@../images/IconParkOutlineDot.png" />
          </image>
       </ImageView>
    </children>

@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="Actualización de la vista FormDataAcademies">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/AcademiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/AcademiesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataAcademiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataAcademiesController.java" afterDir="false" />
+    <list default="true" id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="Funcionalidad completa de la vista FormDataAcademies">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/FormDataAcademies.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/FormDataAcademies.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,51 +55,51 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.AcademiesTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.App.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ContactTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Contact_SkillsTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.CoursesTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ExperienceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.FormDataAcademiesTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.FormDataContactTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.FormDataTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.LanguagesTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.LogInTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.RegisterTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.SkillsTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TemplateBasicTest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.UsersTest.executor&quot;: &quot;Run&quot;,
-    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/usuario/IdeaProjects/GeneradorCurriculums/src/main/resources/org/JavviFdeez/fxml&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.AcademiesTest.executor": "Run",
+    "Application.App.executor": "Run",
+    "Application.ContactTest.executor": "Run",
+    "Application.Contact_SkillsTest.executor": "Run",
+    "Application.CoursesTest.executor": "Run",
+    "Application.ExperienceTest.executor": "Run",
+    "Application.FormDataAcademiesTest.executor": "Run",
+    "Application.FormDataContactTest.executor": "Run",
+    "Application.FormDataTest.executor": "Run",
+    "Application.LanguagesTest.executor": "Run",
+    "Application.LogInTest.executor": "Run",
+    "Application.RegisterTest.executor": "Run",
+    "Application.SkillsTest.executor": "Run",
+    "Application.TemplateBasicTest.executor": "Run",
+    "Application.UsersTest.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/usuario/IdeaProjects/GeneradorCurriculums/src/main/resources/org/JavviFdeez/css",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\usuario\IdeaProjects\GeneradorCurriculums\src\main\resources\org\JavviFdeez\fxml" />
       <recent name="C:\Users\usuario\IdeaProjects\GeneradorCurriculums\src\main\resources\org\JavviFdeez\css" />
+      <recent name="C:\Users\usuario\IdeaProjects\GeneradorCurriculums\src\main\resources\org\JavviFdeez\fxml" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\usuario\IdeaProjects\GeneradorCurriculums\src\main\resources\org\JavviFdeez\css" />
       <recent name="C:\Users\usuario\IdeaProjects\GeneradorCurriculums\src\main\resources\org\JavviFdeez\fxml" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.JavviFdeez.controller.view" />
       <recent name="org.JavviFdeez.test.view" />
+      <recent name="org.JavviFdeez.controller.view" />
     </key>
   </component>
   <component name="RunManager" selected="Application.FormDataAcademiesTest">
@@ -259,7 +258,7 @@
       <workItem from="1716016327460" duration="11235000" />
       <workItem from="1716028874181" duration="33000" />
       <workItem from="1716042668758" duration="7294000" />
-      <workItem from="1716057743343" duration="2685000" />
+      <workItem from="1716057743343" duration="4480000" />
     </task>
     <task id="LOCAL-00001" summary="Creación y configuración del proyecto">
       <option name="closed" value="true" />
@@ -477,7 +476,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716049960044</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Funcionalidad completa de la vista FormDataAcademies">
+      <option name="closed" value="true" />
+      <created>1716060535207</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1716060535207</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -510,7 +517,8 @@
     <MESSAGE value="Actualización de mi vista Form Data" />
     <MESSAGE value="Actualización y funcionalidad completada de la vista FormDataContact" />
     <MESSAGE value="Actualización de la vista FormDataAcademies" />
-    <option name="LAST_COMMIT_MESSAGE" value="Actualización de la vista FormDataAcademies" />
+    <MESSAGE value="Funcionalidad completa de la vista FormDataAcademies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Funcionalidad completa de la vista FormDataAcademies" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
