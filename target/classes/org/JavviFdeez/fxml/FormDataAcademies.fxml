@@ -155,23 +155,23 @@
                      <Font name="Leelawadee UI Semilight" size="20.0" />
                   </font>
                </Label>
-               <Label fx:id="nameText" layoutX="60.0" layoutY="128.0" text="Name" textFill="WHITE">
+               <Label fx:id="nameText" layoutX="58.0" layoutY="128.0" text="Name" textFill="WHITE">
                   <font>
                      <Font name="Roboto Bold" size="22.0" />
                   </font>
                </Label>
-               <Label fx:id="entityText" layoutX="307.0" layoutY="128.0" text="Entity" textFill="WHITE">
+               <Label fx:id="entityText" layoutX="303.0" layoutY="128.0" text="Entity" textFill="WHITE">
                   <font>
                      <Font name="Roboto Bold" size="22.0" />
                   </font>
                </Label>
                <Line endX="-70.0" endY="522.0" layoutX="96.0" layoutY="29.0" startX="-70.0" startY="-29.0" stroke="#a896cd" strokeWidth="3.0" />
-               <Label fx:id="locationText" layoutX="575.0" layoutY="128.0" text="Location" textFill="WHITE">
+               <Label fx:id="locationText" layoutX="571.0" layoutY="128.0" text="Location" textFill="WHITE">
                   <font>
                      <Font name="Roboto Bold" size="22.0" />
                   </font>
                </Label>
-               <Label fx:id="yearText" layoutX="806.0" layoutY="129.0" text="Year" textFill="WHITE">
+               <Label fx:id="yearText" layoutX="802.0" layoutY="129.0" text="Year" textFill="WHITE">
                   <font>
                      <Font name="Roboto Bold" size="22.0" />
                   </font>
@@ -191,18 +191,18 @@
                <HBox />
 
                <HBox layoutX="749.0" layoutY="261.0" />
-                  <ComboBox fx:id="yearComboBox" layoutX="802.0" layoutY="164.0" prefHeight="31.0" prefWidth="205.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-                  <TextField fx:id="locationTextField" layoutX="571.0" layoutY="164.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
+                  <ComboBox fx:id="yearComboBox" layoutX="802.0" layoutY="164.0" prefHeight="31.0" prefWidth="205.0" promptText="Select year or In progress..." style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
+                  <TextField fx:id="locationTextField" layoutX="571.0" layoutY="164.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Location">
                      <font>
                         <Font name="Leelawadee UI Semilight" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="entityTextField" layoutX="303.0" layoutY="164.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
+                  <TextField fx:id="entityTextField" layoutX="303.0" layoutY="164.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Entity">
                      <font>
                         <Font name="Leelawadee UI Semilight" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="nameTextField" layoutX="53.0" layoutY="164.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
+                  <TextField fx:id="nameTextField" layoutX="53.0" layoutY="164.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Name">
                      <font>
                         <Font name="Leelawadee UI Semilight" size="13.0" />
                      </font>
@@ -212,17 +212,17 @@
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="nameText1" layoutX="64.0" layoutY="257.0" opacity="0.0" text="Name" textFill="WHITE">
+            <Label fx:id="nameText1" layoutX="63.0" layoutY="256.0" opacity="0.0" text="Name" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="entityText1" layoutX="303.0" layoutY="256.0" opacity="0.0" text="Entity" textFill="WHITE">
+            <Label fx:id="entityText1" layoutX="308.0" layoutY="256.0" opacity="0.0" text="Entity" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="locationText1" layoutX="575.0" layoutY="256.0" opacity="0.0" text="Location" textFill="WHITE">
+            <Label fx:id="locationText1" layoutX="576.0" layoutY="256.0" opacity="0.0" text="Location" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
@@ -232,60 +232,60 @@
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <ComboBox fx:id="yearComboBox1" layoutX="807.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="205.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <TextField fx:id="locationTextField1" layoutX="576.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
+            <ComboBox fx:id="yearComboBox1" layoutX="807.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="205.0" promptText="Select year or In progress..." style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
+            <TextField fx:id="locationTextField1" layoutX="576.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Location">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="entityTextField1" layoutX="308.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
+            <TextField fx:id="entityTextField1" layoutX="308.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Entity">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="nameTextField1" layoutX="58.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
+            <TextField fx:id="nameTextField1" layoutX="58.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Name">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
             </TextField>
-            <Label fx:id="nameText2" layoutX="64.0" layoutY="377.0" opacity="0.0" text="Name" textFill="WHITE">
+            <Label fx:id="nameText2" layoutX="58.0" layoutY="376.0" opacity="0.0" text="Name" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="entityText2" layoutX="307.0" layoutY="377.0" opacity="0.0" text="Entity" textFill="WHITE">
+            <Label fx:id="entityText2" layoutX="303.0" layoutY="376.0" opacity="0.0" text="Entity" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="locationText2" layoutX="575.0" layoutY="377.0" opacity="0.0" text="Location" textFill="WHITE">
+            <Label fx:id="locationText2" layoutX="571.0" layoutY="376.0" opacity="0.0" text="Location" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="yearText2" layoutX="811.0" layoutY="377.0" opacity="0.0" text="Year" textFill="WHITE">
+            <Label fx:id="yearText2" layoutX="802.0" layoutY="377.0" opacity="0.0" text="Year" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <ComboBox fx:id="yearComboBox2" layoutX="802.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="205.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
+            <ComboBox fx:id="yearComboBox2" layoutX="802.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="205.0" promptText="Select year or In progress..." style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
 
                      <ImageView fx:id="iconAdd" fitHeight="30.0" fitWidth="30.0" layoutX="63.0" layoutY="215.0">
                         <image>
                            <Image url="@../images/MdiPlusCircleOutline%20(1).png" />
                         </image>
                      </ImageView>
-            <TextField fx:id="locationTextField2" layoutX="571.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
+            <TextField fx:id="locationTextField2" layoutX="571.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Location">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="entityTextField2" layoutX="303.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
+            <TextField fx:id="entityTextField2" layoutX="303.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Entity">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="nameTextField2" layoutX="53.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;">
+            <TextField fx:id="nameTextField2" layoutX="53.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Name">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>

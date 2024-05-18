@@ -1,0 +1,84 @@
+#contactText{
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto Bold";
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, #a896cd, 10, 0, 0, 0);
+    fx-effect: innershadow(three-pass-box, #a896cd, 10, 0, 0, 0);
+}
+#academicDataText{
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto Bold";
+    -fx-text-fill: #a896cd;
+    -fx-effect: dropshadow(three-pass-box, #000000, 10, 0, 0, 0);
+    fx-effect: innershadow(three-pass-box, #ffffff, 10, 0, 0, 0);
+}
+#experienceText{
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto Bold";
+    -fx-text-fill: #a896cd;
+    -fx-effect: dropshadow(three-pass-box, #000000, 10, 0, 0, 0);
+    fx-effect: innershadow(three-pass-box, #ffffff, 10, 0, 0, 0);
+}
+#coursesText{
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto Bold";
+    -fx-text-fill: #a896cd;
+    -fx-effect: dropshadow(three-pass-box, #000000, 10, 0, 0, 0);
+    fx-effect: innershadow(three-pass-box, #ffffff, 10, 0, 0, 0);
+}
+#languagesText{
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto Bold";
+    -fx-text-fill: #a896cd;
+    -fx-effect: dropshadow(three-pass-box, #000000, 10, 0, 0, 0);
+    fx-effect: innershadow(three-pass-box, #ffffff, 10, 0, 0, 0);
+}#skillsText{
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto Bold";
+    -fx-text-fill: #a896cd;
+    -fx-effect: dropshadow(three-pass-box, #000000, 10, 0, 0, 0);
+    fx-effect: innershadow(three-pass-box, #ffffff, 10, 0, 0, 0);
+}
+#buttonSaveData {
+    -fx-background-color: #000000; /* Color inicial */
+    -fx-background-radius: 5;
+    -fx-border-color: #a896cd;
+    -fx-border-radius: 5;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10 20;
+    -fx-font-size: 25px;
+    -fx-font-family: "Roboto Bold";
+    -fx-cursor: hand; /* Cambia el cursor al pasar sobre el botón */
+    -fx-effect: dropshadow(three-pass-box, #b6b6b6, 10, 0, 0, 0);
+    -fx-translate-x: 0;
+    -fx-translate-y: 0;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition: transform 1s;
+}
+
+#buttonSaveData:hover {
+    -fx-background-color: #a896cd; /* Color final */
+    -fx-background-radius: 5;
+    -fx-border-color: #000000;
+    -fx-border-radius: 5;
+    -fx-text-fill: #000000;
+    -fx-padding: 10 20;
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto Bold";
+    -fx-effect: dropshadow(three-pass-box, #ffffff, 10, 0, 0, 0);
+    -fx-translate-x: 0;
+    -fx-translate-y: 0;
+    -fx-scale-x: 1.05; /* Escala X aumentada */
+    -fx-scale-y: 1.05; /* Escala Y aumentada */
+}
+
+#buttonSaveData:hover:pressed {
+    -fx-background-color: #000000;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #a896cd;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}

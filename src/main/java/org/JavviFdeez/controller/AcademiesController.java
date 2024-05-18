@@ -9,6 +9,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -165,7 +166,7 @@ public class AcademiesController extends AcademiesControllerAbstract  implements
         }
     }
 
-    public boolean saveDataToDatabase(String name, String entity, String location, String year, String name1, String entity1, String location1, String year1, String name2, String entity2, String location2, String year2, int lastContactID) throws SQLException {
+    public boolean saveDataToDatabase(String name, String entity, String location, String year, String name1, String entity1, String location1, String year1, String name2, String entity2, String location2, String year2, int contact_id) throws SQLException {
         // Guardar los datos en la base de datos
         try {
             if (conn == null || conn.isClosed()) {
@@ -173,28 +174,30 @@ public class AcademiesController extends AcademiesControllerAbstract  implements
             }
 
             // Preparar la consulta SQL para insertar los datos
-            String query = "INSERT INTO cvv_academies (name, entity, location, year) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO cvv_academies (name, entity, location, year, contact_id) VALUES (?, ?, ?, ?, ?), (?, ?, ?, ?, ?), (?, ?, ?, ?, ?)";
             try (PreparedStatement pst = conn.prepareStatement(query)) {
-                pst.setString(1, name.isEmpty() ? null : name);
-                pst.setString(2, entity.isEmpty() ? null : entity);
-                pst.setString(3, location.isEmpty() ? null : location);
+                pst.setString(1, name);
+                pst.setString(2, entity);
+                pst.setString(3, location);
                 pst.setString(4, year);
-                pst.setString(5, name1.isEmpty() ? null : name1);
-                pst.setString(6, entity1.isEmpty() ? null : entity1);
-                pst.setString(7, location1.isEmpty() ? null : location1);
-                pst.setString(8, year1);
-                pst.setString(9, name2.isEmpty() ? null : name2);
-                pst.setString(10, entity2.isEmpty() ? null : entity2);
-                pst.setString(11, location2.isEmpty() ? null : location2);
-                pst.setString(12, year2);
-                pst.setInt(13, lastContactID);
-                pst.executeUpdate();
+                pst.setInt(5, contact_id);
 
-                // Si se ejecuta sin excepciones, devuelve true
+                pst.setString(6, name1);
+                pst.setString(7, entity1);
+                pst.setString(8, location1);
+                pst.setString(9, year1);
+                pst.setInt(10, contact_id);
+
+                pst.setString(11, name2);
+                pst.setString(12, entity2);
+                pst.setString(13, location2);
+                pst.setString(14, year2);
+                pst.setInt(15, contact_id);
+
+                pst.executeUpdate();
                 return true;
             }
         } catch (SQLException e) {
-            // Manejar cualquier excepción de SQL aquí
             throw e;
         }
     }

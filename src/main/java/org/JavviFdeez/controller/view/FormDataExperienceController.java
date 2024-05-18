@@ -4,32 +4,16 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.JavviFdeez.controller.AcademiesController;
-import org.JavviFdeez.controller.ContactController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,7 +22,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class FormDataAcademiesController implements Initializable {
+public class FormDataExperienceController implements Initializable {
 
     @FXML
     private TextField nameTextField;
@@ -136,7 +120,7 @@ public class FormDataAcademiesController implements Initializable {
     private Connection conn;
 
 
-    public FormDataAcademiesController() {
+    public FormDataExperienceController() {
         this.academiesController = new AcademiesController();
         this.conn = ConnectionMariaDB.getConnection();
     }

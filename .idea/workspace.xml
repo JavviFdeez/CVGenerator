@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="Actualización de la vista FormDataAcademies">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/AcademiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/AcademiesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataAcademiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataAcademiesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/FormDataAcademies.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/FormDataAcademies.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;JavviFdeez&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/JavviFdeez/GeneradorCurriculums.git&quot;,
+    &quot;accountId&quot;: &quot;c75c0cf6-0151-42ad-b5ea-20d7a503a54f&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2fUjE9lEWOYILGmViNW7bJyNFIr" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.AcademiesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ContactTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Contact_SkillsTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.CoursesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ExperienceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FormDataAcademiesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FormDataContactTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FormDataTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LanguagesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LogInTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RegisterTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SkillsTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TemplateBasicTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.UsersTest.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/usuario/IdeaProjects/GeneradorCurriculums/src/main/resources/org/JavviFdeez/fxml&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\usuario\IdeaProjects\GeneradorCurriculums\src\main\resources\org\JavviFdeez\fxml" />
+      <recent name="C:\Users\usuario\IdeaProjects\GeneradorCurriculums\src\main\resources\org\JavviFdeez\css" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\usuario\IdeaProjects\GeneradorCurriculums\src\main\resources\org\JavviFdeez\css" />
+      <recent name="C:\Users\usuario\IdeaProjects\GeneradorCurriculums\src\main\resources\org\JavviFdeez\fxml" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.JavviFdeez.controller.view" />
+      <recent name="org.JavviFdeez.test.view" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.FormDataAcademiesTest">
+    <configuration name="FormDataAcademiesTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.FormDataAcademiesTest" />
+      <module name="GeneradorCurriculums" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.JavviFdeez.test.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FormDataContactTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.FormDataContactTest" />
+      <module name="GeneradorCurriculums" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.JavviFdeez.test.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LogInTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.LogInTest" />
+      <module name="GeneradorCurriculums" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.JavviFdeez.test.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegisterTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.RegisterTest" />
+      <module name="GeneradorCurriculums" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.JavviFdeez.test.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TemplateBasicTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.TemplateBasicTest" />
+      <module name="GeneradorCurriculums" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.JavviFdeez.test.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.FormDataAcademiesTest" />
+        <item itemvalue="Application.FormDataContactTest" />
+        <item itemvalue="Application.LogInTest" />
+        <item itemvalue="Application.TemplateBasicTest" />
+        <item itemvalue="Application.RegisterTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="" />
+      <created>1713862438473</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1713862438473</updated>
+      <workItem from="1713862439583" duration="1345000" />
+      <workItem from="1713863797319" duration="652000" />
+      <workItem from="1713864457477" duration="23000" />
+      <workItem from="1713866595138" duration="27000" />
+      <workItem from="1713953764510" duration="2426000" />
+      <workItem from="1714034327445" duration="2057000" />
+      <workItem from="1714036453398" duration="886000" />
+      <workItem from="1714039447148" duration="1593000" />
+      <workItem from="1714041047531" duration="1530000" />
+      <workItem from="1714068706767" duration="2200000" />
+      <workItem from="1714113115916" duration="1265000" />
+      <workItem from="1714114518262" duration="5667000" />
+      <workItem from="1714231699494" duration="5383000" />
+      <workItem from="1714300813921" duration="13754000" />
+      <workItem from="1714413547541" duration="29000" />
+      <workItem from="1714639139436" duration="2944000" />
+      <workItem from="1714644237142" duration="3039000" />
+      <workItem from="1715014360390" duration="32000" />
+      <workItem from="1715067336488" duration="6697000" />
+      <workItem from="1715076369056" duration="3043000" />
+      <workItem from="1715102117867" duration="6684000" />
+      <workItem from="1715162798183" duration="3107000" />
+      <workItem from="1715187206010" duration="8764000" />
+      <workItem from="1715240254785" duration="9770000" />
+      <workItem from="1715256547404" duration="568000" />
+      <workItem from="1715272159724" duration="6826000" />
+      <workItem from="1715279027584" duration="83000" />
+      <workItem from="1715322544372" duration="3599000" />
+      <workItem from="1715327149877" duration="2538000" />
+      <workItem from="1715336528786" duration="3712000" />
+      <workItem from="1715340307893" duration="3615000" />
+      <workItem from="1715457052316" duration="4000" />
+      <workItem from="1715499762743" duration="387000" />
+      <workItem from="1715500158949" duration="6894000" />
+      <workItem from="1715507090349" duration="6175000" />
+      <workItem from="1715513307401" duration="12187000" />
+      <workItem from="1715595895063" duration="14123000" />
+      <workItem from="1715623885306" duration="26000" />
+      <workItem from="1715624050032" duration="1390000" />
+      <workItem from="1715625457524" duration="2533000" />
+      <workItem from="1715628005466" duration="450000" />
+      <workItem from="1715628464182" duration="571000" />
+      <workItem from="1715671884193" duration="6982000" />
+      <workItem from="1715681336441" duration="2920000" />
+      <workItem from="1715687469388" duration="692000" />
+      <workItem from="1715699388803" duration="23415000" />
+      <workItem from="1715769412328" duration="19982000" />
+      <workItem from="1715801608218" duration="1426000" />
+      <workItem from="1715841756353" duration="598000" />
+      <workItem from="1715844596093" duration="6729000" />
+      <workItem from="1715853786540" duration="3174000" />
+      <workItem from="1715862440122" duration="1289000" />
+      <workItem from="1715863808122" duration="861000" />
+      <workItem from="1715872872585" duration="15147000" />
+      <workItem from="1715888346168" duration="36000" />
+      <workItem from="1715924155667" duration="1780000" />
+      <workItem from="1715927829336" duration="7003000" />
+      <workItem from="1715945807508" duration="6134000" />
+      <workItem from="1715956354228" duration="3827000" />
+      <workItem from="1715961155646" duration="1432000" />
+      <workItem from="1715962617810" duration="125000" />
+      <workItem from="1715977160695" duration="3946000" />
+      <workItem from="1716016327460" duration="11235000" />
+      <workItem from="1716028874181" duration="33000" />
+      <workItem from="1716042668758" duration="7294000" />
+      <workItem from="1716057743343" duration="2685000" />
+    </task>
+    <task id="LOCAL-00001" summary="Creación y configuración del proyecto">
+      <option name="closed" value="true" />
+      <created>1713862799311</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1713862799311</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Creación base de datos">
+      <option name="closed" value="true" />
+      <created>1713864424409</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1713864424409</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Creación del paquete Model">
+      <option name="closed" value="true" />
+      <created>1714035899334</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714035899334</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Establecida la conexión con la base de datos">
+      <option name="closed" value="true" />
+      <created>1714041173389</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1714041173389</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Actualización del POM">
+      <option name="closed" value="true" />
+      <created>1714041260710</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1714041260710</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Actualización de los DAO, los controller y sus respectivas interfaces">
+      <option name="closed" value="true" />
+      <created>1714325518196</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1714325518196</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Actualización de los DAO, los controller y sus respectivas interfaces">
+      <option name="closed" value="true" />
+      <created>1714644290692</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1714644290692</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Actualización de los DAO, los controller y sus respectivas interfaces">
+      <option name="closed" value="true" />
+      <created>1715068633032</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1715068633032</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Actualización de los DAO, los controller y sus respectivas interfaces">
+      <option name="closed" value="true" />
+      <created>1715068650763</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1715068650763</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Verificando funcionalidad del CRUD">
+      <option name="closed" value="true" />
+      <created>1715195969341</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1715195969341</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Verificando funcionalidad del CRUD (Expereinces y Courses)">
+      <option name="closed" value="true" />
+      <created>1715243490637</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1715243490637</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Verificando funcionalidad del CRUD (Skill y Languages) y creacion de 2 clases abstractas">
+      <option name="closed" value="true" />
+      <created>1715246509357</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1715246509357</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Creación de Users">
+      <option name="closed" value="true" />
+      <created>1715278043301</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1715278043301</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Actualización del Readme">
+      <option name="closed" value="true" />
+      <created>1715278980063</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1715278980063</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Actualización del Readme">
+      <option name="closed" value="true" />
+      <created>1715279104419</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1715279104419</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Actualización de la BBD, Creación de la primera plantilla CVV">
+      <option name="closed" value="true" />
+      <created>1715512222105</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1715512222105</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Actualización de mi primera plantilla CVV">
+      <option name="closed" value="true" />
+      <created>1715628980435</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1715628980436</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Actualización de mi primera plantilla CVV">
+      <option name="closed" value="true" />
+      <created>1715678890875</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1715678890875</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Actualización de mi primera plantilla CVV">
+      <option name="closed" value="true" />
+      <created>1715769996762</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1715769996762</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Actualización de mi primera plantilla CVV">
+      <option name="closed" value="true" />
+      <created>1715774601675</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1715774601675</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Actualización de mi primera plantilla CVV, Creada y funcional mi vista Register, y Actualización de mi vista LogIn">
+      <option name="closed" value="true" />
+      <created>1715883104497</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1715883104497</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Creada y funcional mi vista LogIn, y Actualización de mi vista Form Data">
+      <option name="closed" value="true" />
+      <created>1715934801087</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1715934801087</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Actualización de mi vista Form Data">
+      <option name="closed" value="true" />
+      <created>1715960172215</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1715960172215</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Actualización y funcionalidad completada de la vista FormDataContact">
+      <option name="closed" value="true" />
+      <created>1715962581580</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1715962581580</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Actualización de la vista FormDataAcademies">
+      <option name="closed" value="true" />
+      <created>1715980988474</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1715980988474</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Actualización de la vista FormDataAcademies">
+      <option name="closed" value="true" />
+      <created>1716028818719</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1716028818719</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Actualización de la vista FormDataAcademies">
+      <option name="closed" value="true" />
+      <created>1716049960043</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1716049960044</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Creación y configuración del proyecto" />
+    <MESSAGE value="Creación base de datos" />
+    <MESSAGE value="Creación del paquete Model" />
+    <MESSAGE value="Establecida la conexión con la base de datos" />
+    <MESSAGE value="Actualización del POM" />
+    <MESSAGE value="Actualización de los DAO, los controller y sus respectivas interfaces" />
+    <MESSAGE value="Verificando funcionalidad del CRUD" />
+    <MESSAGE value="Verificando funcionalidad del CRUD (Expereinces y Courses)" />
+    <MESSAGE value="Verificando funcionalidad del CRUD (Skill y Languages) y creacion de 2 clases abstractas" />
+    <MESSAGE value="Creación de Users" />
+    <MESSAGE value="Actualización del Readme" />
+    <MESSAGE value="Actualización de la BBD, Creación de la primera plantilla CVV" />
+    <MESSAGE value="Actualización de mi primera plantilla CVV" />
+    <MESSAGE value="Actualización de mi primera plantilla CVV, Creada y funcional mi vista Register, y Actualización de mi vista LogIn" />
+    <MESSAGE value="Creada y funcional mi vista LogIn, y Actualización de mi vista Form Data" />
+    <MESSAGE value="Actualización de mi vista Form Data" />
+    <MESSAGE value="Actualización y funcionalidad completada de la vista FormDataContact" />
+    <MESSAGE value="Actualización de la vista FormDataAcademies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Actualización de la vista FormDataAcademies" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="pst" />
+        <watch expression="id.year" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
