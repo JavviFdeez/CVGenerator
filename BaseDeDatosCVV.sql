@@ -8,7 +8,7 @@ CREATE TABLE cvv_academies (
                                name VARCHAR(255),
                                entity VARCHAR(255),
                                location VARCHAR(255),
-                               year INT,
+                               year VARCHAR(255),
                                FOREIGN KEY (contact_id) REFERENCES cvv_contact(contact_id)
 );
 

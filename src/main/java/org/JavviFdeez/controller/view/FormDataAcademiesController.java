@@ -20,6 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.JavviFdeez.controller.AcademiesController;
 import org.JavviFdeez.controller.ContactController;
+import org.JavviFdeez.model.connection.ConnectionMariaDB;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +30,9 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -49,60 +53,92 @@ public class FormDataAcademiesController implements Initializable {
     private ComboBox<String> yearComboBox;
 
     @FXML
+    private Button academicdelete;
+
+    @FXML
+    private ImageView iconAdd;
+
+    @FXML
+    private ImageView iconAdd2;
+
+    @FXML
+    private Button academicadd;
+
+    @FXML
+    private ImageView iconDelete;
+
+    @FXML
+    private ImageView iconDelete2;
+
+
+    @FXML
     private Button buttonSaveData;
 
     @FXML
     private ImageView checkContact;
 
     @FXML
-    private ImageView academicdelete;
+    private TextField nameTextField1;
 
     @FXML
-    private Label textDelete;
+    private TextField entityTextField1;
 
     @FXML
-    private ImageView academicadd;
+    private TextField locationTextField1;
 
     @FXML
-    private Label textAdd;
+    private ComboBox<String> yearComboBox1;
 
     @FXML
-    private Label nameText;
+    private Button academicdelete1;
 
     @FXML
-    private Label entityText;
+    private Button academicadd1;
 
     @FXML
-    private Label locationText;
+    private Label nameText1;
 
     @FXML
-    private Label yearText;
+    private Label entityText1;
 
     @FXML
-    private Label asteriskName;
+    private Label locationText1;
 
     @FXML
-    private Label asteriskEntity;
+    private Label yearText1;
 
     @FXML
-    private Label asteriskLocation;
+    private TextField nameTextField2;
 
     @FXML
-    private Label asteriskYear;
+    private TextField entityTextField2;
 
     @FXML
-    private Pane academiesPane;
-
+    private TextField locationTextField2;
 
     @FXML
-    private VBox dynamicAcademicData;
+    private ComboBox<String> yearComboBox2;
+
+    @FXML
+    private Label nameText2;
+
+    @FXML
+    private Label entityText2;
+
+    @FXML
+    private Label locationText2;
+
+    @FXML
+    private Label yearText2;
 
     private AcademiesController academiesController;
 
+    private Connection conn;
 
 
     public FormDataAcademiesController() {
         this.academiesController = new AcademiesController();
+        this.conn = ConnectionMariaDB.getConnection();
     }
 
     @Override
@@ -111,24 +147,112 @@ public class FormDataAcademiesController implements Initializable {
         Platform.runLater(() -> nameTextField.getParent().requestFocus());
         initializeYearComboBox();
         handleFormData();
-        buttonSaveData.setOnAction(event -> handleFormaDataSave());
-        academicadd.setOnMouseClicked(event -> handleAddAcademic(academiesPane));
+        buttonSaveData.setOnAction(event -> handleFormaDataSave( ));
+        academicadd.setOnMouseClicked(event -> handleAddAcademic());
         academicdelete.setOnMouseClicked(event -> handleDeleteAcademic());
+
+        academicadd1.setOnMouseClicked(event -> handleAddAcademic1());
+        academicdelete1.setOnMouseClicked(event -> handleDeleteAcademic1());
     }
 
-    private void handleAddAcademic(Pane academiesPane) {
-
+    private void handleAddAcademic() {
+        academicdelete.setOpacity(1);
+        iconAdd2.setOpacity(1);
+        iconDelete.setOpacity(1);
+        nameTextField1.setOpacity(1);
+        entityTextField1.setOpacity(1);
+        locationTextField1.setOpacity(1);
+        yearComboBox1.setOpacity(1);
+        academicadd1.setOpacity(1);
+        nameText1.setOpacity(1);
+        entityText1.setOpacity(1);
+        locationText1.setOpacity(1);
+        yearText1.setOpacity(1);
     }
 
 
     private void handleDeleteAcademic() {
-        // Implement logic to delete academic fields dynamically
-        // For demonstration purposes, let's just display a message
+        // Restablecer los campos de texto a vacío
+        nameTextField1.clear();
+        entityTextField1.clear();
+        locationTextField1.clear();
+        yearComboBox1.getSelectionModel().clearSelection();
+
+
+
+        // Restablecer la opacidad a 0
+        iconAdd2.setOpacity(0);
+        iconDelete.setOpacity(0);
+        academicdelete.setOpacity(0);
+        nameTextField1.setOpacity(0);
+        entityTextField1.setOpacity(0);
+        locationTextField1.setOpacity(0);
+        yearComboBox1.setOpacity(0);
+        academicdelete1.setOpacity(0);
+        academicadd1.setOpacity(0);
+        nameText1.setOpacity(0);
+        entityText1.setOpacity(0);
+        locationText1.setOpacity(0);
+        yearText1.setOpacity(0);
+        showAlert("Academic Deleted", "Academic Deleted", Alert.AlertType.INFORMATION);
+    }
+
+    private void handleAddAcademic1() {
+        academicdelete1.setOpacity(1);
+        iconDelete2.setOpacity(1);
+        nameTextField2.setOpacity(1);
+        entityTextField2.setOpacity(1);
+        locationTextField2.setOpacity(1);
+        yearComboBox2.setOpacity(1);
+        nameText2.setOpacity(1);
+        entityText2.setOpacity(1);
+        locationText2.setOpacity(1);
+        yearText2.setOpacity(1);
+    }
+
+
+    private void handleDeleteAcademic1() {
+        // Restablecer los campos de texto a vacío
+        nameTextField2.clear();
+        entityTextField2.clear();
+        locationTextField2.clear();
+        yearComboBox2.getSelectionModel().clearSelection();
+
+        // Restablecer la opacidad a 0
+        iconDelete2.setOpacity(0);
+        academicdelete1.setOpacity(0);
+        nameTextField2.setOpacity(0);
+        entityTextField2.setOpacity(0);
+        locationTextField2.setOpacity(0);
+        yearComboBox2.setOpacity(0);
+        nameText2.setOpacity(0);
+        entityText2.setOpacity(0);
+        locationText2.setOpacity(0);
+        yearText2.setOpacity(0);
+        showAlert("Academic Deleted", "Academic Deleted", Alert.AlertType.INFORMATION);
     }
 
     private void initializeYearComboBox() {
         yearComboBox.getItems().add("In progress...");
         yearComboBox.getItems().addAll(
+                IntStream.rangeClosed(1980, 2024)
+                        .boxed()
+                        .sorted((a, b) -> b - a)
+                        .map(String::valueOf)
+                        .collect(Collectors.toList())
+        );
+
+        yearComboBox1.getItems().add("In progress...");
+        yearComboBox1.getItems().addAll(
+                IntStream.rangeClosed(1980, 2024)
+                        .boxed()
+                        .sorted((a, b) -> b - a)
+                        .map(String::valueOf)
+                        .collect(Collectors.toList())
+        );
+
+        yearComboBox2.getItems().add("In progress...");
+        yearComboBox2.getItems().addAll(
                 IntStream.rangeClosed(1980, 2024)
                         .boxed()
                         .sorted((a, b) -> b - a)
@@ -143,6 +267,16 @@ public class FormDataAcademiesController implements Initializable {
         locationTextField.setOnMouseClicked(event -> handleTextFieldClick(locationTextField));
         yearComboBox.setOnMouseClicked(event -> yearComboBox.show());
         checkContact.setOnMouseClicked(event -> handleBackContact());
+
+        nameTextField1.setOnMouseClicked(event -> handleTextFieldClick(nameTextField1));
+        entityTextField1.setOnMouseClicked(event -> handleTextFieldClick(entityTextField1));
+        locationTextField1.setOnMouseClicked(event -> handleTextFieldClick(locationTextField1));
+        yearComboBox1.setOnMouseClicked(event -> yearComboBox1.show());
+
+        nameTextField2.setOnMouseClicked(event -> handleTextFieldClick(nameTextField2));
+        entityTextField2.setOnMouseClicked(event -> handleTextFieldClick(entityTextField2));
+        locationTextField2.setOnMouseClicked(event -> handleTextFieldClick(locationTextField2));
+        yearComboBox2.setOnMouseClicked(event -> yearComboBox2.show());
     }
 
 
@@ -150,20 +284,26 @@ public class FormDataAcademiesController implements Initializable {
         textField.clear();
     }
 
-    private void handleFormaDataSave() {
+    private void handleFormaDataSave(){
         // Recoger los datos de los campos iniciales
         String name = nameTextField.getText().trim();
         String entity = entityTextField.getText().trim();
         String location = locationTextField.getText().trim();
         String year = yearComboBox.getValue();
+        String name1 = nameTextField1.getText().trim();
+        String entity1 = entityTextField1.getText().trim();
+        String location1 = locationTextField1.getText().trim();
+        String year1 = yearComboBox1.getValue();
+        String name2 = nameTextField2.getText().trim();
+        String entity2 = entityTextField2.getText().trim();
+        String location2 = locationTextField2.getText().trim();
+        String year2 = yearComboBox2.getValue();
 
-        if (name.isEmpty() || entity.isEmpty() || location.isEmpty() || year == null || year.isEmpty()) {
-            showAlert("Campos incompletos", "Por favor, rellene todos los campos obligatorios.", Alert.AlertType.WARNING);
-            return;
-        }
+        // Obtener el último ID de contacto
+        int lastContactID = getLastContactID();
 
         try {
-            boolean saveDataToDatabase = academiesController.saveDataToDatabase(name, entity, location, Integer.parseInt(year));
+            boolean saveDataToDatabase = academiesController.saveDataToDatabase(name, entity, location, year, name1, entity1, location1, year1, name2, entity2, location2, year2, lastContactID);
 
             if (saveDataToDatabase) {
                 showAlert("Éxito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
@@ -175,31 +315,28 @@ public class FormDataAcademiesController implements Initializable {
             e.printStackTrace();
             showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
         }
+    }
 
-        // Recoger los datos de los campos adicionales
-        for (Node node : dynamicAcademicData.getChildren()) {
-            if (node instanceof VBox) {
-                VBox vbox = (VBox) node;
-                TextField nameField = (TextField) vbox.lookup("#nameTextField");
-                TextField entityField = (TextField) vbox.lookup("#entityTextField");
-                TextField locationField = (TextField) vbox.lookup("#locationTextField");
-                ComboBox<String> yearField = (ComboBox<String>) vbox.lookup("#yearComboBox");
+    private int getLastContactID(){
+        int lastContactID = 0;
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = ConnectionMariaDB.getConnection();
+            }
 
-                String additionalName = nameField.getText().trim();
-                String additionalEntity = entityField.getText().trim();
-                String additionalLocation = locationField.getText().trim();
-                String additionalYear = yearField.getValue();
-
-                if (!additionalName.isEmpty() && !additionalEntity.isEmpty() && !additionalLocation.isEmpty() && additionalYear != null && !additionalYear.isEmpty()) {
-                    try {
-                        academiesController.saveDataToDatabase(additionalName, additionalEntity, additionalLocation, Integer.parseInt(additionalYear));
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
-                    }
+            // Preparar la consulta SQL para obtener el último ID de contacto
+            String query = "SELECT MAX(id) FROM contactos"; // Reemplaza 'contactos' con el nombre de tu tabla de contactos
+            try (PreparedStatement pst = conn.prepareStatement(query)) {
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    lastContactID = rs.getInt(1);
                 }
             }
+        } catch (SQLException e) {
+            // Manejar cualquier excepción de SQL aquí
+            e.printStackTrace();
         }
+        return lastContactID;
     }
 
     private void showAlert(String error, String message, Alert.AlertType alertType) {
@@ -208,33 +345,6 @@ public class FormDataAcademiesController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    private void addAcademicDataFields() {
-        VBox newFields = new VBox();
-
-        HBox nameHBox = new HBox(new Label("Nombre"), new TextField());
-        HBox entityHBox = new HBox(new Label("Entidad"), new TextField());
-        HBox locationHBox = new HBox(new Label("Ubicación"), new TextField());
-        HBox yearHBox = new HBox(new Label("Año"), createYearComboBox());
-        ImageView academicDelete = new ImageView();
-
-        HBox deleteHBox = new HBox(academicDelete, new Label("Eliminar Datos Académicos"));
-        academicDelete.setOnMouseClicked(event -> dynamicAcademicData.getChildren().remove(newFields));
-
-        newFields.getChildren().addAll(nameHBox, entityHBox, locationHBox, yearHBox, deleteHBox);
-        dynamicAcademicData.getChildren().add(newFields);
-    }
-
-    private ComboBox<String> createYearComboBox() {
-        ComboBox<String> comboBox = new ComboBox<>();
-        initializeYearComboBox();
-        return comboBox;
-    }
-
-    private void handleDeleteAcademicData() {
-        // Eliminar los nodos correspondientes de la interfaz gráfica
-        dynamicAcademicData.getChildren().removeAll( dynamicAcademicData.getChildren() );
     }
 
     private void changeSceneToFormData() {

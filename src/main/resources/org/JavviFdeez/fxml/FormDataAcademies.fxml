@@ -128,7 +128,7 @@
          </font>
       </Label>
       <Line endX="132.0" layoutX="1131.0" layoutY="151.0" startX="-50.79998779296875" stroke="#a896cd" strokeWidth="5.0" />
-      <Pane layoutX="460.0" layoutY="225.0" prefHeight="551.0" prefWidth="1034.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
+      <Pane layoutX="457.0" layoutY="225.0" prefHeight="551.0" prefWidth="1034.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
          <children>
 
                <Label layoutX="101.0" layoutY="27.0" text="Academies Details" textFill="WHITE">
@@ -182,26 +182,6 @@
                      <Font name="Roboto Bold" size="26.0" />
                   </font>
                </Button>
-               <Label fx:id="asteriskName" layoutX="132.0" layoutY="128.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-                  <font>
-                     <Font name="Leelawadee UI Semilight" size="20.0" />
-                  </font>
-               </Label>
-               <Label fx:id="asteriskLocation" layoutX="668.0" layoutY="128.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-                  <font>
-                     <Font name="Leelawadee UI Semilight" size="20.0" />
-                  </font>
-               </Label>
-               <Label fx:id="asteriskEntity" layoutX="368.0" layoutY="128.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-                  <font>
-                     <Font name="Leelawadee UI Semilight" size="20.0" />
-                  </font>
-               </Label>
-               <Label fx:id="asteriskYear" layoutX="858.0" layoutY="128.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-                  <font>
-                     <Font name="Leelawadee UI Semilight" size="20.0" />
-                  </font>
-               </Label>
                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="49.0" layoutY="27.0">
                   <image>
                      <Image url="@../images/MakiCollege11.png" />
@@ -211,211 +191,140 @@
                <HBox />
 
                <HBox layoutX="749.0" layoutY="261.0" />
-               <Label fx:id="textAdd" layoutX="90.0" layoutY="258.0" prefHeight="25.0" prefWidth="144.0" text="Add Academic Data" textFill="#a896cd">
-                  <font>
-                     <Font name="Leelawadee UI Semilight" size="16.0" />
-                  </font>
-               </Label>
-                  <ComboBox fx:id="yearComboBox" layoutX="802.0" layoutY="164.0" prefHeight="31.0" prefWidth="205.0" promptText="Select year or In progress...*" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-                  <TextField fx:id="locationTextField" layoutX="571.0" layoutY="164.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Location*">
+                  <ComboBox fx:id="yearComboBox" layoutX="802.0" layoutY="164.0" prefHeight="31.0" prefWidth="205.0" promptText="Select year or In progress..." style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
+                  <TextField fx:id="locationTextField" layoutX="571.0" layoutY="164.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Location">
                      <font>
                         <Font name="Leelawadee UI Semilight" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="entityTextField" layoutX="303.0" layoutY="164.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Entity*">
+                  <TextField fx:id="entityTextField" layoutX="303.0" layoutY="164.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Entity">
                      <font>
                         <Font name="Leelawadee UI Semilight" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="nameTextField" layoutX="53.0" layoutY="164.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Name*">
+                  <TextField fx:id="nameTextField" layoutX="53.0" layoutY="164.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Name">
                      <font>
                         <Font name="Leelawadee UI Semilight" size="13.0" />
                      </font>
                   </TextField>
-
-                     <ImageView fx:id="academicadd" fitHeight="30.0" fitWidth="30.0" layoutX="54.0" layoutY="255.0">
-                        <image>
-                           <Image url="@../images/MdiPlusCircleOutline%20(1).png" />
-                        </image>
-                     </ImageView>
-                  <ImageView fx:id="academicdelete" fitHeight="30.0" fitWidth="30.0" layoutX="815.0" layoutY="211.0">
-                     <image>
-                        <Image url="@../images/MaterialSymbolsDelete.png" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="textDelete" layoutX="848.0" layoutY="211.0" prefHeight="30.0" prefWidth="158.0" text="Delete Academic Data" textFill="#a896cd">
-                     <font>
-                        <Font name="Leelawadee UI Semilight" size="16.0" />
-                     </font>
-                  </Label>
-            <Label fx:id="nameText1" layoutX="58.0" layoutY="211.0" opacity="0.0" text="Name" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="entityText1" layoutX="303.0" layoutY="211.0" opacity="0.0" text="Entity" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="locationText1" layoutX="571.0" layoutY="211.0" opacity="0.0" text="Location" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="yearText1" layoutX="802.0" layoutY="212.0" opacity="0.0" text="Year" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="asteriskName1" layoutX="132.0" layoutY="211.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="asteriskLocation1" layoutX="668.0" layoutY="211.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="asteriskEntity1" layoutX="368.0" layoutY="211.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
             <Label fx:id="asteriskYear1" layoutX="858.0" layoutY="211.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
                <font>
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
             </Label>
-            <ComboBox fx:id="yearComboBox1" layoutX="802.0" layoutY="247.0" opacity="0.0" prefHeight="31.0" prefWidth="205.0" promptText="Select year or In progress...*" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <TextField fx:id="locationTextField1" layoutX="571.0" layoutY="247.0" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Location*">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="13.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="entityTextField1" layoutX="303.0" layoutY="247.0" opacity="0.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Entity*">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="13.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="nameTextField1" layoutX="53.0" layoutY="247.0" opacity="0.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Name*">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="13.0" />
-               </font>
-            </TextField>
-            <Label fx:id="nameText11" layoutX="63.0" layoutY="294.0" opacity="0.0" text="Name" textFill="WHITE">
+            <Label fx:id="nameText1" layoutX="63.0" layoutY="256.0" opacity="0.0" text="Name" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="entityText11" layoutX="308.0" layoutY="294.0" opacity="0.0" text="Entity" textFill="WHITE">
+            <Label fx:id="entityText1" layoutX="308.0" layoutY="256.0" opacity="0.0" text="Entity" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="locationText11" layoutX="576.0" layoutY="294.0" opacity="0.0" text="Location" textFill="WHITE">
+            <Label fx:id="locationText1" layoutX="576.0" layoutY="256.0" opacity="0.0" text="Location" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="yearText11" layoutX="807.0" layoutY="295.0" opacity="0.0" text="Year" textFill="WHITE">
+            <Label fx:id="yearText1" layoutX="807.0" layoutY="257.0" opacity="0.0" text="Year" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="asteriskName11" layoutX="137.0" layoutY="294.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="asteriskLocation11" layoutX="673.0" layoutY="294.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="asteriskEntity11" layoutX="373.0" layoutY="294.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="asteriskYear11" layoutX="863.0" layoutY="294.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="yearComboBox11" layoutX="807.0" layoutY="330.0" opacity="0.0" prefHeight="31.0" prefWidth="205.0" promptText="Select year or In progress...*" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <TextField fx:id="locationTextField11" layoutX="576.0" layoutY="330.0" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Location*">
+            <ComboBox fx:id="yearComboBox1" layoutX="807.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="205.0" promptText="Select year or In progress..." style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
+            <TextField fx:id="locationTextField1" layoutX="576.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Location">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="entityTextField11" layoutX="308.0" layoutY="330.0" opacity="0.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Entity*">
+            <TextField fx:id="entityTextField1" layoutX="308.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Entity">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="nameTextField11" layoutX="58.0" layoutY="330.0" opacity="0.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Name*">
+            <TextField fx:id="nameTextField1" layoutX="58.0" layoutY="292.0" opacity="0.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Name">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
             </TextField>
-            <Label fx:id="nameText12" layoutX="58.0" layoutY="376.0" opacity="0.0" text="Name" textFill="WHITE">
+            <Label fx:id="nameText2" layoutX="58.0" layoutY="376.0" opacity="0.0" text="Name" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="entityText12" layoutX="303.0" layoutY="376.0" opacity="0.0" text="Entity" textFill="WHITE">
+            <Label fx:id="entityText2" layoutX="303.0" layoutY="376.0" opacity="0.0" text="Entity" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="locationText12" layoutX="571.0" layoutY="376.0" opacity="0.0" text="Location" textFill="WHITE">
+            <Label fx:id="locationText2" layoutX="571.0" layoutY="376.0" opacity="0.0" text="Location" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="yearText12" layoutX="802.0" layoutY="377.0" opacity="0.0" text="Year" textFill="WHITE">
+            <Label fx:id="yearText2" layoutX="802.0" layoutY="377.0" opacity="0.0" text="Year" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="asteriskName12" layoutX="132.0" layoutY="376.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="asteriskLocation12" layoutX="668.0" layoutY="376.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="asteriskEntity12" layoutX="368.0" layoutY="376.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="asteriskYear12" layoutX="858.0" layoutY="376.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="yearComboBox12" layoutX="802.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="205.0" promptText="Select year or In progress...*" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <TextField fx:id="locationTextField12" layoutX="571.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Location*">
+            <ComboBox fx:id="yearComboBox2" layoutX="802.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="205.0" promptText="Select year or In progress..." style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
+
+                     <ImageView fx:id="iconAdd" fitHeight="30.0" fitWidth="30.0" layoutX="63.0" layoutY="215.0">
+                        <image>
+                           <Image url="@../images/MdiPlusCircleOutline%20(1).png" />
+                        </image>
+                     </ImageView>
+            <TextField fx:id="locationTextField2" layoutX="571.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Location">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="entityTextField12" layoutX="303.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Entity*">
+            <TextField fx:id="entityTextField2" layoutX="303.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Entity">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="nameTextField12" layoutX="53.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Name*">
+            <TextField fx:id="nameTextField2" layoutX="53.0" layoutY="412.0" opacity="0.0" prefHeight="31.0" prefWidth="237.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 5;" text="Name">
                <font>
                   <Font name="Leelawadee UI Semilight" size="13.0" />
                </font>
             </TextField>
+            <ImageView fx:id="iconDelete" fitHeight="30.0" fitWidth="30.0" layoutX="804.0" layoutY="338.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/MaterialSymbolsDelete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="iconAdd2" fitHeight="30.0" fitWidth="30.0" layoutX="63.0" layoutY="338.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/MdiPlusCircleOutline%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="iconDelete2" fitHeight="30.0" fitWidth="30.0" layoutX="815.0" layoutY="458.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/MaterialSymbolsDelete.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="academicadd" layoutX="58.0" layoutY="215.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="   Add Academic Data" textFill="#a896cd">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="academicadd1" layoutX="62.0" layoutY="337.0" mnemonicParsing="false" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="   Add Academic Data" textFill="#a896cd">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="academicdelete" layoutX="800.0" layoutY="338.0" mnemonicParsing="false" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Delete Academic Data" textFill="#a896cd">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="academicdelete1" layoutX="814.0" layoutY="458.0" mnemonicParsing="false" opacity="0.0" prefHeight="31.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Delete Academic Data" textFill="#a896cd">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
 
             </children>
          </Pane>
