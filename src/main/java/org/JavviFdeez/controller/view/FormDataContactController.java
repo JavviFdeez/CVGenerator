@@ -111,6 +111,12 @@ public class FormDataContactController implements Initializable {
         String location = locationTextField.getText().trim();
         String extra = extraTextField.getText().trim();
 
+        // Verificar si los campos obligatorios están vacíos
+        if (name.isEmpty() || lastName.isEmpty() || addImage.getImage() == null || occupation.isEmpty() || mobile.isEmpty() || email.isEmpty() || linkedin.isEmpty() || location.isEmpty()) {
+            showAlert("Campos incompletos", "Por favor, rellene todos los campos obligatorios.", Alert.AlertType.WARNING);
+            return;
+        }
+
         try {
             boolean saveDataToDatabase = contactController.saveDataToDatabase(name, lastName, imageRelativePath, occupation, mobile, email, linkedin, location, extra);
 

@@ -6,18 +6,22 @@ import org.JavviFdeez.model.dao.AcademiesDAO;
 import org.JavviFdeez.model.entity.Academies;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class AcademiesController extends AcademiesControllerAbstract  implements Initializable {
     private AcademiesDAO academiesDAO;
+    private Connection conn;
 
     // ==============
     // Constructor
     // ==============
     public AcademiesController() {
         this.academiesDAO = new AcademiesDAO(ConnectionMariaDB.getConnection());
+        this.conn = ConnectionMariaDB.getConnection();
     }
 
     /**
@@ -158,6 +162,31 @@ public class AcademiesController extends AcademiesControllerAbstract  implements
             // ========================================================================
             System.err.println("❌ Error al buscar las academias: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    public boolean saveDataToDatabase(String name, String entity, String location, int year) throws SQLException {
+        // Guardar los datos en la base de datos
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = ConnectionMariaDB.getConnection();
+            }
+
+            // Preparar la consulta SQL para insertar los datos
+            String query = "INSERT INTO cvv_academies (name, entity, location, year) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement pst = conn.prepareStatement(query)) {
+                pst.setString(1, name);
+                pst.setString(2, entity);
+                pst.setString(3, location);
+                pst.setInt(4, year);
+                pst.executeUpdate();
+
+                // Si se ejecuta sin excepciones, devuelve true
+                return true;
+            }
+        } catch (SQLException e) {
+            // Manejar cualquier excepción de SQL aquí
+            throw e;
         }
     }
 

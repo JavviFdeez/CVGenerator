@@ -10,13 +10,13 @@ public class Academies {
     private String name;
     private String entity;
     private String location;
-    private int year;
+    private String year;
 
 
     // ==============
     // Constructor
     // ==============
-    public Academies(int contact_id, String name, String entity, String location, int year) {
+    public Academies(int contact_id, String name, String entity, String location, String year) {
         this.academies_id = 0;
         this.contact_id = contact_id;
         this.name = name;
@@ -68,11 +68,11 @@ public class Academies {
         this.location = location;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

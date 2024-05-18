@@ -20,7 +20,7 @@ public class AcademiesTest {
 
     private static void testSaveAcademy() {
         // Crear una nueva instancia de Academia con los datos necesarios
-        Academies academies = new Academies(4, "Ejemplo", "ejemplo", "ejemplo", 2022);
+        Academies academies = new Academies(4, "Ejemplo", "ejemplo", "ejemplo", "2022");
 
         // Obtener una conexión a la base de datos
         try (Connection connection = ConnectionMariaDB.getConnection()) {
@@ -55,7 +55,7 @@ public class AcademiesTest {
                 academiaToUpdate.setName("Nuevo nombre");
                 academiaToUpdate.setEntity("Nueva entidad");
                 academiaToUpdate.setLocation("Nueva ubicación");
-                academiaToUpdate.setYear(2024);
+                academiaToUpdate.setYear("2024");
 
                 // Llamar al método update y pasarle el ID y la academia actualizada
                 Academies updatedAcademies = academiesDAO.update(academiaIdToUpdate, academiaToUpdate);

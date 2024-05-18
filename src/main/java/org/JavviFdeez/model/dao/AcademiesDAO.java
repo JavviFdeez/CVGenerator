@@ -46,7 +46,7 @@ public class AcademiesDAO implements iAcademiesDAO {
             pst.setString(2, a.getName());
             pst.setString(3, a.getEntity());
             pst.setString(4, a.getLocation());
-            pst.setInt(5, a.getYear());
+            pst.setString(5, a.getYear());
 
             // =======================
             // Ejecutar la consulta
@@ -101,7 +101,7 @@ public class AcademiesDAO implements iAcademiesDAO {
             pst.setString(1, updatedAcademies.getName());
             pst.setString(2, updatedAcademies.getEntity());
             pst.setString(3, updatedAcademies.getLocation());
-            pst.setInt(4, updatedAcademies.getYear());
+            pst.setString(4, updatedAcademies.getYear());
             pst.setInt(5, id);
 
             // Ejecutar la consulta SQL de actualización
@@ -209,7 +209,7 @@ public class AcademiesDAO implements iAcademiesDAO {
                             res.getString("name"),
                             res.getString("entity"),
                             res.getString("location"),
-                            res.getInt("year")
+                            res.getString("year")
                     );
                 }
             } catch (SQLException e) {
@@ -247,7 +247,7 @@ public class AcademiesDAO implements iAcademiesDAO {
                             rs.getString("name"),
                             rs.getString("entity"),
                             rs.getString("location"),
-                            rs.getInt("year")
+                            rs.getString("year")
                     );
                     // =================================
                     // Agregar la academia a la lista
