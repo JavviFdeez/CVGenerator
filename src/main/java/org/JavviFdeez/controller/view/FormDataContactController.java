@@ -16,7 +16,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.JavviFdeez.controller.ContactController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
-import org.JavviFdeez.model.dao.ContactDAO;
+import org.JavviFdeez.model.entity.Contact;
+import org.JavviFdeez.model.entity.Session;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,7 +36,7 @@ public class FormDataContactController implements Initializable {
     private TextField nameTextField;
 
     @FXML
-    private TextField emailTextField;
+    private TextField emailText;
 
     @FXML
     private TextField LastNameTextField;
@@ -61,17 +62,26 @@ public class FormDataContactController implements Initializable {
     @FXML
     private ImageView addImage;
 
+    @FXML
+    private Button buttonSignoff;
+
     private String imageRelativePath;
 
     @FXML
     private Button buttonSaveData;
 
     private ContactController contactController;
+    private LogInController logInController;
 
 
 
     public FormDataContactController() {
         this.contactController = new ContactController();
+    }
+
+    public void setLogInController(LogInController logInController) {
+        this.logInController = logInController;
+        loadContactData();
     }
 
     @Override
@@ -80,15 +90,77 @@ public class FormDataContactController implements Initializable {
         Platform.runLater(() -> nameTextField.getParent().requestFocus());
         handleFormData();
         buttonSaveData.setOnAction(event -> handleFormaDataSave());
+        buttonSignoff.setOnAction(event -> handleSignoff());
+    }
+
+    private void handleSignoff() {
+        try {
+            // Cargar la nueva escena desde el archivo FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/LogIn.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el escenario actual desde el emailTextField
+            Stage stage = (Stage) occupationTextField.getScene().getWindow();
+
+            // Establecer la nueva escena en el escenario
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejar cualquier error de carga del archivo FXML
+            showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
+        }
+    }
+
+
+    private void loadContactData() {
+        try {
+            if (logInController != null) {
+                // Obtener el contactId del usuario autenticado desde la sesión
+                int contactId = Session.getInstance().getContactId();
+
+                // Obtener el contacto utilizando el contactId
+                Contact contact = logInController.getIDContact();
+
+                if (contact != null) {
+                    // Mostrar los datos del contacto en los campos de texto
+                    nameTextField.setText(contact.getName());
+                    LastNameTextField.setText(contact.getLastname());
+                    occupationTextField.setText(contact.getOccupation());
+                    mobileTextField.setText(contact.getMobile());
+                    emailText.setText(contact.getEmail());
+                    linkedinTextField.setText(contact.getLinkedin());
+                    locationTextField.setText(contact.getLocation());
+                    extraTextField.setText(contact.getExtra());
+                    if (contact.getImage() != null) {
+                        // Si hay una imagen asociada, cargarla en el ImageView
+                        Image image = new Image(new FileInputStream(contact.getImage()));
+                        profileImageView.setImage(image);
+                    }
+                } else {
+                    // Mostrar un mensaje de advertencia si no se encuentra el contacto
+                    showAlert("Advertencia", "No se encontró ningún contacto con el ID proporcionado.", Alert.AlertType.WARNING);
+                }
+            } else {
+                // Mostrar un mensaje de advertencia si LogInController es null
+                showAlert("Advertencia", "No se pudo obtener la instancia de LogInController.", Alert.AlertType.WARNING);
+            }
+        } catch (IOException e) {
+            // Manejar cualquier excepción de E/S que pueda ocurrir al cargar la imagen
+            showAlert("Error", "No se pudo cargar la información del contacto.", Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
     }
 
     private void handleFormData() {
+        // Cargar datos del contacto
         addImage.setOnMouseClicked(event -> handleUploadImage());
         nameTextField.setOnMouseClicked(event -> handleTextFieldClick(nameTextField));
         LastNameTextField.setOnMouseClicked(event -> handleTextFieldClick(LastNameTextField));
         occupationTextField.setOnMouseClicked(event -> handleTextFieldClick(occupationTextField));
         mobileTextField.setOnMouseClicked(event -> handleTextFieldClick(mobileTextField));
-        emailTextField.setOnMouseClicked(event -> handleTextFieldClick(emailTextField));
+        emailText.setOnMouseClicked(event -> handleTextFieldClick(emailText));
         linkedinTextField.setOnMouseClicked(event -> handleTextFieldClick(linkedinTextField));
         extraTextField.setOnMouseClicked(event -> handleTextFieldClick(extraTextField));
         locationTextField.setOnMouseClicked(event -> handleTextFieldClick(locationTextField));
@@ -106,7 +178,7 @@ public class FormDataContactController implements Initializable {
         String lastName = LastNameTextField.getText().trim();
         String occupation = occupationTextField.getText().trim();
         String mobile = mobileTextField.getText().trim();
-        String email = emailTextField.getText().trim();
+        String email = emailText.getText().trim();
         String linkedin = linkedinTextField.getText().trim();
         String location = locationTextField.getText().trim();
         String extra = extraTextField.getText().trim();
@@ -140,7 +212,7 @@ public class FormDataContactController implements Initializable {
             Parent root = loader.load();
 
             // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
-            Stage stage = (Stage) emailTextField.getScene().getWindow();
+            Stage stage = (Stage) nameTextField.getScene().getWindow();
 
             // Establecer la nueva escena en el escenario
             Scene scene = new Scene(root);

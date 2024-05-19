@@ -73,22 +73,17 @@ public class RegisterController implements Initializable {
 
         try {
             Users user = new Users(email, password);
-            // Llamada al método del UsersController para guardar el usuario
             usersController.saveUser(user);
 
-            // Mostrar mensaje de éxito
             showAlert("Éxito", "Usuario guardado exitosamente", Alert.AlertType.INFORMATION);
-
-            // Cambiar a la escena de inicio de sesión después de guardar el usuario
             changeSceneToFormData();
         } catch (SQLException e) {
-            // Mostrar mensaje de error de SQL
             showAlert("Error", "Error al guardar el usuario: " + e.getMessage(), Alert.AlertType.ERROR);
         } catch (IllegalArgumentException e) {
-            // Mostrar mensaje de error de correo electrónico no válido
             showAlert("Error", "Error: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
 
     private void changeSceneToFormData() {
         try {

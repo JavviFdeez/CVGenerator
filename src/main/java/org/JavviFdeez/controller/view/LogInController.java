@@ -9,8 +9,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.JavviFdeez.controller.ContactController;
 import org.JavviFdeez.controller.UsersController;
-import org.JavviFdeez.model.dao.UsersDAO;
+import org.JavviFdeez.model.connection.ConnectionMariaDB;
+import org.JavviFdeez.model.dao.ContactDAO;
+import org.JavviFdeez.model.entity.Contact;
+import org.JavviFdeez.model.entity.Session;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -31,7 +36,12 @@ public class LogInController implements Initializable {
     @FXML
     private Button buttonLogIn;
 
+    private Session session;
+
     private UsersController usersController;
+
+    private ContactController contactController;
+    private ContactDAO contactDAO;
 
 
     // ===============================================
@@ -43,7 +53,10 @@ public class LogInController implements Initializable {
     // Constructor
     // =============================
     public LogInController() {
+        this.contactDAO = new ContactDAO(ConnectionMariaDB.getConnection());
+        this.contactController = new ContactController();
         this.usersController = new UsersController();
+        this.session = Session.getInstance();
     }
 
     @Override
@@ -57,25 +70,85 @@ public class LogInController implements Initializable {
         Platform.runLater(() -> emailTextField.getParent().requestFocus());
     }
 
+    /**
+     * @Author: JavviFdeez
+     * Metodo para mostrar un mensaje de buscar un contacto por ID en la base de datos
+     */
+    public Contact getIDContact() {
+        try {
+            // Obtener el email del usuario autenticado desde el campo de texto
+            String email = emailTextField.getText();
+
+            // Obtener el contactId del usuario autenticado
+            Integer contactId = contactController.getContactIdByEmail(email);
+
+            // Verificar si se obtuvo correctamente el contactId
+            if (contactId != null) {
+                // Buscar el contacto en la base de datos utilizando el contactId
+                Contact foundContact = contactDAO.findById(contactId);
+
+                if (foundContact != null) {
+                    // Si la búsqueda es exitosa, mostrar mensaje de éxito
+                    System.out.println("✅ Contacto encontrado exitosamente: " + foundContact);
+                    return foundContact;
+                } else {
+                    // Si no se encuentra el contacto, mostrar mensaje de advertencia
+                    System.out.println("⚠️ No se encontró ningún contacto con el ID proporcionado: " + contactId);
+                }
+            } else {
+                // Si no se obtiene el contactId, mostrar un mensaje de advertencia
+                System.out.println("⚠️ No se pudo obtener el ID del contacto.");
+            }
+        } catch (SQLException e) {
+            // En caso de error, mostrar mensaje de error
+            System.err.println("❌ Error al buscar el contacto: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private void handleLogIn() {
         String email = emailTextField.getText().trim();
         String password = passwordField.getText().trim();
 
         try {
+            // Verificar la autenticación del usuario
             boolean isAuthenticated = usersController.authenticate(email, password);
 
             if (isAuthenticated) {
-                showAlert("Éxito", "Inicio de sesión exitoso.", Alert.AlertType.INFORMATION);
-                // Cambiar a la escena de inicio de sesión después de guardar el usuario
-                changeSceneToFormData();
+                // Obtener el contactId del usuario autenticado
+                int contactId = Session.getInstance().getContactId();
+
+                // Obtener el contacto utilizando el contactId
+                Contact contact = getIDContact();
+
+                // Si el contacto se encuentra, guardar el contactId en la sesión
+                if (contact != null) {
+                    // Mostrar mensaje de éxito
+                    showAlert("Éxito", "Inicio de sesión exitoso.", Alert.AlertType.INFORMATION);
+
+                    // Guardar el contactId en la sesión
+                    Session.getInstance().setContactId(contactId);
+
+                    // Cambiar a la escena de formulario de contacto
+                    changeSceneToFormData();
+                } else {
+                    // Mostrar mensaje de advertencia si no se encuentra el contacto
+                    showAlert("Advertencia", "No se encontró ningún contacto con el ID proporcionado.", Alert.AlertType.WARNING);
+                }
             } else {
+                // Mostrar mensaje de error
                 showAlert("Error", "Correo electrónico o contraseña incorrectos.", Alert.AlertType.ERROR);
             }
         } catch (SQLException e) {
+            // Manejar errores de SQL
             e.printStackTrace();
             showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
+
+
 
     private void changeSceneToFormData() {
         try {
@@ -83,7 +156,10 @@ public class LogInController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataContact.fxml"));
             Parent root = loader.load();
 
-            // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
+            FormDataContactController formDataContactController = loader.getController();
+            formDataContactController.setLogInController(this);
+
+            // Obtener el escenario actual desde el emailTextField
             Stage stage = (Stage) emailTextField.getScene().getWindow();
 
             // Establecer la nueva escena en el escenario

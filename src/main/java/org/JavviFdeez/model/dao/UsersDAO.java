@@ -36,41 +36,23 @@ public class UsersDAO implements iUsersDAO {
      * @Author: JavviFdeez
      * Método para GUARDAR un usuario en la base de datos.
      */
-    @Override
     public Users save(Users user) throws SQLException {
-        // =========================================
-        // Insertar el usuario en la base de datos
-        // =========================================
         try (PreparedStatement pst = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS)) {
             pst.setString(1, user.getEmail());
             pst.setString(2, user.getPassword());
 
-            // =======================
-            // Ejecutar la consulta
-            // =======================
             int rowsAffected = pst.executeUpdate();
-
-            // ==============================================================
-            // Si no se insertó ningun usuario, mostrar mensaje de error
-            // ==============================================================
             if (rowsAffected == 0) {
                 throw new SQLException("❌ Error al insertar, no se guardó ningun usuario.");
             }
 
-            // ==============================================================
-            // Obtener el ID generado por la inserción
-            // ==============================================================
             try (ResultSet generatedKeys = pst.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    // =====================================================
-                    // Asignar el ID generado por la inserción al usuario
-                    // =====================================================
-                    user.setUsers_id(generatedKeys.getInt(1));
+                    user.setContactId(generatedKeys.getInt(1));
                 } else {
                     throw new SQLException("❌ Error al insertar, no se guardó ningun usuario.");
                 }
             }
-
 
             return user;
         }

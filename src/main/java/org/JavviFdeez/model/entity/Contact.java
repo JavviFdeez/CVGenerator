@@ -20,8 +20,8 @@ public class Contact {
     // ==============
     // Constructor
     // ==============
-    public Contact(String name, String lastname, String image, String occupation, String mobile, String email, String linkedin, String location, String extra) {
-        this.contact_id = 0;
+    public Contact(int contact_id, String name, String lastname, String image, String occupation, String mobile, String email, String linkedin, String location, String extra) {
+        this.contact_id = contact_id;
         this.name = name;
         this.lastname = lastname;
         this.image = image;

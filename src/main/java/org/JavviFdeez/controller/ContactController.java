@@ -101,36 +101,26 @@ public class ContactController implements Initializable {
         }
     }
 
+
+
     /**
-     * @param id el contacto que se va a buscar
+     * @param email
+     * @return
+     * @throws SQLException
      * @Author: JavviFdeez
-     * Metodo para mostrar un mensaje de buscar un contacto por ID en la base de datos
+     * Metodo para mostrar un mensaje de buscar un contacto por email en la base de datos
      */
-    public void getIDContact(int id) {
+    public int getContactIdByEmail(String email) throws SQLException {
         try {
-            // ==========================================
-            // Buscar el contacto en la base de datos
-            // ==========================================
-            Contact foundContact = contactDAO.findById(id);
-            if (foundContact != null) {
-                // ======================================================
-                // Si la busqueda es exitosa, mostrar mensaje de exito.
-                // ======================================================
-                System.out.println("✅ Contacto encontrado exitosamente: " + foundContact);
-            } else {
-                // ======================================================
-                // Si la busqueda es exitosa, mostrar mensaje de exito.
-                // ======================================================
-                System.out.println("⚠️ No se encontró ningun contacto con el ID proporcionado.");
-            }
+            // Consultar la base de datos para obtener el contactId
+            return contactDAO.getContactIdByEmail(email);
         } catch (SQLException e) {
-            // =============================================
-            // En caso de error, mostrar mensaje de error.
-            // =============================================
-            System.err.println("❌ Error al buscar el contacto: " + e.getMessage());
+            // Manejar errores de SQL
             e.printStackTrace();
+            throw new SQLException("Error al obtener el contactId del usuario por correo electrónico: " + e.getMessage());
         }
     }
+
 
     /**
      * @Author: JavviFdeez

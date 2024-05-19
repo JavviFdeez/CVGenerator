@@ -21,6 +21,9 @@ import javafx.stage.Stage;
 import org.JavviFdeez.controller.AcademiesController;
 import org.JavviFdeez.controller.ContactController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
+import org.JavviFdeez.model.entity.Academies;
+import org.JavviFdeez.model.entity.Contact;
+import org.JavviFdeez.model.entity.Session;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -134,6 +137,7 @@ public class FormDataAcademiesController implements Initializable {
     private AcademiesController academiesController;
 
     private Connection conn;
+    private LogInController logInController;
 
 
     public FormDataAcademiesController() {
@@ -141,13 +145,16 @@ public class FormDataAcademiesController implements Initializable {
         this.conn = ConnectionMariaDB.getConnection();
     }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Asegurarse de que ningún campo de texto esté seleccionado al inicio con una pequeña demora
         Platform.runLater(() -> nameTextField.getParent().requestFocus());
+        loadAcademiesData();
         initializeYearComboBox();
         handleFormData();
-        buttonSaveData.setOnAction(event -> handleFormaDataSave( ));
+        buttonSaveData.setOnAction(event -> handleFormaDataSave());
         academicadd.setOnMouseClicked(event -> handleAddAcademic());
         academicdelete.setOnMouseClicked(event -> handleDeleteAcademic());
 
@@ -177,7 +184,6 @@ public class FormDataAcademiesController implements Initializable {
         entityTextField1.clear();
         locationTextField1.clear();
         yearComboBox1.getSelectionModel().clearSelection();
-
 
 
         // Restablecer la opacidad a 0
@@ -284,7 +290,7 @@ public class FormDataAcademiesController implements Initializable {
         textField.clear();
     }
 
-    private void handleFormaDataSave(){
+    private void handleFormaDataSave() {
         // Recoger los datos de los campos iniciales
         String name = nameTextField.getText().trim();
         String entity = entityTextField.getText().trim();
@@ -338,53 +344,84 @@ public class FormDataAcademiesController implements Initializable {
         return lastContactID;
     }
 
+    private void loadAcademiesData() {
+        int contactId = Session.getInstance().getContactId();
 
+        String query = "SELECT * FROM cvv_academies WHERE contact_id = ?";
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1, contactId);
+            ResultSet rs = pst.executeQuery();
 
-    private void showAlert(String error, String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(error);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    private void changeSceneToFormData() {
-        try {
-            // Cargar la nueva escena desde el archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataExperience.fxml"));
-            Parent root = loader.load();
-
-            // Obtener el escenario actual desde el emailTextField
-            Stage stage = (Stage) nameTextField.getScene().getWindow();
-
-            // Establecer la nueva escena en el escenario
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
+            if (rs.next()) {
+                nameTextField.setText(rs.getString("name"));
+                entityTextField.setText(rs.getString("entity"));
+                locationTextField.setText(rs.getString("location"));
+                yearComboBox.setValue(rs.getString("year"));
+            }
+            if (rs.next()) {
+                nameTextField1.setText(rs.getString("name"));
+                entityTextField1.setText(rs.getString("entity"));
+                locationTextField1.setText(rs.getString("location"));
+                yearComboBox1.setValue(rs.getString("year"));
+            }
+            if (rs.next()) {
+                nameTextField2.setText(rs.getString("name"));
+                entityTextField2.setText(rs.getString("entity"));
+                locationTextField2.setText(rs.getString("location"));
+                yearComboBox2.setValue(rs.getString("year"));
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
-            // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
         }
     }
 
-    private void handleBackContact() {
-        try {
-            // Cargar la nueva escena desde el archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataContact.fxml"));
-            Parent root = loader.load();
 
-            // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
-            Stage stage = (Stage) nameTextField.getScene().getWindow();
 
-            // Establecer la nueva escena en el escenario
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
-        }
+private void showAlert(String error, String message, Alert.AlertType alertType) {
+    Alert alert = new Alert(alertType);
+    alert.setTitle(error);
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
+}
+
+private void changeSceneToFormData() {
+    try {
+        // Cargar la nueva escena desde el archivo FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataExperience.fxml"));
+        Parent root = loader.load();
+
+        // Obtener el escenario actual desde el emailTextField
+        Stage stage = (Stage) nameTextField.getScene().getWindow();
+
+        // Establecer la nueva escena en el escenario
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+        // Manejar cualquier error de carga del archivo FXML
+        showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
     }
+}
+
+private void handleBackContact() {
+    try {
+        // Cargar la nueva escena desde el archivo FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataContact.fxml"));
+        Parent root = loader.load();
+
+        // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
+        Stage stage = (Stage) nameTextField.getScene().getWindow();
+
+        // Establecer la nueva escena en el escenario
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+        // Manejar cualquier error de carga del archivo FXML
+        showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
+    }
+}
 }

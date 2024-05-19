@@ -16,7 +16,7 @@
             <Image url="@../images/abstract-black-and-silver-backgr.png" />
          </image>
       </ImageView>
-      <Pane opacity="0.95" prefHeight="113.0" prefWidth="1538.0" style="-fx-background-color: #404040;">
+      <Pane opacity="0.95" prefHeight="113.0" prefWidth="1550.0" style="-fx-background-color: #404040;">
          <children>
             <Line endX="1423.0" layoutX="115.0" layoutY="113.0" startX="-115.0" stroke="#c3c1c1" strokeWidth="2.0" />
             <ImageView fx:id="oneNoCheck" fitHeight="30.0" fitWidth="30.0" layoutX="367.0" layoutY="42.0">
@@ -225,7 +225,7 @@
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="emailTextField" layoutX="673.0" layoutY="275.0" prefHeight="49.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 15;" text="Email*">
+            <TextField fx:id="emailText" layoutX="673.0" layoutY="275.0" prefHeight="49.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 15;" text="Email*">
                <font>
                   <Font name="Leelawadee UI Semilight" size="12.0" />
                </font>
@@ -280,11 +280,6 @@
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="emailLabelNoVisible15" layoutX="442.0" layoutY="345.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
             <Label fx:id="emailLabelNoVisible16" layoutX="805.0" layoutY="135.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
                <font>
                   <Font name="Leelawadee UI Semilight" size="20.0" />
@@ -305,6 +300,17 @@
                   <Image url="@../images/BxsContact.png" />
                </image>
             </ImageView>
+            <Label layoutX="272.0" layoutY="492.0" />
+            <Label alignment="CENTER_RIGHT" layoutX="82.0" layoutY="486.0" prefHeight="30.0" prefWidth="116.0" text="Isn't it you?" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="buttonSignoff" layoutX="210.0" layoutY="478.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="124.0" text="Sign off" textFill="#f7f7f7">
+               <font>
+                  <Font name="Roboto Bold" size="26.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <ImageView fitHeight="551.0" fitWidth="479.0" layoutX="45.0" layoutY="225.0">

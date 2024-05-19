@@ -231,6 +231,7 @@ public class ContactDAO implements iContactDAO {
                     // Crear un objeto Contacto con los datos obtenidos
                     // ==================================================
                     foundContact = new Contact(
+                            rs.getInt("contact_id"),
                             rs.getString("name"),
                             rs.getString("lastname"),
                             rs.getString("image"),
@@ -270,6 +271,7 @@ public class ContactDAO implements iContactDAO {
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
                    Contact contact = new Contact(
+                           rs.getInt("contact_id"),
                            rs.getString("name"),
                            rs.getString("lastname"),
                            rs.getString("image"),
@@ -288,4 +290,23 @@ public class ContactDAO implements iContactDAO {
         }
         return cList;
     }
+
+    public int getContactIdByEmail(String email) throws SQLException {
+        String query = "SELECT contact_id FROM cvv_contact WHERE email = ?";
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setString(1, email);
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("contact_id");
+                }
+            }
+        } catch (SQLException e) {
+            // Manejar errores de SQL
+            e.printStackTrace();
+            throw new SQLException("Error al obtener el contactId del usuario por correo electrónico: " + e.getMessage());
+        }
+        return -1; // En caso de que no se encuentre el contactId asociado al correo electrónico
+    }
+
+
 }

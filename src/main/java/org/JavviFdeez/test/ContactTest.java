@@ -14,13 +14,13 @@ public class ContactTest {
         // testSaveContact();
         // testUpdateContact();
         // testDeleteContact();
-        // testFindContactById();
-         testFindAllContacts();
+        testFindContactById();
+        //testFindAllContacts();
     }
 
     private static void testSaveContact() {
         // Crear una nueva instancia de contacto con los datos necesarios
-        Contact contact = new Contact("John Doe", "Doe", null, "Developer","123456789", "ejemplo@gmail.com", null, "Cordoba", null);
+        Contact contact = new Contact(0, "John Doe", "Doe", null, "Developer","123456789", "ejemplo@gmail.com", null, "Cordoba", null);
 
         // Obtener una conexión a la base de datos
         try (Connection connection = ConnectionMariaDB.getConnection()) {
@@ -113,7 +113,7 @@ public class ContactTest {
             ContactDAO contactDAO = new ContactDAO(connection);
 
             // Obtener un contacto existente
-            int contactId = 4;
+            int contactId =11;
             Contact contact = contactDAO.findById(contactId);
 
             // Verificar si se encontró el contacto

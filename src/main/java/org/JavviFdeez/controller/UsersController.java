@@ -3,6 +3,7 @@ package org.JavviFdeez.controller;
 import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.UsersDAO;
+import org.JavviFdeez.model.entity.Session;
 import org.JavviFdeez.model.entity.Users;
 import org.JavviFdeez.utils.PasswordHasher;
 import org.JavviFdeez.utils.PasswordValidator;
@@ -48,12 +49,14 @@ public class UsersController implements Initializable {
                         "Debe tener un mínimo de 10 caracteres y que incluya: MINUSCULAS, MAYUSCULAS, NUMEROS");
             }
 
-
             user.setPassword(user.getPassword());
             System.out.println("Contraseña hasheada al guardar: " + user.getPassword());
 
-            usersDAO.save(user);
+            Users savedUser = usersDAO.save(user);
             System.out.println("Usuario guardado exitosamente.");
+
+            // Establecer el contactId en la sesión
+            Session.getInstance().setContactId(savedUser.getContactId());
         } catch (SQLException e) {
             throw new SQLException("Error al guardar el usuario: " + e.getMessage());
         }
@@ -187,9 +190,9 @@ public class UsersController implements Initializable {
 
             // Obtener el hash SHA-256 de la contraseña ingresada
             String hashedPassword = PasswordHasher.hashPassword(password);
-            System.out.println("Contraseña hasheada al autenticar: " + hashedPassword);
 
             String query = "SELECT * FROM cvv_users WHERE email = ? AND password = ?";
+            String query2 = "SELECT * FROM cvv_contact WHERE contact_id = ?";
             try (PreparedStatement pst = conn.prepareStatement(query)) {
                 pst.setString(1, email);
                 pst.setString(2, hashedPassword); // Usar la contraseña hasheada aquí
@@ -201,6 +204,7 @@ public class UsersController implements Initializable {
             e.printStackTrace();
             throw new SQLException("Error al autenticar el usuario: " + e.getMessage());
         }
+
     }
 
 
