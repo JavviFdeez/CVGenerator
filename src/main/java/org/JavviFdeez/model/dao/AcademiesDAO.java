@@ -205,7 +205,6 @@ public class AcademiesDAO implements iAcademiesDAO {
                     // Crear un objeto de academia con los datos obtenidos de la base de datos
                     // ==========================================================================
                     foundAcademy = new Academies(
-                            res.getInt("contact_id"),
                             res.getString("name"),
                             res.getString("entity"),
                             res.getString("location"),
@@ -243,7 +242,6 @@ public class AcademiesDAO implements iAcademiesDAO {
                     // Crear un objeto de academia
                     // ==============================
                     Academies academies = new Academies(
-                            rs.getInt("contact_id"),
                             rs.getString("name"),
                             rs.getString("entity"),
                             rs.getString("location"),

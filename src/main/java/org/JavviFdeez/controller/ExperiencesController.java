@@ -6,6 +6,8 @@ import org.JavviFdeez.model.dao.ExperiencesDAO;
 import org.JavviFdeez.model.entity.Experiences;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -15,12 +17,14 @@ public class ExperiencesController implements Initializable {
     // Atributos
     // ================
     private ExperiencesDAO experiencesDAO;
+    private Connection conn;
 
     // ==============
     // Constructor
     // ==============
     public ExperiencesController() {
         this.experiencesDAO = new ExperiencesDAO(ConnectionMariaDB.getConnection());
+        this.conn = ConnectionMariaDB.getConnection();
     }
 
     /**
@@ -161,6 +165,37 @@ public class ExperiencesController implements Initializable {
             // ========================================================================
             System.err.println("❌ Error al buscar las experiencias: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    public boolean saveDataToDatabase(String name, String duration, String company, String year, String name1, String duration1, String company1, String year1, String name2, String duration2, String company2, String year2) throws SQLException {
+        // Guardar los datos en la base de datos
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = ConnectionMariaDB.getConnection();
+            }
+
+            // Preparar la consulta SQL para insertar los datos
+            String query = "INSERT INTO cvv_academies (name, entity, location, year) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?)";
+            try (PreparedStatement pst = conn.prepareStatement(query)) {
+                pst.setString(1, name);
+                pst.setString(2, duration);
+                pst.setString(3, company);
+                pst.setString(4, year);
+                pst.setString(5, name1);
+                pst.setString(6, duration1);
+                pst.setString(7, company1);
+                pst.setString(8, year1);
+                pst.setString(9, name2);
+                pst.setString(10, duration2);
+                pst.setString(11, company2);
+                pst.setString(12, year2);
+
+                pst.executeUpdate();
+                return true;
+            }
+        } catch (SQLException e) {
+            throw e;
         }
     }
 

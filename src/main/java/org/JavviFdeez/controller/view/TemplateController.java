@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -665,8 +666,8 @@ public class TemplateController implements Initializable {
             // Obtener la lista de academias desde la base de datos
             List<Experiences> experienceList = experiencesDAO.findAll();
 
-            // Ordenar la lista de experiencias por posición
-            Collections.sort(experienceList, (exp1, exp2) -> exp1.getPosition() - exp2.getPosition());
+            // Ordenar la lista de experiencias por año
+            Collections.sort(experienceList, Comparator.comparingInt(Experiences::getYear).reversed());
 
             // Cordenadas iniciales
             double nameAndCompanyAndLocationX = 309;
@@ -776,9 +777,6 @@ public class TemplateController implements Initializable {
         try {
             // Obtener la lista de cursos desde la base de datos
             List<Courses> coursesList = coursesDAO.findAll();
-
-            // Ordenar la lista de cursos según la posición
-            Collections.sort(coursesList, (course1, course2) -> course1.getPosition() - course2.getPosition());
 
             // Coordenadas iniciales
             double nameX = 300;

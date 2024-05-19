@@ -169,7 +169,7 @@ public class LogInController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
+            showAlert("Error", "No se pudo cargar la pantalla de contacto.", Alert.AlertType.ERROR);
         }
     }
 

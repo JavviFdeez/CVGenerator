@@ -166,7 +166,7 @@ public class AcademiesController extends AcademiesControllerAbstract  implements
         }
     }
 
-    public boolean saveDataToDatabase(String name, String entity, String location, String year, String name1, String entity1, String location1, String year1, String name2, String entity2, String location2, String year2, int contact_id) throws SQLException {
+    public boolean saveDataToDatabase(String name, String entity, String location, String year, String name1, String entity1, String location1, String year1, String name2, String entity2, String location2, String year2) throws SQLException {
         // Guardar los datos en la base de datos
         try {
             if (conn == null || conn.isClosed()) {
@@ -174,25 +174,22 @@ public class AcademiesController extends AcademiesControllerAbstract  implements
             }
 
             // Preparar la consulta SQL para insertar los datos
-            String query = "INSERT INTO cvv_academies (name, entity, location, year, contact_id) VALUES (?, ?, ?, ?, ?), (?, ?, ?, ?, ?), (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO cvv_academies (name, entity, location, year) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?)";
             try (PreparedStatement pst = conn.prepareStatement(query)) {
                 pst.setString(1, name);
                 pst.setString(2, entity);
                 pst.setString(3, location);
                 pst.setString(4, year);
-                pst.setInt(5, contact_id);
 
-                pst.setString(6, name1);
-                pst.setString(7, entity1);
-                pst.setString(8, location1);
-                pst.setString(9, year1);
-                pst.setInt(10, contact_id);
+                pst.setString(5, name1);
+                pst.setString(6, entity1);
+                pst.setString(7, location1);
+                pst.setString(8, year1);
 
-                pst.setString(11, name2);
-                pst.setString(12, entity2);
-                pst.setString(13, location2);
-                pst.setString(14, year2);
-                pst.setInt(15, contact_id);
+                pst.setString(9, name2);
+                pst.setString(10, entity2);
+                pst.setString(11, location2);
+                pst.setString(12, year2);
 
                 pst.executeUpdate();
                 return true;

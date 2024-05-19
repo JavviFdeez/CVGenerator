@@ -6,6 +6,8 @@ import org.JavviFdeez.model.dao.CoursesDAO;
 import org.JavviFdeez.model.entity.Courses;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -14,12 +16,14 @@ public class CoursesController implements Initializable {
     // Atributos
     // ============
     private CoursesDAO coursesDAO;
+    private Connection conn;
 
     // ==============
     // Constructor
     // ==============
     public CoursesController() {
         this.coursesDAO = new CoursesDAO(ConnectionMariaDB.getConnection());
+        this.conn = ConnectionMariaDB.getConnection();
     }
 
     /**
@@ -142,6 +146,31 @@ public class CoursesController implements Initializable {
             // =============================================
             System.err.println("❌ Error al buscar los cursos: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    public boolean saveDataToDatabase(String name, String duration, String name1, String duration1, String name2, String duration2) throws SQLException {
+        // Guardar los datos en la base de datos
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = ConnectionMariaDB.getConnection();
+            }
+
+            // Preparar la consulta SQL para insertar los datos
+            String query = "INSERT INTO cvv_academies (name, entity,) VALUES (?, ?,) (?, ?), (?, ?)";
+            try (PreparedStatement pst = conn.prepareStatement(query)) {
+                pst.setString(1, name);
+                pst.setString(2, duration);
+                pst.setString(5, name1);
+                pst.setString(6, duration1);
+                pst.setString(9, name2);
+                pst.setString(10, duration2);
+
+                pst.executeUpdate();
+                return true;
+            }
+        } catch (SQLException e) {
+            throw e;
         }
     }
 

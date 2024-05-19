@@ -88,7 +88,7 @@ public class RegisterController implements Initializable {
     private void changeSceneToFormData() {
         try {
             // Cargar la nueva escena desde el archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataContact.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/LogIn.fxml"));
             Parent root = loader.load();
 
             // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)

@@ -16,7 +16,7 @@ public class Academies {
     // ==============
     // Constructor
     // ==============
-    public Academies(int contact_id, String name, String entity, String location, String year) {
+    public Academies(String name, String entity, String location, String year) {
         this.academies_id = 0;
         this.contact_id = contact_id;
         this.name = name;

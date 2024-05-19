@@ -137,7 +137,6 @@ public class FormDataAcademiesController implements Initializable {
     private AcademiesController academiesController;
 
     private Connection conn;
-    private LogInController logInController;
 
 
     public FormDataAcademiesController() {
@@ -305,15 +304,13 @@ public class FormDataAcademiesController implements Initializable {
         String location2 = locationTextField2.getText().trim();
         String year2 = yearComboBox2.getValue();
 
-        // Obtener el último ID de contacto
-        int lastContactID = getLastContactID();
 
         try {
-            boolean saveDataToDatabase = academiesController.saveDataToDatabase(name, entity, location, year, name1, entity1, location1, year1, name2, entity2, location2, year2, lastContactID);
+            boolean saveDataToDatabase = academiesController.saveDataToDatabase(name, entity, location, year, name1, entity1, location1, year1, name2, entity2, location2, year2);
 
             if (saveDataToDatabase) {
                 showAlert("Éxito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
-                // changeSceneToFormData();
+                changeSceneToFormData();
             } else {
                 showAlert("Error", "No se han podido guardar los datos", Alert.AlertType.ERROR);
             }
@@ -323,25 +320,24 @@ public class FormDataAcademiesController implements Initializable {
         }
     }
 
-    private int getLastContactID() {
-        int lastContactID = 0;
-        try {
-            if (conn == null || conn.isClosed()) {
-                conn = ConnectionMariaDB.getConnection();
-            }
-
-            // Preparar la consulta SQL para obtener el último ID de contacto
-            String query = "SELECT MAX(contact_id) FROM cvv_contact";
-            try (PreparedStatement pst = conn.prepareStatement(query)) {
-                ResultSet rs = pst.executeQuery();
-                if (rs.next()) {
-                    lastContactID = rs.getInt(1);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    private void setAcademyDataInFields(Academies academy, int count) {
+        // Establecer el texto de la etiqueta correspondiente
+        if (count == 1) {
+            nameTextField.setText(academy.getName());
+            entityTextField.setText(academy.getEntity());
+            locationTextField.setText(academy.getLocation());
+            yearComboBox.setValue(academy.getYear());
+        } else if (count == 2) {
+            nameTextField1.setText(academy.getName());
+            entityTextField1.setText(academy.getEntity());
+            locationTextField1.setText(academy.getLocation());
+            yearComboBox1.setValue(academy.getYear());
+        } else if (count == 3) {
+            nameTextField2.setText(academy.getName());
+            entityTextField2.setText(academy.getEntity());
+            locationTextField2.setText(academy.getLocation());
+            yearComboBox2.setValue(academy.getYear());
         }
-        return lastContactID;
     }
 
     private void loadAcademiesData() {
@@ -352,23 +348,21 @@ public class FormDataAcademiesController implements Initializable {
             pst.setInt(1, contactId);
             ResultSet rs = pst.executeQuery();
 
-            if (rs.next()) {
-                nameTextField.setText(rs.getString("name"));
-                entityTextField.setText(rs.getString("entity"));
-                locationTextField.setText(rs.getString("location"));
-                yearComboBox.setValue(rs.getString("year"));
-            }
-            if (rs.next()) {
-                nameTextField1.setText(rs.getString("name"));
-                entityTextField1.setText(rs.getString("entity"));
-                locationTextField1.setText(rs.getString("location"));
-                yearComboBox1.setValue(rs.getString("year"));
-            }
-            if (rs.next()) {
-                nameTextField2.setText(rs.getString("name"));
-                entityTextField2.setText(rs.getString("entity"));
-                locationTextField2.setText(rs.getString("location"));
-                yearComboBox2.setValue(rs.getString("year"));
+            int academicCount = 0; // Contador para llevar la cuenta de las academias cargadas
+
+            while (rs.next()) {
+                academicCount++;
+
+                // Crear un objeto Academies con los datos recuperados de la base de datos
+                Academies academy = new Academies(
+                        rs.getString("name"),
+                        rs.getString("entity"),
+                        rs.getString("location"),
+                        rs.getString("year")
+                );
+
+                // Llamar al método setAcademyDataInFields para establecer los valores en los campos de texto
+                setAcademyDataInFields(academy, academicCount);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -376,52 +370,51 @@ public class FormDataAcademiesController implements Initializable {
     }
 
 
-
-private void showAlert(String error, String message, Alert.AlertType alertType) {
+    private void showAlert(String error, String message, Alert.AlertType alertType) {
     Alert alert = new Alert(alertType);
     alert.setTitle(error);
     alert.setHeaderText(null);
     alert.setContentText(message);
     alert.showAndWait();
-}
-
-private void changeSceneToFormData() {
-    try {
-        // Cargar la nueva escena desde el archivo FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataExperience.fxml"));
-        Parent root = loader.load();
-
-        // Obtener el escenario actual desde el emailTextField
-        Stage stage = (Stage) nameTextField.getScene().getWindow();
-
-        // Establecer la nueva escena en el escenario
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
-        // Manejar cualquier error de carga del archivo FXML
-        showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
     }
-}
 
-private void handleBackContact() {
-    try {
-        // Cargar la nueva escena desde el archivo FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataContact.fxml"));
-        Parent root = loader.load();
+    private void changeSceneToFormData() {
+        try {
+            // Cargar la nueva escena desde el archivo FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataExperience.fxml"));
+            Parent root = loader.load();
 
-        // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
-        Stage stage = (Stage) nameTextField.getScene().getWindow();
+            // Obtener el escenario actual desde el emailTextField
+            Stage stage = (Stage) nameTextField.getScene().getWindow();
 
-        // Establecer la nueva escena en el escenario
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
-        // Manejar cualquier error de carga del archivo FXML
-        showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
+            // Establecer la nueva escena en el escenario
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejar cualquier error de carga del archivo FXML
+            showAlert("Error", "No se pudo cargar la pantalla de Experience.", Alert.AlertType.ERROR);
+        }
     }
-}
+
+    private void handleBackContact() {
+        try {
+            // Cargar la nueva escena desde el archivo FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataContact.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
+            Stage stage = (Stage) nameTextField.getScene().getWindow();
+
+            // Establecer la nueva escena en el escenario
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejar cualquier error de carga del archivo FXML
+            showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
+        }
+    }
 }
