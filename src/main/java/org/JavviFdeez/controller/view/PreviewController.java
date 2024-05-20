@@ -36,6 +36,7 @@ public class PreviewController implements Initializable {
 
     private ColorModel colorModel;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Verificar si el modelo de color no es nulo
