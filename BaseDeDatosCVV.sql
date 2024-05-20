@@ -50,7 +50,7 @@ CREATE TABLE cvv_experiences (
                             duration VARCHAR(50),
                             entity VARCHAR(255),
                             location VARCHAR(255),
-                            year INT,
+                            year VARCHAR(250),
                             position VARCHAR(255),
                             FOREIGN KEY (contact_id) REFERENCES cvv_contact(contact_id)
 );
@@ -69,11 +69,11 @@ CREATE TABLE cvv_skills (
                             name VARCHAR(255)
 );
 CREATE TABLE cvv_users (
-                                  users_id INT AUTO_INCREMENT PRIMARY KEY,
-                                  contact_id INT,
-                                  email VARCHAR(100) NOT NULL,
-                                  password VARCHAR(255) NOT NULL,
-                                  FOREIGN KEY (contact_id) REFERENCES cvv_contact(contact_id)
+                            users_id INT AUTO_INCREMENT PRIMARY KEY,
+                            contact_id INT,
+                            email VARCHAR(100) NOT NULL,
+                            password VARCHAR(255) NOT NULL,
+                            FOREIGN KEY (contact_id) REFERENCES cvv_contact(contact_id)
 
 );
 
