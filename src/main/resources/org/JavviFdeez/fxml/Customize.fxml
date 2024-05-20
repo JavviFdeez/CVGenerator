@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1538.0" style="-fx-background-color: #242424;" stylesheets="@../css/Customize.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.JavviFdeez.controller.view.CustomizeController">
+   <children>
+      <ImageView fitHeight="795.0" fitWidth="1550.0" layoutX="-6.0">
+         <image>
+            <Image url="@../images/abstract-black-and-silver-backgr.png" />
+         </image>
+      </ImageView>
+      <Pane opacity="0.95" prefHeight="94.0" prefWidth="1550.0" style="-fx-background-color: #404040;">
+         <children>
+            <Line endX="1423.0" layoutX="115.0" layoutY="96.0" startX="-115.0" stroke="#c3c1c1" strokeWidth="2.0" />
+            <ImageView fx:id="oneNoCheck" fitHeight="30.0" fitWidth="30.0" layoutX="367.0" layoutY="42.0">
+               <image>
+                  <Image url="@../images/PhNumberCircleOne.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="438.0" layoutY="42.0" text="Sign up" textFill="#a896cd">
+               <font>
+                  <Font name="Roboto Bold" size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="626.0" layoutY="42.0" text="Form Data" textFill="#a896cd">
+               <font>
+                  <Font name="Roboto Bold" size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="843.0" layoutY="42.0" prefHeight="29.0" prefWidth="124.0" text="Customize" textFill="#eeeeee">
+               <font>
+                  <Font name="Roboto Bold" size="23.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="thereeNoCheck" fitHeight="30.0" fitWidth="30.0" layoutX="801.0" layoutY="42.0">
+               <image>
+                  <Image url="@../images/PhNumberCircleThreeFill.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1017.0" layoutY="42.0">
+               <image>
+                  <Image url="@../images/PhNumberCircleFourFill.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="1057.0" layoutY="42.0" prefHeight="29.0" prefWidth="91.0" text="Preview" textFill="#a896cd">
+               <font>
+                  <Font name="Roboto Bold" size="23.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="43.0" layoutY="17.0">
+               <image>
+                  <Image url="@../images/Logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="397.0" layoutY="42.0">
+         <image>
+            <Image url="@../images/PhNumberCircleOneFill%20(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="584.0" layoutY="42.0">
+         <image>
+            <Image url="@../images/PhNumberCircleTwoFill.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="270.0" layoutY="102.0" prefHeight="679.0" prefWidth="999.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
+         <children>
+            <Label layoutX="446.0" layoutY="16.0" text="CUSTOMIZE" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label layoutX="-28.0" layoutY="22.0" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Bold" size="35.0" />
+               </font>
+            </Label>
+            <Line endX="831.0" layoutX="167.0" layoutY="62.0" startX="-166.0" stroke="#909090" />
+            <Button fx:id="buttonSaveData" layoutX="808.0" layoutY="600.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="165.0" text="CONTINUE" textFill="#f7f7f7">
+               <font>
+                  <Font name="Roboto Bold" size="26.0" />
+               </font>
+            </Button>
+            <Label layoutX="50.0" layoutY="99.0" prefHeight="26.0" prefWidth="322.0" text="Choose a color for your CVV" textFill="#b2b2b2">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="50.0" layoutY="66.0" text="Interface Color" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="26.0" />
+               </font>
+            </Label>
+            <Pane layoutX="56.0" layoutY="185.0" prefHeight="101.0" prefWidth="48.0" style="-fx-background-color: #161616;">
+               <children>
+                  <Pane layoutX="6.0" layoutY="14.0" prefHeight="8.0" prefWidth="37.0" style="-fx-background-color: #62FF00; -fx-background-radius: 2;" />
+                  <Pane layoutX="9.0" layoutY="27.0" prefHeight="8.0" prefWidth="30.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+                  <Pane layoutX="9.0" layoutY="38.0" prefHeight="8.0" prefWidth="30.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+                  <Pane layoutX="9.0" layoutY="49.0" prefHeight="8.0" prefWidth="30.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+               </children>
+            </Pane>
+            <Pane layoutX="56.0" layoutY="154.0" prefHeight="36.0" prefWidth="182.0" style="-fx-background-color: black; -fx-background-radius: 10;">
+               <children>
+                  <Circle fill="#ff9b00" layoutX="33.0" layoutY="18.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#ff4a4a" layoutX="16.0" layoutY="18.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#aaff00" layoutX="51.0" layoutY="18.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </Pane>
+            <Pane layoutX="104.0" layoutY="190.0" prefHeight="94.0" prefWidth="134.0" style="-fx-background-color: #5F8349;">
+               <children>
+                  <Circle fill="#62ff00" layoutX="15.0" layoutY="22.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#585858" layoutX="15.0" layoutY="47.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Pane layoutX="28.0" layoutY="39.0" prefHeight="17.0" prefWidth="85.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+                  <Circle fill="#62ff00" layoutX="15.0" layoutY="71.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Pane layoutX="28.0" layoutY="64.0" prefHeight="14.0" prefWidth="48.0" style="-fx-background-color: #62FF00; -fx-background-radius: 2;" />
+                  <Pane layoutX="28.0" layoutY="15.0" prefHeight="14.0" prefWidth="48.0" style="-fx-background-color: #62FF00; -fx-background-radius: 2;" />
+               </children>
+            </Pane>
+            <Label layoutX="42.0" layoutY="268.0" prefHeight="37.0" prefWidth="196.0" style="-fx-background-color: #292828; -fx-background-radius: 0; -fx-padding: 10;" text="Green phosphorite" textFill="#62ff00">
+               <font>
+                  <Font name="Roboto Bold" size="13.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="checkGreen" fitHeight="23.0" fitWidth="22.0" layoutX="203.0" layoutY="275.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/MaterialSymbolsCheckCircleOutline1.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="ButtonGreen" layoutX="42.0" layoutY="139.0" mnemonicParsing="false" prefHeight="168.0" prefWidth="196.0">
+               <font>
+                  <Font name="Leelawadee UI" size="12.0" />
+               </font>
+            </Button>
+            <Pane layoutX="297.0" layoutY="185.0" prefHeight="101.0" prefWidth="48.0" style="-fx-background-color: #161616;">
+               <children>
+                  <Pane layoutX="6.0" layoutY="14.0" prefHeight="8.0" prefWidth="37.0" style="-fx-background-color: #008BFF; -fx-background-radius: 2;" />
+                  <Pane layoutX="9.0" layoutY="27.0" prefHeight="8.0" prefWidth="30.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+                  <Pane layoutX="9.0" layoutY="38.0" prefHeight="8.0" prefWidth="30.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+                  <Pane layoutX="9.0" layoutY="49.0" prefHeight="8.0" prefWidth="30.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+               </children>
+            </Pane>
+            <Pane layoutX="297.0" layoutY="154.0" prefHeight="36.0" prefWidth="182.0" style="-fx-background-color: black; -fx-background-radius: 10;">
+               <children>
+                  <Circle fill="#ff9b00" layoutX="33.0" layoutY="18.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#ff4a4a" layoutX="16.0" layoutY="18.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#aaff00" layoutX="51.0" layoutY="18.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </Pane>
+            <Pane layoutX="345.0" layoutY="190.0" prefHeight="94.0" prefWidth="134.0" style="-fx-background-color: #81C6FF;">
+               <children>
+                  <Circle fill="#008bff" layoutX="15.0" layoutY="22.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#585858" layoutX="15.0" layoutY="47.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Pane layoutX="28.0" layoutY="39.0" prefHeight="17.0" prefWidth="85.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+                  <Circle fill="#008bff" layoutX="15.0" layoutY="71.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Pane layoutX="28.0" layoutY="64.0" prefHeight="14.0" prefWidth="48.0" style="-fx-background-color: #008BFF; -fx-background-radius: 2;" />
+                  <Pane layoutX="28.0" layoutY="15.0" prefHeight="14.0" prefWidth="48.0" style="-fx-background-color: #008BFF; -fx-background-radius: 2;" />
+               </children>
+            </Pane>
+            <Label layoutX="283.0" layoutY="267.0" prefHeight="37.0" prefWidth="196.0" style="-fx-background-color: #292828; -fx-background-radius: 0; -fx-padding: 10;" text="Blue Focus" textFill="#008bff">
+               <font>
+                  <Font name="Roboto Bold" size="13.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="checkBlue" fitHeight="23.0" fitWidth="22.0" layoutX="446.0" layoutY="275.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/MaterialSymbolsCheckCircleOutline1.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="ButtonFocus" layoutX="284.0" layoutY="140.0" mnemonicParsing="false" prefHeight="168.0" prefWidth="196.0">
+               <font>
+                  <Font name="Leelawadee UI" size="12.0" />
+               </font>
+            </Button>
+            <Pane layoutX="542.0" layoutY="185.0" prefHeight="101.0" prefWidth="48.0" style="-fx-background-color: #161616;">
+               <children>
+                  <Pane layoutX="6.0" layoutY="14.0" prefHeight="8.0" prefWidth="37.0" style="-fx-background-color: #FF0049; -fx-background-radius: 2;" />
+                  <Pane layoutX="9.0" layoutY="27.0" prefHeight="8.0" prefWidth="30.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+                  <Pane layoutX="9.0" layoutY="38.0" prefHeight="8.0" prefWidth="30.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+                  <Pane layoutX="9.0" layoutY="49.0" prefHeight="8.0" prefWidth="30.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+               </children>
+            </Pane>
+            <Pane layoutX="542.0" layoutY="154.0" prefHeight="36.0" prefWidth="182.0" style="-fx-background-color: black; -fx-background-radius: 10;">
+               <children>
+                  <Circle fill="#ff9b00" layoutX="33.0" layoutY="18.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#ff4a4a" layoutX="16.0" layoutY="18.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#aaff00" layoutX="51.0" layoutY="18.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </Pane>
+            <Pane layoutX="590.0" layoutY="190.0" prefHeight="94.0" prefWidth="134.0" style="-fx-background-color: #F9769B;">
+               <children>
+                  <Circle fill="#ff0049" layoutX="15.0" layoutY="22.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#585858" layoutX="15.0" layoutY="47.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Pane layoutX="28.0" layoutY="39.0" prefHeight="17.0" prefWidth="85.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+                  <Circle fill="#ff0049" layoutX="15.0" layoutY="71.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Pane layoutX="28.0" layoutY="64.0" prefHeight="14.0" prefWidth="48.0" style="-fx-background-color: #FF0049; -fx-background-radius: 2;" />
+                  <Pane layoutX="28.0" layoutY="15.0" prefHeight="14.0" prefWidth="48.0" style="-fx-background-color: #FF0049; -fx-background-radius: 2;" />
+               </children>
+            </Pane>
+            <Label layoutX="528.0" layoutY="267.0" prefHeight="37.0" prefWidth="196.0" style="-fx-background-color: #292828; -fx-background-radius: 0; -fx-padding: 10;" text="Pale Red" textFill="#ff0049">
+               <font>
+                  <Font name="Leelawadee UI" size="13.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="checkPink" fitHeight="23.0" fitWidth="22.0" layoutX="689.0" layoutY="275.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/MaterialSymbolsCheckCircleOutline1.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="ButtonPink" layoutX="528.0" layoutY="140.0" mnemonicParsing="false" prefHeight="168.0" prefWidth="196.0">
+               <font>
+                  <Font name="Leelawadee UI" size="12.0" />
+               </font>
+            </Button>
+            <Pane layoutX="775.0" layoutY="185.0" prefHeight="101.0" prefWidth="48.0" style="-fx-background-color: #161616;">
+               <children>
+                  <Pane layoutX="6.0" layoutY="14.0" prefHeight="8.0" prefWidth="37.0" style="-fx-background-color: #616161; -fx-background-radius: 2;" />
+                  <Pane layoutX="9.0" layoutY="27.0" prefHeight="8.0" prefWidth="30.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+                  <Pane layoutX="9.0" layoutY="38.0" prefHeight="8.0" prefWidth="30.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+                  <Pane layoutX="9.0" layoutY="49.0" prefHeight="8.0" prefWidth="30.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+               </children>
+            </Pane>
+            <Pane layoutX="775.0" layoutY="154.0" prefHeight="36.0" prefWidth="182.0" style="-fx-background-color: black; -fx-background-radius: 10;">
+               <children>
+                  <Circle fill="#ff9b00" layoutX="33.0" layoutY="18.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#ff4a4a" layoutX="16.0" layoutY="18.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#aaff00" layoutX="51.0" layoutY="18.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </Pane>
+            <Pane layoutX="823.0" layoutY="190.0" prefHeight="94.0" prefWidth="134.0" style="-fx-background-color: #CCCCCC;">
+               <children>
+                  <Circle fill="#616161" layoutX="15.0" layoutY="22.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#585858" layoutX="15.0" layoutY="47.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Pane layoutX="28.0" layoutY="39.0" prefHeight="17.0" prefWidth="85.0" style="-fx-background-color: #585858; -fx-background-radius: 2;" />
+                  <Circle fill="#616161" layoutX="15.0" layoutY="71.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Pane layoutX="28.0" layoutY="64.0" prefHeight="14.0" prefWidth="48.0" style="-fx-background-color: #616161; -fx-background-radius: 2;" />
+                  <Pane layoutX="28.0" layoutY="15.0" prefHeight="14.0" prefWidth="48.0" style="-fx-background-color: #616161; -fx-background-radius: 2;" />
+               </children>
+            </Pane>
+            <Label layoutX="761.0" layoutY="267.0" prefHeight="37.0" prefWidth="196.0" style="-fx-background-color: #292828; -fx-background-radius: 0; -fx-padding: 10;" text="Elegant Black" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI" size="13.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="checkBlack" fitHeight="23.0" fitWidth="22.0" layoutX="924.0" layoutY="275.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/MaterialSymbolsCheckCircleOutline1.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="ButtonBlack" layoutX="761.0" layoutY="139.0" mnemonicParsing="false" prefHeight="168.0" prefWidth="196.0">
+               <font>
+                  <Font name="Leelawadee UI" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="50.0" layoutY="323.0" text="Interface Theme" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="26.0" />
+               </font>
+            </Label>
+            <Line endX="777.0" layoutX="177.0" layoutY="320.0" startX="-133.0" stroke="#909090" />
+            <Label layoutX="50.0" layoutY="357.0" prefHeight="26.0" prefWidth="322.0" text="Choose a theme for your CVV" textFill="#b2b2b2">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="22.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="43.0" fitWidth="48.0" layoutX="388.0" layoutY="12.0">
+               <image>
+                  <Image url="@../images/GridiconsCustomize.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="270.0" fitWidth="165.0" layoutX="397.0" layoutY="391.0">
+               <image>
+                  <Image url="@../images/image%20(1).png" />
+               </image>
+            </ImageView>
+            <Label layoutX="398.0" layoutY="622.0" prefHeight="39.0" prefWidth="165.0" style="-fx-background-color: #292828; -fx-background-radius: 0; -fx-padding: 10;" text="Basic Template" textFill="RED">
+               <font>
+                  <Font name="Leelawadee UI" size="13.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="checkTemplate" fitHeight="23.0" fitWidth="22.0" layoutX="531.0" layoutY="630.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/MaterialSymbolsCheckCircleOutline1.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="ButtonTemplate" layoutX="397.0" layoutY="389.0" mnemonicParsing="false" prefHeight="270.0" prefWidth="165.0">
+               <font>
+                  <Font name="Leelawadee UI" size="12.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="backForm" fitHeight="39.0" fitWidth="37.0" layoutX="24.0" layoutY="13.0">
+               <image>
+                  <Image url="@../images/IconamoonArrowLeft6Circle.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</Pane>

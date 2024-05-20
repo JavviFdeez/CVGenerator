@@ -8,7 +8,6 @@ import org.JavviFdeez.model.entity.Contact;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -110,15 +109,33 @@ public class ContactController implements Initializable {
      * @Author: JavviFdeez
      * Metodo para mostrar un mensaje de buscar un contacto por email en la base de datos
      */
-    public int getContactIdByEmail(String email) throws SQLException {
+    public Integer getContactIdByEmail(String email) throws SQLException {
         try {
-            // Consultar la base de datos para obtener el contactId
-            return contactDAO.getContactIdByEmail(email);
+            // ==========================================
+            // Buscar el contactId en la base de datos
+            // ==========================================
+            Integer contactId = contactDAO.getContactIdByEmail(email);
+            if (contactId != null) {
+                // ======================================================
+                // Si la búsqueda es exitosa, mostrar mensaje de éxito.
+                // ======================================================
+                System.out.println("✅ Contacto encontrado exitosamente: contactId = " + contactId);
+                return contactId;
+            } else {
+                // ======================================================
+                // Si no se encuentra el contacto, mostrar mensaje de advertencia.
+                // ======================================================
+                System.out.println("⚠️ No se encontró ningún contacto con el email proporcionado.");
+            }
         } catch (SQLException e) {
-            // Manejar errores de SQL
+            // =============================================
+            // En caso de error, mostrar mensaje de error.
+            // =============================================
+            System.err.println("❌ Error al buscar el contactId por email: " + e.getMessage());
             e.printStackTrace();
             throw new SQLException("Error al obtener el contactId del usuario por correo electrónico: " + e.getMessage());
         }
+        return null;
     }
 
 

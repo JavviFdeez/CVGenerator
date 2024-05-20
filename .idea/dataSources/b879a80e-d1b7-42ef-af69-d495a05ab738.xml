@@ -1364,7 +1364,7 @@
     </schema>
     <schema id="510" parent="1" name="curriculums">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-05-18.16:19:55</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-05-19.18:37:07</LastIntrospectionLocalTimestamp>
       <CollationName>latin1_swedish_ci</CollationName>
     </schema>
     <schema id="511" parent="1" name="demojava">
@@ -1427,7 +1427,7 @@
       <CollationName>latin1_swedish_ci</CollationName>
     </table>
     <column id="528" parent="520" name="academies_id">
-      <AutoIncrement>10</AutoIncrement>
+      <AutoIncrement>64</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1472,7 +1472,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="538" parent="521" name="contact_id">
-      <AutoIncrement>11</AutoIncrement>
+      <AutoIncrement>31</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1584,168 +1584,173 @@
       <Position>3</Position>
     </column>
     <column id="563" parent="523" name="duration">
-      <DasType>varchar(50)|0s</DasType>
+      <DasType>int(11)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="564" parent="523" name="position">
-      <DasType>varchar(255)|0s</DasType>
-      <Position>5</Position>
-    </column>
-    <foreign-key id="565" parent="523" name="cvv_courses_ibfk_1">
+    <foreign-key id="564" parent="523" name="cvv_courses_ibfk_1">
       <ColNames>contact_id</ColNames>
       <RefColNames>contact_id</RefColNames>
       <RefTableName>cvv_contact</RefTableName>
     </foreign-key>
-    <index id="566" parent="523" name="PRIMARY">
+    <index id="565" parent="523" name="PRIMARY">
       <ColNames>course_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="567" parent="523" name="contact_id">
+    <index id="566" parent="523" name="contact_id">
       <ColNames>contact_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="568" parent="523" name="PRIMARY">
+    <key id="567" parent="523" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="569" parent="524" name="experience_id">
+    <column id="568" parent="524" name="experience_id">
+      <AutoIncrement>9</AutoIncrement>
+      <DasType>int(11)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="569" parent="524" name="contact_id">
+      <DasType>int(11)|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="570" parent="524" name="name">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="571" parent="524" name="duration">
+      <DasType>varchar(50)|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <column id="572" parent="524" name="company">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <column id="573" parent="524" name="location">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>6</Position>
+    </column>
+    <column id="574" parent="524" name="year">
+      <DasType>varchar(250)|0s</DasType>
+      <Position>7</Position>
+    </column>
+    <foreign-key id="575" parent="524" name="cvv_experiences_ibfk_1">
+      <ColNames>contact_id</ColNames>
+      <RefColNames>contact_id</RefColNames>
+      <RefTableName>cvv_contact</RefTableName>
+    </foreign-key>
+    <index id="576" parent="524" name="PRIMARY">
+      <ColNames>experience_id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="577" parent="524" name="contact_id">
+      <ColNames>contact_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="578" parent="524" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="579" parent="525" name="lang_id">
       <AutoIncrement>6</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="570" parent="524" name="contact_id">
+    <column id="580" parent="525" name="contact_id">
       <DasType>int(11)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="571" parent="524" name="name">
-      <DasType>varchar(255)|0s</DasType>
+    <column id="581" parent="525" name="spanish">
+      <DasType>varchar(50)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="572" parent="524" name="duration">
+    <column id="582" parent="525" name="english">
       <DasType>varchar(50)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="573" parent="524" name="company">
-      <DasType>varchar(255)|0s</DasType>
+    <column id="583" parent="525" name="french">
+      <DasType>varchar(50)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="574" parent="524" name="location">
-      <DasType>varchar(255)|0s</DasType>
-      <Position>6</Position>
-    </column>
-    <column id="575" parent="524" name="year">
-      <DasType>int(11)|0s</DasType>
-      <Position>7</Position>
-    </column>
-    <column id="576" parent="524" name="position">
-      <DasType>varchar(255)|0s</DasType>
-      <Position>8</Position>
-    </column>
-    <foreign-key id="577" parent="524" name="cvv_experiences_ibfk_1">
+    <foreign-key id="584" parent="525" name="cvv_languages_ibfk_1">
       <ColNames>contact_id</ColNames>
       <RefColNames>contact_id</RefColNames>
       <RefTableName>cvv_contact</RefTableName>
     </foreign-key>
-    <index id="578" parent="524" name="PRIMARY">
-      <ColNames>experience_id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="579" parent="524" name="contact_id">
-      <ColNames>contact_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="580" parent="524" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="581" parent="525" name="lang_id">
-      <AutoIncrement>3</AutoIncrement>
-      <DasType>int(11)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="582" parent="525" name="contact_id">
-      <DasType>int(11)|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="583" parent="525" name="spanish">
-      <DasType>varchar(50)|0s</DasType>
-      <Position>3</Position>
-    </column>
-    <column id="584" parent="525" name="english">
-      <DasType>varchar(50)|0s</DasType>
-      <Position>4</Position>
-    </column>
-    <column id="585" parent="525" name="french">
-      <DasType>varchar(50)|0s</DasType>
-      <Position>5</Position>
-    </column>
-    <foreign-key id="586" parent="525" name="cvv_languages_ibfk_1">
-      <ColNames>contact_id</ColNames>
-      <RefColNames>contact_id</RefColNames>
-      <RefTableName>cvv_contact</RefTableName>
-    </foreign-key>
-    <index id="587" parent="525" name="PRIMARY">
+    <index id="585" parent="525" name="PRIMARY">
       <ColNames>lang_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="588" parent="525" name="contact_id">
+    <index id="586" parent="525" name="contact_id">
       <ColNames>contact_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="589" parent="525" name="PRIMARY">
+    <key id="587" parent="525" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="590" parent="526" name="skill_id">
-      <AutoIncrement>7</AutoIncrement>
+    <column id="588" parent="526" name="skill_id">
+      <AutoIncrement>10</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="591" parent="526" name="name">
+    <column id="589" parent="526" name="name">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
     </column>
-    <index id="592" parent="526" name="PRIMARY">
+    <index id="590" parent="526" name="PRIMARY">
       <ColNames>skill_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="593" parent="526" name="PRIMARY">
+    <key id="591" parent="526" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="594" parent="527" name="users_id">
-      <AutoIncrement>15</AutoIncrement>
+    <column id="592" parent="527" name="users_id">
+      <AutoIncrement>1</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="595" parent="527" name="email">
-      <DasType>varchar(100)|0s</DasType>
-      <NotNull>1</NotNull>
+    <column id="593" parent="527" name="contact_id">
+      <DasType>int(11)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="596" parent="527" name="password">
-      <DasType>varchar(255)|0s</DasType>
+    <column id="594" parent="527" name="email">
+      <DasType>varchar(100)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
+    <column id="595" parent="527" name="password">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <foreign-key id="596" parent="527" name="cvv_users_ibfk_1">
+      <ColNames>contact_id</ColNames>
+      <RefColNames>contact_id</RefColNames>
+      <RefTableName>cvv_contact</RefTableName>
+    </foreign-key>
     <index id="597" parent="527" name="PRIMARY">
       <ColNames>users_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="598" parent="527" name="PRIMARY">
+    <index id="598" parent="527" name="contact_id">
+      <ColNames>contact_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="599" parent="527" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

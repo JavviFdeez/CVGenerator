@@ -198,6 +198,14 @@ public class TemplateController implements Initializable {
     @FXML
     private AnchorPane coursesAnchorPane;
 
+    @FXML
+    private Pane bgColor1;
+
+    @FXML
+    private Pane bgColor;
+
+    private ColorModel colorModel;
+
     // ==============================
     // Constructore sin argumentos
     // ==============================
@@ -222,6 +230,11 @@ public class TemplateController implements Initializable {
         dataAcademies(academiesAnchorPane);
         dataExperience(experiencesAnchorPane);
         dataCourses(coursesAnchorPane);
+        image.setPreserveRatio(false);
+        if (colorModel != null) {
+            colorModel.selectedColorProperty().addListener((observable, oldValue, newValue) -> applyColor(newValue));
+            applyColor(colorModel.getSelectedColor());
+        }
     }
 
     // ==============
@@ -629,10 +642,10 @@ public class TemplateController implements Initializable {
                 // Crear y configurar la línea vertical
                 if (i > 0) {
                     Line verticalLine = new Line();
-                    verticalLine.setStartX(iconX + iconSize / 2 - 25);
-                    verticalLine.setStartY(nameAndYearY - (iconSize / 2) + iconSize - 40);
-                    verticalLine.setEndX(iconX + iconSize / 2 - 25);
-                    verticalLine.setEndY(nameAndYearY - (iconSize / 2) + iconSize);
+                    verticalLine.setStartX(iconX - 15); // Alineación horizontal de la línea
+                    verticalLine.setStartY(nameAndYearY - spacing - 7); // Inicio vertical de la línea
+                    verticalLine.setEndX(iconX - 15); // Alineación horizontal de la línea
+                    verticalLine.setEndY(nameAndYearY + 7); // Fin vertical de la línea
                     verticalLine.setStrokeWidth(2.0);
                     verticalLine.setStroke(Color.BLACK);
                     academyPane.getChildren().add(verticalLine);
@@ -666,8 +679,9 @@ public class TemplateController implements Initializable {
             // Obtener la lista de academias desde la base de datos
             List<Experiences> experienceList = experiencesDAO.findAll();
 
-            // Ordenar la lista de experiencias por año
-            Collections.sort(experienceList, Comparator.comparingInt(Experiences::getYear).reversed());
+            // Ordenar la lista de experiencias por año (en orden descendente)
+            //Collections.sort(experienceList, Comparator.comparing(Experiences::getYear, Comparator.reverseOrder()));
+
 
             // Cordenadas iniciales
             double nameAndCompanyAndLocationX = 309;
@@ -687,7 +701,6 @@ public class TemplateController implements Initializable {
             for (int i = 0; i < experienceList.size(); i++) {
                 Experiences experiences = experienceList.get(i);
 
-                if (experiences.getPosition() != previousPosition) {
                     // Crear un contenedor Pane para organizar los elementos
                     Pane experiencePane = new Pane();
 
@@ -766,7 +779,6 @@ public class TemplateController implements Initializable {
                     companyY += spacing * 1.6;
                     locationY += spacing * 1.6;
                 }
-            }
         } catch (SQLException e) {
             // Manejar cualquier excepción SQL mostrando un mensaje de error
             throw new RuntimeException("❌ Error al obtener las academias: " + e.getMessage(), e);
@@ -825,5 +837,16 @@ public class TemplateController implements Initializable {
             // Manejar cualquier excepción SQL mostrando un mensaje de error
             throw new RuntimeException("❌ Error al obtener los cursos: " + e.getMessage(), e);
         }
+    }
+
+    public void setColorModel(ColorModel colorModel) {
+        this.colorModel = colorModel;
+    }
+
+    private void applyColor(String color) {
+        bgColor1.setStyle("-fx-background-color: " + (color.equals("#62FF00") ? color : ""));
+        bgColor.setStyle("-fx-background-color: " + (color.equals("#008BFF") ? color : ""));
+        bgColor.setStyle("-fx-background-color: " + (color.equals("#FF0049") ? color : ""));
+        bgColor.setStyle("-fx-background-color: " + (color.equals("#616161") ? color : ""));
     }
 }

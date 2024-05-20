@@ -11,8 +11,8 @@ public class CoursesDAO implements iCoursesDAO {
     // =======================================
     // Sentencias SQL para la base de datos
     // =======================================
-    private static final String INSERT = "INSERT INTO cvv_courses (contact_id, name, duration, position) VALUES (?, ?, ?, ?)";
-    private static final String UPDATE = "UPDATE cvv_courses SET name=?, duration=?, position=? WHERE course_id=?";
+    private static final String INSERT = "INSERT INTO cvv_courses (contact_id, name, duration) VALUES (?, ?, ?)";
+    private static final String UPDATE = "UPDATE cvv_courses SET name=?, duration=? WHERE course_id=?";
     private static final String DELETE = "DELETE FROM cvv_courses WHERE course_id=?";
     private static final String FIND_BY_ID = "SELECT * FROM cvv_courses WHERE course_id=?";
     private static final String FIND_ALL = "SELECT * FROM cvv_courses";
@@ -98,7 +98,6 @@ public class CoursesDAO implements iCoursesDAO {
         try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
             pst.setString(1, upsateCourse.getName());
             pst.setInt(2, upsateCourse.getDuration());
-            pst.setInt(3, upsateCourse.getPosition());
             pst.setInt(4, id);
 
             // =======================
@@ -213,14 +212,11 @@ public class CoursesDAO implements iCoursesDAO {
             try (ResultSet res = pst.executeQuery()) {
                 if (res.next()) {
                     foundCourse = new Courses(
-                            // ==============================
-                            // Obtener los datos del curso
-                            // ==============================
                             res.getInt("contact_id"),
                             res.getString("name"),
-                            res.getInt("duration"),
-                            res.getInt("position")
-                    );
+                            res.getInt("duration")
+                );
+
                 }
             }
         } catch (SQLException e) {
@@ -256,8 +252,7 @@ public class CoursesDAO implements iCoursesDAO {
                     Courses course = new Courses(
                             rs.getInt("contact_id"),
                             rs.getString("name"),
-                            rs.getInt("duration"),
-                            rs.getInt("position")
+                            rs.getInt("duration")
                     );
                     coursesList.add(course);
                 }

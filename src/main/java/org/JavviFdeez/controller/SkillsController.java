@@ -6,6 +6,8 @@ import org.JavviFdeez.model.dao.SkillsDAO;
 import org.JavviFdeez.model.entity.Skills;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -15,12 +17,14 @@ public class SkillsController implements Initializable {
     // Atributos
     // ============
     private SkillsDAO skillsDAO;
+    private Connection conn;
 
     // ==============
     // Constructor
     // ==============
     public SkillsController() {
         this.skillsDAO = new SkillsDAO(ConnectionMariaDB.getConnection());
+        this.conn = ConnectionMariaDB.getConnection();
     }
 
     /**
@@ -147,6 +151,45 @@ public class SkillsController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public boolean saveDataToDatabase(String name, Integer value, String name1, Integer value1, String name2, Integer value2) throws SQLException {
+        // Guardar los datos en la base de datos
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = ConnectionMariaDB.getConnection();
+            }
+
+            // Preparar las consultas SQL para insertar los datos en ambas tablas
+            String queryCvvSkills = "INSERT INTO cvv_skills (name) VALUES (?), (?), (?)";
+            String queryContactSkills = "INSERT INTO contact_skills (value) VALUES (?), (?), (?)";
+
+            // Usar transacciones para asegurar que ambas consultas se ejecuten correctamente
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement pstCvvSkills = conn.prepareStatement(queryCvvSkills);
+                 PreparedStatement pstContactSkills = conn.prepareStatement(queryContactSkills)) {
+
+                // Insertar en cvv_skills
+                pstCvvSkills.setString(1, name);
+                pstCvvSkills.setString(2, name1);
+                pstCvvSkills.setString(3, name2);
+                pstCvvSkills.executeUpdate();
+
+                // Insertar en contact_skills
+                pstContactSkills.setInt(1, value);
+                pstContactSkills.setInt(2, value1);
+                pstContactSkills.setInt(3, value2);
+
+                pstCvvSkills.executeUpdate();
+                pstContactSkills.executeUpdate();
+                return true;
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -11,13 +11,12 @@ public class Experiences {
     private String duration;
     private String company;
     private String location;
-    private int year;
-    private int position;
+    private String year;
 
     // ==============
     // Constructor
     // ==============
-    public Experiences(int contact_id, String name, String duration, String entity, String location, int year, int position) {
+    public Experiences(int contact_id, String name, String duration, String entity, String location, String year) {
         this.experience_id = 0;
         this.contact_id = contact_id;
         this.name = name;
@@ -25,7 +24,6 @@ public class Experiences {
         this.company = entity;
         this.location = location;
         this.year = year;
-        this.position = position;
     }
 
     // ======================
@@ -79,20 +77,12 @@ public class Experiences {
         this.location = location;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
     }
 
 
@@ -109,7 +99,6 @@ public class Experiences {
                 ", company='" + company + '\'' +
                 ", location='" + location + '\'' +
                 ", year=" + year +
-                ", position=" + position +
                 '}';
     }
 }

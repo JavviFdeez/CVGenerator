@@ -13,7 +13,7 @@ import java.sql.Types;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AcademiesController extends AcademiesControllerAbstract  implements Initializable {
+public class AcademiesController extends AcademiesControllerAbstract implements Initializable {
     private AcademiesDAO academiesDAO;
     private Connection conn;
 
@@ -166,38 +166,43 @@ public class AcademiesController extends AcademiesControllerAbstract  implements
         }
     }
 
-    public boolean saveDataToDatabase(String name, String entity, String location, String year, String name1, String entity1, String location1, String year1, String name2, String entity2, String location2, String year2) throws SQLException {
+    public boolean saveDataToDatabase(int contactId, String name, String entity, String location, String year, String name1, String entity1, String location1, String year1, String name2, String entity2, String location2, String year2) throws SQLException {
         // Guardar los datos en la base de datos
         try {
             if (conn == null || conn.isClosed()) {
                 conn = ConnectionMariaDB.getConnection();
             }
 
-            // Preparar la consulta SQL para insertar los datos
-            String query = "INSERT INTO cvv_academies (name, entity, location, year) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?)";
+            // Preparar la consulta SQL
+            String query = "INSERT INTO cvv_academies (contact_id, name, entity, location, year) VALUES (?, ?, ?, ?, ?), (?, ?, ?, ?, ?), (?, ?, ?, ?, ?)";
             try (PreparedStatement pst = conn.prepareStatement(query)) {
-                pst.setString(1, name);
-                pst.setString(2, entity);
-                pst.setString(3, location);
-                pst.setString(4, year);
+                // Establecer los parámetros de la consulta
+                pst.setInt(1, contactId);
+                pst.setString(2, name);
+                pst.setString(3, entity);
+                pst.setString(4, location);
+                pst.setString(5, year);
+                pst.setInt(6, contactId);
+                pst.setString(7, name1);
+                pst.setString(8, entity1);
+                pst.setString(9, location1);
+                pst.setString(10, year1);
+                pst.setInt(11, contactId);
+                pst.setString(12, name2);
+                pst.setString(13, entity2);
+                pst.setString(14, location2);
+                pst.setString(15, year2);
 
-                pst.setString(5, name1);
-                pst.setString(6, entity1);
-                pst.setString(7, location1);
-                pst.setString(8, year1);
-
-                pst.setString(9, name2);
-                pst.setString(10, entity2);
-                pst.setString(11, location2);
-                pst.setString(12, year2);
-
-                pst.executeUpdate();
-                return true;
+                // Ejecutar la consulta y verificar si se insertaron filas
+                int rowsInserted = pst.executeUpdate();
+                return rowsInserted > 0;
             }
+
         } catch (SQLException e) {
             throw e;
         }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

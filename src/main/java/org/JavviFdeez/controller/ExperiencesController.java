@@ -168,7 +168,7 @@ public class ExperiencesController implements Initializable {
         }
     }
 
-    public boolean saveDataToDatabase(String name, String duration, String company, String year, String name1, String duration1, String company1, String year1, String name2, String duration2, String company2, String year2) throws SQLException {
+    public boolean saveDataToDatabase(String name, String entity, String location, String year, String name1, String entity1, String location1, String year1, String name2, String entity2, String location2, String year2) throws SQLException {
         // Guardar los datos en la base de datos
         try {
             if (conn == null || conn.isClosed()) {
@@ -176,19 +176,21 @@ public class ExperiencesController implements Initializable {
             }
 
             // Preparar la consulta SQL para insertar los datos
-            String query = "INSERT INTO cvv_academies (name, entity, location, year) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?)";
+            String query = "INSERT INTO cvv_experiences (name, duration, company, year) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?)";
             try (PreparedStatement pst = conn.prepareStatement(query)) {
                 pst.setString(1, name);
-                pst.setString(2, duration);
-                pst.setString(3, company);
+                pst.setString(2, entity);
+                pst.setString(3, location);
                 pst.setString(4, year);
+
                 pst.setString(5, name1);
-                pst.setString(6, duration1);
-                pst.setString(7, company1);
+                pst.setString(6, entity1);
+                pst.setString(7, location1);
                 pst.setString(8, year1);
+
                 pst.setString(9, name2);
-                pst.setString(10, duration2);
-                pst.setString(11, company2);
+                pst.setString(10, entity2);
+                pst.setString(11, location2);
                 pst.setString(12, year2);
 
                 pst.executeUpdate();

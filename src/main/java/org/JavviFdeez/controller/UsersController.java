@@ -190,6 +190,7 @@ public class UsersController implements Initializable {
 
             // Obtener el hash SHA-256 de la contraseña ingresada
             String hashedPassword = PasswordHasher.hashPassword(password);
+            System.out.println("Contraseña hasheada al autenticar: " + hashedPassword);
 
             String query = "SELECT * FROM cvv_users WHERE email = ? AND password = ?";
             String query2 = "SELECT * FROM cvv_contact WHERE contact_id = ?";

@@ -19,7 +19,7 @@ public class CoursesTest {
 
     private static void testSaveCourses() {
         // Crear una nueva instancia de curso con los datos necesarios
-        Courses c = new Courses(4, "PhotoShop", 2, 1);
+        Courses c = new Courses(4, "PhotoShop", 2);
 
         // Obtener una conexión a la base de datos
         try (Connection connection = ConnectionMariaDB.getConnection()) {
@@ -53,7 +53,6 @@ public class CoursesTest {
                 // Actualizar los datos del curso
                 coursesToUpdate.setName("Nuevo nombre");
                 coursesToUpdate.setDuration(3);
-                coursesToUpdate.setPosition(2);
 
                 // Llamar al método update y pasarle el ID y el curso actualizado
                 cDAO.update(coursesIdToUpdate, coursesToUpdate);

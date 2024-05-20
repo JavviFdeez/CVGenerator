@@ -8,7 +8,8 @@ public class Users {
     // =============
     // Attributes
     // =============
-    private int contactId;
+    private int users_id;
+    private int contact_id;
     private String email;
     private String password;
 
@@ -16,7 +17,7 @@ public class Users {
     // Constructors
     // ===============
     public Users(String email, String password) {
-        this.contactId = 0;
+        this.contact_id = 0;
 
         if (EmailValidator.isValidEmail(email)) {
             this.email = email;
@@ -36,11 +37,11 @@ public class Users {
     // Getters & Setters
     // ====================
     public int getContactId() {
-        return contactId;
+        return contact_id;
     }
 
     public void setContactId(int contactId) {
-        this.contactId = contactId;
+        this.contact_id = contactId;
     }
 
     public String getEmail() {
@@ -59,13 +60,30 @@ public class Users {
         this.password = password;
     }
 
+    public int getUsers_id() {
+        return users_id;
+    }
+
+    public void setUsers_id(int users_id) {
+        this.users_id = users_id;
+    }
+
+    public int getContact_id() {
+        return contact_id;
+    }
+
+    public void setContact_id(int contact_id) {
+        this.contact_id = contact_id;
+    }
+
     // ===========
     // ToString
     // ===========
     @Override
     public String toString() {
         return "Users: {" +
-                "contactId=" + contactId +
+                "users_id" + users_id +
+                ", contact_id=" + contact_id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';

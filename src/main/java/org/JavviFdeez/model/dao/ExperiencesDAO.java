@@ -11,8 +11,8 @@ public class ExperiencesDAO implements iExperiencesDAO {
     // =======================================
     // Sentencias SQL para la base de datos
     // =======================================
-    private static final String INSERT = "INSERT INTO cvv_experiences (contact_id, name, duration, company, location, year, position) VALUES (?,?,?,?,?,?,?)";
-    private static final String UPDATE = "UPDATE cvv_experiences SET name=?, duration=?, company=?, location=?, year=?, position=? WHERE experience_id=?";
+    private static final String INSERT = "INSERT INTO cvv_experiences (contact_id, name, duration, company, location, year) VALUES (?,?,?,?,?,?)";
+    private static final String UPDATE = "UPDATE cvv_experiences SET name=?, duration=?, company=?, location=?, year=? WHERE experience_id=?";
     private static final String DELETE = "DELETE FROM cvv_experiences WHERE experience_id=?";
     private static final String FIND_BY_ID = "SELECT * FROM cvv_experiences WHERE experience_id=?";
     private static final String FIND_ALL = "SELECT * FROM cvv_experiences";
@@ -47,8 +47,7 @@ public class ExperiencesDAO implements iExperiencesDAO {
             pst.setString(3, exp.getDuration());
             pst.setString(4, exp.getCompany());
             pst.setString(5, exp.getLocation());
-            pst.setInt(6, exp.getYear());
-            pst.setInt(7, exp.getPosition());
+            pst.setString(6, exp.getYear());
 
             // =======================
             // Ejecutar la consulta
@@ -102,8 +101,7 @@ public class ExperiencesDAO implements iExperiencesDAO {
             pst.setString(2, exp.getDuration());
             pst.setString(3, exp.getCompany());
             pst.setString(4, exp.getLocation());
-            pst.setInt(5, exp.getYear());
-            pst.setInt(6, exp.getPosition());
+            pst.setString(5, exp.getYear());
             pst.setInt(7, id);
 
             // =======================
@@ -190,8 +188,7 @@ public class ExperiencesDAO implements iExperiencesDAO {
                             rs.getString("duration"),
                             rs.getString("company"),
                             rs.getString("location"),
-                            rs.getInt("year"),
-                            rs.getInt("position")
+                            rs.getString("year")
                     );
                 }
             }
@@ -219,8 +216,7 @@ public class ExperiencesDAO implements iExperiencesDAO {
                             rs.getString("duration"),
                             rs.getString("company"),
                             rs.getString("location"),
-                            rs.getInt("year"),
-                            rs.getInt("position")
+                            rs.getString("year")
                     );
                     experiencesList.add(experience);
                 }

@@ -205,6 +205,7 @@ public class AcademiesDAO implements iAcademiesDAO {
                     // Crear un objeto de academia con los datos obtenidos de la base de datos
                     // ==========================================================================
                     foundAcademy = new Academies(
+                            res.getInt("contact_id"),
                             res.getString("name"),
                             res.getString("entity"),
                             res.getString("location"),
@@ -242,6 +243,7 @@ public class AcademiesDAO implements iAcademiesDAO {
                     // Crear un objeto de academia
                     // ==============================
                     Academies academies = new Academies(
+                            rs.getInt("contact_id"),
                             rs.getString("name"),
                             rs.getString("entity"),
                             rs.getString("location"),
@@ -257,5 +259,27 @@ public class AcademiesDAO implements iAcademiesDAO {
             }
         }
         return academiesList;
+    }
+
+    public Academies getIDContact(int contactId) throws SQLException {
+        String query = "SELECT contact_id, name, entity, location FROM cvv_academies WHERE contact_id = ?";
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1, contactId);
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    return new Academies(
+                            rs.getInt("contact_id"),
+                            rs.getString("name"),
+                            rs.getString("entity"),
+                            rs.getString("location"),
+                            rs.getString("year")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ Error al obtener la academia por contact_id: " + e.getMessage());
+            throw new SQLException("Error al obtener la academia por contact_id: " + e.getMessage());
+        }
+        return null; // Devuelve null si no se encuentra la academia
     }
 }

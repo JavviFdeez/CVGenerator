@@ -12,7 +12,9 @@ import javafx.stage.Stage;
 import org.JavviFdeez.controller.ContactController;
 import org.JavviFdeez.controller.UsersController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
+import org.JavviFdeez.model.dao.AcademiesDAO;
 import org.JavviFdeez.model.dao.ContactDAO;
+import org.JavviFdeez.model.entity.Academies;
 import org.JavviFdeez.model.entity.Contact;
 import org.JavviFdeez.model.entity.Session;
 
@@ -41,6 +43,7 @@ public class LogInController implements Initializable {
     private UsersController usersController;
 
     private ContactController contactController;
+    private AcademiesDAO academiesDAO;
     private ContactDAO contactDAO;
 
 
@@ -55,6 +58,7 @@ public class LogInController implements Initializable {
     public LogInController() {
         this.contactDAO = new ContactDAO(ConnectionMariaDB.getConnection());
         this.contactController = new ContactController();
+        this.academiesDAO = new AcademiesDAO(ConnectionMariaDB.getConnection());
         this.usersController = new UsersController();
         this.session = Session.getInstance();
     }
@@ -107,6 +111,40 @@ public class LogInController implements Initializable {
         return null;
     }
 
+    public Academies getIDAcademies() {
+        try {
+            // Obtener el email del usuario autenticado desde el campo de texto
+            String email = emailTextField.getText();
+
+            // Obtener el contactId del usuario autenticado
+            Integer contactId = contactController.getContactIdByEmail(email);
+
+            // Verificar si se obtuvo correctamente el contactId
+            if (contactId != null && contactId != -1) {
+                // Buscar la academia en la base de datos utilizando el contactId
+                Academies foundAcademy = academiesDAO.getIDContact(contactId);
+
+                if (foundAcademy != null) {
+                    // Si la búsqueda es exitosa, mostrar mensaje de éxito
+                    System.out.println("✅ Academia encontrada exitosamente: " + foundAcademy);
+                    return foundAcademy;
+                } else {
+                    // Si no se encuentra la academia, mostrar mensaje de advertencia
+                    System.out.println("⚠️ No se encontró ninguna academia con el ID proporcionado: " + contactId);
+                }
+            } else {
+                // Si no se obtiene el contactId, mostrar un mensaje de advertencia
+                System.out.println("⚠️ No se pudo obtener el ID del contacto.");
+            }
+        } catch (SQLException e) {
+            // En caso de error, mostrar mensaje de error
+            System.err.println("❌ Error al buscar la academia: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     private void handleLogIn() {
         String email = emailTextField.getText().trim();
         String password = passwordField.getText().trim();
@@ -116,11 +154,17 @@ public class LogInController implements Initializable {
             boolean isAuthenticated = usersController.authenticate(email, password);
 
             if (isAuthenticated) {
+                showAlert("Éxito", "Inicio de sesión exitoso.", Alert.AlertType.INFORMATION);
+                // Cambiar a la escena de inicio de sesión después de guardar el usuario
+                changeSceneToFormData();
                 // Obtener el contactId del usuario autenticado
                 int contactId = Session.getInstance().getContactId();
 
                 // Obtener el contacto utilizando el contactId
                 Contact contact = getIDContact();
+
+                // Obtener la academia utilizando el contactId
+                Academies academy = getIDAcademies();
 
                 // Si el contacto se encuentra, guardar el contactId en la sesión
                 if (contact != null) {

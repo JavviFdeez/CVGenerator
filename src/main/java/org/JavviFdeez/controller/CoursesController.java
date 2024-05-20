@@ -149,7 +149,7 @@ public class CoursesController implements Initializable {
         }
     }
 
-    public boolean saveDataToDatabase(String name, String duration, String name1, String duration1, String name2, String duration2) throws SQLException {
+    public boolean saveDataToDatabase(String name, Integer duration, String name1, Integer duration1, String name2, Integer duration2) throws SQLException {
         // Guardar los datos en la base de datos
         try {
             if (conn == null || conn.isClosed()) {
@@ -157,14 +157,14 @@ public class CoursesController implements Initializable {
             }
 
             // Preparar la consulta SQL para insertar los datos
-            String query = "INSERT INTO cvv_academies (name, entity,) VALUES (?, ?,) (?, ?), (?, ?)";
+            String query = "INSERT INTO cvv_courses (name, duration) VALUES (?, ?,) (?, ?), (?, ?)";
             try (PreparedStatement pst = conn.prepareStatement(query)) {
                 pst.setString(1, name);
-                pst.setString(2, duration);
+                pst.setInt(2, duration);
                 pst.setString(5, name1);
-                pst.setString(6, duration1);
+                pst.setInt(6, duration1);
                 pst.setString(9, name2);
-                pst.setString(10, duration2);
+                pst.setInt(10, duration2);
 
                 pst.executeUpdate();
                 return true;

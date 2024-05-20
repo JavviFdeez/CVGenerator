@@ -215,13 +215,11 @@ public class ContactDAO implements iContactDAO {
         // Contacto encontrado, o null si no se encuentra
         // =================================================
         Contact foundContact = null;
-
         // ===================================================
         // Buscar el contacto por su ID en la base de datos
         // ===================================================
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_ID)) {
             pst.setInt(1, id);
-
             // ========================================================
             // Ejecutar la consulta SQL para buscar el contacto por ID
             // ========================================================
@@ -291,7 +289,7 @@ public class ContactDAO implements iContactDAO {
         return cList;
     }
 
-    public int getContactIdByEmail(String email) throws SQLException {
+    public Integer getContactIdByEmail(String email) throws SQLException {
         String query = "SELECT contact_id FROM cvv_contact WHERE email = ?";
         try (PreparedStatement pst = conn.prepareStatement(query)) {
             pst.setString(1, email);
@@ -301,12 +299,9 @@ public class ContactDAO implements iContactDAO {
                 }
             }
         } catch (SQLException e) {
-            // Manejar errores de SQL
-            e.printStackTrace();
+            System.err.println("❌ Error al buscar el contactId por email: " + e.getMessage());
             throw new SQLException("Error al obtener el contactId del usuario por correo electrónico: " + e.getMessage());
         }
-        return -1; // En caso de que no se encuentre el contactId asociado al correo electrónico
+        return null; // Devuelve null si no se encuentra el contactId
     }
-
-
 }

@@ -11,9 +11,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.JavviFdeez.controller.ContactController;
 import org.JavviFdeez.controller.UsersController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.UsersDAO;
+import org.JavviFdeez.model.entity.Contact;
 import org.JavviFdeez.model.entity.Users;
 import java.io.IOException;
 import java.net.URL;
@@ -36,6 +38,7 @@ public class RegisterController implements Initializable {
     private Button buttonRegister;
 
     private UsersController usersController;
+    private ContactController contactController;
 
     private UsersDAO usersDAO;
 
@@ -72,6 +75,7 @@ public class RegisterController implements Initializable {
         String password = passwordField.getText();
 
         try {
+            // Crear el usuario con el contact_id obtenido
             Users user = new Users(email, password);
             usersController.saveUser(user);
 

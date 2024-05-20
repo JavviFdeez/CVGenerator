@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1538.0" style="-fx-background-color: #242424;" stylesheets="@../css/Preview.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.JavviFdeez.controller.view.PreviewController">
+   <children>
+      <ImageView fitHeight="795.0" fitWidth="1550.0" layoutX="-6.0">
+         <image>
+            <Image url="@../images/abstract-black-and-silver-backgr.png" />
+         </image>
+      </ImageView>
+      <Pane opacity="0.95" prefHeight="94.0" prefWidth="1550.0" style="-fx-background-color: #404040;">
+         <children>
+            <Line endX="1423.0" layoutX="115.0" layoutY="96.0" startX="-115.0" stroke="#c3c1c1" strokeWidth="2.0" />
+            <ImageView fx:id="oneNoCheck" fitHeight="30.0" fitWidth="30.0" layoutX="367.0" layoutY="42.0">
+               <image>
+                  <Image url="@../images/PhNumberCircleOne.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="438.0" layoutY="42.0" text="Sign up" textFill="#a896cd">
+               <font>
+                  <Font name="Roboto Bold" size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="626.0" layoutY="42.0" text="Form Data" textFill="#a896cd">
+               <font>
+                  <Font name="Roboto Bold" size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="843.0" layoutY="42.0" prefHeight="29.0" prefWidth="124.0" text="Customize" textFill="#a896cd">
+               <font>
+                  <Font name="Roboto Bold" size="23.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="thereeNoCheck" fitHeight="30.0" fitWidth="30.0" layoutX="801.0" layoutY="42.0">
+               <image>
+                  <Image url="@../images/PhNumberCircleThreeFill%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1017.0" layoutY="42.0">
+               <image>
+                  <Image url="@../images/PhNumberCircleFourFill%20(1).png" />
+               </image>
+            </ImageView>
+            <Label layoutX="1057.0" layoutY="42.0" prefHeight="29.0" prefWidth="91.0" text="Preview" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Bold" size="23.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="43.0" layoutY="17.0">
+               <image>
+                  <Image url="@../images/Logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="397.0" layoutY="42.0">
+         <image>
+            <Image url="@../images/PhNumberCircleOneFill%20(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="584.0" layoutY="42.0">
+         <image>
+            <Image url="@../images/PhNumberCircleTwoFill.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="520.0" layoutY="116.0" prefHeight="656.0" prefWidth="498.0" style="-fx-background-color: trasparent; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
+         <children>
+            <Label layoutX="-28.0" layoutY="22.0" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Bold" size="35.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="75.0" prefWidth="498.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
+               <children>
+                  <Label layoutX="216.0" layoutY="22.0" text="PREVIEW" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="-28.0" layoutY="22.0" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto Bold" size="35.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="43.0" fitWidth="37.0" layoutX="163.0" layoutY="16.0">
+                     <image>
+                        <Image url="@../images/StreamlineBusinessUserCurriculumSolid.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="backForm" fitHeight="39.0" fitWidth="37.0" layoutX="30.0" layoutY="25.0">
+                     <image>
+                        <Image url="@../images/IconamoonArrowLeft6Circle.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <ImageView fx:id="templateBlack" fitHeight="580.0" fitWidth="391.0" layoutX="54.0" layoutY="75.0">
+               <image>
+                  <Image url="@../images/Captura%20de%20pantalla%202024-05-20%20181204.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="templateGreen" fitHeight="580.0" fitWidth="391.0" layoutX="54.0" layoutY="75.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/Captura%20de%20pantalla%202024-05-20%20182543.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="templateFocus" fitHeight="580.0" fitWidth="391.0" layoutX="54.0" layoutY="75.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/Captura%20de%20pantalla%202024-05-20%20182816.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="templatePink" fitHeight="580.0" fitWidth="391.0" layoutX="54.0" layoutY="75.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/Captura%20de%20pantalla%202024-05-20%20182930.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="buttonSaveData" layoutX="94.0" layoutY="570.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="310.0" text="GENERATE CVV" textFill="#f7f7f7">
+               <font>
+                  <Font name="Roboto Bold" size="26.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</Pane>

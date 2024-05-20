@@ -9,17 +9,15 @@ public class Courses {
     private int contact_id;
     private String name;
     private int duration;
-    private int position;
 
     // ==============
     // Constructor
     // ==============
-    public Courses(int contact_id, String name, int duration, int position) {
+    public Courses(int contact_id, String name, int duration) {
         this.course_id = 0;
         this.contact_id = contact_id;
         this.name = name;
         this.duration = duration;
-        this.position = position;
     }
 
     // ======================
@@ -57,13 +55,6 @@ public class Courses {
         this.duration = duration;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
 
     // ================
     // toString
@@ -75,7 +66,6 @@ public class Courses {
                 ", contact_id=" + contact_id +
                 ", name='" + name + '\'' +
                 ", duration=" + duration +
-                ", position=" + position +
                 '}';
     }
 }

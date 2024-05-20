@@ -6,18 +6,22 @@ import org.JavviFdeez.model.dao.LanguagesDAO;
 import org.JavviFdeez.model.entity.Languages;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class LanguagesController implements Initializable {
     private LanguagesDAO languagesDAO;
+    private Connection conn;
 
     // ==============
     // Constructor
     // ==============
     public LanguagesController() {
         this.languagesDAO = new LanguagesDAO(ConnectionMariaDB.getConnection());
+        this.conn = ConnectionMariaDB.getConnection();
     }
 
     /**
@@ -150,6 +154,34 @@ public class LanguagesController implements Initializable {
             // ========================================================================
             System.err.println("❌ Error al buscar las lenguas: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    public boolean saveDataToDatabase(String spanish, String english, String french, String spanish1, String english1, String french1, String spanish2, String english2, String french2) throws SQLException {
+        // Guardar los datos en la base de datos
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = ConnectionMariaDB.getConnection();
+            }
+
+            // Preparar la consulta SQL para insertar los datos
+            String query = "INSERT INTO cvv_languages (spanish, english, french) VALUES (?, ?, ?), (?, ?, ?), (?, ?, ?)";
+            try (PreparedStatement pst = conn.prepareStatement(query)) {
+                pst.setString(1, spanish);
+                pst.setString(2, english);
+                pst.setString(3, french);
+                pst.setString(4, spanish1);
+                pst.setString(5, english1);
+                pst.setString(6, french1);
+                pst.setString(7, spanish2);
+                pst.setString(8, english2);
+                pst.setString(9, french2);
+
+                pst.executeUpdate();
+                return true;
+            }
+        } catch (SQLException e) {
+            throw e;
         }
     }
 

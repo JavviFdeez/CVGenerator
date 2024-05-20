@@ -13,6 +13,7 @@ import org.JavviFdeez.controller.AcademiesController;
 import org.JavviFdeez.controller.ExperiencesController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.entity.Academies;
+import org.JavviFdeez.model.entity.Experiences;
 import org.JavviFdeez.model.entity.Session;
 
 import java.io.IOException;
@@ -77,7 +78,7 @@ public class FormDataExperienceController implements Initializable {
     private ComboBox<String> yearComboBox1;
 
     @FXML
-    private Button experiencedelete1;
+    private Button experiencedelete2;
 
     @FXML
     private Button experiencedd1;
@@ -137,12 +138,12 @@ public class FormDataExperienceController implements Initializable {
         loadExperienceData();
         initializeYearComboBox();
         handleFormData();
-        buttonSaveData.setOnAction(event -> handleFormaDataSave());
+        buttonSaveData.setOnAction(event -> changeSceneToFormData());
         experienceAdd.setOnMouseClicked(event -> handleAddExperience());
         experiencedelete.setOnMouseClicked(event -> handleDeleteExperience());
 
         experiencedd1.setOnMouseClicked(event -> handleAddExperience1());
-        experiencedelete1.setOnMouseClicked(event -> handleDeleteExperience1());
+        experiencedelete2.setOnMouseClicked(event -> handleDeleteExperience1());
     }
 
     private void handleAddExperience() {
@@ -197,7 +198,7 @@ public class FormDataExperienceController implements Initializable {
         entityText2.setOpacity(1);
         locationText2.setOpacity(1);
         yearText2.setOpacity(1);
-        experiencedelete1.setOpacity(1);
+        experiencedelete2.setOpacity(1);
     }
 
     private void handleDeleteExperience1() {
@@ -209,7 +210,7 @@ public class FormDataExperienceController implements Initializable {
 
         // Restablecer la opacidad a 0
         iconDelete2.setOpacity(0);
-        experiencedelete1.setOpacity(0);
+        experiencedelete2.setOpacity(0);
         nameTextField2.setOpacity(0);
         entityTextField2.setOpacity(0);
         locationTextField2.setOpacity(0);
@@ -218,7 +219,7 @@ public class FormDataExperienceController implements Initializable {
         entityText2.setOpacity(0);
         locationText2.setOpacity(0);
         yearText2.setOpacity(0);
-        showAlert("Academic Deleted", "Academic Deleted", Alert.AlertType.INFORMATION);
+        showAlert("Experience Deleted", "Experience Deleted", Alert.AlertType.INFORMATION);
     }
 
     private void initializeYearComboBox() {
@@ -275,21 +276,21 @@ public class FormDataExperienceController implements Initializable {
     private void handleFormaDataSave() {
         // Recoger los datos de los campos iniciales
         String name = nameTextField.getText().trim();
-        String entity = entityTextField.getText().trim();
-        String location = locationTextField.getText().trim();
+        String duration = entityTextField.getText().trim();
+        String company = locationTextField.getText().trim();
         String year = yearComboBox.getValue();
         String name1 = nameTextField1.getText().trim();
-        String entity1 = entityTextField1.getText().trim();
-        String location1 = locationTextField1.getText().trim();
+        String duration1 = entityTextField1.getText().trim();
+        String company1 = locationTextField1.getText().trim();
         String year1 = yearComboBox1.getValue();
         String name2 = nameTextField2.getText().trim();
-        String entity2 = entityTextField2.getText().trim();
-        String location2 = locationTextField2.getText().trim();
+        String duration2 = entityTextField2.getText().trim();
+        String company2 = locationTextField2.getText().trim();
         String year2 = yearComboBox2.getValue();
 
 
         try {
-            boolean saveDataToDatabase = experiencesController.saveDataToDatabase(name, entity, location, year, name1, entity1, location1, year1, name2, entity2, location2, year2);
+            boolean saveDataToDatabase = experiencesController.saveDataToDatabase(name, duration, company, year, name1, duration1, company1, year1, name2, duration2, company2, year2);
 
             if (saveDataToDatabase) {
                 showAlert("Éxito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
@@ -309,24 +310,24 @@ public class FormDataExperienceController implements Initializable {
             nameTextField.setText(academy.getName());
             entityTextField.setText(academy.getEntity());
             locationTextField.setText(academy.getLocation());
-            yearComboBox.setValue(academy.getYear());
+            //yearComboBox.setText(academy.getYear());
         } else if (count == 2) {
             nameTextField1.setText(academy.getName());
             entityTextField1.setText(academy.getEntity());
             locationTextField1.setText(academy.getLocation());
-            yearComboBox1.setValue(academy.getYear());
+            //yearComboBox1.setText(academy.getYear());
         } else if (count == 3) {
             nameTextField2.setText(academy.getName());
             entityTextField2.setText(academy.getEntity());
             locationTextField2.setText(academy.getLocation());
-            yearComboBox2.setValue(academy.getYear());
+            //yearComboBox2.setText(academy.getYear());
         }
     }
 
     private void loadExperienceData() {
         int contactId = Session.getInstance().getContactId();
 
-        String query = "SELECT * FROM cvv_academies WHERE contact_id = ?";
+        String query = "SELECT * FROM cvv_experiences WHERE contact_id = ?";
         try (PreparedStatement pst = conn.prepareStatement(query)) {
             pst.setInt(1, contactId);
             ResultSet rs = pst.executeQuery();
@@ -337,15 +338,14 @@ public class FormDataExperienceController implements Initializable {
                 academicCount++;
 
                 // Crear un objeto Academies con los datos recuperados de la base de datos
-                Academies academy = new Academies(
+                Experiences experiences = new Experiences(
+                        rs.getInt("contact_id"),
                         rs.getString("name"),
+                        rs.getString("duration"),
                         rs.getString("entity"),
                         rs.getString("location"),
                         rs.getString("year")
                 );
-
-                // Llamar al método setAcademyDataInFields para establecer los valores en los campos de texto
-                setAcademyDataInFields(academy, academicCount);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -396,7 +396,7 @@ public class FormDataExperienceController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
+            showAlert("Error", "No se pudo cargar la pantalla de academies.", Alert.AlertType.ERROR);
         }
     }
 }

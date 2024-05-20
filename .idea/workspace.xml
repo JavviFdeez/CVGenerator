@@ -4,37 +4,85 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="Al iniciar sesion, recuerda los datos ya registrados del usuario">
+    <list default="true" id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="i">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b879a80e-d1b7-42ef-af69-d495a05ab738.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b879a80e-d1b7-42ef-af69-d495a05ab738.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BaseDeDatosCVV.sql" beforeDir="false" afterPath="$PROJECT_DIR$/BaseDeDatosCVV.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/AcademiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/AcademiesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/ContactController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/ContactController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/CoursesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/CoursesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/ExperiencesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/ExperiencesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/LanguagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/LanguagesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/SkillsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/SkillsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/UsersController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataAcademiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataAcademiesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataContactController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataContactController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataCoursesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataCoursesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataExperienceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataExperienceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/LogInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/LogInController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/RegisterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/TemplateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/TemplateController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/dao/AcademiesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/dao/AcademiesDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/dao/ContactDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/dao/ContactDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/dao/CoursesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/dao/CoursesDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/dao/ExperiencesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/dao/ExperiencesDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/entity/Academies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/entity/Academies.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/entity/Courses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/entity/Courses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/entity/Experiences.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/entity/Experiences.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/entity/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/entity/Users.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/test/AcademiesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/test/AcademiesTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/test/view/FormDataExperienceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/test/view/FormDataExperienceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/test/CoursesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/test/CoursesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/test/ExperienceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/test/ExperienceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/FormDataCourses.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/FormDataCourses.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/FormDataExperience.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/FormDataExperience.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/templatesCVV/TemplateBasic.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/templatesCVV/TemplateBasic.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/AcademiesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/AcademiesController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/ContactController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/ContactController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/Contact_SkillsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/Contact_SkillsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/CoursesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/CoursesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/ExperiencesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/ExperiencesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/LanguagesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/LanguagesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/SkillsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/SkillsController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/UsersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/UsersController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataAcademiesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataAcademiesController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataContactController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataContactController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataExperienceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataExperienceController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/LogInController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/LogInController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/RegisterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/RegisterController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/css/FormDataContact.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/css/FormDataContact.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/FormDataAcademies.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/FormDataAcademies.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/TemplateController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/TemplateController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/FormDataExperience.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/FormDataExperience.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/connection/ConnectionProperties.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/connection/ConnectionProperties.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/AcademiesDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/AcademiesDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/ContactDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/ContactDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/Contact_SkillsDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/Contact_SkillsDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/CoursesDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/CoursesDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/ExperiencesDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/ExperiencesDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/LanguagesDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/LanguagesDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/MainDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/MainDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/SkillsDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/SkillsDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/UsersDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/UsersDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Academies.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Academies.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Contact.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Contact.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Contact_Skills.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Contact_Skills.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Courses.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Courses.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Experiences.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Experiences.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Languages.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Languages.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Skills.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Skills.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/templatesCVV/TemplateBasic.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/templatesCVV/TemplateBasic.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/AcademiesTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/AcademiesTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/ContactTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/ContactTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/Contact_SkillsTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/Contact_SkillsTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/CoursesTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/CoursesTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/ExperienceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/ExperienceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/LanguagesTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/LanguagesTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/SkillsTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/SkillsTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/UsersTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/test/UsersTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/utils/Scenes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/utils/Scenes.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,45 +131,48 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.AcademiesTest.executor": "Run",
-    "Application.App.executor": "Run",
-    "Application.ContactTest.executor": "Run",
-    "Application.Contact_SkillsTest.executor": "Run",
-    "Application.CoursesTest.executor": "Run",
-    "Application.ExperienceTest.executor": "Run",
-    "Application.FormDataAcademiesTest.executor": "Run",
-    "Application.FormDataContactTest.executor": "Run",
-    "Application.FormDataCoursesTest.executor": "Run",
-    "Application.FormDataExperienceTest.executor": "Run",
-    "Application.FormDataTest.executor": "Run",
-    "Application.LanguagesTest.executor": "Run",
-    "Application.LogInTest.executor": "Run",
-    "Application.RegisterTest.executor": "Run",
-    "Application.SkillsTest.executor": "Run",
-    "Application.TemplateBasicTest.executor": "Run",
-    "Application.UsersTest.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/usuario/IdeaProjects/GeneradorCurriculums/src/main/resources/org/JavviFdeez/css",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.AcademiesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ContactTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Contact_SkillsTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.CoursesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.CustomizeTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ExperienceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FormDataAcademiesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FormDataContactTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FormDataCoursesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FormDataExperienceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FormDataLanguagesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FormDataSkillsTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FormDataTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LanguagesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LogInTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RegisterTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SkillsTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TemplateBasicTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.UsersTest.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/usuario/IdeaProjects/GeneradorCurriculums/src/main/resources/org/JavviFdeez/fxml&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\usuario\IdeaProjects\GeneradorCurriculums\src\main\resources\org\JavviFdeez\css" />
       <recent name="C:\Users\usuario\IdeaProjects\GeneradorCurriculums\src\main\resources\org\JavviFdeez\fxml" />
+      <recent name="C:\Users\usuario\IdeaProjects\GeneradorCurriculums\src\main\resources\org\JavviFdeez\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\usuario\IdeaProjects\GeneradorCurriculums\src\main\resources\org\JavviFdeez\css" />
@@ -132,7 +183,7 @@
       <recent name="org.JavviFdeez.test.view" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.FormDataCoursesTest">
+  <component name="RunManager" selected="Application.CustomizeTest">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.App" />
       <module name="GeneradorCurriculums" />
@@ -146,21 +197,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ContactTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.ContactTest" />
-      <module name="GeneradorCurriculums" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.JavviFdeez.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FormDataContactTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.FormDataContactTest" />
+    <configuration name="CustomizeTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.CustomizeTest" />
       <module name="GeneradorCurriculums" />
       <extension name="coverage">
         <pattern>
@@ -172,8 +210,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FormDataCoursesTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.FormDataCoursesTest" />
+    <configuration name="FormDataAcademiesTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.FormDataAcademiesTest" />
       <module name="GeneradorCurriculums" />
       <extension name="coverage">
         <pattern>
@@ -185,8 +223,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FormDataExperienceTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.FormDataExperienceTest" />
+    <configuration name="RegisterTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.RegisterTest" />
+      <module name="GeneradorCurriculums" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.JavviFdeez.test.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TemplateBasicTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.TemplateBasicTest" />
       <module name="GeneradorCurriculums" />
       <extension name="coverage">
         <pattern>
@@ -200,11 +251,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.FormDataCoursesTest" />
-        <item itemvalue="Application.FormDataExperienceTest" />
+        <item itemvalue="Application.CustomizeTest" />
         <item itemvalue="Application.App" />
-        <item itemvalue="Application.ContactTest" />
-        <item itemvalue="Application.FormDataContactTest" />
+        <item itemvalue="Application.TemplateBasicTest" />
+        <item itemvalue="Application.RegisterTest" />
+        <item itemvalue="Application.FormDataAcademiesTest" />
       </list>
     </recent_temporary>
   </component>
@@ -289,7 +340,14 @@
       <workItem from="1716028874181" duration="33000" />
       <workItem from="1716042668758" duration="7294000" />
       <workItem from="1716057743343" duration="4543000" />
-      <workItem from="1716097678080" duration="24440000" />
+      <workItem from="1716097678080" duration="41531000" />
+      <workItem from="1716144317075" duration="437000" />
+      <workItem from="1716194663835" duration="2009000" />
+      <workItem from="1716196698061" duration="11461000" />
+      <workItem from="1716219650321" duration="6587000" />
+      <workItem from="1716226254867" duration="114000" />
+      <workItem from="1716226375940" duration="995000" />
+      <workItem from="1716227378475" duration="167000" />
     </task>
     <task id="LOCAL-00001" summary="Creación y configuración del proyecto">
       <option name="closed" value="true" />
@@ -531,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716116814506</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Creación vista FormDataCourses">
+      <option name="closed" value="true" />
+      <created>1716127282637</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1716127282637</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -567,7 +633,8 @@
     <MESSAGE value="Funcionalidad completa de la vista FormDataAcademies" />
     <MESSAGE value="Actualización de la vista FormDataExperiences" />
     <MESSAGE value="Al iniciar sesion, recuerda los datos ya registrados del usuario" />
-    <option name="LAST_COMMIT_MESSAGE" value="Al iniciar sesion, recuerda los datos ya registrados del usuario" />
+    <MESSAGE value="Creación vista FormDataCourses" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creación vista FormDataCourses" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

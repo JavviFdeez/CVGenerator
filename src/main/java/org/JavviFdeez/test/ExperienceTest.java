@@ -19,7 +19,7 @@ public class ExperienceTest {
 
     private static void testSaveExperiences() {
         // Crear una nueva instancia de experiencia con los datos necesarios
-        Experiences exp = new Experiences(4, "Musico", "11", "Ejemplo", "Madrid", 2024, 2);
+        Experiences exp = new Experiences(4, "Musico", "11", "Ejemplo", "Madrid", "2024");
 
         // Obtener una conexión a la base de datos
         try (Connection connection = ConnectionMariaDB.getConnection()) {
@@ -55,8 +55,7 @@ public class ExperienceTest {
                 expToUpdate.setDuration("Nueva duración");
                 expToUpdate.setCompany("Nueva ubicación");
                 expToUpdate.setLocation("Nueva ubicación");
-                expToUpdate.setYear(2025);
-                expToUpdate.setPosition(3);
+                expToUpdate.setYear("2025");
 
                 // Llamar al método update y pasarle el ID y la experiencia actualizada
                 Experiences updatedExp = expDAO.update(expIdToUpdate, expToUpdate);

@@ -211,6 +211,8 @@ public class FormDataContactController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataAcademies.fxml"));
             Parent root = loader.load();
 
+
+
             // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
             Stage stage = (Stage) nameTextField.getScene().getWindow();
 

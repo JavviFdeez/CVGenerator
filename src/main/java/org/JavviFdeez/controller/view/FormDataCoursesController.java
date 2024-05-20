@@ -13,6 +13,7 @@ import org.JavviFdeez.controller.CoursesController;
 import org.JavviFdeez.controller.ExperiencesController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.entity.Academies;
+import org.JavviFdeez.model.entity.Courses;
 import org.JavviFdeez.model.entity.Session;
 
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class FormDataCoursesController implements Initializable {
     private Button buttonSaveData;
 
     @FXML
-    private ImageView checkContact;
+    private ImageView checkExperience;
 
     @FXML
     private TextField nameTextField1;
@@ -105,7 +106,7 @@ public class FormDataCoursesController implements Initializable {
         Platform.runLater(() -> nameTextField.getParent().requestFocus());
         loadExperienceData();
         handleFormData();
-        buttonSaveData.setOnAction(event -> handleFormaDataSave());
+        buttonSaveData.setOnAction(event -> changeSceneToFormData());
         experienceAdd.setOnMouseClicked(event -> handleAddExperience());
         experiencedelete.setOnMouseClicked(event -> handleDeleteExperience());
 
@@ -141,7 +142,7 @@ public class FormDataCoursesController implements Initializable {
         experiencedelete.setOpacity(0);
         nameText1.setOpacity(0);
         entityText1.setOpacity(0);
-        showAlert("Experience Deleted", "Experience Deleted", Alert.AlertType.INFORMATION);
+        showAlert("Contact Deleted", "Contact Deleted", Alert.AlertType.INFORMATION);
     }
 
     private void handleAddExperience1() {
@@ -167,7 +168,7 @@ public class FormDataCoursesController implements Initializable {
 
         nameText2.setOpacity(0);
         entityText2.setOpacity(0);
-        showAlert("Academic Deleted", "Academic Deleted", Alert.AlertType.INFORMATION);
+        showAlert("Contact Deleted", "Contact Deleted", Alert.AlertType.INFORMATION);
     }
 
 
@@ -175,7 +176,7 @@ public class FormDataCoursesController implements Initializable {
     private void handleFormData() {
         nameTextField.setOnMouseClicked(event -> handleTextFieldClick(nameTextField));
         entityTextField.setOnMouseClicked(event -> handleTextFieldClick(entityTextField));
-        checkContact.setOnMouseClicked(event -> handleBackAcademies());
+        checkExperience.setOnMouseClicked(event -> handleBackExperience());
 
         nameTextField1.setOnMouseClicked(event -> handleTextFieldClick(nameTextField1));
         entityTextField1.setOnMouseClicked(event -> handleTextFieldClick(entityTextField1));
@@ -191,15 +192,15 @@ public class FormDataCoursesController implements Initializable {
     private void handleFormaDataSave() {
         // Recoger los datos de los campos iniciales
         String name = nameTextField.getText().trim();
-        String entity = entityTextField.getText().trim();
+        Integer duration = Integer.valueOf(entityTextField.getText().trim());
         String name1 = nameTextField1.getText().trim();
-        String entity1 = entityTextField1.getText().trim();
+        Integer duration1 = Integer.valueOf(entityTextField1.getText().trim());
         String name2 = nameTextField2.getText().trim();
-        String entity2 = entityTextField2.getText().trim();
+        Integer duration2 = Integer.valueOf(entityTextField2.getText().trim());
 
 
         try {
-            boolean saveDataToDatabase = coursesController.saveDataToDatabase(name, entity, name1, entity1, name2, entity2);
+            boolean saveDataToDatabase = coursesController.saveDataToDatabase(name, duration, name1, duration1, name2, duration2);
 
             if (saveDataToDatabase) {
                 showAlert("Éxito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
@@ -230,7 +231,7 @@ public class FormDataCoursesController implements Initializable {
     private void loadExperienceData() {
         int contactId = Session.getInstance().getContactId();
 
-        String query = "SELECT * FROM cvv_academies WHERE contact_id = ?";
+        String query = "SELECT * FROM cvv_courses WHERE contact_id = ?";
         try (PreparedStatement pst = conn.prepareStatement(query)) {
             pst.setInt(1, contactId);
             ResultSet rs = pst.executeQuery();
@@ -241,15 +242,12 @@ public class FormDataCoursesController implements Initializable {
                 academicCount++;
 
                 // Crear un objeto Academies con los datos recuperados de la base de datos
-                Academies academy = new Academies(
+                Courses courses = new Courses(
+                        rs.getInt("contact_id"),
                         rs.getString("name"),
-                        rs.getString("entity"),
-                        rs.getString("location"),
-                        rs.getString("year")
+                        rs.getInt("duration")
                 );
 
-                // Llamar al método setAcademyDataInFields para establecer los valores en los campos de texto
-                setAcademyDataInFields(academy, academicCount);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -267,7 +265,7 @@ public class FormDataCoursesController implements Initializable {
     private void changeSceneToFormData() {
         try {
             // Cargar la nueva escena desde el archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataCourses.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataLanguages.fxml"));
             Parent root = loader.load();
 
             // Obtener el escenario actual desde el emailTextField
@@ -284,10 +282,10 @@ public class FormDataCoursesController implements Initializable {
         }
     }
 
-    private void handleBackAcademies() {
+    private void handleBackExperience() {
         try {
             // Cargar la nueva escena desde el archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataAcademies.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataExperience.fxml"));
             Parent root = loader.load();
 
             // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)

@@ -25,8 +25,6 @@ CREATE TABLE cvv_contact (
                             extra varchar(255)
 );
 
-
-
 CREATE TABLE cvv_contact_skills (
                             cskill_id INT AUTO_INCREMENT PRIMARY KEY,
                             contact_id INT,
@@ -70,10 +68,12 @@ CREATE TABLE cvv_skills (
                             skill_id INT AUTO_INCREMENT PRIMARY KEY,
                             name VARCHAR(255)
 );
-
 CREATE TABLE cvv_users (
                                   users_id INT AUTO_INCREMENT PRIMARY KEY,
+                                  contact_id INT,
                                   email VARCHAR(100) NOT NULL,
-                                  password VARCHAR(255) NOT NULL
+                                  password VARCHAR(255) NOT NULL,
+                                  FOREIGN KEY (contact_id) REFERENCES cvv_contact(contact_id)
+
 );
 

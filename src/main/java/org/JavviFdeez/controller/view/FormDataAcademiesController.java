@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import org.JavviFdeez.controller.AcademiesController;
 import org.JavviFdeez.controller.ContactController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
+import org.JavviFdeez.model.dao.ContactDAO;
 import org.JavviFdeez.model.entity.Academies;
 import org.JavviFdeez.model.entity.Contact;
 import org.JavviFdeez.model.entity.Session;
@@ -135,8 +136,10 @@ public class FormDataAcademiesController implements Initializable {
     private Label yearText2;
 
     private AcademiesController academiesController;
+    private ContactDAO contactDAO;
 
     private Connection conn;
+    private LogInController logInController;
 
 
     public FormDataAcademiesController() {
@@ -144,16 +147,18 @@ public class FormDataAcademiesController implements Initializable {
         this.conn = ConnectionMariaDB.getConnection();
     }
 
-
+    public void setLogInController(LogInController logInController) {
+        this.logInController = logInController;
+        loadAcademiesData();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Asegurarse de que ningún campo de texto esté seleccionado al inicio con una pequeña demora
         Platform.runLater(() -> nameTextField.getParent().requestFocus());
-        loadAcademiesData();
         initializeYearComboBox();
         handleFormData();
-        buttonSaveData.setOnAction(event -> handleFormaDataSave());
+        buttonSaveData.setOnAction(event -> changeSceneToFormData());
         academicadd.setOnMouseClicked(event -> handleAddAcademic());
         academicdelete.setOnMouseClicked(event -> handleDeleteAcademic());
 
@@ -289,6 +294,36 @@ public class FormDataAcademiesController implements Initializable {
         textField.clear();
     }
 
+    public Contact getIDContact() {
+        try {
+            // Obtener el contactId del usuario autenticado
+            Integer contactId = Session.getInstance().getContactId();
+
+            // Verificar si se obtuvo correctamente el contactId
+            if (contactId != null) {
+                // Buscar el contacto en la base de datos utilizando el contactId
+                Contact foundContact = contactDAO.findById(contactId);
+
+                if (foundContact != null) {
+                    // Si la búsqueda es exitosa, mostrar mensaje de éxito
+                    System.out.println("✅ Contacto encontrado exitosamente: " + foundContact);
+                    return foundContact;
+                } else {
+                    // Si no se encuentra el contacto, mostrar mensaje de advertencia
+                    System.out.println("⚠️ No se encontró ningún contacto con el ID proporcionado: " + contactId);
+                }
+            } else {
+                // Si no se obtiene el contactId, mostrar un mensaje de advertencia
+                System.out.println("⚠️ No se pudo obtener el ID del contacto.");
+            }
+        } catch (SQLException e) {
+            // En caso de error, mostrar mensaje de error
+            System.err.println("❌ Error al buscar el contacto: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private void handleFormaDataSave() {
         // Recoger los datos de los campos iniciales
         String name = nameTextField.getText().trim();
@@ -304,9 +339,8 @@ public class FormDataAcademiesController implements Initializable {
         String location2 = locationTextField2.getText().trim();
         String year2 = yearComboBox2.getValue();
 
-
         try {
-            boolean saveDataToDatabase = academiesController.saveDataToDatabase(name, entity, location, year, name1, entity1, location1, year1, name2, entity2, location2, year2);
+            boolean saveDataToDatabase = academiesController.saveDataToDatabase(Session.getInstance().getContactId(), name, entity, location, year, name1, entity1, location1, year1, name2, entity2, location2, year2);
 
             if (saveDataToDatabase) {
                 showAlert("Éxito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
@@ -320,54 +354,31 @@ public class FormDataAcademiesController implements Initializable {
         }
     }
 
-    private void setAcademyDataInFields(Academies academy, int count) {
-        // Establecer el texto de la etiqueta correspondiente
-        if (count == 1) {
-            nameTextField.setText(academy.getName());
-            entityTextField.setText(academy.getEntity());
-            locationTextField.setText(academy.getLocation());
-            yearComboBox.setValue(academy.getYear());
-        } else if (count == 2) {
-            nameTextField1.setText(academy.getName());
-            entityTextField1.setText(academy.getEntity());
-            locationTextField1.setText(academy.getLocation());
-            yearComboBox1.setValue(academy.getYear());
-        } else if (count == 3) {
-            nameTextField2.setText(academy.getName());
-            entityTextField2.setText(academy.getEntity());
-            locationTextField2.setText(academy.getLocation());
-            yearComboBox2.setValue(academy.getYear());
-        }
-    }
-
     private void loadAcademiesData() {
-        int contactId = Session.getInstance().getContactId();
+        if (logInController != null) {
+            // Obtener el contactId del usuario autenticado desde la sesión
+            int contactId = Session.getInstance().getContactId();
 
-        String query = "SELECT * FROM cvv_academies WHERE contact_id = ?";
-        try (PreparedStatement pst = conn.prepareStatement(query)) {
-            pst.setInt(1, contactId);
-            ResultSet rs = pst.executeQuery();
+            // Obtener el contacto utilizando el contactId
+            Academies academies = logInController.getIDAcademies();
 
-            int academicCount = 0; // Contador para llevar la cuenta de las academias cargadas
+            if (academies != null) {
+                // Mostrar los datos del contacto en los campos de texto
+                nameTextField.setText(academies.getName());
+                entityTextField.setText(academies.getEntity());
+                locationTextField.setText(academies.getLocation());
+                yearComboBox.setValue(academies.getYear());
 
-            while (rs.next()) {
-                academicCount++;
-
-                // Crear un objeto Academies con los datos recuperados de la base de datos
-                Academies academy = new Academies(
-                        rs.getString("name"),
-                        rs.getString("entity"),
-                        rs.getString("location"),
-                        rs.getString("year")
-                );
-
-                // Llamar al método setAcademyDataInFields para establecer los valores en los campos de texto
-                setAcademyDataInFields(academy, academicCount);
+            } else {
+                // Mostrar un mensaje de advertencia si no se encuentra el contacto
+                showAlert("Advertencia", "No se encontró ningún contacto con el ID proporcionado.", Alert.AlertType.WARNING);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } else {
+            // Mostrar un mensaje de advertencia si LogInController es null
+            showAlert("Advertencia", "No se pudo obtener la instancia de LogInController.", Alert.AlertType.WARNING);
         }
     }
+
 
 
     private void showAlert(String error, String message, Alert.AlertType alertType) {
