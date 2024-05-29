@@ -102,13 +102,13 @@ public class ContactDAO implements iContactDAO {
      * Método para ACTUALIZAR la información de un contacto en la base de datos.
      */
     @Override
-    public Contact update(int id, Contact updatedContact) throws SQLException {
+    public boolean update(int id, Contact updatedContact) throws SQLException {
         // Habilitar la transacción
         conn.setAutoCommit(false);
 
-        // ============================================
-        // Actualizar el contacto en la base de datos
-        // ============================================
+        // Variable para indicar si la actualización fue exitosa
+        boolean isUpdated = false;
+
         try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
             // Establecer los valores de los parámetros en la consulta SQL
             pst.setString(1, updatedContact.getName());
@@ -122,21 +122,18 @@ public class ContactDAO implements iContactDAO {
             pst.setString(9, updatedContact.getExtra());
             pst.setInt(10, id);
 
-            // =======================
             // Ejecutar la consulta
-            // =======================
             int rowsAffected = pst.executeUpdate();
 
-            // ==============================================================
-            // Si no se actualizo ningun contacto, mostrar mensaje de error
-            // ==============================================================
-            if (rowsAffected == 0) {
-                throw new SQLException("❌ Error al actualizar el contacto, ninguna fila afectada.");
+            // Verificar si se actualizó al menos una fila
+            if (rowsAffected > 0) {
+                isUpdated = true;
+                // Realizar commit
+                conn.commit();
+            } else {
+                // Si no se actualizó ninguna fila, hacer rollback
+                conn.rollback();
             }
-
-            // Realizar commit
-            conn.commit();
-
         } catch (SQLException e) {
             // En caso de error, hacer rollback
             conn.rollback();
@@ -150,8 +147,9 @@ public class ContactDAO implements iContactDAO {
             }
         }
 
-        return updatedContact;
+        return isUpdated;
     }
+
 
     /**
      * @param id el contacto que se va a eliminar

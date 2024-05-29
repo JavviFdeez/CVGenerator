@@ -13,7 +13,7 @@ public class Contact_Skills {
     // Constructor
     // ===============
     public Contact_Skills(int contact_id, int skill_id, int value) {
-        this.cskill_id = 0;
+        this.cskill_id = cskill_id;
         this.contact_id = contact_id;
         this.skill_id = skill_id;
         this.value = value;

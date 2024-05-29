@@ -2,7 +2,7 @@ package org.JavviFdeez.test;
 
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.UsersDAO;
-import org.JavviFdeez.model.entity.Users;
+import org.JavviFdeez.model.entity.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,7 +20,7 @@ public class UsersTest {
 
     private static void testSaveUser() {
         // Crear una nueva instancia de usuario con los datos necesarios
-        Users users = new Users("ejemplo@gmail.com" , "Ejemplo123");
+        User user = new User("ejemplo@gmail.com" , "Ejemplo123", 0);
 
         // Obtener una aplicación de base de datos
         try (Connection connection = ConnectionMariaDB.getConnection()) {
@@ -30,7 +30,7 @@ public class UsersTest {
             // Guardar el usuario en la base de datos
             try {
                 // Llama al método save del UserDAO para guardar el usuario
-                Users savedUser = usersDAO.save(users);
+                User savedUser = usersDAO.save(user);
                 System.out.println("✅ Usuario insertado exitosamente: " + savedUser);
             } catch (SQLException e) {
                 System.out.println("❌ Error al guardar el usuario: " + e.getMessage());
@@ -47,7 +47,7 @@ public class UsersTest {
 
             // Obtener un usuario existente para actualizar
             int userIdToUpdate = 1;
-            Users userToUpdate = usersDAO.findById(userIdToUpdate);
+            User userToUpdate = usersDAO.findById(userIdToUpdate);
 
             // Verificar si se encontró el usuario
             if (userToUpdate != null) {
@@ -56,7 +56,7 @@ public class UsersTest {
                 userToUpdate.setPassword("Pepe123456");
 
                 // Llamar al método update y pasarle el ID y el usuario actualizado
-                Users updatedUser = usersDAO.update(userIdToUpdate, userToUpdate);
+                User updatedUser = usersDAO.update(userIdToUpdate, userToUpdate);
 
                 // Verificar si el usuario se actualizó correctamente
                 if (updatedUser != null) {
@@ -81,7 +81,7 @@ public class UsersTest {
             int userIdToDelete = 1;
 
             // Obtener el usuario por su ID
-            Users userToDelete = usersDAO.findById(userIdToDelete);
+            User userToDelete = usersDAO.findById(userIdToDelete);
 
             // Verificar si se encontró el usuario
             if (userToDelete != null) {
@@ -109,7 +109,7 @@ public class UsersTest {
             int userId = 2;
 
             // Obtener el usuario por su ID
-            Users user = usersDAO.findById(userId);
+            User user = usersDAO.findById(userId);
 
             // Verificar si se encontró el usuario
             if (user != null) {
@@ -128,7 +128,7 @@ public class UsersTest {
             UsersDAO usersDAO = new UsersDAO(connection);
 
             // Obtener todos los usuarios
-            List<Users> users = usersDAO.findAll();
+            List<User> users = usersDAO.findAll();
 
             // Verificar si se encontró el usuario
             if (users != null) {

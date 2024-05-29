@@ -1,7 +1,7 @@
 package org.JavviFdeez.model.dao;
 
 import org.JavviFdeez.model.dao.interfaces.iUsersDAO;
-import org.JavviFdeez.model.entity.Users;
+import org.JavviFdeez.model.entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class UsersDAO implements iUsersDAO {
     // =======================================
     // Sentencias SQL para la base de datos
     // =======================================
-    private static final String INSERT = "INSERT INTO cvv_users (email, password) VALUES (?, ?)";
+    private static final String INSERT = "INSERT INTO cvv_users (email, password, contact_id) VALUES (?, ?, ?)";
     private static final String UPDATE = "UPDATE cvv_users SET email=?, password=? WHERE users_id=?";
     private static final String DELETE = "DELETE FROM cvv_users WHERE users_id=?";
     private static final String FIND_BY_ID = "SELECT * FROM cvv_users WHERE users_id=?";
@@ -36,21 +36,22 @@ public class UsersDAO implements iUsersDAO {
      * @Author: JavviFdeez
      * Método para GUARDAR un usuario en la base de datos.
      */
-    public Users save(Users user) throws SQLException {
+    public User save(User user) throws SQLException {
         try (PreparedStatement pst = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS)) {
             pst.setString(1, user.getEmail());
             pst.setString(2, user.getPassword());
+            pst.setInt(3, user.getContactId());
 
             int rowsAffected = pst.executeUpdate();
             if (rowsAffected == 0) {
-                throw new SQLException("❌ Error al insertar, no se guardó ningun usuario.");
+                throw new SQLException("❌ Error al insertar, no se guardó ningún usuario.");
             }
 
             try (ResultSet generatedKeys = pst.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     user.setContactId(generatedKeys.getInt(1));
                 } else {
-                    throw new SQLException("❌ Error al insertar, no se guardó ningun usuario.");
+                    throw new SQLException("❌ Error al insertar, no se guardó ningún usuario.");
                 }
             }
 
@@ -67,7 +68,7 @@ public class UsersDAO implements iUsersDAO {
      * Método para ACTUALIZAR un usuario en la base de datos.
      */
     @Override
-    public Users update(int id, Users updateUser) throws SQLException {
+    public User update(int id, User updateUser) throws SQLException {
         // ===========================
         // Habilitar la transacción
         // ===========================
@@ -175,19 +176,20 @@ public class UsersDAO implements iUsersDAO {
      * Método para CONSULTAR un usuario en la base de datos.
      */
     @Override
-    public Users findById(int id) throws SQLException {
+    public User findById(int id) throws SQLException {
         // ===========================================
         // Buscar el usuario en la base de datos
         // ===========================================
-        Users foundUser = null;
+        User foundUser = null;
 
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_ID)) {
             pst.setInt(1, id);
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
-                    foundUser = new Users(
+                    foundUser = new User(
                             rs.getString("email"),
-                            rs.getString("password")
+                            rs.getString("password"),
+                            rs.getInt("contact_id")
                     );
                 }
             }
@@ -199,11 +201,11 @@ public class UsersDAO implements iUsersDAO {
     }
 
     @Override
-    public List<Users> findAll() throws SQLException {
+    public List<User> findAll() throws SQLException {
         // ==============================
         // Crear una lista de usuarios
         // ==============================
-        List<Users> usersList = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
 
         // ===========================
         // Llamar al método findAll
@@ -214,9 +216,10 @@ public class UsersDAO implements iUsersDAO {
             // =======================
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
-                    usersList.add(new Users(
+                    userList.add(new User(
                             rs.getString("email"),
-                            rs.getString("password")
+                            rs.getString("password"),
+                            rs.getInt("contact_id")
                     ));
                 }
             }
@@ -224,6 +227,6 @@ public class UsersDAO implements iUsersDAO {
             throw new SQLException("❌ Error al buscar los usuarios: " + e.getMessage(), e);
         }
 
-        return usersList;
+        return userList;
     }
 }

@@ -15,13 +15,13 @@ public interface iContactDAO {
     Contact save(Contact contact) throws SQLException;
 
     /**
-     * @Author: JavviFdeez
-     * Metodo para ACTUALIZAR un contacto
      * @param c
      * @return
      * @throws SQLException
+     * @Author: JavviFdeez
+     * Metodo para ACTUALIZAR un contacto
      */
-    Contact update(int id, Contact c) throws SQLException;
+    boolean update(int id, Contact c) throws SQLException;
 
     /**
      * @Author: JavviFdeez

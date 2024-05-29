@@ -2,6 +2,9 @@ package org.JavviFdeez.controller;
 
 import org.JavviFdeez.model.entity.Academies;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 
 public abstract class AcademiesControllerAbstract {
     protected AcademiesController academiesController;
@@ -39,4 +42,7 @@ public abstract class AcademiesControllerAbstract {
      * Método para BUSCAR todas las academias de la base de datos y muestra un mensaje de exito o error.
      */
     public abstract void findAllAcademies();
+
+
+    public abstract void initialize(URL url, ResourceBundle resourceBundle);
 }

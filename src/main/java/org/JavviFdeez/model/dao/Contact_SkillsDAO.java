@@ -189,7 +189,6 @@ public class Contact_SkillsDAO implements iContact_SkillsDAO {
                     // ====================================
                     // Obtener los datos de la consulta
                     // ====================================
-                    int cskill_id = rs.getInt("cskill_id");
                     int contact_id = rs.getInt("contact_id");
                     int skill_id = rs.getInt("skill_id");
                     int value = rs.getInt("value");
@@ -197,7 +196,7 @@ public class Contact_SkillsDAO implements iContact_SkillsDAO {
                     // =======================
                     // Crear la relacion
                     // =======================
-                    cs = new Contact_Skills(contact_id, skill_id, value);
+                    cs = new Contact_Skills( contact_id, skill_id, value);
                 }
             }
         }

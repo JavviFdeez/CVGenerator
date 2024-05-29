@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -14,11 +13,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.JavviFdeez.controller.AcademiesController;
 import org.JavviFdeez.controller.ContactController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
+import org.JavviFdeez.model.dao.AcademiesDAO;
+import org.JavviFdeez.model.dao.ContactDAO;
+import org.JavviFdeez.model.entity.Academies;
 import org.JavviFdeez.model.entity.Contact;
 import org.JavviFdeez.model.entity.Session;
-
+import org.JavviFdeez.utils.EmailValidator;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -70,13 +73,23 @@ public class FormDataContactController implements Initializable {
     @FXML
     private Button buttonSaveData;
 
+    private Session session;
+
     private ContactController contactController;
+    private AcademiesController acadController;
     private LogInController logInController;
+    private ContactDAO contactDAO;
+    private AcademiesDAO academiesDAO;
 
 
 
     public FormDataContactController() {
         this.contactController = new ContactController();
+        this.academiesDAO = new AcademiesDAO(ConnectionMariaDB.getConnection());
+        this.acadController = new AcademiesController();
+        this.session = Session.getInstance();
+        this.contactDAO = new ContactDAO(ConnectionMariaDB.getConnection());
+        this.session = Session.getInstance();
     }
 
     public void setLogInController(LogInController logInController) {
@@ -115,43 +128,39 @@ public class FormDataContactController implements Initializable {
 
 
     private void loadContactData() {
-        try {
-            if (logInController != null) {
-                // Obtener el contactId del usuario autenticado desde la sesión
-                int contactId = Session.getInstance().getContactId();
+        if (logInController != null) {
+            // Obtener el contactId del usuario autenticado desde la sesión
+            int contactId = Session.getInstance().getContactId();
 
-                // Obtener el contacto utilizando el contactId
-                Contact contact = logInController.getIDContact();
+            // Obtener el contacto utilizando el contactId
+            Contact contact = logInController.getIDContact();
 
-                if (contact != null) {
-                    // Mostrar los datos del contacto en los campos de texto
-                    nameTextField.setText(contact.getName());
-                    LastNameTextField.setText(contact.getLastname());
-                    occupationTextField.setText(contact.getOccupation());
-                    mobileTextField.setText(contact.getMobile());
-                    emailText.setText(contact.getEmail());
-                    linkedinTextField.setText(contact.getLinkedin());
-                    locationTextField.setText(contact.getLocation());
-                    extraTextField.setText(contact.getExtra());
-                    if (contact.getImage() != null) {
-                        // Si hay una imagen asociada, cargarla en el ImageView
-                        Image image = new Image(new FileInputStream(contact.getImage()));
-                        profileImageView.setImage(image);
-                    }
+            if (contact != null) {
+                // Mostrar los datos del contacto en los campos de texto
+                nameTextField.setText(contact.getName());
+                LastNameTextField.setText(contact.getLastname());
+                occupationTextField.setText(contact.getOccupation());
+                mobileTextField.setText(contact.getMobile());
+                emailText.setText(contact.getEmail()); // Aquí obtienes la dirección de correo electrónico
+
+                // Verificar si la dirección de correo electrónico no es nula antes de validarla
+                if (contact.getEmail() != null && EmailValidator.isValidEmail(contact.getEmail())) {
+                    // La dirección de correo electrónico es válida
                 } else {
-                    // Mostrar un mensaje de advertencia si no se encuentra el contacto
-                    showAlert("Advertencia", "No se encontró ningún contacto con el ID proporcionado.", Alert.AlertType.WARNING);
+                    // La dirección de correo electrónico es nula o inválida
+                    showAlert("Advertencia", "La dirección de correo electrónico es inválida.", Alert.AlertType.WARNING);
                 }
+
             } else {
-                // Mostrar un mensaje de advertencia si LogInController es null
-                showAlert("Advertencia", "No se pudo obtener la instancia de LogInController.", Alert.AlertType.WARNING);
+                // Mostrar un mensaje de advertencia si no se encuentra el contacto
+                showAlert("Advertencia", "No se encontró ningún contacto con el ID proporcionado.", Alert.AlertType.WARNING);
             }
-        } catch (IOException e) {
-            // Manejar cualquier excepción de E/S que pueda ocurrir al cargar la imagen
-            showAlert("Error", "No se pudo cargar la información del contacto.", Alert.AlertType.ERROR);
-            e.printStackTrace();
+        } else {
+            // Mostrar un mensaje de advertencia si LogInController es null
+            showAlert("Advertencia", "No se pudo obtener la instancia de LogInController.", Alert.AlertType.WARNING);
         }
     }
+
 
     private void handleFormData() {
         // Cargar datos del contacto
@@ -190,15 +199,41 @@ public class FormDataContactController implements Initializable {
         }
 
         try {
-            boolean saveDataToDatabase = contactController.saveDataToDatabase(name, lastName, imageRelativePath, occupation, mobile, email, linkedin, location, extra);
+            // Obtener el contactId del usuario autenticado desde la sesión
+            int contactId = Session.getInstance().getContactId();
+            System.out.println(contactId);
 
-                if (saveDataToDatabase) {
-                    showAlert("Exito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
-                    // Cambiar a la escena de inicio de sesión después de guardar el usuario
-                    changeSceneToFormData();
-                } else {
-                    showAlert("Error", "No se han podido guardar los datos", Alert.AlertType.ERROR);
-                }
+            // Crear un nuevo objeto Contact con los datos del formulario
+            Contact contact = new Contact();
+            contact.setContact_id(contactId);
+            contact.setName(name);
+            contact.setLastname(lastName);
+            contact.setOccupation(occupation);
+            contact.setMobile(mobile);
+            contact.setEmail(email);
+            contact.setLinkedin(linkedin);
+            contact.setLocation(location);
+            contact.setExtra(extra);
+            contact.setImage(imageRelativePath);
+
+            boolean saveDataToDatabase;
+
+            // Verificar si el contacto existe
+            if (contactController.getContactById(contactId) != null) {
+                // Si el contacto existe, actualizarlo
+                saveDataToDatabase = contactController.updateContact(contactId, contact);
+            } else {
+                // Si el contacto no existe, crear un nuevo contacto
+                saveDataToDatabase = contactController.saveDataToDatabase(contact);
+            }
+
+            if (saveDataToDatabase) {
+                showAlert("Éxito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
+                // Cambiar a la escena de academies después de guardar el contacto
+                changeSceneToFormData();
+            } else {
+                showAlert("Error", "No se han podido guardar los datos", Alert.AlertType.ERROR);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
@@ -212,6 +247,9 @@ public class FormDataContactController implements Initializable {
             Parent root = loader.load();
 
 
+            // Obtener el controlador de la nueva escena
+            FormDataAcademiesController formDataAcademiesController = loader.getController();
+            formDataAcademiesController.setContactController(contactController);
 
             // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
             Stage stage = (Stage) nameTextField.getScene().getWindow();

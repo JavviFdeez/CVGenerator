@@ -1,6 +1,6 @@
 package org.JavviFdeez.model.dao.interfaces;
 
-import org.JavviFdeez.model.entity.Users;
+import org.JavviFdeez.model.entity.User;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -14,7 +14,7 @@ public interface iUsersDAO {
      * @Author: JavviFdeez
      * Método para CREAR un usuario
      */
-    Users save(Users user) throws SQLException;
+    User save(User user) throws SQLException;
 
     /**
      * @param user
@@ -23,7 +23,7 @@ public interface iUsersDAO {
      * @Author: JavviFdeez
      * Método para ACTUALIZAR un usuario
      */
-    Users update(int id, Users user) throws SQLException;
+    User update(int id, User user) throws SQLException;
 
     /**
      * @param id
@@ -41,7 +41,7 @@ public interface iUsersDAO {
      * @Author: JavviFdeez
      * Método para BUSCAR un usuario por su ID
      */
-    Users findById(int id) throws SQLException;
+    User findById(int id) throws SQLException;
 
     /**
      * @return
@@ -49,5 +49,5 @@ public interface iUsersDAO {
      * @Author: JavviFdeez
      * Método para BUSCAR todos los usuarios
      */
-    List<Users> findAll() throws SQLException;
+    List<User> findAll() throws SQLException;
 }

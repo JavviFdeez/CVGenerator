@@ -262,12 +262,22 @@ public class AcademiesDAO implements iAcademiesDAO {
     }
 
     public Academies getIDContact(int contactId) throws SQLException {
-        String query = "SELECT contact_id, name, entity, location FROM cvv_academies WHERE contact_id = ?";
+        // Declarar una variable para almacenar la academia encontrada
+        Academies academies = null;
+
+        // Definir la consulta SQL para buscar las academias por contact_id
+        String query = "SELECT * FROM cvv_academies WHERE contact_id = ?";
+
         try (PreparedStatement pst = conn.prepareStatement(query)) {
+            // Establecer el parámetro contact_id en la consulta SQL
             pst.setInt(1, contactId);
+
+            // Ejecutar la consulta SQL y obtener el resultado
             try (ResultSet rs = pst.executeQuery()) {
+                // Verificar si se encontró una academia para el contact_id dado
                 if (rs.next()) {
-                    return new Academies(
+                    // Mapear los resultados a un objeto Academies
+                    academies = new Academies(
                             rs.getInt("contact_id"),
                             rs.getString("name"),
                             rs.getString("entity"),
@@ -276,10 +286,9 @@ public class AcademiesDAO implements iAcademiesDAO {
                     );
                 }
             }
-        } catch (SQLException e) {
-            System.err.println("❌ Error al obtener la academia por contact_id: " + e.getMessage());
-            throw new SQLException("Error al obtener la academia por contact_id: " + e.getMessage());
         }
-        return null; // Devuelve null si no se encuentra la academia
+
+        return academies;
     }
 }
+

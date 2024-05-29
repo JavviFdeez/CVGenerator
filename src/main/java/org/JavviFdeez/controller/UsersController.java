@@ -4,7 +4,7 @@ import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.UsersDAO;
 import org.JavviFdeez.model.entity.Session;
-import org.JavviFdeez.model.entity.Users;
+import org.JavviFdeez.model.entity.User;
 import org.JavviFdeez.utils.PasswordHasher;
 import org.JavviFdeez.utils.PasswordValidator;
 
@@ -42,7 +42,7 @@ public class UsersController implements Initializable {
      * @Author: JavviFdeez
      * Método para GUARDAR un usuario en la base de datos.
      */
-    public void saveUser(Users user) throws SQLException, IllegalArgumentException {
+    public void saveUser(User user) throws SQLException, IllegalArgumentException {
         try {
             if (!PasswordValidator.isValidPassword(user.getPassword())) {
                 throw new IllegalArgumentException("Contraseña no válida. \n" +
@@ -50,10 +50,7 @@ public class UsersController implements Initializable {
             }
 
             user.setPassword(user.getPassword());
-            System.out.println("Contraseña hasheada al guardar: " + user.getPassword());
-
-            Users savedUser = usersDAO.save(user);
-            System.out.println("Usuario guardado exitosamente.");
+            User savedUser = usersDAO.save(user);
 
             // Establecer el contactId en la sesión
             Session.getInstance().setContactId(savedUser.getContactId());
@@ -68,7 +65,7 @@ public class UsersController implements Initializable {
      * @Author: JavviFdeez
      * Método para ACTUALIZAR un usuario en la base de datos y mostrar un mensaje de exito o error.
      */
-    public void updateUser(int id, Users updatedUser) throws SQLException {
+    public void updateUser(int id, User updatedUser) throws SQLException {
         try {
             // =========================================
             // Actualizar el usuario en la base de datos
@@ -122,7 +119,7 @@ public class UsersController implements Initializable {
             // =========================================
             // Consultar el usuario en la base de datos
             // =========================================
-            Users foundUser = usersDAO.findById(id);
+            User foundUser = usersDAO.findById(id);
 
             if (foundUser != null) {
                 // ======================================================
@@ -153,9 +150,9 @@ public class UsersController implements Initializable {
             // ===================================================
             // Consultar todos los usuarios en la base de datos
             // ===================================================
-            List<Users> usersList = usersDAO.findAll();
+            List<User> userList = usersDAO.findAll();
 
-            if (!usersList.isEmpty()) {
+            if (!userList.isEmpty()) {
                 // ======================================================
                 // Si el guardado es exitoso, mostrar mensaje de exito.
                 // ======================================================
@@ -190,22 +187,26 @@ public class UsersController implements Initializable {
 
             // Obtener el hash SHA-256 de la contraseña ingresada
             String hashedPassword = PasswordHasher.hashPassword(password);
-            System.out.println("Contraseña hasheada al autenticar: " + hashedPassword);
 
             String query = "SELECT * FROM cvv_users WHERE email = ? AND password = ?";
-            String query2 = "SELECT * FROM cvv_contact WHERE contact_id = ?";
             try (PreparedStatement pst = conn.prepareStatement(query)) {
                 pst.setString(1, email);
-                pst.setString(2, hashedPassword); // Usar la contraseña hasheada aquí
+                pst.setString(2, hashedPassword);
                 try (ResultSet rs = pst.executeQuery()) {
-                    return rs.next();
+                    if (rs.next()) {
+                        int contactId = rs.getInt("contact_id");
+                        // Establecer el contact_id en la sesión
+                        Session.getInstance().setContactId(contactId);
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException("Error al autenticar el usuario: " + e.getMessage());
         }
-
     }
 
 

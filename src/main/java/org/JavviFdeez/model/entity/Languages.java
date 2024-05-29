@@ -15,7 +15,7 @@ public class Languages {
     // Constructor
     // ==============
     public Languages(int contact_id, int spanish, int english, int french) {
-        this.lang_id = 0;
+        this.lang_id = lang_id;
         this.contact_id = contact_id;
         this.spanish = spanish;
         this.english = english;

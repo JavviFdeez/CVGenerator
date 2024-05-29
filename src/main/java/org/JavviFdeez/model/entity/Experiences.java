@@ -17,7 +17,7 @@ public class Experiences {
     // Constructor
     // ==============
     public Experiences(int contact_id, String name, String duration, String entity, String location, String year) {
-        this.experience_id = 0;
+        this.experience_id = experience_id;
         this.contact_id = contact_id;
         this.name = name;
         this.duration = duration;

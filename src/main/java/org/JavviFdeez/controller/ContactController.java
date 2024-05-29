@@ -2,12 +2,16 @@ package org.JavviFdeez.controller;
 
 import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
+import org.JavviFdeez.model.dao.AcademiesDAO;
 import org.JavviFdeez.model.dao.ContactDAO;
+import org.JavviFdeez.model.entity.Academies;
 import org.JavviFdeez.model.entity.Contact;
+import org.JavviFdeez.model.entity.Session;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -19,6 +23,9 @@ public class ContactController implements Initializable {
     private ContactDAO contactDAO;
 
     private Connection conn;
+    private Session session;
+    private AcademiesController academiesController;
+    private AcademiesDAO academiesDAO;
 
     // ==============
     // Constructor
@@ -26,6 +33,9 @@ public class ContactController implements Initializable {
     public ContactController() {
         this.contactDAO = new ContactDAO(ConnectionMariaDB.getConnection());
         this.conn = ConnectionMariaDB.getConnection();
+        this.academiesDAO = new AcademiesDAO(ConnectionMariaDB.getConnection());
+        this.academiesController = new AcademiesController();
+        this.session = Session.getInstance();
     }
 
     /**
@@ -35,10 +45,12 @@ public class ContactController implements Initializable {
      */
     public void saveContact(Contact contact) {
         try {
+
             // ==========================================
             // Guardar el contacto en la base de datos
             // ==========================================
             contactDAO.save(contact);
+
             // ======================================================
             // Si el guardado es exitoso, mostrar mensaje de éxito.
             // ======================================================
@@ -57,22 +69,25 @@ public class ContactController implements Initializable {
      * @Author: JavviFdeez
      * Metodo para mostrar un mensaje de ACTUALIZAR un contacto en la base de datos
      */
-    public void updateContact(int id, Contact updatedContact) {
+    public boolean updateContact(int id, Contact updatedContact) {
         try {
-            // ==========================================
             // Actualizar el contacto en la base de datos
-            // ==========================================
-            contactDAO.update(id, updatedContact);
-            // ======================================================
-            // Si la actualizacion es exitosa, mostrar mensaje de exito.
-            // ======================================================
-            System.out.println("✅ Contacto actualizado exitosamente.");
+            boolean isUpdated = contactDAO.update(id, updatedContact);
+
+            if (isUpdated) {
+                // Si la actualización es exitosa, mostrar mensaje de éxito.
+                System.out.println("✅ Contacto actualizado exitosamente.");
+            } else {
+                // Si no se actualizó ninguna fila, mostrar mensaje de error.
+                System.err.println("❌ No se encontró el contacto para actualizar.");
+            }
+
+            return isUpdated;
         } catch (SQLException e) {
-            // =============================================
             // En caso de error, mostrar mensaje de error.
-            // =============================================
             System.err.println("❌ Error al actualizar el contacto: " + e.getMessage());
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -162,7 +177,7 @@ public class ContactController implements Initializable {
         }
     }
 
-    public boolean saveDataToDatabase(String name, String lastname, String image, String occupation, String mobile, String email, String linkedin, String location, String extra) throws SQLException {
+    public boolean saveDataToDatabase(Contact contact) throws SQLException {
         // Guardar los datos en la base de datos
         try {
             if (conn == null || conn.isClosed()) {
@@ -172,15 +187,15 @@ public class ContactController implements Initializable {
             // Preparar la consulta SQL para insertar los datos
             String query = "INSERT INTO cvv_contact (name, lastname, image, occupation, mobile, email, linkedin, location, extra) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement pst = conn.prepareStatement(query)) {
-                pst.setString(1, name);
-                pst.setString(2, lastname);
-                pst.setString(3, image);
-                pst.setString(4, occupation);
-                pst.setString(5, mobile);
-                pst.setString(6, email);
-                pst.setString(7, linkedin);
-                pst.setString(8, location);
-                pst.setString(9, extra);
+                pst.setString(1, contact.getName());
+                pst.setString(2, contact.getLastname());
+                pst.setString(3, contact.getImage());
+                pst.setString(4, contact.getOccupation());
+                pst.setString(5, contact.getMobile());
+                pst.setString(6, contact.getEmail());
+                pst.setString(7, contact.getLinkedin());
+                pst.setString(8, contact.getLocation());
+                pst.setString(9, contact.getExtra());
                 // Ejecutar la inserción
                 pst.executeUpdate();
 
@@ -192,6 +207,54 @@ public class ContactController implements Initializable {
             throw e;
         }
     }
+
+    public Contact getContactById(int contactId) throws SQLException {
+        Contact contact = null;
+        String query = "SELECT * FROM cvv_contact WHERE contact_id = ?";
+
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, contactId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Obtener los datos del contacto desde el ResultSet
+                    String name = resultSet.getString("name");
+                    String lastName = resultSet.getString("lastname");
+                    String image = resultSet.getString("image");
+                    String occupation = resultSet.getString("occupation");
+                    String mobile = resultSet.getString("mobile");
+                    String email = resultSet.getString("email");
+                    String linkedin = resultSet.getString("linkedin");
+                    String location = resultSet.getString("location");
+                    String extra = resultSet.getString("extra");
+
+                    // Crear un objeto Contact con los datos obtenidos
+                    contact = new Contact(contactId, name, lastName, image, occupation, mobile, email, linkedin, location, extra);
+                }
+            }
+        }
+
+        return contact;
+    }
+
+    public Academies getIDAcademies() {
+        try {
+            // Obtener el contactId del usuario autenticado de la sesión
+            int contactId = Session.getInstance().getContactId();
+
+            // Utilizar el contactId para buscar las academias asociadas
+            Academies academies = academiesDAO.getIDContact(contactId);
+
+            // Devolver las academias encontradas
+            return academies;
+        } catch (SQLException e) {
+            // En caso de error, mostrar mensaje de error
+            System.err.println("❌ Error al buscar las academias del contacto: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -63,10 +63,10 @@ public class ContactTest {
                 contactToUpdate.setExtra("New Extra");
 
                 // Llamar al método update y pasarle el ID y el contacto actualizado
-                Contact updatedContact = contactDAO.update(contactIdToUpdate, contactToUpdate);
+                boolean updatedContact = contactDAO.update(contactIdToUpdate, contactToUpdate);
 
                 // Verificar si el contacto se actualizó correctamente
-                if (updatedContact != null) {
+                if (updatedContact) {
                     System.out.println("✅ Contacto actualizada exitosamente: " + updatedContact);
                 } else {
                     System.out.println("❌ Error al actualizar el contacto.");

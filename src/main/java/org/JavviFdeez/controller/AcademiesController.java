@@ -4,12 +4,12 @@ import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.AcademiesDAO;
 import org.JavviFdeez.model.entity.Academies;
+import org.JavviFdeez.model.entity.Session;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.List;
 import java.util.ResourceBundle;
 
