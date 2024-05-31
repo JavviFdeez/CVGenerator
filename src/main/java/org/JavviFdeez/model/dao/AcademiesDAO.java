@@ -290,5 +290,13 @@ public class AcademiesDAO implements iAcademiesDAO {
 
         return academies;
     }
+
+    public void deleteByContactId(int contactId) throws SQLException {
+        String query = "DELETE FROM cvv_academies WHERE contact_id = ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, contactId);
+            preparedStatement.executeUpdate();
+        }
+    }
 }
 

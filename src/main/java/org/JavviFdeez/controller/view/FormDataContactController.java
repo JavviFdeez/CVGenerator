@@ -17,8 +17,7 @@ import org.JavviFdeez.controller.AcademiesController;
 import org.JavviFdeez.controller.ContactController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.AcademiesDAO;
-import org.JavviFdeez.model.dao.ContactDAO;
-import org.JavviFdeez.model.entity.Academies;
+import org.JavviFdeez.model.dao.ContactDAO;;
 import org.JavviFdeez.model.entity.Contact;
 import org.JavviFdeez.model.entity.Session;
 import org.JavviFdeez.utils.EmailValidator;
@@ -245,7 +244,6 @@ public class FormDataContactController implements Initializable {
             // Cargar la nueva escena desde el archivo FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataAcademies.fxml"));
             Parent root = loader.load();
-
 
             // Obtener el controlador de la nueva escena
             FormDataAcademiesController formDataAcademiesController = loader.getController();

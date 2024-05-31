@@ -81,7 +81,7 @@ public class AcademiesController extends AcademiesControllerAbstract implements 
      * @Author: JavviFdeez
      * Método para ELIMINAR una academia de la base de datos y muestra un mensaje de éxito o error.
      */
-    public void deleteAcademies(int id) {
+    public void deleteAcademies(int id){
         try {
             // =========================================================
             // Eliminar la academia de la base de datos
@@ -117,11 +117,6 @@ public class AcademiesController extends AcademiesControllerAbstract implements 
                 // ==================================================
                 System.out.println("✅ Academia encontrada:");
                 System.out.println(foundAcademies);
-            } else {
-                // ================================================================
-                // Si no se encontró la academia, mostrar mensaje de advertencia
-                // ================================================================
-                System.out.println("⚠️ No se encontró ninguna academia con el ID " + id + ".");
             }
         } catch (SQLException e) {
             // ========================================================================
@@ -151,11 +146,6 @@ public class AcademiesController extends AcademiesControllerAbstract implements 
                 for (Academies academies : academiesList) {
                     System.out.println(academies);
                 }
-            } else {
-                // =====================================================================
-                // Si no se encontró ninguna academia, mostrar mensaje de advertencia
-                // =====================================================================
-                System.out.println("⚠️ No se encontró ninguna academia.");
             }
         } catch (SQLException e) {
             // ========================================================================
@@ -203,6 +193,9 @@ public class AcademiesController extends AcademiesControllerAbstract implements 
         }
     }
 
+    public void deleteByContactId(int contactId) throws SQLException {
+        academiesDAO.deleteByContactId(contactId);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

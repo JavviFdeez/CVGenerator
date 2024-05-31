@@ -90,3 +90,18 @@
     -fx-effect: dropshadow(three-pass-box, #a896cd, 10, 0, 0, 0);
     -fx-effect: innershadow(three-pass-box, #858585, 10, 0, 0, 0);
 }
+#academiesContainer {
+    -fx-background-color: #ff0000;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-background-radius: 15;
+    -fx-border-color: rgba(255, 255, 255, 0);
+    -fx-border-radius: 15;
+}
+#paneForm {
+    -fx-background-color: #ff0000;
+
+}
+#h{
+    -fx-background-color: rgba(255, 0, 0, 0);
+}
