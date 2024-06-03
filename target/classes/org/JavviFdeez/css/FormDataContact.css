@@ -40,7 +40,7 @@
     fx-effect: innershadow(three-pass-box, #ffffff, 10, 0, 0, 0);
 }
 #buttonSaveData {
-    -fx-background-color: #000000; /* Color inicial */
+    -fx-background-color: #000000;
     -fx-background-radius: 5;
     -fx-border-color: #a896cd;
     -fx-border-radius: 5;
@@ -48,7 +48,7 @@
     -fx-padding: 10 20;
     -fx-font-size: 25px;
     -fx-font-family: "Roboto Bold";
-    -fx-cursor: hand; /* Cambia el cursor al pasar sobre el botón */
+    -fx-cursor: hand;
     -fx-effect: dropshadow(three-pass-box, #b6b6b6, 10, 0, 0, 0);
     -fx-translate-x: 0;
     -fx-translate-y: 0;
@@ -58,7 +58,7 @@
 }
 
 #buttonSaveData:hover {
-    -fx-background-color: #a896cd; /* Color final */
+    -fx-background-color: #a896cd;
     -fx-background-radius: 5;
     -fx-border-color: #000000;
     -fx-border-radius: 5;
@@ -69,8 +69,8 @@
     -fx-effect: dropshadow(three-pass-box, #ffffff, 10, 0, 0, 0);
     -fx-translate-x: 0;
     -fx-translate-y: 0;
-    -fx-scale-x: 1.05; /* Escala X aumentada */
-    -fx-scale-y: 1.05; /* Escala Y aumentada */
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
 #buttonSaveData:hover:pressed {
@@ -84,7 +84,7 @@
 }
 
 #buttonSignoff {
-    -fx-background-color: #000000; /* Color inicial */
+    -fx-background-color: #000000;
     -fx-background-radius: 5;
     -fx-border-color: #a896cd;
     -fx-border-radius: 5;
@@ -92,17 +92,19 @@
     -fx-padding: 10 20;
     -fx-font-size: 20px;
     -fx-font-family: "Roboto Bold";
-    -fx-cursor: hand; /* Cambia el cursor al pasar sobre el botón */
+    -fx-cursor: hand;
     -fx-effect: dropshadow(three-pass-box, #b6b6b6, 10, 0, 0, 0);
     -fx-translate-x: 0;
     -fx-translate-y: 0;
     -fx-scale-x: 1;
     -fx-scale-y: 1;
     -fx-transition: transform 1s;
+    -fx-font-family: 'Roboto';
+    -fx-font-weight: bold;
 }
 
 #buttonSignoff:hover {
-    -fx-background-color: #a896cd; /* Color final */
+    -fx-background-color: #a896cd;
     -fx-background-radius: 5;
     -fx-border-color: #000000;
     -fx-border-radius: 5;
@@ -113,8 +115,10 @@
     -fx-effect: dropshadow(three-pass-box, #ffffff, 10, 0, 0, 0);
     -fx-translate-x: 0;
     -fx-translate-y: 0;
-    -fx-scale-x: 1.05; /* Escala X aumentada */
-    -fx-scale-y: 1.05; /* Escala Y aumentada */
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-font-family: 'Roboto';
+    -fx-font-weight: bold;
 }
 
 #buttonSignoff:hover:pressed {
@@ -125,4 +129,18 @@
     -fx-border-radius: 5;
     -fx-scale-x: 1;
     -fx-scale-y: 1;
+    -fx-font-family: 'Roboto';
+    -fx-font-weight: bold;
+}
+.text-field {
+    -fx-font-family: 'Roboto';
+}
+
+.combo-box {
+    -fx-font-family: 'Roboto';
+    -fx-font-weight: bold;
+}
+.label {
+    -fx-font-family: 'Roboto';
+    -fx-font-weight: bold;
 }

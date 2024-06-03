@@ -20,7 +20,7 @@ public class AcademiesTest {
 
     private static void testSaveAcademy() {
         // Crear una nueva instancia de Academia con los datos necesarios
-        Academies academies = new Academies( 0, "ejemplo", "ejemplo", "ejemplo", "2022");
+        Academies academies = new Academies(0, 0, "ejemplo", "ejemplo", "ejemplo", "2022");
 
         // Obtener una conexión a la base de datos
         try (Connection connection = ConnectionMariaDB.getConnection()) {

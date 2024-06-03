@@ -309,31 +309,7 @@ public class FormDataLanguagesController implements Initializable {
 
 
     private void loadExperienceData() {
-        int contactId = Session.getInstance().getContactId();
 
-        String query = "SELECT * FROM cvv_academies WHERE contact_id = ?";
-        try (PreparedStatement pst = conn.prepareStatement(query)) {
-            pst.setInt(1, contactId);
-            ResultSet rs = pst.executeQuery();
-
-            int academicCount = 0; // Contador para llevar la cuenta de las academias cargadas
-
-            while (rs.next()) {
-                academicCount++;
-
-                // Crear un objeto Academies con los datos recuperados de la base de datos
-                Academies academy = new Academies(
-                        rs.getInt("contact_id"),
-                        rs.getString("name"),
-                        rs.getString("entity"),
-                        rs.getString("location"),
-                        rs.getString("year")
-                );
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     private void showAlert(String error, String message, Alert.AlertType alertType) {

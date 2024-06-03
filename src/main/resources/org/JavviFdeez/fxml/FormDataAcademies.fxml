@@ -12,6 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.layout.Region?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1538.0" style="-fx-background-color: #242424;" stylesheets="@../css/FormDataAcademies.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.JavviFdeez.controller.view.FormDataAcademiesController">
    <children>
       <ImageView fitHeight="795.0" fitWidth="1550.0" layoutX="-6.0">
@@ -129,10 +130,10 @@
          </font>
       </Label>
       <Line endX="132.0" layoutX="1131.0" layoutY="151.0" startX="-50.79998779296875" stroke="#a896cd" strokeWidth="5.0" />
-      <Pane layoutX="158.0" layoutY="217.0" prefHeight="551.0" prefWidth="1223.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
+      <Pane layoutX="158.0" layoutY="226.0" prefHeight="555.0" prefWidth="1223.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
          <children>
 
-            <Label layoutX="185.0" layoutY="21.0" text="Academies Details" textFill="WHITE">
+            <Label layoutX="162.0" layoutY="23.0" text="Academies Details" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="34.0" />
                </font>
@@ -151,18 +152,18 @@
 
             <HBox />
 
-            <Label layoutX="137.0" layoutY="68.0" prefHeight="26.0" prefWidth="322.0" text="Fill in the academies information" textFill="WHITE">
+            <Label layoutX="114.0" layoutY="70.0" prefHeight="26.0" prefWidth="322.0" text="Fill in the academies information" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
             </Label>
-            <Line endX="1035.0" layoutX="144.0" layoutY="113.0" startX="-100.0" stroke="#b4b4b4" />
+            <Line endX="1035.0" layoutX="144.0" layoutY="110.0" startX="-100.0" stroke="#b4b4b4" />
             <Button fx:id="buttonSaveData" layoutX="956.0" layoutY="29.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="214.0" text="CONTINUE" textFill="#f7f7f7">
                <font>
                   <Font name="Roboto Bold" size="26.0" />
                </font>
             </Button>
-            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="133.0" layoutY="21.0">
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="110.0" layoutY="23.0">
                <image>
                   <Image url="@../images/MakiCollege11.png" />
                </image>
@@ -196,25 +197,37 @@
                   <Image url="@../images/MaterialSymbolsDelete.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="52.0" fitWidth="53.0" layoutX="37.0" layoutY="25.0">
+            <ImageView fx:id="backContact" fitHeight="52.0" fitWidth="53.0" layoutX="37.0" layoutY="25.0">
                <image>
                   <Image url="@../images/IconamoonArrowLeft6Circle.png" />
                </image>
             </ImageView>
-            <Pane fx:id="paneForm" layoutX="50.0" layoutY="135.0" prefHeight="391.0" prefWidth="1125.0">
+            <Pane fx:id="paneForm" layoutX="50.0" layoutY="135.0" prefHeight="395.0" prefWidth="1130.0">
                <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutX="0.0" layoutY="0.0" prefHeight="391.0" prefWidth="1125.0">
-                  <VBox fx:id="h" prefHeight="391.0" prefWidth="1125.0">
+                  <VBox fx:id="background" prefHeight="407.0" prefWidth="1121.0">
                      <VBox fx:id="academiesContainer" prefHeight="12.0" prefWidth="1090.0">
                         <!-- Contenido de tu VBox -->
                      </VBox>
-                     <ToolBar>
-                        <Button onAction="#handleAddAcademicForm" text="Add Academiy Data" />
+                     <ToolBar style="-fx-background-color: #575757">
+                        <!-- Nodo de relleno flexible para agregar margen a la izquierda -->
+                        <Region style="-fx-padding: 0 3 0 0;" />
+
+                        <!-- Botón para agregar datos de la academia -->
+                        <Button fx:id="buttonAdd" onAction="#handleAddAcademicForm" text="Add Academy Data" />
+
+                        <!-- Nodo de relleno flexible para empujar el botón Delete hacia la derecha -->
+                        <Region HBox.hgrow="ALWAYS" />
+
+                        <!-- Botón para eliminar datos de la academia -->
+                        <Button fx:id="buttonDelete" onAction="#handleDeleteAcademicForm" text="Delete Academy Data" />
+
+                        <!-- Padding para agregar margen a la derecha -->
+                        <Region style="-fx-padding: 0 105 0 0;" />
                      </ToolBar>
+
                   </VBox>
                </ScrollPane>
             </Pane>
-
-
          </children>
       </Pane>
       <ImageView fx:id="checkContact" fitHeight="40.0" fitWidth="40.0" layoutX="236.0" layoutY="131.0">

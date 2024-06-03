@@ -36,8 +36,9 @@ public class Contact {
         this.mobile = mobile;
         if (EmailValidator.isValidEmail(email)) {
             this.email = email;
+            System.out.println(email);
         } else {
-            throw new IllegalArgumentException("❌ Correo electrónico no válido");
+            System.out.println("Invalid email: " + email);
         }
         this.linkedin = linkedin;
         this.location = location;

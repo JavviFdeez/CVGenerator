@@ -4,6 +4,7 @@ module org.JavviFdeez {
     requires java.sql;
     requires java.xml.bind;
     requires java.desktop;
+    requires org.controlsfx.controls;
 
     opens org.JavviFdeez.controller.view to javafx.fxml;
     exports org.JavviFdeez;

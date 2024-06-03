@@ -6,13 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.JavviFdeez.controller.AcademiesController;
 import org.JavviFdeez.controller.ContactController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
@@ -31,6 +30,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ResourceBundle;
+
 
 public class FormDataContactController implements Initializable {
 
@@ -65,7 +65,7 @@ public class FormDataContactController implements Initializable {
     private ImageView addImage;
 
     @FXML
-    private Button buttonSignoff;
+    private ImageView backLogIn;
 
     private String imageRelativePath;
 
@@ -102,7 +102,7 @@ public class FormDataContactController implements Initializable {
         Platform.runLater(() -> nameTextField.getParent().requestFocus());
         handleFormData();
         buttonSaveData.setOnAction(event -> handleFormaDataSave());
-        buttonSignoff.setOnAction(event -> handleSignoff());
+        backLogIn.setOnMouseClicked(event -> handleSignoff());
     }
 
     private void handleSignoff() {
@@ -121,7 +121,7 @@ public class FormDataContactController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la inicio de sesión.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 
@@ -140,23 +140,23 @@ public class FormDataContactController implements Initializable {
                 LastNameTextField.setText(contact.getLastname());
                 occupationTextField.setText(contact.getOccupation());
                 mobileTextField.setText(contact.getMobile());
-                emailText.setText(contact.getEmail()); // Aquí obtienes la dirección de correo electrónico
+                emailText.setText(contact.getEmail());
 
                 // Verificar si la dirección de correo electrónico no es nula antes de validarla
                 if (contact.getEmail() != null && EmailValidator.isValidEmail(contact.getEmail())) {
                     // La dirección de correo electrónico es válida
                 } else {
                     // La dirección de correo electrónico es nula o inválida
-                    showAlert("Advertencia", "La dirección de correo electrónico es inválida.", Alert.AlertType.WARNING);
+                    logInController.showAutoClosingAlert("ADVERTENCIA: La dirección de correo electrónico es inválida.", LogInController.AlertType.WARNING, Duration.seconds(1.5));
                 }
 
             } else {
                 // Mostrar un mensaje de advertencia si no se encuentra el contacto
-                showAlert("Advertencia", "No se encontró ningún contacto con el ID proporcionado.", Alert.AlertType.WARNING);
+                logInController.showAutoClosingAlert("ADVERTENCIA: No se encontró contacto con el ID proporcionado.", LogInController.AlertType.WARNING, Duration.seconds(1.5));
             }
         } else {
             // Mostrar un mensaje de advertencia si LogInController es null
-            showAlert("Advertencia", "No se pudo obtener la instancia de LogInController.", Alert.AlertType.WARNING);
+            logInController.showAutoClosingAlert("ADVERTENCIA: No se pudo obtener la instancia de LogInController.", LogInController.AlertType.WARNING, Duration.seconds(1.5));
         }
     }
 
@@ -193,14 +193,13 @@ public class FormDataContactController implements Initializable {
 
         // Verificar si los campos obligatorios están vacíos
         if (name.isEmpty() || lastName.isEmpty() || addImage.getImage() == null || occupation.isEmpty() || mobile.isEmpty() || email.isEmpty() || linkedin.isEmpty() || location.isEmpty()) {
-            showAlert("Campos incompletos", "Por favor, rellene todos los campos obligatorios.", Alert.AlertType.WARNING);
+            logInController.showAutoClosingAlert("CAMPOS INCOMPLETOS: Por favor, rellene todos los campos obligatorios.", LogInController.AlertType.WARNING, Duration.seconds(1.5));
             return;
         }
 
         try {
             // Obtener el contactId del usuario autenticado desde la sesión
             int contactId = Session.getInstance().getContactId();
-            System.out.println(contactId);
 
             // Crear un nuevo objeto Contact con los datos del formulario
             Contact contact = new Contact();
@@ -227,15 +226,15 @@ public class FormDataContactController implements Initializable {
             }
 
             if (saveDataToDatabase) {
-                showAlert("Éxito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
+                logInController.showAutoClosingAlert("AVISO: Los datos de Contacto se han guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                 // Cambiar a la escena de academies después de guardar el contacto
                 changeSceneToFormData();
             } else {
-                showAlert("Error", "No se han podido guardar los datos", Alert.AlertType.ERROR);
+                logInController.showAutoClosingAlert("ERROR: No se pudieron guardar los datos.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se pudieron guardar los datos.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 
@@ -259,18 +258,11 @@ public class FormDataContactController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de Academies.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de Academies.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
-
-    private void showAlert(String error, String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(error);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
 
     private void handleUploadImage() {
         FileChooser fileChooser = new FileChooser();

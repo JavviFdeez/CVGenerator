@@ -38,10 +38,11 @@ public abstract class AcademiesControllerAbstract {
     public abstract void findAcademiesById(int id);
 
     /**
+     * @return
      * @Author: JavviFdeez
      * Método para BUSCAR todas las academias de la base de datos y muestra un mensaje de exito o error.
      */
-    public abstract void findAllAcademies();
+    public abstract Academies findAllAcademies();
 
 
     public abstract void initialize(URL url, ResourceBundle resourceBundle);

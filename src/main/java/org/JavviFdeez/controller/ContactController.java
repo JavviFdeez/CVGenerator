@@ -45,24 +45,22 @@ public class ContactController implements Initializable {
      */
     public void saveContact(Contact contact) {
         try {
-
-            // ==========================================
             // Guardar el contacto en la base de datos
-            // ==========================================
             contactDAO.save(contact);
 
-            // ======================================================
             // Si el guardado es exitoso, mostrar mensaje de éxito.
-            // ======================================================
             System.out.println("✅ Contacto guardada exitosamente.");
+        } catch (IllegalArgumentException e) {
+            // Manejar la excepción de correo electrónico no válido
+            System.err.println("❌ Error al guardar el contacto: " + e.getMessage());
+            // Aquí puedes mostrar un mensaje al usuario o tomar otras acciones apropiadas
         } catch (SQLException e) {
-            // =============================================
-            // En caso de error, mostrar mensaje de error.
-            // =============================================
+            // En caso de otros errores de SQL, mostrar mensaje de error.
             System.err.println("❌ Error al guardar el contacto: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 
     /**
      * @param id el contacto que se va a actualizar
@@ -216,7 +214,7 @@ public class ContactController implements Initializable {
             preparedStatement.setInt(1, contactId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    // Obtener los datos del contacto desde el ResultSet
+                    // Obtener los datos del contacto
                     String name = resultSet.getString("name");
                     String lastName = resultSet.getString("lastname");
                     String image = resultSet.getString("image");

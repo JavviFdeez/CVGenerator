@@ -16,7 +16,7 @@ public class Academies {
     // ==============
     // Constructor
     // ==============
-    public Academies(int contact_id, String name, String entity, String location, String year) {
+    public Academies(int academies_id, int contact_id, String name, String entity, String location, String year) {
         this.academies_id = academies_id;
         this.contact_id = contact_id;
         this.name = name;
@@ -25,6 +25,9 @@ public class Academies {
         this.year = year;
     }
 
+    public Academies() {
+
+    }
     // =====================
     // Getters and Setters
     // =====================

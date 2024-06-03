@@ -4,12 +4,13 @@ import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.AcademiesDAO;
 import org.JavviFdeez.model.entity.Academies;
-import org.JavviFdeez.model.entity.Session;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -128,10 +129,11 @@ public class AcademiesController extends AcademiesControllerAbstract implements 
     }
 
     /**
+     * @return
      * @Author: JavviFdeez
      * Método para BUSCAR todas las academias de la base de datos y muestra un mensaje de exito o error.
      */
-    public void findAllAcademies() {
+    public Academies findAllAcademies() {
         try {
             // =================================================
             // Buscar todas las academias en la base de datos
@@ -154,6 +156,7 @@ public class AcademiesController extends AcademiesControllerAbstract implements 
             System.err.println("❌ Error al buscar las academias: " + e.getMessage());
             e.printStackTrace();
         }
+        return null;
     }
 
     public boolean saveDataToDatabase(int contactId, String name, String entity, String location, String year, String name1, String entity1, String location1, String year1, String name2, String entity2, String location2, String year2) throws SQLException {
@@ -193,9 +196,32 @@ public class AcademiesController extends AcademiesControllerAbstract implements 
         }
     }
 
-    public void deleteByContactId(int contactId) throws SQLException {
-        academiesDAO.deleteByContactId(contactId);
+    public List<Academies> getAcademiesById(int contactId) throws SQLException {
+        List<Academies> academiesList = new ArrayList<>();
+        String query = "SELECT * FROM cvv_academies WHERE contact_id = ?";
+
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, contactId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Obtener los datos de cada academia
+                    int academiesId = resultSet.getInt("academies_id");
+                    String name = resultSet.getString("name");
+                    String entity = resultSet.getString("entity");
+                    String location = resultSet.getString("location");
+                    String year = resultSet.getString("year");
+
+                    // Crear un objeto Academies con los datos obtenidos y agregarlo a la lista
+                    Academies academies = new Academies(academiesId, contactId, name, entity, location, year);
+                    academiesList.add(academies);
+                }
+            }
+        }
+
+        return academiesList;
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

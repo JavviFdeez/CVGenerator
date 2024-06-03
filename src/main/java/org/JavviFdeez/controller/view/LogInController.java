@@ -1,5 +1,6 @@
 package org.JavviFdeez.controller.view;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,14 +9,21 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import org.JavviFdeez.controller.ContactController;
 import org.JavviFdeez.controller.UsersController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.AcademiesDAO;
-import org.JavviFdeez.model.dao.ContactDAO;import org.JavviFdeez.model.entity.Academies;
+import org.JavviFdeez.model.dao.ContactDAO;
+import org.JavviFdeez.model.entity.Academies;
 import org.JavviFdeez.model.entity.Contact;
 import org.JavviFdeez.model.entity.Session;
+import org.controlsfx.control.NotificationPane;
+import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.net.URL;
@@ -64,10 +72,10 @@ public class LogInController implements Initializable {
 
 
     /**
-     * @Author: JavviFdeez
-     * Metodo para inicializar el controlador
      * @param url
      * @param resourceBundle
+     * @Author: JavviFdeez
+     * Metodo para inicializar el controlador
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -82,6 +90,8 @@ public class LogInController implements Initializable {
     private void handleController() {
         // Asegurarse de que ningún campo de texto esté seleccionado al inicio con una pequeña demora
         Platform.runLater(() -> emailTextField.getParent().requestFocus());
+        emailTextField.setPromptText("Email *");
+        passwordField.setPromptText("Password *");
     }
 
     /**
@@ -137,23 +147,24 @@ public class LogInController implements Initializable {
             if (authenticated) {
                 // Obtener el contact_id de la sesión
                 int contactId = Session.getInstance().getContactId();
-                System.out.println(contactId);
 
                 // Verificar si el contact_id es válido (por ejemplo, mayor que cero)
                 if (contactId > 0) {
                     // Cambiar a la escena de datos de contacto
                     changeSceneToFormData();
+                    showAutoClosingAlert("AVISO: Inicio de Sesión Exitoso.", AlertType.SUCCESS, Duration.seconds(1.5));
                 } else {
-                    showAlert("Error", "No se pudo obtener el ID de contacto de la sesión.", Alert.AlertType.ERROR);
+                    showAutoClosingAlert("ERROR: No se pudo obtener el ID de contacto de la sesión.", AlertType.ERROR, Duration.seconds(1.5));
                 }
+
             } else {
                 // Mostrar mensaje de error si las credenciales son incorrectas
-                showAlert("Error", "Correo electrónico o contraseña incorrectos", Alert.AlertType.ERROR);
+                showAutoClosingAlert("ERROR: Credenciales incorrectas.", AlertType.ERROR, Duration.seconds(1.5));
             }
         } catch (SQLException e) {
             e.printStackTrace();
             // Mostrar mensaje de error si ocurre un error durante la autenticación
-            showAlert("Error", "Error durante la autenticación", Alert.AlertType.ERROR);
+            showAutoClosingAlert("ERROR: Ocurrio un error durante la autenticación.", AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 
@@ -181,14 +192,14 @@ public class LogInController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de contacto.", Alert.AlertType.ERROR);
+            showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de datos de contacto.", AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 
     /**
+     * @param event
      * @Author: JavviFdeez
      * Metodo para cambiar de escena a la de registro
-     * @param event
      */
     @FXML
     private void handleButtonRegister(javafx.event.ActionEvent event) {
@@ -206,15 +217,82 @@ public class LogInController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de Register.", Alert.AlertType.ERROR);
+            showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de Register.", AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 
-    private void showAlert(String error, String message, Alert.AlertType alertType) {
+    public enum AlertType {
+        INFORMATION,
+        WARNING,
+        ERROR,
+        SUCCESS
+    }
+
+    public void showAutoClosingAlert(String message, AlertType type, Duration duration) {
+        Alert.AlertType alertType;
+        String cssStyle = "";
+        String imagePath = "";
+
+        switch (type) {
+            case INFORMATION:
+                alertType = Alert.AlertType.INFORMATION;
+                cssStyle = "-fx-background-color: transparent; -fx-text-fill: #000000;";
+                imagePath = "/org/JavviFdeez/images/MaterialSymbolsCheckCircleOutline2.png";
+                break;
+            case WARNING:
+                alertType = Alert.AlertType.WARNING;
+                cssStyle = "-fx-background-color: transparent; -fx-text-fill: #ffcc00;";
+                imagePath = "/org/JavviFdeez/images/MaterialSymbolsErrorOutlineRounded.png";
+                break;
+            case ERROR:
+                alertType = Alert.AlertType.ERROR;
+                cssStyle = "-fx-background-color: transparent; -fx-text-fill: #ff0000;";
+                imagePath = "/org/JavviFdeez/images/MaterialSymbolsErrorOutlineRounded.png";
+                break;
+            case SUCCESS:
+                alertType = Alert.AlertType.CONFIRMATION;
+                cssStyle = "-fx-background-color: transparent; -fx-text-fill: #00ff00;";
+                imagePath = "/org/JavviFdeez/images/MaterialSymbolsCheckCircleOutline2.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown alert type: " + type);
+        }
+
         Alert alert = new Alert(alertType);
-        alert.setTitle(error);
+        alert.initStyle(StageStyle.UNDECORATED);
         alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.showAndWait();
+
+
+        // Crear el ImageView con el icono y el tamaño deseado
+        ImageView icon = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
+        icon.setFitWidth(32);
+        icon.setFitHeight(32);
+
+        // Establecer el icono personalizado como el gráfico de la alerta
+        alert.setGraphic(icon);
+
+        Button closeButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+        closeButton.setVisible(false);
+
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setStyle("-fx-font-size: 12px;" + cssStyle);
+
+        // Establecer la altura mínima y máxima para controlar el tamaño vertical
+        dialogPane.setMinHeight(80);
+        dialogPane.setMaxHeight(150);
+
+        dialogPane.getScene().getRoot().setStyle(" -fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 15");
+        alert.getDialogPane().getScene().setFill(null);
+
+        alert.getDialogPane().setPrefSize(350, 1);
+
+        alert.show();
+
+        // Configurar la duración de la alerta
+        PauseTransition delay = new PauseTransition(duration);
+        delay.setOnFinished(event -> alert.close());
+        delay.play();
     }
 }

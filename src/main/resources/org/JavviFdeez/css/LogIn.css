@@ -85,3 +85,15 @@
     -fx-scale-x: 1;
     -fx-scale-y: 1;
 }
+.text-field {
+    -fx-font-family: 'Roboto';
+}
+
+.combo-box {
+    -fx-font-family: 'Roboto';
+    -fx-font-weight: bold;
+}
+.label {
+    -fx-font-family: 'Roboto';
+    -fx-font-weight: bold;
+}
