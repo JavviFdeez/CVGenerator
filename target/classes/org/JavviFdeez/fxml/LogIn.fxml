@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -14,8 +15,11 @@
    <children>
       <ImageView fitHeight="795.0" fitWidth="1550.0" layoutX="-6.0">
          <image>
-            <Image url="@../images/abstract-black-and-silver-backgr.png" />
+            <Image url="@../images/Sencillo%20Blanco%20y%20Claro%20Simple%20Presentación.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <Pane opacity="0.95" prefHeight="113.0" prefWidth="1538.0" style="-fx-background-color: #404040;">
          <children>
@@ -115,7 +119,7 @@
                   <Image url="@../images/UilPadlock.png" />
                </image>
             </ImageView>
-            <Label fx:id="emailLabelNoVisible" layoutX="85.0" layoutY="143.0" prefHeight="30.0" prefWidth="46.0" text="Email" textFill="WHITE">
+            <Label fx:id="emailLabelNoVisible" layoutX="85.0" layoutY="143.0" prefHeight="30.0" prefWidth="60.0" text="Email" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
@@ -125,12 +129,12 @@
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="448.0" layoutY="59.0" text="WELCOME" textFill="#a896cd">
+            <Label layoutX="462.0" layoutY="61.0" text="WELCOME" textFill="#a896cd">
                <font>
                   <Font name="Roboto Bold" size="35.0" />
                </font>
             </Label>
-            <Label layoutX="623.0" layoutY="59.0" text="TO" textFill="WHITE">
+            <Label layoutX="640.0" layoutY="61.0" text="TO" textFill="WHITE">
                <font>
                   <Font name="Roboto Bold" size="35.0" />
                </font>
@@ -151,17 +155,20 @@
                   <Font name="Roboto Bold" size="26.0" />
                </font>
             </Button>
-            <Label fx:id="emailLabelNoVisible1" layoutX="134.0" layoutY="143.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
+            <Label fx:id="emailLabelNoVisible1" layoutX="147.0" layoutY="143.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
                <font>
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="emailLabelNoVisible11" layoutX="170.0" layoutY="247.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
+            <Label fx:id="emailLabelNoVisible11" layoutX="183.0" layoutY="244.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
                <font>
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
             </Label>
          </children>
+         <effect>
+            <DropShadow />
+         </effect>
       </Pane>
       <Label layoutX="652.0" layoutY="182.0" text="CV GENERATOR" textFill="WHITE">
          <font>
