@@ -198,7 +198,7 @@
                   <Image url="@../images/MaterialSymbolsDelete.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="backExperiences" fitHeight="52.0" fitWidth="53.0" layoutX="37.0" layoutY="25.0">
+            <ImageView fx:id="backCourses" fitHeight="52.0" fitWidth="53.0" layoutX="37.0" layoutY="25.0">
                <image>
                   <Image url="@../images/IconamoonArrowLeft6Circle.png" />
                </image>
@@ -207,9 +207,9 @@
                <children>
                   <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutX="0.0" layoutY="0.0" prefHeight="391.0" prefWidth="1125.0">
                      <content>
-                        <VBox fx:id="background" prefHeight="407.0" prefWidth="1121.0">
+                        <VBox fx:id="background" prefHeight="407.0" prefWidth="1121.0" style="-fx-padding: 10 0 0 0;">
                            <children>
-                              <VBox fx:id="languagesContainer" prefHeight="12.0" prefWidth="1090.0" />
+                              <VBox fx:id="languagesContainer" prefHeight="12.0" prefWidth="1090.0" style="-fx-padding: 0 0 0 20;"/>
                            </children>
                         </VBox>
                      </content>

@@ -78,7 +78,7 @@ public class FormDataLanguagesController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Asegurarse de que ningún campo de texto esté seleccionado al inicio con una pequeña demora
         Platform.runLater(() -> languagesContainer.getParent().requestFocus());
-        buttonSaveData.setOnAction(event -> changeSceneToFormData());
+        buttonSaveData.setOnAction(event -> handleFormaDataSave());
         checkCourses.setOnMouseClicked(event -> handleBackCourses());
         backCourses.setOnMouseClicked(event -> handleBackCourses());
         createLanguagesForm();
@@ -159,13 +159,8 @@ public class FormDataLanguagesController implements Initializable {
 
         // Añadir los campos de texto en la segunda fila
         gridPane.add(spanishComboBox, 0, 1);
-        gridPane.add(englishComboBox, 0, 2);
-        gridPane.add(frenchComboBox, 0, 3);
-
-        // Ajustar las restricciones de columna para que se extiendan horizontalmente
-        for (ColumnConstraints constraint : gridPane.getColumnConstraints()) {
-            constraint.setHgrow(Priority.ALWAYS);
-        }
+        gridPane.add(englishComboBox, 1, 1);
+        gridPane.add(frenchComboBox, 2, 1);
 
         // Agregar los campos a las listas
         SpanishTextFields.add(spanishComboBox);

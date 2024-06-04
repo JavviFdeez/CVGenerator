@@ -60,7 +60,7 @@ public class FormDataCoursesController implements Initializable {
     private List<GridPane> coursesForms = new ArrayList<>();
     private List<TextField> nameTextFields = new ArrayList<>();
     private List<TextField> durationTextFields = new ArrayList<>();
-    ;
+
 
 
     public FormDataCoursesController() {
@@ -74,7 +74,6 @@ public class FormDataCoursesController implements Initializable {
     public void setCoursesController(ExperiencesController experiencesController) throws SQLException {
         this.experiencesController = experiencesController;
         loadCoursesData();
-        handleAddCoursesForm();
     }
 
     @Override

@@ -98,7 +98,7 @@ public class CoursesDAO implements iCoursesDAO {
         try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
             pst.setString(1, upsateCourse.getName());
             pst.setInt(2, upsateCourse.getDuration());
-            pst.setInt(4, id);
+            pst.setInt(3, id);
 
             // =======================
             // Ejecutar la consulta
@@ -108,7 +108,7 @@ public class CoursesDAO implements iCoursesDAO {
             // ==============================================================
             // Si no se actualizó ningun curso, mostrar mensaje de error
             // ==============================================================
-            if (rowsAffected == 0) {
+            if (rowsAffected > 0) {
                 throw new SQLException("No se pudo actualizar el curso con ID: " + id);
             }
 

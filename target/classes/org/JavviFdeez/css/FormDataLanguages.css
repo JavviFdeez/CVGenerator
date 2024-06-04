@@ -102,3 +102,44 @@
     -fx-effect: dropshadow(three-pass-box, #a896cd, 10, 0, 0, 0);
     -fx-effect: innershadow(three-pass-box, #dedede, 10, 0, 0, 0);
 }
+.text-field {
+    -fx-font-family: 'Roboto';
+    -fx-font-weight: bold;
+}
+
+.combo-box {
+    -fx-font-family: 'Roboto';
+    -fx-font-weight: bold;
+}
+.label {
+    -fx-font-family: 'Roboto';
+    -fx-font-weight: bold;
+}
+#languagesContainer {
+    -fx-background: #575757;
+    -fx-border-color: #575757;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+#paneForm {
+    -fx-background: #575757;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+#background{
+    -fx-background: #575757;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-border-color: #575757;
+}
+#scrollPane{
+    -fx-background: #575757;
+    -fx-border-color: #575757;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(three-pass-box, #494949, 10, 0, 0, 0);
+    fx-effect: innershadow(three-pass-box, #494949, 10, 0, 0, 0);
+}
