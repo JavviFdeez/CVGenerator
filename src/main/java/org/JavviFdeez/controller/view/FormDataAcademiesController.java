@@ -23,7 +23,6 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -97,9 +96,9 @@ public class FormDataAcademiesController implements Initializable {
         nameTextField.setStyle(
                         "-fx-font-weight: bold; " +
                         "-fx-background-color: #B4B4B4; " +
-                        "-fx-background-radius: 15; " +
+                        "-fx-background-radius: 10; " +
                         "-fx-border-color: white; " +
-                        "-fx-border-radius: 15; " +
+                        "-fx-border-radius: 10; " +
                         "-fx-prompt-text-fill: gray;"
         );
         nameTextField.setPromptText("Name");
@@ -108,9 +107,9 @@ public class FormDataAcademiesController implements Initializable {
         entityTextField.setPromptText("Entity");
         VBox.setMargin(entityTextField, new Insets(0, 100, 0, 0));entityTextField.setStyle(
                 "-fx-background-color: #B4B4B4; " +
-                        "-fx-background-radius: 15; " +
+                        "-fx-background-radius: 10; " +
                         "-fx-border-color: white; " +
-                        "-fx-border-radius: 15; " +
+                        "-fx-border-radius: 10; " +
                         "-fx-prompt-text-fill: gray;"
         );
 
@@ -120,9 +119,9 @@ public class FormDataAcademiesController implements Initializable {
         VBox.setMargin(locationTextField, new Insets(0, 100, 0, 0));
         locationTextField.setStyle(
                 "-fx-background-color: #B4B4B4; " +
-                        "-fx-background-radius: 15; " +
+                        "-fx-background-radius: 10; " +
                         "-fx-border-color: white; " +
-                        "-fx-border-radius: 15; " +
+                        "-fx-border-radius: 10; " +
                         "-fx-prompt-text-fill: gray;"
         );
 
@@ -141,9 +140,9 @@ public class FormDataAcademiesController implements Initializable {
 
         VBox.setMargin(yearComboBox, new Insets(0, 100, 0, 0));yearComboBox.setStyle(
                 "-fx-background-color: #B4B4B4; " +
-                        "-fx-background-radius: 15; " +
+                        "-fx-background-radius: 10; " +
                         "-fx-border-color: white; " +
-                        "-fx-border-radius: 15; " +
+                        "-fx-border-radius: 10; " +
                         "-fx-prompt-text-fill: gray;"
         );
         yearComboBox.setPromptText("Year");
@@ -203,67 +202,71 @@ public class FormDataAcademiesController implements Initializable {
         // Obtener el último formulario de academia agregado
         GridPane lastAcademyForm = academyForms.isEmpty() ? null : academyForms.get(academyForms.size() - 1);
 
-
         if (lastAcademyForm != null) {
+            // Obtener el índice del último formulario
+            int index = academyForms.size() - 1;
+
             // Eliminar el GridPane del VBox
             academiesContainer.getChildren().remove(lastAcademyForm);
 
             // Eliminar el GridPane de la lista
             academyForms.remove(lastAcademyForm);
+
+            // Obtener el academies_id de la academia asociada con este formulario
+            List<Academies> academiesList = academiesController.getAcademiesById(session.getContactId());
+            if (academiesList != null && index < academiesList.size()) {
+                int academiesId = academiesList.get(index).getAcademies_id();
+
+                // Llamar al controlador para eliminar la academia por su academies_id
+                academiesController.deleteAcademies(academiesId);
+            }
         }
-
-
-        if (academiesController.getAcademiesById(session.getContactId()) != null) {
-            // Llamar al controlador para eliminar la academia
-            academiesController.deleteAcademies(session.getContactId());
-        }
-
     }
-
 
     private void handleFormaDataSave() {
         // Obtener el contact_id de la sesión actual
         int contactId = session.getContactId();
 
-        // Recorrer cada hijo del VBox academiesContainer
-        for (int i = 0; i < academiesContainer.getChildren().size(); i++) {
-            Node node = academiesContainer.getChildren().get(i);
-            if (node instanceof GridPane) {
-                GridPane gridPane = (GridPane) node;
+        try {
+            // Obtener todas las academias asociadas al contacto
+            List<Academies> existingAcademies = academiesController.getAcademiesById(contactId);
 
-                // Recoger los datos de cada academia utilizando las referencias guardadas
-                TextField nameTextField = nameTextFields.get(i);
-                TextField entityTextField = entityTextFields.get(i);
-                TextField locationTextField = locationTextFields.get(i);
-                ComboBox<String> yearComboBox = yearComboBoxes.get(i);
+            for (int i = 0; i < academiesContainer.getChildren().size(); i++) {
+                Node node = academiesContainer.getChildren().get(i);
+                if (node instanceof GridPane) {
+                    GridPane gridPane = (GridPane) node;
 
+                    // Recoger los datos de cada academia utilizando las referencias guardadas
+                    TextField nameTextField = nameTextFields.get(i);
+                    TextField entityTextField = entityTextFields.get(i);
+                    TextField locationTextField = locationTextFields.get(i);
+                    ComboBox<String> yearComboBox = yearComboBoxes.get(i);
 
-                // Verificar si la academia ya existe en la base de datos
-                try {
-                    List<Academies> existingAcademies = academiesController.getAcademiesById(contactId);
-                    if (existingAcademies != null) {
-                        // La academia ya existe en la base de datos, muestra un mensaje de confirmación
-                        logInController.showAutoClosingAlert("AVISO: La academia ya existe en la base de datos.", LogInController.AlertType.INFORMATION, Duration.seconds(1.5));
+                    // Crear un objeto Academies con los datos recolectados
+                    Academies academies = new Academies();
+                    academies.setContact_id(contactId);
+                    academies.setName(nameTextField.getText().trim());
+                    academies.setEntity(entityTextField.getText().trim());
+                    academies.setLocation(locationTextField.getText().trim());
+                    academies.setYear(yearComboBox.getValue());
+
+                    if (i < existingAcademies.size()) {
+                        // Actualizar academia existente
+                        academies.setAcademies_id(existingAcademies.get(i).getAcademies_id());
+                        academiesController.updateAcademies(academies);
+                        logInController.showAutoClosingAlert("AVISO: La academia se ha actualizado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        changeSceneToFormData();
+                    } else {
+                        // Insertar nueva academia
+                        academiesController.saveAcademies(academies);
+                        logInController.showAutoClosingAlert("AVISO: La academia se ha guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                         changeSceneToFormData();
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    logInController.showAutoClosingAlert("ERROR: Error al verificar la existencia de la academia en la base de datos.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
-                    return;
                 }
-
-                // Crear un objeto Academies con los datos recolectados
-                Academies academies = new Academies();
-                academies.setContact_id(contactId);
-                academies.setName(nameTextField.getText().trim());
-                academies.setEntity(entityTextField.getText().trim());
-                academies.setLocation(locationTextField.getText().trim());
-                academies.setYear(yearComboBox.getValue());
-
-                // Guardar la academia en la base de datos utilizando el controlador AcademiesController
-                academiesController.saveAcademies(academies);
-                logInController.showAutoClosingAlert("AVISO: Los datos academicos se ha guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logInController.showAutoClosingAlert("ERROR: Error al guardar los datos académicos.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 
@@ -318,13 +321,15 @@ public class FormDataAcademiesController implements Initializable {
         }
     }
 
-
-
     private void changeSceneToFormData() {
         try {
             // Cargar la nueva escena desde el archivo FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataExperience.fxml"));
             Parent root = loader.load();
+
+            // Obtener el controlador de la nueva escena
+            FormDataExperienceController formDataExperienceController = loader.getController();
+            formDataExperienceController.setAcademiesController(academiesController);
 
             // Obtener el escenario actual
             Stage stage = (Stage) checkContact.getScene().getWindow();
@@ -337,6 +342,8 @@ public class FormDataAcademiesController implements Initializable {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
             logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de Experience.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -356,7 +363,7 @@ public class FormDataAcademiesController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la Inicio de Sesión.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de Contact.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 }

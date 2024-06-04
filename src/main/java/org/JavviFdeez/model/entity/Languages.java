@@ -22,6 +22,8 @@ public class Languages {
         this.french = french;
     }
 
+    public Languages() {}
+
     // ======================
     // Getters and Setters
     // ======================

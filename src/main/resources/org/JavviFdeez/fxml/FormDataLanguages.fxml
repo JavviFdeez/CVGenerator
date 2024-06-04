@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1538.0" style="-fx-background-color: #242424;" stylesheets="@../css/FormDataLanguages.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.JavviFdeez.controller.view.FormDataLanguagesController">
    <children>
-      <ImageView fitHeight="795.0" fitWidth="1550.0" layoutX="-6.0" layoutY="6.0">
+      <ImageView fitHeight="795.0" fitWidth="1550.0" layoutX="1.0" layoutY="6.0">
          <image>
-            <Image url="@../images/abstract-black-and-silver-backgr.png" />
+            <Image url="@../images/Sencillo%20Blanco%20y%20Claro%20Simple%20Presentación.png" />
          </image>
       </ImageView>
       <Pane opacity="0.95" prefHeight="113.0" prefWidth="1544.0" style="-fx-background-color: #404040;">
@@ -117,160 +119,6 @@
          </image>
       </ImageView>
       <Line endX="132.0" layoutX="1131.0" layoutY="151.0" startX="-50.79998779296875" stroke="#a896cd" strokeWidth="5.0" />
-      <Pane layoutX="457.0" layoutY="225.0" prefHeight="551.0" prefWidth="1034.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
-         <children>
-
-            <Label layoutX="105.0" layoutY="26.0" text="Languages Details" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="34.0" />
-               </font>
-            </Label>
-            <Label layoutX="121.0" layoutY="29.0" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="35.0" />
-               </font>
-            </Label>
-
-            <HBox />
-
-            <HBox />
-
-            <HBox />
-
-            <HBox />
-
-            <Label layoutX="53.0" layoutY="74.0" prefHeight="26.0" prefWidth="322.0" text="Fill in the level languages information" textFill="WHITE">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="spanishText" layoutX="60.0" layoutY="128.0" text="Spanish" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="englishText" layoutX="309.0" layoutY="128.0" text="English" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <Line endX="-70.0" endY="522.0" layoutX="96.0" layoutY="29.0" startX="-70.0" startY="-29.0" stroke="#a896cd" strokeWidth="3.0" />
-            <Line endX="774.0" layoutX="146.0" layoutY="116.0" startX="-100.0" stroke="#b4b4b4" />
-            <Button fx:id="buttonSaveData" layoutX="723.0" layoutY="29.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="214.0" text="CONTINUE" textFill="#f7f7f7">
-               <font>
-                  <Font name="Roboto Bold" size="26.0" />
-               </font>
-            </Button>
-
-            <HBox />
-
-            <HBox layoutX="749.0" layoutY="261.0" />
-            <Label fx:id="asteriskYear1" layoutX="858.0" layoutY="211.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
-               <font>
-                  <Font name="Leelawadee UI Semilight" size="20.0" />
-               </font>
-            </Label>
-
-            <ImageView fx:id="iconAdd" fitHeight="30.0" fitWidth="30.0" layoutX="63.0" layoutY="215.0">
-               <image>
-                  <Image url="@../images/MdiPlusCircleOutline%20(1).png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="iconAdd1" fitHeight="30.0" fitWidth="30.0" layoutX="63.0" layoutY="338.0" opacity="0.0">
-               <image>
-                  <Image url="@../images/MdiPlusCircleOutline%20(1).png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="iconDelete1" fitHeight="30.0" fitWidth="30.0" layoutX="646.0" layoutY="459.0" opacity="0.0">
-               <image>
-                  <Image url="@../images/MaterialSymbolsDelete.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="experienceAdd" layoutX="52.0" layoutY="215.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="205.0" style="-fx-background-color: transparent;" text="Add Languages" textFill="#a896cd">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="experiencedd1" layoutX="58.0" layoutY="338.0" mnemonicParsing="false" opacity="0.0" prefHeight="31.0" prefWidth="194.0" style="-fx-background-color: transparent;" text="   Add Languages" textFill="#a896cd">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="56.0" layoutY="25.0">
-               <image>
-                  <Image url="@../images/LucideLanguages.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="iconDelete" fitHeight="30.0" fitWidth="30.0" layoutX="646.0" layoutY="338.0" opacity="0.0">
-               <image>
-                  <Image url="@../images/MaterialSymbolsDelete.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="frenchText" layoutX="566.0" layoutY="128.0" text="French" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="spanishComboBox" layoutX="60.0" layoutY="166.0" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <ComboBox fx:id="englishComboBox" layoutX="309.0" layoutY="166.0" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <ComboBox fx:id="frenchComboBox" layoutX="566.0" layoutY="166.0" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <Label fx:id="spanishText1" layoutX="60.0" layoutY="261.0" opacity="0.0" text="Spanish" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="englishText1" layoutX="309.0" layoutY="261.0" opacity="0.0" text="English" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="frenchText1" layoutX="566.0" layoutY="261.0" opacity="0.0" text="French" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="spanishComboBox1" layoutX="60.0" layoutY="299.0" opacity="0.0" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <ComboBox fx:id="englishComboBox1" layoutX="309.0" layoutY="299.0" opacity="0.0" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <ComboBox fx:id="frenchComboBox1" layoutX="566.0" layoutY="299.0" opacity="0.0" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <Label fx:id="spanishText2" layoutX="60.0" layoutY="380.0" opacity="0.0" text="Spanish" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="englishText2" layoutX="309.0" layoutY="380.0" opacity="0.0" text="English" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="frenchText2" layoutX="566.0" layoutY="380.0" opacity="0.0" text="French" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Bold" size="22.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="spanishComboBox2" layoutX="60.0" layoutY="418.0" opacity="0.0" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <ComboBox fx:id="englishComboBox2" layoutX="309.0" layoutY="418.0" opacity="0.0" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <ComboBox fx:id="frenchComboBox2" layoutX="566.0" layoutY="418.0" opacity="0.0" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 2;" />
-            <Button fx:id="experiencedelete" layoutX="652.0" layoutY="338.0" mnemonicParsing="false" opacity="0.0" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: transparent;" text="Delete Languages" textFill="#a896cd">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="experiencedelete1" layoutX="655.0" layoutY="459.0" mnemonicParsing="false" opacity="0.0" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: transparent;" text="Delete Languages" textFill="#a896cd">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-
-         </children>
-      </Pane>
-      <ImageView fitHeight="551.0" fitWidth="440.0" layoutX="45.0" layoutY="225.0">
-         <image>
-            <Image url="@../images/_72da32f3-e019-4677-8052-97e2f623605b.jfif" />
-         </image>
-      </ImageView>
-      <Line endX="89.5" endY="139.5" layoutX="398.0" layoutY="84.0" startX="-354.0" startY="141.0" stroke="#a896cd" strokeWidth="3.0" />
-      <Line endX="-69.5355224609375" endY="510.0" layoutX="114.0" layoutY="264.0" startX="-69.5355224609375" startY="-38.0" stroke="#a896cd" strokeWidth="3.0" />
-      <Line endX="333.0" endY="715.0" layoutX="154.0" layoutY="61.0" startX="-110.0" startY="715.0" stroke="#a896cd" strokeWidth="3.0" />
       <ImageView fx:id="checkContact" fitHeight="40.0" fitWidth="40.0" layoutX="236.0" layoutY="131.0">
          <image>
             <Image url="@../images/TeenyiconsTickCircleSolid.png" />
@@ -291,5 +139,87 @@
             <Image url="@../images/TeenyiconsTickCircleSolid.png" />
          </image>
       </ImageView>
+      <Pane layoutX="158.0" layoutY="226.0" prefHeight="555.0" prefWidth="1223.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
+         <children>
+            <Label layoutX="162.0" layoutY="23.0" text="Languages Details" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Bold" size="34.0" />
+               </font>
+            </Label>
+            <Label layoutX="121.0" layoutY="29.0" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Bold" size="35.0" />
+               </font>
+            </Label>
+            <HBox />
+            <HBox />
+            <HBox />
+            <HBox />
+            <Label layoutX="114.0" layoutY="70.0" prefHeight="26.0" prefWidth="322.0" text="Fill in the languages information" textFill="WHITE">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="20.0" />
+               </font>
+            </Label>
+            <Line endX="1035.0" layoutX="144.0" layoutY="110.0" startX="-100.0" stroke="#b4b4b4" />
+            <Button fx:id="buttonSaveData" layoutX="956.0" layoutY="29.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="214.0" text="CONTINUE" textFill="#f7f7f7">
+               <font>
+                  <Font name="Roboto Bold" size="26.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="110.0" layoutY="23.0">
+               <image>
+                  <Image url="@../images/MakiCollege11.png" />
+               </image>
+            </ImageView>
+            <HBox />
+            <HBox layoutX="749.0" layoutY="261.0" />
+            <Label fx:id="asteriskYear1" layoutX="858.0" layoutY="211.0" opacity="0.0" prefHeight="30.0" prefWidth="46.0" text="*" textFill="#e63c42">
+               <font>
+                  <Font name="Leelawadee UI Semilight" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="yearText2" layoutX="811.0" layoutY="377.0" opacity="0.0" text="Year" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Bold" size="22.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="iconDelete" fitHeight="30.0" fitWidth="30.0" layoutX="804.0" layoutY="338.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/MaterialSymbolsDelete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="iconAdd2" fitHeight="30.0" fitWidth="30.0" layoutX="63.0" layoutY="338.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/MdiPlusCircleOutline%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="iconDelete2" fitHeight="30.0" fitWidth="30.0" layoutX="815.0" layoutY="458.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/MaterialSymbolsDelete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="backExperiences" fitHeight="52.0" fitWidth="53.0" layoutX="37.0" layoutY="25.0">
+               <image>
+                  <Image url="@../images/IconamoonArrowLeft6Circle.png" />
+               </image>
+            </ImageView>
+            <Pane fx:id="paneForm" layoutX="50.0" layoutY="135.0" prefHeight="395.0" prefWidth="1130.0">
+               <children>
+                  <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutX="0.0" layoutY="0.0" prefHeight="391.0" prefWidth="1125.0">
+                     <content>
+                        <VBox fx:id="background" prefHeight="407.0" prefWidth="1121.0">
+                           <children>
+                              <VBox fx:id="languagesContainer" prefHeight="12.0" prefWidth="1090.0" />
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </Pane>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
    </children>
 </Pane>

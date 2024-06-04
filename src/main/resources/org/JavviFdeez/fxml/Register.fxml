@@ -67,7 +67,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="388.0" layoutY="291.0" opacity="0.99" prefHeight="450.0" prefWidth="763.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #a896cd; -fx-border-radius: 25;">
+      <Pane layoutX="388.0" layoutY="291.0" opacity="0.99" prefHeight="450.0" prefWidth="763.0" style="-fx-background-color: #292828; -fx-background-radius: 10; -fx-border-color: #a896cd; -fx-border-radius: 10;">
          <children>
             <Label layoutX="457.0" layoutY="70.0" text="Hi, Welcome to CV Generator" textFill="WHITE">
                <font>
@@ -85,8 +85,8 @@
                   <Font name="Roboto Bold" size="35.0" />
                </font>
             </Label>
-            <TextField fx:id="emailTextField" layoutX="406.0" layoutY="164.0" prefHeight="53.0" prefWidth="330.0" style="-fx-background-color: #777777; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-padding: 15;" />
-            <PasswordField fx:id="passwordField" layoutX="406.0" layoutY="261.0" prefHeight="53.0" prefWidth="330.0" style="-fx-background-color: #777777; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-padding: 15;" />
+            <TextField fx:id="emailTextField" layoutX="406.0" layoutY="164.0" prefHeight="53.0" prefWidth="330.0" style="-fx-background-color: #777777; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10; -fx-padding: 15;" />
+            <PasswordField fx:id="passwordField" layoutX="406.0" layoutY="261.0" prefHeight="53.0" prefWidth="330.0" style="-fx-background-color: #777777; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10; -fx-padding: 15;" />
             <ImageView fx:id="emailNoVisible" fitHeight="25.0" fitWidth="25.0" layoutX="427.0" layoutY="132.0">
                <image>
                   <Image url="@../images/PhUserBold.png" />

@@ -149,17 +149,17 @@
                   <Font name="Roboto Bold" size="35.0" />
                </font>
             </Label>
-            <TextField fx:id="nameTextField" layoutX="66.0" layoutY="173.0" prefHeight="21.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 15;" text="Fist Name*">
+            <TextField fx:id="nameTextField" layoutX="66.0" layoutY="173.0" prefHeight="21.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10; -fx-padding: 15;" text="Fist Name*">
                <font>
                   <Font name="Leelawadee UI Semilight" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="LastNameTextField" layoutX="413.0" layoutY="173.0" prefHeight="5.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 15;" text=" Last Name*">
+            <TextField fx:id="LastNameTextField" layoutX="413.0" layoutY="173.0" prefHeight="5.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10; -fx-padding: 15;" text=" Last Name*">
                <font>
                   <Font name="Leelawadee UI Semilight" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="locationTextField" layoutX="67.0" layoutY="276.0" prefHeight="49.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 15;" text="Location*">
+            <TextField fx:id="locationTextField" layoutX="67.0" layoutY="276.0" prefHeight="49.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10; -fx-padding: 15;" text="Location*">
                <font>
                   <Font name="Leelawadee UI Semilight" size="12.0" />
                </font>
@@ -184,7 +184,7 @@
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="mobileTextField" layoutX="413.0" layoutY="276.0" prefHeight="5.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 15;" text="Mobile*">
+            <TextField fx:id="mobileTextField" layoutX="413.0" layoutY="276.0" prefHeight="5.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10; -fx-padding: 15;" text="Mobile*">
                <font>
                   <Font name="Leelawadee UI Semilight" size="12.0" />
                </font>
@@ -194,7 +194,7 @@
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="extraTextField" layoutX="413.0" layoutY="391.0" prefHeight="49.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 15;" text="Extra">
+            <TextField fx:id="extraTextField" layoutX="413.0" layoutY="391.0" prefHeight="49.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10; -fx-padding: 15;" text="Extra">
                <font>
                   <Font name="Leelawadee UI Semilight" size="12.0" />
                </font>
@@ -204,7 +204,7 @@
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="linkedinTextField" layoutX="67.0" layoutY="391.0" prefHeight="5.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 15;" text="LinkedIn*">
+            <TextField fx:id="linkedinTextField" layoutX="67.0" layoutY="391.0" prefHeight="5.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10; -fx-padding: 15;" text="LinkedIn*">
                <font>
                   <Font name="Leelawadee UI Semilight" size="12.0" />
                </font>
@@ -214,7 +214,7 @@
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="occupationTextField" layoutX="748.0" layoutY="172.0" prefHeight="49.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 15;" text="Occupation*">
+            <TextField fx:id="occupationTextField" layoutX="748.0" layoutY="172.0" prefHeight="49.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10; -fx-padding: 15;" text="Occupation*">
                <font>
                   <Font name="Leelawadee UI Semilight" size="12.0" />
                </font>
@@ -225,7 +225,7 @@
                   <Font name="Roboto Bold" size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="emailText" layoutX="748.0" layoutY="275.0" prefHeight="49.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-padding: 15;" text="Email*">
+            <TextField fx:id="emailText" layoutX="748.0" layoutY="275.0" prefHeight="49.0" prefWidth="281.0" style="-fx-background-color: #B4B4B4; -fx-background-radius: 10; -fx-border-color: white; -fx-border-radius: 10; -fx-padding: 15;" text="Email*">
                <font>
                   <Font name="Leelawadee UI Semilight" size="12.0" />
                </font>

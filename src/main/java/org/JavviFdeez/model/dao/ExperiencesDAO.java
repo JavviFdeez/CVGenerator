@@ -82,43 +82,59 @@ public class ExperiencesDAO implements iExperiencesDAO {
     }
 
     /**
-     * @param exp
+     * @param id
+     * @param updatedExp
      * @return
      * @throws SQLException
      * @Author: JavviFdeez
      * Método para ACTUALIZAR una experiencia en la base de datos.
      */
     @Override
-    public Experiences update(int id, Experiences exp) throws SQLException {
+    public Experiences update(int id, Experiences updatedExp) throws SQLException {
         // Habilitar la transacción
         conn.setAutoCommit(false);
+
+        boolean isUpdated = false;
 
         // ==============================================
         // Actualizar la experiencia en la base de datos
         // ==============================================
         try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
-            pst.setString(1, exp.getName());
-            pst.setString(2, exp.getDuration());
-            pst.setString(3, exp.getCompany());
-            pst.setString(4, exp.getLocation());
-            pst.setString(5, exp.getYear());
-            pst.setInt(7, id);
+            pst.setString(1, updatedExp.getName());
+            pst.setString(2, updatedExp.getDuration());
+            pst.setString(3, updatedExp.getCompany());
+            pst.setString(4, updatedExp.getLocation());
+            pst.setString(5, updatedExp.getYear());
+            pst.setInt(6, id);
 
             // =======================
             // Ejecutar la consulta
             // =======================
             int rowsAffected = pst.executeUpdate();
 
-            // ==============================================================
-            // Si no se insertó ninguna experiencia, mostrar mensaje de error
-            // ==============================================================
-            if (rowsAffected == 0) {
-                throw new SQLException("❌ Error al insertar, no se inserto ninguna experiencia.");
+            // Verificar si se actualizó al menos una fila
+            if (rowsAffected > 0) {
+                isUpdated = true;
+                // Realizar commit
+                conn.commit();
+            } else {
+                // Si no se actualizó ninguna fila, hacer rollback
+                conn.rollback();
             }
-
+        } catch (SQLException e) {
+            // En caso de error, hacer rollback
+            conn.rollback();
+            throw new SQLException("Error al actualizar el experiencia: " + e.getMessage(), e);
+        } finally {
+            try {
+                // Restaurar la autoconfirmación
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                throw new SQLException("Error al restaurar la autoconfirmación: " + ex.getMessage(), ex);
+            }
         }
 
-        return exp;
+        return updatedExp;
     }
 
     /**

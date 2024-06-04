@@ -20,6 +20,8 @@ public class Courses {
         this.duration = duration;
     }
 
+    public Courses() { }
+
     // ======================
     // Getters and Setters
     // ======================

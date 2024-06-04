@@ -3,12 +3,15 @@ package org.JavviFdeez.controller;
 import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.LanguagesDAO;
+import org.JavviFdeez.model.entity.Courses;
 import org.JavviFdeez.model.entity.Languages;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -49,13 +52,13 @@ public class LanguagesController implements Initializable {
     }
 
     /**
-     * @param id la lengua que se va a actualizar
+     * @param updateLanguages la lengua que se va a actualizar
      * @Author: JavviFdeez
      * Método que ACTUALIZAR una lengua en la base de datos y muestra un mensaje de إxito o error.
      */
-    public void updateLanguages(int id, Languages updateLanguages) {
+    public void updateLanguages(Languages updateLanguages) {
         try {
-            Languages updatedLanguages = languagesDAO.update(id, updateLanguages);
+            Languages updatedLanguages = languagesDAO.update(updateLanguages.getLang_id(), updateLanguages);
             if (updatedLanguages != null) {
                 // =========================================================
                 // La actualización fue exitosa, mostrar mensaje de إxito
@@ -157,32 +160,28 @@ public class LanguagesController implements Initializable {
         }
     }
 
-    public boolean saveDataToDatabase(String spanish, String english, String french, String spanish1, String english1, String french1, String spanish2, String english2, String french2) throws SQLException {
-        // Guardar los datos en la base de datos
-        try {
-            if (conn == null || conn.isClosed()) {
-                conn = ConnectionMariaDB.getConnection();
-            }
+    public List<Languages> getLanguagesById(int contactId) throws SQLException {
+        List<Languages> languagesList = new ArrayList<>();
+        String query = "SELECT * FROM cvv_languages WHERE contact_id = ?";
 
-            // Preparar la consulta SQL para insertar los datos
-            String query = "INSERT INTO cvv_languages (spanish, english, french) VALUES (?, ?, ?), (?, ?, ?), (?, ?, ?)";
-            try (PreparedStatement pst = conn.prepareStatement(query)) {
-                pst.setString(1, spanish);
-                pst.setString(2, english);
-                pst.setString(3, french);
-                pst.setString(4, spanish1);
-                pst.setString(5, english1);
-                pst.setString(6, french1);
-                pst.setString(7, spanish2);
-                pst.setString(8, english2);
-                pst.setString(9, french2);
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, contactId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Obtener los datos de cada languages
+                    int langId = resultSet.getInt("lang_id");
+                    int spanish = resultSet.getInt("spanish");
+                    int english = resultSet.getInt("english");
+                    int french = resultSet.getInt("french");
 
-                pst.executeUpdate();
-                return true;
+                    // Crear un objeto Courses con los datos obtenidos y agregarlo a la lista
+                    Languages languages = new Languages(langId, spanish, english, french);
+                    languagesList.add(languages);
+                }
             }
-        } catch (SQLException e) {
-            throw e;
         }
+
+        return languagesList;
     }
 
     @Override

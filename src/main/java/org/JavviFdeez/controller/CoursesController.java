@@ -4,11 +4,15 @@ import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.CoursesDAO;
 import org.JavviFdeez.model.entity.Courses;
+import org.JavviFdeez.model.entity.Experiences;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CoursesController implements Initializable {
@@ -51,16 +55,16 @@ public class CoursesController implements Initializable {
     }
 
     /**
-     * @param id el curso que se va a actualizar
+     * @param updatedCourses el curso que se va a actualizar
      * @Author: JavviFdeez
      * Metodo para mostrar un mensaje de ACTUALIZAR un nuevo curso en la base de datos
      */
-    public void updateCourses(int id, Courses updatedCourses) {
+    public void updateCourses(Courses updatedCourses) {
         try {
             // ==========================================
             // Actualizar el curso en la base de datos
             // ==========================================
-            coursesDAO.update(id, updatedCourses);
+            coursesDAO.update(updatedCourses.getCourse_id(), updatedCourses);
             // ===========================================================
             // Si la actualizacion es exitosa, mostrar mensaje de exito.
             // ===========================================================
@@ -149,29 +153,28 @@ public class CoursesController implements Initializable {
         }
     }
 
-    public boolean saveDataToDatabase(String name, Integer duration, String name1, Integer duration1, String name2, Integer duration2) throws SQLException {
-        // Guardar los datos en la base de datos
-        try {
-            if (conn == null || conn.isClosed()) {
-                conn = ConnectionMariaDB.getConnection();
-            }
+    public List<Courses> getCoursesById(int contactId) throws SQLException {
+        List<Courses> coursesList = new ArrayList<>();
+        String query = "SELECT * FROM cvv_courses WHERE contact_id = ?";
 
-            // Preparar la consulta SQL para insertar los datos
-            String query = "INSERT INTO cvv_courses (name, duration) VALUES (?, ?,) (?, ?), (?, ?)";
-            try (PreparedStatement pst = conn.prepareStatement(query)) {
-                pst.setString(1, name);
-                pst.setInt(2, duration);
-                pst.setString(5, name1);
-                pst.setInt(6, duration1);
-                pst.setString(9, name2);
-                pst.setInt(10, duration2);
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, contactId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Obtener los datos de cada course
+                    int coursesId = resultSet.getInt("course_id");
+                    String name = resultSet.getString("name");
+                    int duration = resultSet.getInt("duration");
 
-                pst.executeUpdate();
-                return true;
+
+                    // Crear un objeto Courses con los datos obtenidos y agregarlo a la lista
+                    Courses courses = new Courses(coursesId, name, duration);
+                    coursesList.add(courses);
+                }
             }
-        } catch (SQLException e) {
-            throw e;
         }
+
+        return coursesList;
     }
 
     @Override

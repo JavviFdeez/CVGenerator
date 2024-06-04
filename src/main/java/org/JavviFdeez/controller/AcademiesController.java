@@ -52,16 +52,16 @@ public class AcademiesController extends AcademiesControllerAbstract implements 
     }
 
     /**
-     * @param id la academia que se va a actualizar
+     * @param updatedAcademies la academia que se va a actualizar
      * @Author: JavviFdeez
      * Método que ACTUALIZAR una academia en la base de datos y muestra un mensaje de éxito o error.
      */
-    public void updateAcademies(int id, Academies updatedAcademies) {
+    public void updateAcademies(Academies updatedAcademies) {
         try {
             // =========================================
             // Actualizar el academia en la base de datos
             // =========================================
-            academiesDAO.update(id, updatedAcademies);
+            academiesDAO.update(updatedAcademies.getAcademies_id(), updatedAcademies);
 
             // ======================================================
             // Si el guardado es exitoso, mostrar mensaje de exito.
@@ -157,43 +157,6 @@ public class AcademiesController extends AcademiesControllerAbstract implements 
             e.printStackTrace();
         }
         return null;
-    }
-
-    public boolean saveDataToDatabase(int contactId, String name, String entity, String location, String year, String name1, String entity1, String location1, String year1, String name2, String entity2, String location2, String year2) throws SQLException {
-        // Guardar los datos en la base de datos
-        try {
-            if (conn == null || conn.isClosed()) {
-                conn = ConnectionMariaDB.getConnection();
-            }
-
-            // Preparar la consulta SQL
-            String query = "INSERT INTO cvv_academies (contact_id, name, entity, location, year) VALUES (?, ?, ?, ?, ?), (?, ?, ?, ?, ?), (?, ?, ?, ?, ?)";
-            try (PreparedStatement pst = conn.prepareStatement(query)) {
-                // Establecer los parámetros de la consulta
-                pst.setInt(1, contactId);
-                pst.setString(2, name);
-                pst.setString(3, entity);
-                pst.setString(4, location);
-                pst.setString(5, year);
-                pst.setInt(6, contactId);
-                pst.setString(7, name1);
-                pst.setString(8, entity1);
-                pst.setString(9, location1);
-                pst.setString(10, year1);
-                pst.setInt(11, contactId);
-                pst.setString(12, name2);
-                pst.setString(13, entity2);
-                pst.setString(14, location2);
-                pst.setString(15, year2);
-
-                // Ejecutar la consulta y verificar si se insertaron filas
-                int rowsInserted = pst.executeUpdate();
-                return rowsInserted > 0;
-            }
-
-        } catch (SQLException e) {
-            throw e;
-        }
     }
 
     public List<Academies> getAcademiesById(int contactId) throws SQLException {

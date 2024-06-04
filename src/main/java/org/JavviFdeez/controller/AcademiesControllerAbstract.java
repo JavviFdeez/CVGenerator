@@ -17,11 +17,11 @@ public abstract class AcademiesControllerAbstract {
     public abstract void saveAcademies(Academies academies);
 
     /**
-     * @param id la academia que se va a actualizar
+     * @param updatedAcademies la academia que se va a actualizar
      * @Author: JavviFdeez
      * Método que ACTUALIZAR una academia en la base de datos y muestra un mensaje de éxito o error.
      */
-    public abstract void updateAcademies(int id, Academies updatedAcademies);
+    public abstract void updateAcademies(Academies updatedAcademies);
 
     /**
      * @param id la academia que se va a eliminar

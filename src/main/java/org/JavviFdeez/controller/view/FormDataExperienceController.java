@@ -4,360 +4,342 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.JavviFdeez.controller.AcademiesController;
 import org.JavviFdeez.controller.ExperiencesController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
-import org.JavviFdeez.model.entity.Academies;
 import org.JavviFdeez.model.entity.Experiences;
 import org.JavviFdeez.model.entity.Session;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class FormDataExperienceController implements Initializable {
-
-    @FXML
-    private TextField nameTextField;
-
-    @FXML
-    private TextField entityTextField;
-
-    @FXML
-    private TextField locationTextField;
-
-    @FXML
-    private ComboBox<String> yearComboBox;
-
-    @FXML
-    private Button experiencedelete;
-
-    @FXML
-    private ImageView iconAdd;
-
-    @FXML
-    private ImageView iconAdd2;
-
-    @FXML
-    private Button experienceAdd;
-
-    @FXML
-    private ImageView iconDelete1;
-
-    @FXML
-    private ImageView iconDelete2;
-
 
     @FXML
     private Button buttonSaveData;
 
     @FXML
-    private ImageView checkContact;
+    private ImageView checkAcademies;
 
     @FXML
-    private TextField nameTextField1;
+    private ImageView backAcademies;
 
     @FXML
-    private TextField entityTextField1;
-
+    private Pane paneForm;
     @FXML
-    private TextField locationTextField1;
-
-    @FXML
-    private ComboBox<String> yearComboBox1;
-
-    @FXML
-    private Button experiencedelete2;
-
-    @FXML
-    private Button experiencedd1;
-
-    @FXML
-    private Label nameText1;
-
-    @FXML
-    private Label entityText1;
-
-    @FXML
-    private Label locationText1;
-
-    @FXML
-    private Label yearText1;
-
-    @FXML
-    private TextField nameTextField2;
-
-    @FXML
-    private TextField entityTextField2;
-
-    @FXML
-    private TextField locationTextField2;
-
-    @FXML
-    private ComboBox<String> yearComboBox2;
-
-    @FXML
-    private Label nameText2;
-
-    @FXML
-    private Label entityText2;
-
-    @FXML
-    private Label locationText2;
-
-    @FXML
-    private Label yearText2;
+    private VBox experienceContainer;
 
 
     private ExperiencesController experiencesController;
-
+    private LogInController logInController;
+    private AcademiesController academiesController;
     private Connection conn;
-
+    private Session session;
+    private List<GridPane> experienceForms = new ArrayList<>();
+    private List<TextField> nameTextFields = new ArrayList<>();
+    private List<TextField> durationTextFields = new ArrayList<>();
+    private List<TextField> companyTextFields = new ArrayList<>();
+    private List<TextField> locationTextFields = new ArrayList<>();
+    private List<ComboBox<String>> yearComboBoxes = new ArrayList<>();
 
     public FormDataExperienceController() {
         this.experiencesController = new ExperiencesController();
+        this.session = Session.getInstance();
+        this.logInController = new LogInController();
         this.conn = ConnectionMariaDB.getConnection();
+        this.academiesController = new AcademiesController();
+    }
+
+    public void setAcademiesController(AcademiesController academiesController) throws SQLException {
+        this.academiesController = academiesController;
+        loadExperienceData();
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Asegurarse de que ningún campo de texto esté seleccionado al inicio con una pequeña demora
-        Platform.runLater(() -> nameTextField.getParent().requestFocus());
-        loadExperienceData();
-        initializeYearComboBox();
-        handleFormData();
-        buttonSaveData.setOnAction(event -> changeSceneToFormData());
-        experienceAdd.setOnMouseClicked(event -> handleAddExperience());
-        experiencedelete.setOnMouseClicked(event -> handleDeleteExperience());
-
-        experiencedd1.setOnMouseClicked(event -> handleAddExperience1());
-        experiencedelete2.setOnMouseClicked(event -> handleDeleteExperience1());
+        Platform.runLater(() -> checkAcademies.getParent().requestFocus());
+        buttonSaveData.setOnAction(event -> handleFormaDataSave());
+        checkAcademies.setOnMouseClicked(event -> handleBackAcademies());
+        backAcademies.setOnMouseClicked(event -> handleBackAcademies());
+        handleAddExperienceForm();
     }
 
-    private void handleAddExperience() {
-        experiencedelete.setOpacity(1);
-        experiencedd1.setOpacity(1);
-        iconAdd2.setOpacity(1);
-        iconDelete1.setOpacity(1);
-        nameTextField1.setOpacity(1);
-        entityTextField1.setOpacity(1);
-        locationTextField1.setOpacity(1);
-        yearComboBox1.setOpacity(1);
-        experienceAdd.setOpacity(1);
-        nameText1.setOpacity(1);
-        entityText1.setOpacity(1);
-        locationText1.setOpacity(1);
-        yearText1.setOpacity(1);
-        iconDelete1.setOpacity(1);
+    @FXML
+    private void handleAddExperienceForm() {
+        // Crear y añadir un nuevo formulario
+        createExperienceForm();
     }
 
-    private void handleDeleteExperience() {
-        // Restablecer los campos de texto a vacío
-        nameTextField1.clear();
-        entityTextField1.clear();
-        locationTextField1.clear();
-        yearComboBox1.getSelectionModel().clearSelection();
-
-
-        // Restablecer la opacidad a 0
-        iconAdd2.setOpacity(0);
-        iconDelete1.setOpacity(0);
-        experiencedd1.setOpacity(0);
-        nameTextField1.setOpacity(0);
-        entityTextField1.setOpacity(0);
-        locationTextField1.setOpacity(0);
-        yearComboBox1.setOpacity(0);
-        experiencedelete.setOpacity(0);
-        nameText1.setOpacity(0);
-        entityText1.setOpacity(0);
-        locationText1.setOpacity(0);
-        yearText1.setOpacity(0);
-        showAlert("Experience Deleted", "Experience Deleted", Alert.AlertType.INFORMATION);
+    @FXML
+    private void handleDeleteExperienceForm() throws SQLException {
+        // Eliminar un nuevo formulario
+        handleDeleteExperience();
     }
 
-    private void handleAddExperience1() {
-        experiencedelete.setOpacity(1);
-        iconDelete2.setOpacity(1);
-        nameTextField2.setOpacity(1);
-        entityTextField2.setOpacity(1);
-        locationTextField2.setOpacity(1);
-        yearComboBox2.setOpacity(1);
-        nameText2.setOpacity(1);
-        entityText2.setOpacity(1);
-        locationText2.setOpacity(1);
-        yearText2.setOpacity(1);
-        experiencedelete2.setOpacity(1);
-    }
+    private void createExperienceForm() {
+        // Crear campos de Name, Entity, Location y Year
+        TextField nameTextField = new TextField();
+        VBox.setMargin(nameTextField, new Insets(0, 100, 0, 0));
+        nameTextField.setStyle(
+                "-fx-font-weight: bold; " +
+                        "-fx-background-color: #B4B4B4; " +
+                        "-fx-background-radius: 10; " +
+                        "-fx-border-color: white; " +
+                        "-fx-border-radius: 10; " +
+                        "-fx-prompt-text-fill: gray;"
+        );
+        nameTextField.setPromptText("Name");
 
-    private void handleDeleteExperience1() {
-        // Restablecer los campos de texto a vacío
-        nameTextField2.clear();
-        entityTextField2.clear();
-        locationTextField2.clear();
-        yearComboBox2.getSelectionModel().clearSelection();
+        TextField durationTextField = new TextField();
+        durationTextField.setPromptText("Duration(months)");
+        VBox.setMargin(durationTextField, new Insets(0, 100, 0, 0));
+        durationTextField.setStyle(
+                "-fx-background-color: #B4B4B4; " +
+                        "-fx-background-radius: 10; " +
+                        "-fx-border-color: white; " +
+                        "-fx-border-radius: 10; " +
+                        "-fx-prompt-text-fill: gray;"
+        );
 
-        // Restablecer la opacidad a 0
-        iconDelete2.setOpacity(0);
-        experiencedelete2.setOpacity(0);
-        nameTextField2.setOpacity(0);
-        entityTextField2.setOpacity(0);
-        locationTextField2.setOpacity(0);
-        yearComboBox2.setOpacity(0);
-        nameText2.setOpacity(0);
-        entityText2.setOpacity(0);
-        locationText2.setOpacity(0);
-        yearText2.setOpacity(0);
-        showAlert("Experience Deleted", "Experience Deleted", Alert.AlertType.INFORMATION);
-    }
 
-    private void initializeYearComboBox() {
-        yearComboBox.getItems().add("In progress...");
+        TextField companyTextField = new TextField();
+        companyTextField.setPromptText("Company");
+        VBox.setMargin(companyTextField, new Insets(0, 100, 0, 0));
+        companyTextField.setStyle(
+                "-fx-background-color: #B4B4B4; " +
+                        "-fx-background-radius: 10; " +
+                        "-fx-border-color: white; " +
+                        "-fx-border-radius: 10; " +
+                        "-fx-prompt-text-fill: gray;"
+        );
+
+        TextField locationTextField = new TextField();
+        locationTextField.setPromptText("Location");
+        VBox.setMargin(locationTextField, new Insets(0, 100, 0, 0));
+        locationTextField.setStyle(
+                "-fx-background-color: #B4B4B4; " +
+                        "-fx-background-radius: 10; " +
+                        "-fx-border-color: white; " +
+                        "-fx-border-radius: 10; " +
+                        "-fx-prompt-text-fill: gray;"
+        );
+
+        ComboBox<String> yearComboBox = new ComboBox<>();
         yearComboBox.getItems().addAll(
-                IntStream.rangeClosed(1980, 2024)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
+                "2024", "2023", "2022", "2021", "2020",
+                "2019", "2018", "2017", "2016", "2015",
+                "2014", "2013", "2012", "2011", "2010",
+                "2009", "2008", "2007", "2006", "2005",
+                "2004", "2003", "2002", "2001", "2000",
+                "1999", "1998", "1997", "1996", "1995",
+                "1994", "1993", "1992", "1991", "1990",
+                "1989", "1988", "1987", "1986", "1985",
+                "1984", "1983", "1982", "1981", "1980"
         );
 
-        yearComboBox1.getItems().add("In progress...");
-        yearComboBox1.getItems().addAll(
-                IntStream.rangeClosed(1980, 2024)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
+        VBox.setMargin(yearComboBox, new Insets(0, 100, 0, 0));yearComboBox.setStyle(
+                "-fx-background-color: #B4B4B4; " +
+                        "-fx-background-radius: 10; " +
+                        "-fx-border-color: white; " +
+                        "-fx-border-radius: 10; " +
+                        "-fx-prompt-text-fill: gray;"
+        );
+        yearComboBox.setPromptText("Year");
+        yearComboBox.setPrefWidth(200);
+
+        // Crear un GridPane para organizar los elementos
+        GridPane gridPane = new GridPane();
+        gridPane.setVgap(5);
+        gridPane.setHgap(5);
+        gridPane.getColumnConstraints().addAll(
+                new ColumnConstraints(),
+                new ColumnConstraints(),
+                new ColumnConstraints(),
+                new ColumnConstraints(),
+                new ColumnConstraints()
         );
 
-        yearComboBox2.getItems().add("In progress...");
-        yearComboBox2.getItems().addAll(
-                IntStream.rangeClosed(1980, 2024)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
-        );
+
+        // Crear etiquetas
+        Label nameLabel = new Label("NAME:");nameLabel.setStyle("-fx-font-size: 18px;");
+
+        Label durationLabel = new Label("DURATION:");durationLabel.setStyle("-fx-font-size: 18px;");
+
+        Label companyLabel = new Label("COMPANY:"); companyLabel.setStyle("-fx-font-size: 18px;");
+
+        Label locationLabel = new Label("LOCATION:"); locationLabel.setStyle("-fx-font-size: 18px;");
+
+        Label yearLabel = new Label("YEAR:");yearLabel.setStyle("-fx-font-size: 18px;");
+
+        // Agregar las etiquetas en la primera fila
+        gridPane.add(nameLabel, 0, 0);
+        gridPane.add(durationLabel, 1, 0);
+        gridPane.add(companyLabel, 2, 0);
+        gridPane.add(locationLabel, 3, 0);
+        gridPane.add(yearLabel, 4, 0);
+
+        // Añadir los campos de texto en la segunda fila
+        gridPane.add(nameTextField, 0, 1);
+        gridPane.add(durationTextField, 1, 1);
+        gridPane.add(companyTextField, 2, 1);
+        gridPane.add(locationTextField, 3, 1);
+        gridPane.add(yearComboBox, 4, 1);
+
+        // Ajustar las restricciones de columna para que se extiendan horizontalmente
+        for (ColumnConstraints constraint : gridPane.getColumnConstraints()) {
+            constraint.setHgrow(Priority.ALWAYS);
+        }
+
+        // Agregar los campos a las listas
+        nameTextFields.add(nameTextField);
+        durationTextFields.add(durationTextField);
+        companyTextFields.add(companyTextField);
+        locationTextFields.add(locationTextField);
+        yearComboBoxes.add(yearComboBox);
+
+        experienceForms.add(gridPane);
+        // Agregar el GridPane al VBox
+        experienceContainer.getChildren().add(gridPane);
     }
 
-    private void handleFormData() {
-        nameTextField.setOnMouseClicked(event -> handleTextFieldClick(nameTextField));
-        entityTextField.setOnMouseClicked(event -> handleTextFieldClick(entityTextField));
-        locationTextField.setOnMouseClicked(event -> handleTextFieldClick(locationTextField));
-        yearComboBox.setOnMouseClicked(event -> yearComboBox.show());
-        checkContact.setOnMouseClicked(event -> handleBackAcademies());
+    private void handleDeleteExperience() throws SQLException {
+        // Obtener el último formulario de experiencia agregado
+        GridPane lastExperienceForm = experienceForms.isEmpty() ? null : experienceForms.get(experienceForms.size() - 1);
 
-        nameTextField1.setOnMouseClicked(event -> handleTextFieldClick(nameTextField1));
-        entityTextField1.setOnMouseClicked(event -> handleTextFieldClick(entityTextField1));
-        locationTextField1.setOnMouseClicked(event -> handleTextFieldClick(locationTextField1));
-        yearComboBox1.setOnMouseClicked(event -> yearComboBox1.show());
 
-        nameTextField2.setOnMouseClicked(event -> handleTextFieldClick(nameTextField2));
-        entityTextField2.setOnMouseClicked(event -> handleTextFieldClick(entityTextField2));
-        locationTextField2.setOnMouseClicked(event -> handleTextFieldClick(locationTextField2));
-        yearComboBox2.setOnMouseClicked(event -> yearComboBox2.show());
+        if (lastExperienceForm != null) {
+            // Eliminar el GridPane del VBox
+            experienceContainer.getChildren().remove(lastExperienceForm);
+
+            // Eliminar el GridPane de la lista
+            experienceForms.remove(lastExperienceForm);
+        }
+
+
+        if (experiencesController.getExperienceById(session.getContactId()) != null) {
+            // Llamar al controlador para eliminar la experiencia
+            experiencesController.deleteExperiences(session.getContactId());
+        }
     }
 
-    private void handleTextFieldClick(TextField textField) {
-        textField.clear();
-    }
 
     private void handleFormaDataSave() {
-        // Recoger los datos de los campos iniciales
-        String name = nameTextField.getText().trim();
-        String duration = entityTextField.getText().trim();
-        String company = locationTextField.getText().trim();
-        String year = yearComboBox.getValue();
-        String name1 = nameTextField1.getText().trim();
-        String duration1 = entityTextField1.getText().trim();
-        String company1 = locationTextField1.getText().trim();
-        String year1 = yearComboBox1.getValue();
-        String name2 = nameTextField2.getText().trim();
-        String duration2 = entityTextField2.getText().trim();
-        String company2 = locationTextField2.getText().trim();
-        String year2 = yearComboBox2.getValue();
-
+        // Obtener el contact_id de la sesión actual
+        int contactId = session.getContactId();
 
         try {
-            boolean saveDataToDatabase = experiencesController.saveDataToDatabase(name, duration, company, year, name1, duration1, company1, year1, name2, duration2, company2, year2);
+            // Obtener todas las experiencias asociadas al contacto
+            List<Experiences> existingExperiences = experiencesController.getExperienceById(contactId);
 
-            if (saveDataToDatabase) {
-                showAlert("Éxito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
-                changeSceneToFormData();
-            } else {
-                showAlert("Error", "No se han podido guardar los datos", Alert.AlertType.ERROR);
+            for (int i = 0; i < experienceContainer.getChildren().size(); i++) {
+                Node node = experienceContainer.getChildren().get(i);
+                if (node instanceof GridPane) {
+                    GridPane gridPane = (GridPane) node;
+
+                    // Recoger los datos de cada experiencia utilizando las referencias guardadas
+                    TextField nameTextField = nameTextFields.get(i);
+                    TextField companyTextField = companyTextFields.get(i);
+                    TextField durationTextField = durationTextFields.get(i);
+                    TextField locationTextField = locationTextFields.get(i);
+                    ComboBox<String> yearComboBox = yearComboBoxes.get(i);
+
+                    // Crear un objeto Experiences con los datos recolectados
+                    Experiences experiences = new Experiences();
+                    experiences.setContact_id(contactId);
+                    experiences.setName(nameTextField.getText().trim());
+                    experiences.setCompany(companyTextField.getText());
+                    experiences.setDuration(durationTextField.getText().trim());
+                    experiences.setLocation(locationTextField.getText().trim());
+                    experiences.setYear(yearComboBox.getValue());
+
+                    if (i < existingExperiences.size()) {
+                        // Actualizar experiencia existente
+                        experiences.setExperience_id(existingExperiences.get(i).getExperience_id());
+                        experiencesController.updateExperiences(experiences);
+                        logInController.showAutoClosingAlert("AVISO: Experiencia se ha actualizado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        changeSceneToFormData();
+                    } else {
+                        // Insertar nueva experiencia
+                        experiencesController.saveExperiences(experiences);
+                        logInController.showAutoClosingAlert("AVISO: Experiencia se ha guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        changeSceneToFormData();
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: Error al guardar los datos de Experiencias.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 
-    private void setAcademyDataInFields(Academies academy, int count) {
-        // Establecer el texto de la etiqueta correspondiente
-        if (count == 1) {
-            nameTextField.setText(academy.getName());
-            entityTextField.setText(academy.getEntity());
-            locationTextField.setText(academy.getLocation());
-            //yearComboBox.setText(academy.getYear());
-        } else if (count == 2) {
-            nameTextField1.setText(academy.getName());
-            entityTextField1.setText(academy.getEntity());
-            locationTextField1.setText(academy.getLocation());
-            //yearComboBox1.setText(academy.getYear());
-        } else if (count == 3) {
-            nameTextField2.setText(academy.getName());
-            entityTextField2.setText(academy.getEntity());
-            locationTextField2.setText(academy.getLocation());
-            //yearComboBox2.setText(academy.getYear());
-        }
-    }
+    public void loadExperienceData() throws SQLException {
+        if (academiesController != null) {
+            // Obtener el contactId del usuario autenticado desde la sesión
+            int contactId = Session.getInstance().getContactId();
 
-    private void loadExperienceData() {
-        int contactId = Session.getInstance().getContactId();
+            // Obtener todas las experiencias asociadas con el contactId
+            List<Experiences> experiencesList = experiencesController.getExperienceById(contactId);
 
-        String query = "SELECT * FROM cvv_experiences WHERE contact_id = ?";
-        try (PreparedStatement pst = conn.prepareStatement(query)) {
-            pst.setInt(1, contactId);
-            ResultSet rs = pst.executeQuery();
+            // Verificar si se encontraron experiencias asociadas
+            if (experiencesList != null && !experiencesList.isEmpty()) {
+                // Recorrer todas las experiencias recuperadas
+                for (int i = 0; i < experiencesList.size(); i++) {
+                    Experiences experiences = experiencesList.get(i);
 
-            int academicCount = 0; // Contador para llevar la cuenta de las academias cargadas
+                    // Verificar si hay suficientes GridPane y campos de texto
+                    if (i < experienceForms.size()) {
+                        GridPane gridPane = experienceForms.get(i);
 
-            while (rs.next()) {
-                academicCount++;
+                        // Obtener los campos de texto correspondientes del GridPane actual
+                        TextField nameTextField = nameTextFields.get(i);
+                        TextField durationTextField = durationTextFields.get(i);
+                        TextField companyTextField = companyTextFields.get(i);
+                        TextField locationTextField = locationTextFields.get(i);
+                        ComboBox<String> yearComboBox = yearComboBoxes.get(i);
 
-                // Crear un objeto Academies con los datos recuperados de la base de datos
-                Experiences experiences = new Experiences(
-                        rs.getInt("contact_id"),
-                        rs.getString("name"),
-                        rs.getString("duration"),
-                        rs.getString("entity"),
-                        rs.getString("location"),
-                        rs.getString("year")
-                );
+                        // Cargar los datos de la experiencia en los campos de texto correspondientes
+                        nameTextField.setText(experiences.getName());
+                        durationTextField.setText(experiences.getDuration());
+                        companyTextField.setText(experiences.getCompany());
+                        locationTextField.setText(experiences.getLocation());
+                        yearComboBox.setValue(experiences.getYear());
+                    } else {
+                        // Si hay más experiencias que GridPane disponibles, se crea un nuevo GridPane y se cargan los datos
+                        createExperienceForm();
+                        GridPane gridPane = experienceForms.get(experienceForms.size() - 1);
+
+                        // Obtener los campos de texto correspondientes del nuevo GridPane
+                        TextField nameTextField = nameTextFields.get(nameTextFields.size() - 1);
+                        TextField durationTextField = durationTextFields.get(durationTextFields.size() - 1);
+                        TextField companyTextField = companyTextFields.get(companyTextFields.size() - 1);
+                        TextField locationTextField = locationTextFields.get(locationTextFields.size() - 1);
+                        ComboBox<String> yearComboBox = yearComboBoxes.get(yearComboBoxes.size() - 1);
+
+                        // Cargar los datos de la academia en los campos de texto correspondientes
+                        nameTextField.setText(experiences.getName());
+                        durationTextField.setText(experiences.getDuration());
+                        companyTextField.setText(experiences.getCompany());
+                        locationTextField.setText(experiences.getLocation());
+                        yearComboBox.setValue(experiences.getYear());
+                    }
+                }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-    }
-
-    private void showAlert(String error, String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(error);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     private void changeSceneToFormData() {
@@ -366,8 +348,12 @@ public class FormDataExperienceController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataCourses.fxml"));
             Parent root = loader.load();
 
-            // Obtener el escenario actual desde el emailTextField
-            Stage stage = (Stage) nameTextField.getScene().getWindow();
+            // Obtener el controlador de la nueva escena
+            FormDataCoursesController formDataCoursesController = loader.getController();
+            formDataCoursesController.setCoursesController(experiencesController);
+
+            // Obtener el escenario actual
+            Stage stage = (Stage) checkAcademies.getScene().getWindow();
 
             // Establecer la nueva escena en el escenario
             Scene scene = new Scene(root);
@@ -376,7 +362,9 @@ public class FormDataExperienceController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de Experience.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de Courses.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -386,8 +374,8 @@ public class FormDataExperienceController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataAcademies.fxml"));
             Parent root = loader.load();
 
-            // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
-            Stage stage = (Stage) nameTextField.getScene().getWindow();
+            // Obtener el escenario actual
+            Stage stage = (Stage) checkAcademies.getScene().getWindow();
 
             // Establecer la nueva escena en el escenario
             Scene scene = new Scene(root);
@@ -396,7 +384,7 @@ public class FormDataExperienceController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de academies.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la Academia.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 }

@@ -277,16 +277,17 @@ public class LogInController implements Initializable {
 
 
         DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.setStyle("-fx-font-size: 12px;" + cssStyle);
+
 
         // Establecer la altura mínima y máxima para controlar el tamaño vertical
         dialogPane.setMinHeight(80);
         dialogPane.setMaxHeight(150);
 
-        dialogPane.getScene().getRoot().setStyle(" -fx-background-radius: 15; -fx-background-color: transparent; -fx-border-radius: 15");
+        dialogPane.getScene().getRoot().setStyle(" -fx-background-radius: 15; -fx-background-color: transparent;");
+        dialogPane.setStyle("-fx-font-family: 'Roboto';");
         alert.getDialogPane().getScene().setFill(null);
 
-        alert.getDialogPane().setPrefSize(350, 1);
+        alert.getDialogPane().setPrefSize(500, 1);
 
         alert.show();
 

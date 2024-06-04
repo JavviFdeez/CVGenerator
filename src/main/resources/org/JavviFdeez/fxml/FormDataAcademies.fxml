@@ -4,20 +4,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.layout.Region?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1538.0" style="-fx-background-color: #242424;" stylesheets="@../css/FormDataAcademies.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.JavviFdeez.controller.view.FormDataAcademiesController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="798.0" prefWidth="1538.0" style="-fx-background-color: #242424;" stylesheets="@../css/FormDataAcademies.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.JavviFdeez.controller.view.FormDataAcademiesController">
    <children>
-      <ImageView fitHeight="795.0" fitWidth="1550.0" layoutX="-6.0">
+      <ImageView fitHeight="810.0" fitWidth="1550.0" layoutX="-3.0" layoutY="-14.0">
          <image>
-            <Image url="@../images/abstract-black-and-silver-backgr.png" />
+            <Image url="@../images/Sencillo%20Blanco%20y%20Claro%20Simple%20Presentación.png" />
          </image>
       </ImageView>
       <Pane opacity="0.95" prefHeight="113.0" prefWidth="1544.0" style="-fx-background-color: #404040;">
@@ -130,7 +131,7 @@
          </font>
       </Label>
       <Line endX="132.0" layoutX="1131.0" layoutY="151.0" startX="-50.79998779296875" stroke="#a896cd" strokeWidth="5.0" />
-      <Pane layoutX="158.0" layoutY="226.0" prefHeight="555.0" prefWidth="1223.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
+      <Pane layoutX="158.0" layoutY="226.0" prefHeight="557.0" prefWidth="1223.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
          <children>
 
             <Label layoutX="162.0" layoutY="23.0" text="Academies Details" textFill="WHITE">
@@ -229,6 +230,9 @@
                </ScrollPane>
             </Pane>
          </children>
+         <effect>
+            <DropShadow />
+         </effect>
       </Pane>
       <ImageView fx:id="checkContact" fitHeight="40.0" fitWidth="40.0" layoutX="236.0" layoutY="131.0">
          <image>

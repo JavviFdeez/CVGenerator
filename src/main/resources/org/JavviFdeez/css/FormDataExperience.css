@@ -94,3 +94,137 @@
     -fx-effect: dropshadow(three-pass-box, #a896cd, 10, 0, 0, 0);
     -fx-effect: innershadow(three-pass-box, #dedede, 10, 0, 0, 0);
 }
+.text-field {
+    -fx-font-family: 'Roboto';
+    -fx-font-weight: bold;
+}
+
+.combo-box {
+    -fx-font-family: 'Roboto';
+    -fx-font-weight: bold;
+}
+.label {
+    -fx-font-family: 'Roboto';
+    -fx-font-weight: bold;
+}
+#buttonDelete {
+    -fx-background-color: #424242;
+    -fx-background-radius: 5;
+    -fx-border-color: #a896cd;
+    -fx-border-radius: 5;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10 20;
+    -fx-font-family: "Roboto Bold";
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(three-pass-box, #a896cd, 10, 0, 0, 0);
+    -fx-translate-x: 0;
+    -fx-translate-y: 0;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition: transform 1s;
+    -fx-start-margin: 0 500 0 0;
+}
+
+#buttonDelete:hover {
+    -fx-background-color: linear-gradient(to left, #575757, #a896cd);
+    -fx-background-radius: 5;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 5;
+    -fx-font-size: 13px;
+    -fx-background-size: 0% 100%;
+    -fx-text-fill: #000000;
+    -fx-padding: 10 20;
+    -fx-font-family: "Roboto Bold";
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5) , 3, 0.0 , 0 , 1 );
+    -fx-translate-x: 0;
+    -fx-translate-y: 0;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-background-position: right center;
+    -fx-transition: -fx-background-size 25s;
+}
+
+#buttonDelete:hover:pressed {
+    -fx-background-color: #a896cd;
+    -fx-text-fill: #000000;
+    -fx-border-color: #ffffff;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}
+#buttonAdd {
+    -fx-background-color: #424242;
+    -fx-background-radius: 5;
+    -fx-border-color: #a896cd;
+    -fx-border-radius: 5;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10 20;
+    -fx-font-family: "Roboto Bold";
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(three-pass-box, #a896cd, 10, 0, 0, 0);
+    -fx-translate-x: 0;
+    -fx-translate-y: 0;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition: transform 1s;
+}
+
+#buttonAdd:hover {
+    -fx-background-color: linear-gradient(to right, #575757, #a896cd);
+    -fx-background-radius: 5;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 5;
+    -fx-font-size: 13px;
+    -fx-background-size: 0% 100%;
+    -fx-text-fill: #000000;
+    -fx-padding: 10 20;
+    -fx-font-family: "Roboto Bold";
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5) , 3, 0.0 , 0 , 1 );
+    -fx-translate-x: 0;
+    -fx-translate-y: 0;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-background-position: right center;
+    -fx-transition: -fx-background-size 25s;
+}
+
+#buttonAdd:hover:pressed {
+    -fx-background-color: #a896cd;
+    -fx-text-fill: #000000;
+    -fx-border-color: #ffffff;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}
+#experienceContainer {
+    -fx-background: #575757;
+    -fx-border-color: #575757;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+#paneForm {
+    -fx-background: #575757;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+#background{
+    -fx-background: #575757;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-border-color: #575757;
+}
+#scrollPane{
+    -fx-background: #575757;
+    -fx-border-color: #575757;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(three-pass-box, #494949, 10, 0, 0, 0);
+    fx-effect: innershadow(three-pass-box, #494949, 10, 0, 0, 0);
+}

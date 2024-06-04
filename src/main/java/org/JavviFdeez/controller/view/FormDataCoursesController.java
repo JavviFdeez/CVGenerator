@@ -4,16 +4,22 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.JavviFdeez.controller.AcademiesController;
 import org.JavviFdeez.controller.CoursesController;
 import org.JavviFdeez.controller.ExperiencesController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.entity.Academies;
 import org.JavviFdeez.model.entity.Courses;
+import org.JavviFdeez.model.entity.Experiences;
 import org.JavviFdeez.model.entity.Session;
 
 import java.io.IOException;
@@ -22,36 +28,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FormDataCoursesController implements Initializable {
-
-    @FXML
-    private TextField nameTextField;
-
-    @FXML
-    private TextField entityTextField;
-
-    @FXML
-    private Button experiencedelete;
-
-    @FXML
-    private ImageView iconAdd;
-
-    @FXML
-    private ImageView iconAdd2;
-
-    @FXML
-    private Button experienceAdd;
-
-    @FXML
-    private ImageView iconDelete1;
-
-    @FXML
-    private ImageView iconDelete2;
-
 
     @FXML
     private Button buttonSaveData;
@@ -60,207 +45,246 @@ public class FormDataCoursesController implements Initializable {
     private ImageView checkExperience;
 
     @FXML
-    private TextField nameTextField1;
+    private ImageView backExperiences;
 
     @FXML
-    private TextField entityTextField1;
-
+    private Pane paneForm;
     @FXML
-    private Button experiencedelete1;
-
-    @FXML
-    private Button experiencedd1;
-
-    @FXML
-    private Label nameText1;
-
-    @FXML
-    private Label entityText1;
-
-    @FXML
-    private TextField nameTextField2;
-
-    @FXML
-    private TextField entityTextField2;
-
-    @FXML
-    private Label nameText2;
-
-    @FXML
-    private Label entityText2;
+    private VBox coursesContainer;
 
     private CoursesController coursesController;
-
+    private ExperiencesController experiencesController;
+    private LogInController logInController;
     private Connection conn;
+    private Session session;
+    private List<GridPane> coursesForms = new ArrayList<>();
+    private List<TextField> nameTextFields = new ArrayList<>();
+    private List<TextField> durationTextFields = new ArrayList<>();
+    ;
 
 
     public FormDataCoursesController() {
         this.coursesController = new CoursesController();
+        this.experiencesController = new ExperiencesController();
+        this.logInController = new LogInController();
         this.conn = ConnectionMariaDB.getConnection();
+        this.session = Session.getInstance();
     }
 
+    public void setCoursesController(ExperiencesController experiencesController) throws SQLException {
+        this.experiencesController = experiencesController;
+        loadCoursesData();
+        handleAddCoursesForm();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Asegurarse de que ningún campo de texto esté seleccionado al inicio con una pequeña demora
-        Platform.runLater(() -> nameTextField.getParent().requestFocus());
-        loadExperienceData();
-        handleFormData();
-        buttonSaveData.setOnAction(event -> changeSceneToFormData());
-        experienceAdd.setOnMouseClicked(event -> handleAddExperience());
-        experiencedelete.setOnMouseClicked(event -> handleDeleteExperience());
-
-        experiencedd1.setOnMouseClicked(event -> handleAddExperience1());
-        experiencedelete1.setOnMouseClicked(event -> handleDeleteExperience1());
-    }
-
-    private void handleAddExperience() {
-        experiencedelete.setOpacity(1);
-        experiencedd1.setOpacity(1);
-        iconAdd2.setOpacity(1);
-        iconDelete1.setOpacity(1);
-        nameTextField1.setOpacity(1);
-        entityTextField1.setOpacity(1);
-        experienceAdd.setOpacity(1);
-        nameText1.setOpacity(1);
-        entityText1.setOpacity(1);
-        iconDelete1.setOpacity(1);
-    }
-
-    private void handleDeleteExperience() {
-        // Restablecer los campos de texto a vacío
-        nameTextField1.clear();
-        entityTextField1.clear();
-
-
-        // Restablecer la opacidad a 0
-        iconAdd2.setOpacity(0);
-        iconDelete1.setOpacity(0);
-        experiencedd1.setOpacity(0);
-        nameTextField1.setOpacity(0);
-        entityTextField1.setOpacity(0);
-        experiencedelete.setOpacity(0);
-        nameText1.setOpacity(0);
-        entityText1.setOpacity(0);
-        showAlert("Contact Deleted", "Contact Deleted", Alert.AlertType.INFORMATION);
-    }
-
-    private void handleAddExperience1() {
-        experiencedelete.setOpacity(1);
-        iconDelete2.setOpacity(1);
-        nameTextField2.setOpacity(1);
-        entityTextField2.setOpacity(1);
-        nameText2.setOpacity(1);
-        entityText2.setOpacity(1);
-        experiencedelete1.setOpacity(1);
-    }
-
-    private void handleDeleteExperience1() {
-        // Restablecer los campos de texto a vacío
-        nameTextField2.clear();
-        entityTextField2.clear();
-
-        // Restablecer la opacidad a 0
-        iconDelete2.setOpacity(0);
-        experiencedelete1.setOpacity(0);
-        nameTextField2.setOpacity(0);
-        entityTextField2.setOpacity(0);
-
-        nameText2.setOpacity(0);
-        entityText2.setOpacity(0);
-        showAlert("Contact Deleted", "Contact Deleted", Alert.AlertType.INFORMATION);
-    }
-
-
-
-    private void handleFormData() {
-        nameTextField.setOnMouseClicked(event -> handleTextFieldClick(nameTextField));
-        entityTextField.setOnMouseClicked(event -> handleTextFieldClick(entityTextField));
+        Platform.runLater(() -> checkExperience.getParent().requestFocus());;
+        buttonSaveData.setOnAction(event -> handleFormaDataSave());
         checkExperience.setOnMouseClicked(event -> handleBackExperience());
-
-        nameTextField1.setOnMouseClicked(event -> handleTextFieldClick(nameTextField1));
-        entityTextField1.setOnMouseClicked(event -> handleTextFieldClick(entityTextField1));
-
-        nameTextField2.setOnMouseClicked(event -> handleTextFieldClick(nameTextField2));
-        entityTextField2.setOnMouseClicked(event -> handleTextFieldClick(entityTextField2));
+        backExperiences.setOnMouseClicked(event -> handleBackExperience());
+        handleAddCoursesForm();
     }
 
-    private void handleTextFieldClick(TextField textField) {
-        textField.clear();
+    @FXML
+    private void handleAddCoursesForm() {
+        // Crear y añadir un nuevo formulario
+        createCoursesForm();
+    }
+
+    @FXML
+    private void handleDeleteCoursesForm() throws SQLException {
+        // Eliminar un nuevo formulario
+        handleDeleteCourses();
+    }
+
+    private void createCoursesForm() {
+        // Crear campos
+        TextField nameTextField = new TextField();
+        VBox.setMargin(nameTextField, new Insets(0, 100, 0, 0));
+        nameTextField.setStyle(
+                "-fx-font-weight: bold; " +
+                        "-fx-background-color: #B4B4B4; " +
+                        "-fx-background-radius: 10; " +
+                        "-fx-border-color: white; " +
+                        "-fx-border-radius: 10; " +
+                        "-fx-prompt-text-fill: gray;"
+        );
+        nameTextField.setPromptText("Name");
+
+        TextField durationTextField = new TextField();
+        durationTextField.setPromptText("Duration(hours)");
+        VBox.setMargin(durationTextField, new Insets(0, 100, 0, 0));
+        durationTextField.setStyle(
+                "-fx-background-color: #B4B4B4; " +
+                        "-fx-background-radius: 10; " +
+                        "-fx-border-color: white; " +
+                        "-fx-border-radius: 10; " +
+                        "-fx-prompt-text-fill: gray;"
+        );
+
+        // Crear un GridPane para organizar los elementos
+        GridPane gridPane = new GridPane();
+        gridPane.setVgap(5);
+        gridPane.setHgap(5);
+        gridPane.getColumnConstraints().addAll(
+                new ColumnConstraints(),
+                new ColumnConstraints()
+        );
+
+
+        // Crear etiquetas
+        Label nameLabel = new Label("NAME:");
+        nameLabel.setStyle("-fx-font-size: 18px;");
+
+        Label durationLabel = new Label("DURATION:");
+        durationLabel.setStyle("-fx-font-size: 18px;");
+
+        // Agregar las etiquetas en la primera fila
+        gridPane.add(nameLabel, 0, 0);
+        gridPane.add(durationLabel, 1, 0);
+
+        // Añadir los campos de texto en la segunda fila
+        gridPane.add(nameTextField, 0, 1);
+        gridPane.add(durationTextField, 1, 1);
+
+        // Ajustar las restricciones de columna para que se extiendan horizontalmente
+        for (ColumnConstraints constraint : gridPane.getColumnConstraints()) {
+            constraint.setHgrow(Priority.ALWAYS);
+        }
+
+        // Agregar los campos a las listas
+        nameTextFields.add(nameTextField);
+        durationTextFields.add(durationTextField);
+
+        coursesForms.add(gridPane);
+        // Agregar el GridPane al VBox
+        coursesContainer.getChildren().add(gridPane);
+    }
+
+    private void handleDeleteCourses() throws SQLException {
+        // Obtener el último formulario de experiencia agregado
+        GridPane lastCoursesForm = coursesForms.isEmpty() ? null : coursesForms.get(coursesForms.size() - 1);
+
+
+        if (lastCoursesForm != null) {
+            // Eliminar el GridPane del VBox
+            coursesContainer.getChildren().remove(lastCoursesForm);
+
+            // Eliminar el GridPane de la lista
+            coursesForms.remove(lastCoursesForm);
+        }
+
+        if (coursesController.getCoursesById(session.getContactId()) != null) {
+            // Llamar al controlador para eliminar el cursos
+            coursesController.deleteCourses(session.getContactId());
+        }
     }
 
     private void handleFormaDataSave() {
-        // Recoger los datos de los campos iniciales
-        String name = nameTextField.getText().trim();
-        Integer duration = Integer.valueOf(entityTextField.getText().trim());
-        String name1 = nameTextField1.getText().trim();
-        Integer duration1 = Integer.valueOf(entityTextField1.getText().trim());
-        String name2 = nameTextField2.getText().trim();
-        Integer duration2 = Integer.valueOf(entityTextField2.getText().trim());
-
+        // Obtener el contact_id de la sesión actual
+        int contactId = session.getContactId();
 
         try {
-            boolean saveDataToDatabase = coursesController.saveDataToDatabase(name, duration, name1, duration1, name2, duration2);
+            // Obtener todas las Curses asociadas al contacto
+            List<Courses> existingCourses = coursesController.getCoursesById(contactId);
 
-            if (saveDataToDatabase) {
-                showAlert("Éxito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
-                changeSceneToFormData();
-            } else {
-                showAlert("Error", "No se han podido guardar los datos", Alert.AlertType.ERROR);
+            for (int i = 0; i < coursesContainer.getChildren().size(); i++) {
+                Node node = coursesContainer.getChildren().get(i);
+                if (node instanceof GridPane) {
+                    GridPane gridPane = (GridPane) node;
+
+                    // Recoger los datos de cada courses utilizando las referencias guardadas
+                    TextField nameTextField = nameTextFields.get(i);
+                    TextField durationTextField = durationTextFields.get(i);
+
+                    // Crear un objeto Courses con los datos recolectados
+                    Courses courses = new Courses();
+                    courses.setContact_id(contactId);
+                    courses.setName(nameTextField.getText().trim());
+                    Pattern pattern = Pattern.compile("^[0-9]*$");
+                    Matcher matcher = pattern.matcher(durationTextField.getText());
+
+                    if (matcher.matches()) {
+                        // El texto solo contiene números, continuar con la conversión a entero
+                        courses.setDuration(Integer.parseInt(durationTextField.getText().trim()));
+                    } else {
+                        logInController.showAutoClosingAlert("ERROR: Duración de Cursos debe ser un número.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
+                    }
+                    courses.setDuration(Integer.parseInt(durationTextField.getText().trim()));
+
+                    if (i < existingCourses.size()) {
+                        // Actualizar courses existente
+                        courses.setCourse_id(existingCourses.get(i).getCourse_id());
+                        coursesController.updateCourses(courses);
+                        logInController.showAutoClosingAlert("AVISO: Courses se ha actualizado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        changeSceneToFormData();
+                    } else {
+                        // Insertar nueva experiencia
+                        coursesController.saveCourses(courses);
+                        logInController.showAutoClosingAlert("AVISO: Courses se ha guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        changeSceneToFormData();
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: Error al guardar los datos de Courses.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 
-    private void setAcademyDataInFields(Academies academy, int count) {
-        // Establecer el texto de la etiqueta correspondiente
-        if (count == 1) {
-            nameTextField.setText(academy.getName());
-            entityTextField.setText(academy.getEntity());
-        } else if (count == 2) {
-            nameTextField1.setText(academy.getName());
-            entityTextField1.setText(academy.getEntity());
-        } else if (count == 3) {
-            nameTextField2.setText(academy.getName());
-            entityTextField2.setText(academy.getEntity());
-        }
-    }
 
-    private void loadExperienceData() {
-        int contactId = Session.getInstance().getContactId();
+    public void loadCoursesData() throws SQLException {
+        if (experiencesController != null) {
+            // Obtener el contactId del usuario autenticado desde la sesión
+            int contactId = Session.getInstance().getContactId();
 
-        String query = "SELECT * FROM cvv_courses WHERE contact_id = ?";
-        try (PreparedStatement pst = conn.prepareStatement(query)) {
-            pst.setInt(1, contactId);
-            ResultSet rs = pst.executeQuery();
+            // Obtener todas las courses asociadas con el contactId
+            List<Courses> coursesList = coursesController.getCoursesById(contactId);
 
-            int academicCount = 0; // Contador para llevar la cuenta de las academias cargadas
+            // Limpiar los formularios existentes
+            coursesContainer.getChildren().clear();
+            coursesForms.clear();
+            nameTextFields.clear();
+            durationTextFields.clear();
 
-            while (rs.next()) {
-                academicCount++;
+            // Verificar si se encontraron courses asociadas
+            if (coursesList != null && !coursesList.isEmpty()) {
+                // Recorrer todas las courses recuperadas
+                for (int i = 0; i < coursesList.size(); i++) {
+                    Courses courses = coursesList.get(i);
 
-                // Crear un objeto Academies con los datos recuperados de la base de datos
-                Courses courses = new Courses(
-                        rs.getInt("contact_id"),
-                        rs.getString("name"),
-                        rs.getInt("duration")
-                );
+                    // Verificar si hay suficientes GridPane y campos de texto
+                    if (i < coursesForms.size()) {
+                        GridPane gridPane = coursesForms.get(i);
 
+                        // Obtener los campos de texto correspondientes del GridPane actual
+                        TextField nameTextField = nameTextFields.get(i);
+                        TextField durationTextField = durationTextFields.get(i);
+
+                        // Cargar los datos de la academia en los campos de texto correspondientes
+                        nameTextField.setText(courses.getName());
+                        durationTextField.setText(String.valueOf(courses.getDuration()));
+
+                    } else {
+                        // Si hay más courses que GridPane disponibles, se crea un nuevo GridPane y se cargan los datos
+                        createCoursesForm();
+                        GridPane gridPane = coursesForms.get(coursesForms.size() - 1);
+
+                        // Obtener los campos de texto correspondientes del nuevo GridPane
+                        TextField nameTextField = nameTextFields.get(nameTextFields.size() - 1);
+                        TextField durationTextField = durationTextFields.get(durationTextFields.size() - 1);
+
+                        // Cargar los datos de la courses en los campos de texto correspondientes
+                        nameTextField.setText(courses.getName());
+                        durationTextField.setText(String.valueOf(courses.getDuration()));
+                    }
+                }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
-    private void showAlert(String error, String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(error);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 
     private void changeSceneToFormData() {
         try {
@@ -268,8 +292,12 @@ public class FormDataCoursesController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataLanguages.fxml"));
             Parent root = loader.load();
 
+            // Obtener el controlador de la nueva escena
+            FormDataLanguagesController formDataLanguagesController = loader.getController();
+            formDataLanguagesController.setCoursesController(coursesController);
+
             // Obtener el escenario actual desde el emailTextField
-            Stage stage = (Stage) nameTextField.getScene().getWindow();
+            Stage stage = (Stage) checkExperience.getScene().getWindow();
 
             // Establecer la nueva escena en el escenario
             Scene scene = new Scene(root);
@@ -278,7 +306,9 @@ public class FormDataCoursesController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de Experience.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de Languages.", LogInController.AlertType.ERROR, Duration.seconds(1.5));        } catch (
+                SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -289,7 +319,7 @@ public class FormDataCoursesController implements Initializable {
             Parent root = loader.load();
 
             // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
-            Stage stage = (Stage) nameTextField.getScene().getWindow();
+            Stage stage = (Stage) checkExperience.getScene().getWindow();
 
             // Establecer la nueva escena en el escenario
             Scene scene = new Scene(root);
@@ -298,7 +328,7 @@ public class FormDataCoursesController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la Experiencia.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 }

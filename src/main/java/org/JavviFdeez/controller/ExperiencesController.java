@@ -3,12 +3,15 @@ package org.JavviFdeez.controller;
 import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.ExperiencesDAO;
+import org.JavviFdeez.model.entity.Academies;
 import org.JavviFdeez.model.entity.Experiences;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -53,24 +56,21 @@ public class ExperiencesController implements Initializable {
     }
 
     /**
-     * @param exp
+     * @param updatedExperiences
      * @Author: JavviFdeez
      * Metodo para ACTUALIZAR una experiencia en la base de datos y mostrar un mensaje de exito o error
      */
-    public void updateExperiences(int id, Experiences exp) {
+    public void updateExperiences(Experiences updatedExperiences) {
         try {
-            Experiences updatedExperiences = experiencesDAO.update(id, exp);
-            if (updatedExperiences != null) {
-                // =========================================================
-                // La actualización fue exitosa, mostrar mensaje de exito
-                // =========================================================
-                System.out.println("✅ Experiencia actualizada exitosamente.");
-            } else {
-                // ===============================================================
-                // No se actualizó ninguna fila, mostrar mensaje de advertencia
-                // ===============================================================;
-                System.out.println("⚠️ No se encontró ninguna experiencia para actualizar.");
-            }
+            // =========================================
+            // Actualizar la experiencia en la base de datos
+            // =========================================
+            experiencesDAO.update(updatedExperiences.getExperience_id(), updatedExperiences);
+            // ======================================================
+            // Si la actualización es exitosa, mostrar mensaje de exito
+            // ======================================================
+
+            System.out.println("✅ Experiencia actualizada exitosamente.");
         } catch (SQLException e) {
             // ==================================================================================================
             // Ocurrio un error al actualizar la experiencia, mostrar mensaje de error y detalles de la excepción
@@ -168,37 +168,30 @@ public class ExperiencesController implements Initializable {
         }
     }
 
-    public boolean saveDataToDatabase(String name, String entity, String location, String year, String name1, String entity1, String location1, String year1, String name2, String entity2, String location2, String year2) throws SQLException {
-        // Guardar los datos en la base de datos
-        try {
-            if (conn == null || conn.isClosed()) {
-                conn = ConnectionMariaDB.getConnection();
+    public List<Experiences> getExperienceById(int contactId) throws SQLException {
+        List<Experiences> experiencesList = new ArrayList<>();
+        String query = "SELECT * FROM cvv_experiences WHERE contact_id = ?";
+
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, contactId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Obtener los datos de cada Experience
+                    int academiesId = resultSet.getInt("experience_id");
+                    String name = resultSet.getString("name");
+                    String duration = resultSet.getString("duration");
+                    String company = resultSet.getString("company");
+                    String location = resultSet.getString("location");
+                    String year = resultSet.getString("year");
+
+                    // Crear un objeto Experiences con los datos obtenidos y agregarlo a la lista
+                    Experiences experiences = new Experiences(academiesId, name, duration, company, location, year);
+                    experiencesList.add(experiences);
+                }
             }
-
-            // Preparar la consulta SQL para insertar los datos
-            String query = "INSERT INTO cvv_experiences (name, duration, company, year) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?)";
-            try (PreparedStatement pst = conn.prepareStatement(query)) {
-                pst.setString(1, name);
-                pst.setString(2, entity);
-                pst.setString(3, location);
-                pst.setString(4, year);
-
-                pst.setString(5, name1);
-                pst.setString(6, entity1);
-                pst.setString(7, location1);
-                pst.setString(8, year1);
-
-                pst.setString(9, name2);
-                pst.setString(10, entity2);
-                pst.setString(11, location2);
-                pst.setString(12, year2);
-
-                pst.executeUpdate();
-                return true;
-            }
-        } catch (SQLException e) {
-            throw e;
         }
+
+        return experiencesList;
     }
 
     @Override

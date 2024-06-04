@@ -4,16 +4,20 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.JavviFdeez.controller.CoursesController;
+import org.JavviFdeez.controller.ExperiencesController;
 import org.JavviFdeez.controller.LanguagesController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
-import org.JavviFdeez.model.entity.Academies;
-import org.JavviFdeez.model.entity.Session;
+import org.JavviFdeez.model.entity.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,56 +25,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FormDataLanguagesController implements Initializable {
-
-    @FXML
-    private ComboBox<String>  spanishComboBox;
-
-    @FXML
-    private ComboBox<String>  englishComboBox;
-
-    @FXML
-    private ComboBox<String>  frenchComboBox;
-
-    @FXML
-    private ComboBox<String>  spanishComboBox1;
-
-    @FXML
-    private ComboBox<String>  englishComboBox1;
-
-    @FXML
-    private ComboBox<String>  frenchComboBox1;
-
-    @FXML
-    private ComboBox<String>  spanishComboBox2;
-
-    @FXML
-    private ComboBox<String>  englishComboBox2;
-
-    @FXML
-    private ComboBox<String>  frenchComboBox2;
-
-    @FXML
-    private Button experiencedelete;
-
-    @FXML
-    private ImageView iconAdd1;
-
-    @FXML
-    private ImageView iconAdd;
-
-    @FXML
-    private Button experienceAdd;
-
-    @FXML
-    private ImageView iconDelete1;
-
-    @FXML
-    private ImageView iconDelete;
 
     @FXML
     private Button buttonSaveData;
@@ -79,245 +42,232 @@ public class FormDataLanguagesController implements Initializable {
     private ImageView checkCourses;
 
     @FXML
-    private Button experiencedelete1;
+    private ImageView backCourses;
 
     @FXML
-    private Button experiencedd1;
-
+    private Pane paneForm;
     @FXML
-    private Label spanishText;
-
-    @FXML
-    private Label englishText;
-
-    @FXML
-    private Label frenchText;
-
-    @FXML
-    private Label spanishText1;
-
-    @FXML
-    private Label englishText1;
-
-    @FXML
-    private Label frenchText1;
-
-    @FXML
-    private Label spanishText2;
-
-    @FXML
-    private Label englishText2;
-
-    @FXML
-    private Label frenchText2;
+    private VBox languagesContainer;
 
     private LanguagesController languagesController;
-
+    private CoursesController coursesController;
+    private LogInController logInController;
     private Connection conn;
+    private Session session;
+    private List<GridPane> languagesForms = new ArrayList<>();
+    private List<ComboBox<String>> SpanishTextFields = new ArrayList<>();
+    private List<ComboBox<String>> EnglishTextFields = new ArrayList<>();
+    private List<ComboBox<String>> FrenchTextFields = new ArrayList<>();
 
 
     public FormDataLanguagesController() {
         this.languagesController = new LanguagesController();
+        this.coursesController = new CoursesController();
+        this.logInController = new LogInController();
+        this.session = Session.getInstance();
         this.conn = ConnectionMariaDB.getConnection();
     }
 
 
+    public void setCoursesController(CoursesController coursesController) throws SQLException {
+        this.coursesController = coursesController;
+        loadLanguagesData();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Asegurarse de que ningún campo de texto esté seleccionado al inicio con una pequeña demora
-        Platform.runLater(() -> spanishComboBox.getParent().requestFocus());
-        loadExperienceData();
-        initializeComboBox();
-        handleFormData();
+        Platform.runLater(() -> languagesContainer.getParent().requestFocus());
         buttonSaveData.setOnAction(event -> changeSceneToFormData());
-        experienceAdd.setOnMouseClicked(event -> handleAddLanguage());
-        experiencedelete.setOnMouseClicked(event -> handleDeleteLanguage());
-
-        experiencedd1.setOnMouseClicked(event -> handleAddLanguage1());
-        experiencedelete1.setOnMouseClicked(event -> handleDeleteLanguage1());
-    }
-
-    private void handleAddLanguage() {
-        experiencedelete.setOpacity(1);
-        experiencedd1.setOpacity(1);
-        iconAdd1.setOpacity(1);
-        iconDelete.setOpacity(1);
-        spanishComboBox1.setOpacity(1);
-        englishComboBox1.setOpacity(1);
-        frenchComboBox1.setOpacity(1);
-        experienceAdd.setOpacity(1);
-        spanishText1.setOpacity(1);
-        englishText.setOpacity(1);
-        frenchText.setOpacity(1);
-    }
-
-    private void handleDeleteLanguage() {
-        // Restablecer la opacidad a 0
-        englishComboBox1.setOpacity(0);
-        frenchComboBox1.setOpacity(0);
-        iconAdd1.setOpacity(0);
-        iconDelete.setOpacity(0);
-        iconDelete1.setOpacity(0);
-        experiencedd1.setOpacity(0);
-        spanishComboBox1.setOpacity(0);
-        experiencedelete.setOpacity(0);
-        spanishText1.setOpacity(0);
-        englishText1.setOpacity(0);
-        frenchText1.setOpacity(0);
-        showAlert("Languages Deleted", "Languages Deleted", Alert.AlertType.INFORMATION);
-    }
-
-    private void handleAddLanguage1() {
-        experiencedelete.setOpacity(1);
-        iconDelete1.setOpacity(1);
-        spanishComboBox2.setOpacity(1);
-        englishComboBox2.setOpacity(1);
-        frenchComboBox2.setOpacity(1);
-        experienceAdd.setOpacity(1);
-        spanishText2.setOpacity(1);
-        englishText2.setOpacity(1);
-        frenchText2.setOpacity(1);
-        experiencedelete1.setOpacity(1);
-    }
-
-    private void handleDeleteLanguage1() {
-        // Restablecer la opacidad a 0
-        iconDelete1.setOpacity(0);
-        experiencedelete1.setOpacity(0);
-        spanishComboBox2.setOpacity(0);
-        englishComboBox2.setOpacity(0);
-        frenchComboBox2.setOpacity(0);
-        spanishText2.setOpacity(0);
-        englishText2.setOpacity(0);
-        frenchText2.setOpacity(0);
-        showAlert("Languages Deleted", "Languages Deleted", Alert.AlertType.INFORMATION);
-    }
-
-    private void initializeComboBox() {
-        spanishComboBox.getItems().addAll(
-                IntStream.rangeClosed(0,5)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
-        );
-        englishComboBox.getItems().addAll(
-                IntStream.rangeClosed(0,5)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
-        );
-        frenchComboBox.getItems().addAll(
-                IntStream.rangeClosed(0,5)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
-        );
-
-        spanishComboBox1.getItems().addAll(
-                IntStream.rangeClosed(0,5)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
-        );
-        englishComboBox1.getItems().addAll(
-                IntStream.rangeClosed(0,5)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
-        );
-        frenchComboBox1.getItems().addAll(
-                IntStream.rangeClosed(0,5)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
-        );
-
-        spanishComboBox2.getItems().addAll(
-                IntStream.rangeClosed(0,5)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
-        );
-        englishComboBox2.getItems().addAll(
-                IntStream.rangeClosed(0,5)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
-        );
-        frenchComboBox2.getItems().addAll(
-                IntStream.rangeClosed(0,5)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
-        );
-    }
-
-    private void handleFormData() {
-        spanishComboBox.setOnMouseClicked(event -> spanishComboBox.show());
-        englishComboBox.setOnMouseClicked(event -> englishComboBox.show());
-        frenchComboBox.setOnMouseClicked(event -> frenchComboBox.show());
-
-        spanishComboBox1.setOnMouseClicked(event -> spanishComboBox1.show());
-        englishComboBox1.setOnMouseClicked(event -> englishComboBox1.show());
-        frenchComboBox1.setOnMouseClicked(event -> frenchComboBox1.show());
-
-        spanishComboBox2.setOnMouseClicked(event -> spanishComboBox2.show());
-        englishComboBox2.setOnMouseClicked(event -> englishComboBox2.show());
-        frenchComboBox2.setOnMouseClicked(event -> frenchComboBox2.show());
         checkCourses.setOnMouseClicked(event -> handleBackCourses());
+        backCourses.setOnMouseClicked(event -> handleBackCourses());
+        createLanguagesForm();
     }
+
+    private void createLanguagesForm() {
+        // Crear campos
+        ComboBox<String> spanishComboBox = new ComboBox<>();
+        spanishComboBox.getItems().addAll(
+                "0", "1", "2", "3", "4", "5"
+        );
+
+        VBox.setMargin(spanishComboBox, new Insets(0, 100, 0, 0));
+        spanishComboBox.setStyle(
+                "-fx-background-color: #B4B4B4; " +
+                        "-fx-background-radius: 10; " +
+                        "-fx-border-color: white; " +
+                        "-fx-border-radius: 10; " +
+                        "-fx-prompt-text-fill: gray;"
+        );
+        spanishComboBox.setPromptText("Spanish");
+        spanishComboBox.setPrefWidth(200);
+
+        ComboBox<String> englishComboBox = new ComboBox<>();
+        englishComboBox.getItems().addAll(
+                "0", "1", "2", "3", "4", "5"
+        );
+
+        VBox.setMargin(englishComboBox, new Insets(0, 100, 0, 0));
+        englishComboBox.setStyle(
+                "-fx-background-color: #B4B4B4; " +
+                        "-fx-background-radius: 10; " +
+                        "-fx-border-color: white; " +
+                        "-fx-border-radius: 10; " +
+                        "-fx-prompt-text-fill: gray;"
+        );
+        englishComboBox.setPromptText("English");
+        englishComboBox.setPrefWidth(200);
+
+        ComboBox<String> frenchComboBox = new ComboBox<>();
+        frenchComboBox.getItems().addAll(
+                "0", "1", "2", "3", "4", "5"
+        );
+
+        VBox.setMargin(frenchComboBox, new Insets(0, 100, 0, 0));
+        frenchComboBox.setStyle(
+                "-fx-background-color: #B4B4B4; " +
+                        "-fx-background-radius: 10; " +
+                        "-fx-border-color: white; " +
+                        "-fx-border-radius: 10; " +
+                        "-fx-prompt-text-fill: gray;"
+        );
+        frenchComboBox.setPromptText("French");
+        frenchComboBox.setPrefWidth(200);
+
+        // Crear un GridPane para organizar los elementos
+        GridPane gridPane = new GridPane();
+        gridPane.setVgap(5);
+        gridPane.setHgap(5);
+        gridPane.getColumnConstraints().addAll(
+                new ColumnConstraints()
+        );
+
+        // Crear etiquetas
+        Label spanishLabel = new Label("SPANISH:");
+        spanishLabel.setStyle("-fx-font-size: 18px;");
+
+        Label englishLabel = new Label("ENGLISH:");
+        englishLabel.setStyle("-fx-font-size: 18px;");
+
+        Label frenchLabel = new Label("FRENCH:");
+        frenchLabel.setStyle("-fx-font-size: 18px;");
+
+        // Agregar las etiquetas en la primera fila
+        gridPane.add(spanishLabel, 0, 0);
+        gridPane.add(englishLabel, 1, 0);
+        gridPane.add(frenchLabel, 2, 0);
+
+        // Añadir los campos de texto en la segunda fila
+        gridPane.add(spanishComboBox, 0, 1);
+        gridPane.add(englishComboBox, 0, 2);
+        gridPane.add(frenchComboBox, 0, 3);
+
+        // Ajustar las restricciones de columna para que se extiendan horizontalmente
+        for (ColumnConstraints constraint : gridPane.getColumnConstraints()) {
+            constraint.setHgrow(Priority.ALWAYS);
+        }
+
+        // Agregar los campos a las listas
+        SpanishTextFields.add(spanishComboBox);
+        EnglishTextFields.add(englishComboBox);
+        FrenchTextFields.add(frenchComboBox);
+
+        languagesForms.add(gridPane);
+        // Agregar el GridPane al VBox
+        languagesContainer.getChildren().add(gridPane);
+    }
+
 
     private void handleFormaDataSave() {
-        // Recoger los datos de los campos iniciales
-        String spanish = spanishComboBox.getValue();
-        String english = englishComboBox.getValue();
-        String french = frenchComboBox.getValue();
-
-        String spanish1 = spanishComboBox1.getValue();
-        String english1 = englishComboBox1.getValue();
-        String french1 = frenchComboBox1.getValue();
-
-        String spanish2 = spanishComboBox2.getValue();
-        String english2 = englishComboBox2.getValue();
-        String french2 = frenchComboBox2.getValue();
-
-
+        // Obtener el contact_id de la sesión actual
+        int contactId = session.getContactId();
 
         try {
-            boolean saveDataToDatabase = languagesController.saveDataToDatabase(spanish, english, french, spanish1, english1, french1, spanish2, english2, french2);
+            // Obtener todas las Languages asociadas al contacto
+            List<Languages> existingLanguages = languagesController.getLanguagesById(contactId);
 
-            if (saveDataToDatabase) {
-                showAlert("Éxito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
-                changeSceneToFormData();
-            } else {
-                showAlert("Error", "No se han podido guardar los datos", Alert.AlertType.ERROR);
+            for (int i = 0; i < languagesContainer.getChildren().size(); i++) {
+                Node node = languagesContainer.getChildren().get(i);
+                if (node instanceof GridPane) {
+                    GridPane gridPane = (GridPane) node;
+
+                    // Recoger los datos de cada language utilizando las referencias guardadas
+                    ComboBox<String> spanishComboBox = SpanishTextFields.get(i);
+                    ComboBox<String> englishComboBox = EnglishTextFields.get(i);
+                    ComboBox<String> frenchComboBox = FrenchTextFields.get(i);
+
+                    // Crear un objeto Languages con los datos recolectados
+                    Languages languages = new Languages();
+                    languages.setContact_id(contactId);
+                    languages.setSpanish(Integer.parseInt(spanishComboBox.getValue()));
+                    languages.setEnglish(Integer.parseInt(englishComboBox.getValue()));
+                    languages.setFrench(Integer.parseInt(frenchComboBox.getValue()));
+
+                    if (i < existingLanguages.size()) {
+                        // Actualizar language existente
+                        languages.setLang_id(existingLanguages.get(i).getLang_id());
+                        languagesController.updateLanguages(languages);
+                        logInController.showAutoClosingAlert("AVISO: Languages se ha actualizado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        changeSceneToFormData();
+                    } else {
+                        // Insertar nueva language
+                        languagesController.saveLanguages(languages);
+                        logInController.showAutoClosingAlert("AVISO: Languages se ha guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        changeSceneToFormData();
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: Error al guardar los datos de Courses.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 
+    public void loadLanguagesData() throws SQLException {
+        if (coursesController != null) {
+            // Obtener el contactId del usuario autenticado desde la sesión
+            int contactId = Session.getInstance().getContactId();
 
-    private void loadExperienceData() {
+            // Obtener todas las languages asociadas con el contactId
+            List<Languages> languagesList = languagesController.getLanguagesById(contactId);
 
-    }
+            // Verificar si se encontraron languages asociadas
+            if (languagesList != null && !languagesList.isEmpty()) {
+                // Recorrer todas las languages recuperadas
+                for (int i = 0; i < languagesList.size(); i++) {
+                    Languages languages = languagesList.get(i);
 
-    private void showAlert(String error, String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(error);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+                    // Verificar si hay suficientes GridPane y campos de texto
+                    if (i < languagesForms.size()) {
+                        GridPane gridPane = languagesForms.get(i);
+
+                        // Obtener los campos de texto correspondientes del GridPane actual
+                        ComboBox<String> spanishComBox = SpanishTextFields.get(i);
+                        ComboBox<String> englishComBox = EnglishTextFields.get(i);
+                        ComboBox<String> frenchComBox = FrenchTextFields.get(i);
+
+                        // Cargar los datos de la language en los campos de texto correspondientes
+                        spanishComBox.setValue(String.valueOf(languages.getSpanish()));
+                        englishComBox.setValue(String.valueOf(languages.getEnglish()));
+                        frenchComBox.setValue(String.valueOf(languages.getFrench()));
+                    } else {
+                        // Si hay más languages que GridPane disponibles, se crea un nuevo GridPane y se cargan los datos
+                        createLanguagesForm();
+                        GridPane gridPane = languagesForms.get(languagesForms.size() - 1);
+
+                        // Obtener los campos de texto correspondientes del nuevo GridPane
+                        ComboBox<String> spanishTextField = SpanishTextFields.get(languagesForms.size() - 1);
+                        ComboBox<String> englishTextField = EnglishTextFields.get(languagesForms.size() - 1);
+                        ComboBox<String> frenchTextField = FrenchTextFields.get(languagesForms.size() - 1);
+
+                        // Cargar los datos de la language en los campos de texto correspondientes
+                        spanishTextField.setValue(String.valueOf(languages.getSpanish()));
+                        englishTextField.setValue(String.valueOf(languages.getEnglish()));
+                        frenchTextField.setValue(String.valueOf(languages.getFrench()));
+                    }
+                }
+            }
+        }
     }
 
     private void changeSceneToFormData() {
@@ -327,7 +277,7 @@ public class FormDataLanguagesController implements Initializable {
             Parent root = loader.load();
 
             // Obtener el escenario actual desde el emailTextField
-            Stage stage = (Stage) spanishComboBox.getScene().getWindow();
+            Stage stage = (Stage) checkCourses.getScene().getWindow();
 
             // Establecer la nueva escena en el escenario
             Scene scene = new Scene(root);
@@ -336,7 +286,7 @@ public class FormDataLanguagesController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de Experience.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de Skills.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 
@@ -347,7 +297,7 @@ public class FormDataLanguagesController implements Initializable {
             Parent root = loader.load();
 
             // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
-            Stage stage = (Stage) spanishComboBox.getScene().getWindow();
+            Stage stage = (Stage) checkCourses.getScene().getWindow();
 
             // Establecer la nueva escena en el escenario
             Scene scene = new Scene(root);
@@ -356,7 +306,7 @@ public class FormDataLanguagesController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de courses.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la Languages.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 }

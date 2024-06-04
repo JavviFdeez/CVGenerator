@@ -65,7 +65,7 @@ public class FormDataContactController implements Initializable {
     private ImageView addImage;
 
     @FXML
-    private ImageView backLogIn;
+    public ImageView backLogIn;
 
     private String imageRelativePath;
 
@@ -89,6 +89,8 @@ public class FormDataContactController implements Initializable {
         this.session = Session.getInstance();
         this.contactDAO = new ContactDAO(ConnectionMariaDB.getConnection());
         this.session = Session.getInstance();
+        this.logInController = new LogInController();
+        this.backLogIn = new ImageView();
     }
 
     public void setLogInController(LogInController logInController) {
@@ -220,13 +222,15 @@ public class FormDataContactController implements Initializable {
             if (contactController.getContactById(contactId) != null) {
                 // Si el contacto existe, actualizarlo
                 saveDataToDatabase = contactController.updateContact(contactId, contact);
+                logInController.showAutoClosingAlert("AVISO: Contacto se han guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                changeSceneToFormData();
             } else {
                 // Si el contacto no existe, crear un nuevo contacto
                 saveDataToDatabase = contactController.saveDataToDatabase(contact);
             }
 
             if (saveDataToDatabase) {
-                logInController.showAutoClosingAlert("AVISO: Los datos de Contacto se han guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                logInController.showAutoClosingAlert("AVISO: Contacto se han guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                 // Cambiar a la escena de academies después de guardar el contacto
                 changeSceneToFormData();
             } else {
@@ -249,12 +253,22 @@ public class FormDataContactController implements Initializable {
             formDataAcademiesController.setContactController(contactController);
 
             // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
-            Stage stage = (Stage) nameTextField.getScene().getWindow();
-
-            // Establecer la nueva escena en el escenario
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            Scene scene = emailText.getScene();
+            if (scene != null) {
+                Stage stage = (Stage) scene.getWindow();
+                if (stage != null) {
+                    // Establecer la nueva escena en el escenario
+                    Scene newScene = new Scene(root);
+                    stage.setScene(newScene);
+                    stage.show();
+                } else {
+                    // Manejar el caso en el que el Stage es null
+                    System.out.println("El Stage es null");
+                }
+            } else {
+                // Manejar el caso en el que la escena es null
+                System.out.println("La escena es null");
+            }
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
@@ -267,7 +281,7 @@ public class FormDataContactController implements Initializable {
     private void handleUploadImage() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.svg")
         );
 
         File selectedFile = fileChooser.showOpenDialog(null);
