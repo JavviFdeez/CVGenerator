@@ -271,6 +271,11 @@ public class FormDataLanguagesController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataSkills.fxml"));
             Parent root = loader.load();
 
+            // Obtener el controlador de la nueva escena
+            FormDataSkillsController formDataSkillsController = loader.getController();
+            formDataSkillsController.setSkillsController(languagesController);
+
+
             // Obtener el escenario actual desde el emailTextField
             Stage stage = (Stage) checkCourses.getScene().getWindow();
 

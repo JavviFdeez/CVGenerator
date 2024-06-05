@@ -12,9 +12,11 @@ public class Skills {
     // Constructor
     // ==============
     public Skills(String name) {
-        this.skill_id = 0;
+        this.skill_id = skill_id;
         this.name = name;
     }
+
+    public Skills() { }
 
     // ======================
     // Getters and Setters

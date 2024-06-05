@@ -4,10 +4,12 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.JavviFdeez.controller.CoursesController;
 import org.JavviFdeez.controller.LanguagesController;
@@ -23,51 +25,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FormDataSkillsController implements Initializable {
-
-    @FXML
-    private TextField spanishComboBox;
-
-    @FXML
-    private ComboBox<String> englishComboBox;
-
-
-    @FXML
-    private TextField spanishComboBox1;
-
-    @FXML
-    private ComboBox<String> englishComboBox1;
-
-
-    @FXML
-    private TextField spanishComboBox2;
-
-    @FXML
-    private ComboBox<String> englishComboBox2;
-
-
-    @FXML
-    private Button experiencedelete;
-
-    @FXML
-    private ImageView iconAdd1;
-
-    @FXML
-    private ImageView iconAdd;
-
-    @FXML
-    private Button experienceAdd;
-
-    @FXML
-    private ImageView iconDelete1;
-
-    @FXML
-    private ImageView iconDelete;
-
     @FXML
     private Button buttonSaveData;
 
@@ -75,161 +39,143 @@ public class FormDataSkillsController implements Initializable {
     private ImageView checkLanguages;
 
     @FXML
-    private Button experiencedelete1;
+    private ImageView backLanguages;
 
     @FXML
-    private Button experiencedd1;
+    private Pane paneForm;
 
     @FXML
-    private Label spanishText;
+    private VBox skillsContainer;
 
-    @FXML
-    private Label englishText;
-
-    @FXML
-    private Label spanishText1;
-
-    @FXML
-    private Label englishText1;
-
-
-    @FXML
-    private Label spanishText2;
-
-    @FXML
-    private Label englishText2;
 
     private SkillsController skillsController;
-
+    private LogInController logInController;
+    private LanguagesController languagesController;
     private Connection conn;
+    private Session session;
+    private List<GridPane> skillsForms = new ArrayList<>();
+    private List<TextField> nameTextFields = new ArrayList<>();
+    private List<ComboBox<String>> valueComboBoxes = new ArrayList<>();
 
 
     public FormDataSkillsController() {
         this.skillsController = new SkillsController();
+        this.logInController = new LogInController();
+        this.languagesController = new LanguagesController();
+        this.session = Session.getInstance();
         this.conn = ConnectionMariaDB.getConnection();
     }
 
+    public void setLanguagesController(LanguagesController languagesController) throws SQLException {
+        this.languagesController = languagesController;
+        loadSkillsData();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Asegurarse de que ningún campo de texto esté seleccionado al inicio con una pequeña demora
-        Platform.runLater(() -> spanishComboBox.getParent().requestFocus());
-        loadSkillsData();
-        initializeComboBox();
-        handleFormData();
+        Platform.runLater(() -> checkLanguages.getParent().requestFocus());
         buttonSaveData.setOnAction(event -> changeSceneToFormData());
-        experienceAdd.setOnMouseClicked(event -> handleAddLanguage());
-        experiencedelete.setOnMouseClicked(event -> handleDeleteLanguage());
-
-        experiencedd1.setOnMouseClicked(event -> handleAddLanguage1());
-        experiencedelete1.setOnMouseClicked(event -> handleDeleteLanguage1());
+        checkLanguages.setOnMouseClicked(event -> handleBackLanguages());
+        backLanguages.setOnMouseClicked(event -> handleBackLanguages());
+        handleAddSkillsForm();
     }
 
-    private void handleAddLanguage() {
-        experiencedelete.setOpacity(1);
-        experiencedd1.setOpacity(1);
-        iconAdd1.setOpacity(1);
-        iconDelete.setOpacity(1);
-        spanishComboBox1.setOpacity(1);
-        englishComboBox1.setOpacity(1);
-        experienceAdd.setOpacity(1);
-        spanishText1.setOpacity(1);
-        englishText.setOpacity(1);
+    @FXML
+    private void handleAddSkillsForm() {
+        // Crear y añadir un nuevo formulario
+        createSkillsForm();
     }
 
-    private void handleDeleteLanguage() {
-        // Restablecer la opacidad a 0
-        englishComboBox1.setOpacity(0);
-        iconAdd1.setOpacity(0);
-        iconDelete.setOpacity(0);
-        iconDelete1.setOpacity(0);
-        experiencedd1.setOpacity(0);
-        spanishComboBox1.setOpacity(0);
-        experiencedelete.setOpacity(0);
-        spanishText1.setOpacity(0);
-        englishText1.setOpacity(0);
-        showAlert("Languages Deleted", "Languages Deleted", Alert.AlertType.INFORMATION);
+    @FXML
+    private void handleDeleteSkillsForm(){
+        // Eliminar un nuevo formulario
+        handleDeleteSkills();
     }
 
-    private void handleAddLanguage1() {
-        experiencedelete.setOpacity(1);
-        iconDelete1.setOpacity(1);
-        spanishComboBox2.setOpacity(1);
-        englishComboBox2.setOpacity(1);
-        experienceAdd.setOpacity(1);
-        spanishText2.setOpacity(1);
-        englishText2.setOpacity(1);
-        experiencedelete1.setOpacity(1);
-    }
-
-    private void handleDeleteLanguage1() {
-        // Restablecer la opacidad a 0
-        iconDelete1.setOpacity(0);
-        experiencedelete1.setOpacity(0);
-        spanishComboBox2.setOpacity(0);
-        englishComboBox2.setOpacity(0);
-        spanishText2.setOpacity(0);
-        englishText2.setOpacity(0);
-        showAlert("Languages Deleted", "Languages Deleted", Alert.AlertType.INFORMATION);
-    }
-
-    private void initializeComboBox() {
-        englishComboBox.getItems().addAll(
-                IntStream.rangeClosed(0, 5)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
+    private void createExperienceForm() {
+        // Crear campos Name y Value
+        TextField nameTextField = new TextField();
+        VBox.setMargin(nameTextField, new Insets(0, 100, 0, 0));
+        nameTextField.setStyle(
+                "-fx-font-weight: bold; " +
+                        "-fx-background-color: #B4B4B4; " +
+                        "-fx-background-radius: 10; " +
+                        "-fx-border-color: white; " +
+                        "-fx-border-radius: 10; " +
+                        "-fx-prompt-text-fill: gray;"
         );
-        englishComboBox1.getItems().addAll(
-                IntStream.rangeClosed(0, 5)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
+        nameTextField.setPromptText("Name");
+
+        ComboBox<String> valueComboBox = new ComboBox<>();
+        valueComboBox.getItems().addAll(
+                "0", "5", "10", "15", "20", "25", "30", "35", "40",
+                "45", "50", "55", "60", "65", "70", "75", "80", "85", "90",
+                "95", "100"
         );
-        englishComboBox2.getItems().addAll(
-                IntStream.rangeClosed(0, 5)
-                        .boxed()
-                        .sorted((a, b) -> b - a)
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
+
+        VBox.setMargin(valueComboBox, new Insets(0, 100, 0, 0));
+        valueComboBox.setStyle(
+                "-fx-background-color: #B4B4B4; " +
+                        "-fx-background-radius: 10; " +
+                        "-fx-border-color: white; " +
+                        "-fx-border-radius: 10; " +
+                        "-fx-prompt-text-fill: gray;"
         );
+        valueComboBox.setPromptText("Value");
+        valueComboBox.setPrefWidth(200);
+
+        // Crear un GridPane para organizar los elementos
+        GridPane gridPane = new GridPane();
+        gridPane.setVgap(5);
+        gridPane.setHgap(5);
+        gridPane.getColumnConstraints().addAll(
+                new ColumnConstraints(),
+                new ColumnConstraints()
+        );
+
+
+        // Crear etiquetas
+        Label nameLabel = new Label("NAME:");nameLabel.setStyle("-fx-font-size: 18px;");
+
+        Label valueLabel = new Label("VALUE:");valueLabel.setStyle("-fx-font-size: 18px;");
+
+        // Agregar las etiquetas en la primera fila
+        gridPane.add(nameLabel, 0, 0);
+        gridPane.add(valueLabel, 1, 0);
+
+        // Añadir los campos de texto en la segunda fila
+        gridPane.add(nameTextField, 0, 1);
+        gridPane.add(valueComboBox, 1, 1);
+
+        // Agregar los campos a las listas
+        nameTextFields.add(nameTextField);
+        valueComboBoxes.add(valueComboBox);
+
+        skillsForms.add(gridPane);
+        // Agregar el GridPane al VBox
+        skillsContainer.getChildren().add(gridPane);
     }
 
-    private void handleFormData() {
-        englishComboBox.setOnMouseClicked(event -> englishComboBox.show());
-        englishComboBox1.setOnMouseClicked(event -> englishComboBox1.show());
-        englishComboBox2.setOnMouseClicked(event -> englishComboBox2.show());
-
-        checkLanguages.setOnMouseClicked(event -> handleCheckLanguages());
-    }
-
-    private void handleFormaDataSave() {
-        // Recoger los datos de los campos iniciales y manejar los posibles valores null
-        String name = spanishComboBox.getText().trim();
-        String name1 = spanishComboBox1.getText().trim();
-        String name2 = spanishComboBox2.getText().trim();
-        Integer value = Integer.valueOf(englishComboBox.getValue());
-        Integer value1 = Integer.valueOf(englishComboBox1.getValue());
-        Integer value2 = Integer.valueOf(englishComboBox2.getValue());
+    private void handleDeleteExperience() throws SQLException {
+        // Obtener el último formulario de skills agregado
+        GridPane lastskillsForm = skillsForms.isEmpty() ? null : skillsForms.get(skillsForms.size() - 1);
 
 
-        try {
-            boolean saveDataToDatabase = skillsController.saveDataToDatabase(name, value, name1, value1, name2, value2);
-            if (saveDataToDatabase) {
-                showAlert("Éxito", "Los datos se han guardado exitosamente", Alert.AlertType.INFORMATION);
-                changeSceneToFormData();
-            } else {
-                showAlert("Error", "No se han podido guardar los datos", Alert.AlertType.ERROR);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
+        if (lastskillsForm != null) {
+            // Eliminar el GridPane del VBox
+            skillsContainer.getChildren().remove(lastskillsForm);
+
+            // Eliminar el GridPane de la lista
+            skillsForms.remove(lastskillsForm);
+        }
+
+
+        if (skillsController.getSkillsById(session.getContactId()) != null) {
+            // Llamar al controlador para eliminar la experiencia
+            experiencesController.deleteExperiences(session.getContactId());
         }
     }
-
-
 
     private void loadSkillsData() {
         int contactId = Session.getInstance().getContactId();
@@ -270,7 +216,7 @@ public class FormDataSkillsController implements Initializable {
             Parent root = loader.load();
 
             // Obtener el escenario actual desde el emailTextField
-            Stage stage = (Stage) spanishComboBox.getScene().getWindow();
+            Stage stage = (Stage) checkLanguages.getScene().getWindow();
 
             // Establecer la nueva escena en el escenario
             Scene scene = new Scene(root);
@@ -283,14 +229,14 @@ public class FormDataSkillsController implements Initializable {
         }
     }
 
-    private void handleCheckLanguages() {
+    private void handleBackLanguages() {
         try {
             // Cargar la nueva escena desde el archivo FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataLanguages.fxml"));
             Parent root = loader.load();
 
             // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
-            Stage stage = (Stage) spanishComboBox.getScene().getWindow();
+            Stage stage = (Stage) checkLanguages.getScene().getWindow();
 
             // Establecer la nueva escena en el escenario
             Scene scene = new Scene(root);

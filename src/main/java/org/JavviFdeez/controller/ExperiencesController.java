@@ -177,7 +177,7 @@ public class ExperiencesController implements Initializable {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     // Obtener los datos de cada Experience
-                    int academiesId = resultSet.getInt("experience_id");
+                    int experienceId = resultSet.getInt("experience_id");
                     String name = resultSet.getString("name");
                     String duration = resultSet.getString("duration");
                     String company = resultSet.getString("company");
@@ -185,7 +185,7 @@ public class ExperiencesController implements Initializable {
                     String year = resultSet.getString("year");
 
                     // Crear un objeto Experiences con los datos obtenidos y agregarlo a la lista
-                    Experiences experiences = new Experiences(academiesId, name, duration, company, location, year);
+                    Experiences experiences = new Experiences(experienceId, name, duration, company, location, year);
                     experiencesList.add(experiences);
                 }
             }

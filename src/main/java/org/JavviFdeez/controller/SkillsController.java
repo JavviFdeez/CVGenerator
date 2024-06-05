@@ -3,12 +3,17 @@ package org.JavviFdeez.controller;
 import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.SkillsDAO;
+import org.JavviFdeez.model.entity.Contact_Skills;
+import org.JavviFdeez.model.entity.Experiences;
 import org.JavviFdeez.model.entity.Skills;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SkillsController implements Initializable {
@@ -189,7 +194,31 @@ public class SkillsController implements Initializable {
         }
     }
 
+    public List<Contact_Skills> getSkillsById(int contactId) throws SQLException {
+        List<Contact_Skills> skillsList = new ArrayList<>();
+        String query = "SELECT cs.cskill_id, cs.skill_id, s.name, cs.value FROM cvv_contact_skills cs JOIN cvv_skills s ON cs.skill_id = s.skill_id WHERE cs.contact_id = ?";
 
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, contactId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Obtener los datos de cada Skill
+                    int cskill_id = resultSet.getInt("cskill_id");
+                    int skill_id = resultSet.getInt("skill_id");
+                    String name = resultSet.getString("name");
+                    int value = resultSet.getInt("value");
+
+                    // Crear un objeto Contact_Skills con los datos obtenidos y agregarlo a la lista
+                    Contact_Skills contactSkills = new Contact_Skills(contactId, skill_id, value);
+                    Skills skills = new Skills(name);
+                    skillsList.add(contactSkills);
+                    skillsList.add(skills);
+                }
+            }
+        }
+
+        return skillsList;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

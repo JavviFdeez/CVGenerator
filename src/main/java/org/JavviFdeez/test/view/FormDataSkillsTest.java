@@ -28,7 +28,7 @@ public class FormDataSkillsTest extends Application {
             primaryStage.getIcons().add(appIcon);
 
             // Establecer título de la ventana
-            primaryStage.setTitle("CVV Generator");
+            primaryStage.setTitle("CV Generator");
 
             // Maximizar la ventana
             primaryStage.setMaximized(true);
