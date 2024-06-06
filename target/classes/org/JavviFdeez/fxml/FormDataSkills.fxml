@@ -200,7 +200,7 @@
                   <Image url="@../images/MaterialSymbolsDelete.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="backAcademies" fitHeight="52.0" fitWidth="53.0" layoutX="37.0" layoutY="25.0">
+            <ImageView fx:id="backLanguages" fitHeight="52.0" fitWidth="53.0" layoutX="37.0" layoutY="25.0">
                <image>
                   <Image url="@../images/IconamoonArrowLeft6Circle.png" />
                </image>

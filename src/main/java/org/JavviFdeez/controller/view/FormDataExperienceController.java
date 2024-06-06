@@ -351,7 +351,7 @@ public class FormDataExperienceController implements Initializable {
 
             // Obtener el controlador de la nueva escena
             FormDataCoursesController formDataCoursesController = loader.getController();
-            formDataCoursesController.setCoursesController(experiencesController);
+            formDataCoursesController.setExperiencesController(experiencesController);
 
             // Obtener el escenario actual
             Stage stage = (Stage) checkAcademies.getScene().getWindow();

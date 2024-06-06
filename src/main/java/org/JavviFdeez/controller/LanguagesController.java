@@ -58,18 +58,8 @@ public class LanguagesController implements Initializable {
      */
     public void updateLanguages(Languages updateLanguages) {
         try {
-            Languages updatedLanguages = languagesDAO.update(updateLanguages.getLang_id(), updateLanguages);
-            if (updatedLanguages != null) {
-                // =========================================================
-                // La actualización fue exitosa, mostrar mensaje de إxito
-                // =========================================================
-                System.out.println("✅ Lengua actualizada exitosamente.");
-            } else {
-                // ===============================================================
-                // No se actualizó ninguna fila, mostrar mensaje de advertencia
-                // ===============================================================
-                System.out.println("⚠️ No se encontró ninguna lengua para actualizar.");
-            }
+            languagesDAO.update(updateLanguages.getLang_id(), updateLanguages);
+            System.out.println("✅ Lenguas actualizada exitosamente.");
         } catch (SQLException e) {
             // ==================================================================================================
             // Ocurrio un error al actualizar la lengua, mostrar mensaje de error y detalles de la excepción

@@ -262,8 +262,7 @@ public class FormDataContactController implements Initializable {
                     stage.setScene(newScene);
                     stage.show();
                 } else {
-                    // Manejar el caso en el que el Stage es null
-                    System.out.println("El Stage es null");
+                    System.out.println("");
                 }
             } else {
                 // Manejar el caso en el que la escena es null

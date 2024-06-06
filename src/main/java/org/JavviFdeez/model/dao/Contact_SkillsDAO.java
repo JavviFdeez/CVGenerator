@@ -97,7 +97,7 @@ public class Contact_SkillsDAO implements iContact_SkillsDAO {
             // Ejecutar la consulta SQL de actualización
             int rowsAffected = pst.executeUpdate();
 
-            if (rowsAffected == 0) {
+            if (rowsAffected > 0) {
                 // Si no se afectaron filas, lanzar una excepción
                 throw new SQLException("No se pudo actualizar la relación con ID: " + id);
             }

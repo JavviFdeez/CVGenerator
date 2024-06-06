@@ -71,7 +71,7 @@ public class FormDataCoursesController implements Initializable {
         this.session = Session.getInstance();
     }
 
-    public void setCoursesController(ExperiencesController experiencesController) throws SQLException {
+    public void setExperiencesController(ExperiencesController experiencesController) throws SQLException {
         this.experiencesController = experiencesController;
         loadCoursesData();
     }

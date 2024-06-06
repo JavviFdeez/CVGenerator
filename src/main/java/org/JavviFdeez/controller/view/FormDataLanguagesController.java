@@ -276,6 +276,7 @@ public class FormDataLanguagesController implements Initializable {
             formDataSkillsController.setSkillsController(languagesController);
 
 
+
             // Obtener el escenario actual desde el emailTextField
             Stage stage = (Stage) checkCourses.getScene().getWindow();
 
@@ -287,6 +288,8 @@ public class FormDataLanguagesController implements Initializable {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
             logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de Skills.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

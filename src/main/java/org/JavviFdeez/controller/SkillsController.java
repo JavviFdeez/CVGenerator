@@ -57,16 +57,16 @@ public class SkillsController implements Initializable {
     }
 
     /**
-     * @param id la habilidad que se va a actualizar
+     * @param updatedSkills la habilidad que se va a actualizar
      * @Author: JavviFdeez
      * Metodo para mostrar un mensaje de ACTUALIZAR una nueva habilidad en la base de datos
      */
-    public void updateSkills(int id, Skills updatedSkills) {
+    public void updateSkills(Skills updatedSkills) {
         try {
             // ==========================================
             // Actualizar la habilidad en la base de datos
             // ==========================================
-            skillsDAO.update(id, updatedSkills);
+            skillsDAO.update(updatedSkills.getSkill_id(), updatedSkills);
             // ===========================================================
             // Si la actualizacion es exitosa, mostrar mensaje de exito.
             // ===========================================================
@@ -194,9 +194,12 @@ public class SkillsController implements Initializable {
         }
     }
 
-    public List<Contact_Skills> getSkillsById(int contactId) throws SQLException {
-        List<Contact_Skills> skillsList = new ArrayList<>();
-        String query = "SELECT cs.cskill_id, cs.skill_id, s.name, cs.value FROM cvv_contact_skills cs JOIN cvv_skills s ON cs.skill_id = s.skill_id WHERE cs.contact_id = ?";
+    public List<Object> getSkillsById(int contactId) throws SQLException {
+        List<Object> skillsList = new ArrayList<>();
+        String query = "SELECT cs.cskill_id, cs.skill_id, s.name, cs.value " +
+                "FROM cvv_contact_skills cs " +
+                "JOIN cvv_skills s ON cs.skill_id = s.skill_id " +
+                "WHERE cs.contact_id = ?";
 
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(1, contactId);
@@ -208,10 +211,14 @@ public class SkillsController implements Initializable {
                     String name = resultSet.getString("name");
                     int value = resultSet.getInt("value");
 
-                    // Crear un objeto Contact_Skills con los datos obtenidos y agregarlo a la lista
+                    // Crear un objeto Contact_Skills con los datos obtenidos
                     Contact_Skills contactSkills = new Contact_Skills(contactId, skill_id, value);
-                    Skills skills = new Skills(name);
+                    contactSkills.setCskill_id(cskill_id); // Establecer el cskill_id después de la creación
                     skillsList.add(contactSkills);
+
+                    // Crear un objeto Skills con el nombre de la habilidad
+                    Skills skills = new Skills(name);
+                    skills.setSkill_id(skill_id); // Establecer el skill_id si es necesario
                     skillsList.add(skills);
                 }
             }

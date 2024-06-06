@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="795.0" fitWidth="1550.0" layoutX="-6.0">
          <image>
-            <Image url="@../images/abstract-black-and-silver-backgr.png" />
+            <Image url="@../images/Sencillo%20Blanco%20y%20Claro%20Simple%20Presentación.png" />
          </image>
       </ImageView>
       <Pane opacity="0.95" prefHeight="94.0" prefWidth="1550.0" style="-fx-background-color: #404040;">
@@ -71,7 +71,7 @@
             <Image url="@../images/PhNumberCircleTwoFill.png" />
          </image>
       </ImageView>
-      <Pane layoutX="270.0" layoutY="102.0" prefHeight="679.0" prefWidth="999.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
+      <Pane layoutX="270.0" layoutY="106.0" prefHeight="679.0" prefWidth="999.0" style="-fx-background-color: #292828; -fx-background-radius: 25; -fx-border-color: #DBDBDB; -fx-border-radius: 25;">
          <children>
             <Label layoutX="446.0" layoutY="16.0" text="CUSTOMIZE" textFill="WHITE">
                <font>
@@ -89,9 +89,9 @@
                   <Font name="Roboto Bold" size="26.0" />
                </font>
             </Button>
-            <Label layoutX="50.0" layoutY="99.0" prefHeight="26.0" prefWidth="322.0" text="Choose a color for your CVV" textFill="#b2b2b2">
+            <Label layoutX="50.0" layoutY="95.0" prefHeight="26.0" prefWidth="322.0" text="Choose a color for your CVV" textFill="#b2b2b2">
                <font>
-                  <Font name="Leelawadee UI Semilight" size="22.0" />
+                  <Font name="Leelawadee UI Semilight" size="21.0" />
                </font>
             </Label>
             <Label layoutX="50.0" layoutY="66.0" text="Interface Color" textFill="WHITE">
@@ -265,9 +265,9 @@
                </font>
             </Label>
             <Line endX="777.0" layoutX="177.0" layoutY="320.0" startX="-133.0" stroke="#909090" />
-            <Label layoutX="50.0" layoutY="357.0" prefHeight="26.0" prefWidth="322.0" text="Choose a theme for your CVV" textFill="#b2b2b2">
+            <Label layoutX="50.0" layoutY="352.0" prefHeight="26.0" prefWidth="322.0" text="Choose a theme for your CVV" textFill="#b2b2b2">
                <font>
-                  <Font name="Leelawadee UI Semilight" size="22.0" />
+                  <Font name="Leelawadee UI Semilight" size="21.0" />
                </font>
             </Label>
             <ImageView fitHeight="43.0" fitWidth="48.0" layoutX="388.0" layoutY="12.0">

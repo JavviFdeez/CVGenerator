@@ -5,19 +5,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.JavviFdeez.controller.Contact_SkillsController;
 import org.JavviFdeez.controller.CoursesController;
 import org.JavviFdeez.controller.LanguagesController;
 import org.JavviFdeez.controller.SkillsController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
-import org.JavviFdeez.model.entity.Academies;
-import org.JavviFdeez.model.entity.Session;
-import org.JavviFdeez.model.entity.Skills;
+import org.JavviFdeez.model.entity.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +28,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -49,6 +51,7 @@ public class FormDataSkillsController implements Initializable {
 
 
     private SkillsController skillsController;
+    private Contact_SkillsController contact_skillsController;
     private LogInController logInController;
     private LanguagesController languagesController;
     private Connection conn;
@@ -60,13 +63,14 @@ public class FormDataSkillsController implements Initializable {
 
     public FormDataSkillsController() {
         this.skillsController = new SkillsController();
+        this.contact_skillsController = new Contact_SkillsController();
         this.logInController = new LogInController();
         this.languagesController = new LanguagesController();
         this.session = Session.getInstance();
         this.conn = ConnectionMariaDB.getConnection();
     }
 
-    public void setLanguagesController(LanguagesController languagesController) throws SQLException {
+    public void setSkillsController(LanguagesController languagesController) throws SQLException {
         this.languagesController = languagesController;
         loadSkillsData();
     }
@@ -75,7 +79,7 @@ public class FormDataSkillsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Asegurarse de que ningún campo de texto esté seleccionado al inicio con una pequeña demora
         Platform.runLater(() -> checkLanguages.getParent().requestFocus());
-        buttonSaveData.setOnAction(event -> changeSceneToFormData());
+        buttonSaveData.setOnAction(event -> handleFormaDataSave());
         checkLanguages.setOnMouseClicked(event -> handleBackLanguages());
         backLanguages.setOnMouseClicked(event -> handleBackLanguages());
         handleAddSkillsForm();
@@ -88,12 +92,12 @@ public class FormDataSkillsController implements Initializable {
     }
 
     @FXML
-    private void handleDeleteSkillsForm(){
+    private void handleDeleteSkillsForm() throws SQLException {
         // Eliminar un nuevo formulario
         handleDeleteSkills();
     }
 
-    private void createExperienceForm() {
+    private void createSkillsForm() {
         // Crear campos Name y Value
         TextField nameTextField = new TextField();
         VBox.setMargin(nameTextField, new Insets(0, 100, 0, 0));
@@ -136,9 +140,11 @@ public class FormDataSkillsController implements Initializable {
 
 
         // Crear etiquetas
-        Label nameLabel = new Label("NAME:");nameLabel.setStyle("-fx-font-size: 18px;");
+        Label nameLabel = new Label("NAME:");
+        nameLabel.setStyle("-fx-font-size: 18px;");
 
-        Label valueLabel = new Label("VALUE:");valueLabel.setStyle("-fx-font-size: 18px;");
+        Label valueLabel = new Label("VALUE:");
+        valueLabel.setStyle("-fx-font-size: 18px;");
 
         // Agregar las etiquetas en la primera fila
         gridPane.add(nameLabel, 0, 0);
@@ -157,7 +163,7 @@ public class FormDataSkillsController implements Initializable {
         skillsContainer.getChildren().add(gridPane);
     }
 
-    private void handleDeleteExperience() throws SQLException {
+    private void handleDeleteSkills() throws SQLException {
         // Obtener el último formulario de skills agregado
         GridPane lastskillsForm = skillsForms.isEmpty() ? null : skillsForms.get(skillsForms.size() - 1);
 
@@ -173,40 +179,99 @@ public class FormDataSkillsController implements Initializable {
 
         if (skillsController.getSkillsById(session.getContactId()) != null) {
             // Llamar al controlador para eliminar la experiencia
-            experiencesController.deleteExperiences(session.getContactId());
+            skillsController.deleteSkills(session.getContactId());
         }
     }
 
-    private void loadSkillsData() {
-        int contactId = Session.getInstance().getContactId();
+    private void handleFormaDataSave() {
+        // Obtener el contact_id de la sesión actual
+        int contactId = session.getContactId();
 
-        String query = "SELECT * FROM cvv_contact_skills WHERE contact_id = ?";
-        try (PreparedStatement pst = conn.prepareStatement(query)) {
-            pst.setInt(1, contactId);
-            ResultSet rs = pst.executeQuery();
+        try {
+            // Obtener todas las skills asociadas al contacto
+            List<Object> existingSkills = skillsController.getSkillsById(contactId);
 
-            int academicCount = 0; // Contador para llevar la cuenta de las academias cargadas
+            for (int i = 0; i < skillsContainer.getChildren().size(); i++) {
+                Node node = skillsContainer.getChildren().get(i);
+                if (node instanceof GridPane) {
+                    GridPane gridPane = (GridPane) node;
 
-            while (rs.next()) {
-                academicCount++;
+                    // Recoger los datos de cada skill utilizando las referencias guardadas
+                    TextField nameTextField = nameTextFields.get(i);
+                    ComboBox<String> valueComboBox = valueComboBoxes.get(i);
 
-                // Crear un objeto Academies con los datos recuperados de la base de datos
-                Skills skills = new Skills(
-                        rs.getString("name")
-                );
+                    // Crear un objeto skills con los datos recolectados
+                    Skills skills = new Skills();
+                    Contact_Skills contactSkills = new Contact_Skills();
+                    contactSkills.setContact_id(contactId);
+                    contactSkills.setValue(Integer.parseInt(valueComboBox.getValue()));
+                    skills.setName(nameTextField.getText().trim());
 
+                    if (i < existingSkills.size()) {
+                        // Actualizar la skill existente
+                        Contact_Skills existingContactSkills = (Contact_Skills) existingSkills.get(i);
+                        contactSkills.setSkill_id(existingContactSkills.getSkill_id());
+                        contact_skillsController.updateContact_Skill(contactSkills);
+                        logInController.showAutoClosingAlert("AVISO: Skills se ha actualizado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        skillsController.updateSkills(skills);
+                        changeSceneToFormData();
+                    } else {
+                        // Insertar nueva habilidad
+                        skillsController.saveSkills(skills);
+                        contact_skillsController.saveContact_Skill(contactSkills);
+                        logInController.showAutoClosingAlert("AVISO: Skills se ha guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        changeSceneToFormData();
+                    }
+                }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
-    private void showAlert(String error, String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(error);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+
+    public void loadSkillsData() throws SQLException {
+        if (skillsController != null) {
+            // Obtener el contactId del usuario autenticado desde la sesión
+            int contactId = Session.getInstance().getContactId();
+
+            // Obtener todas las skills asociadas con el contactId
+            List<Object> contactSkillsList = contact_skillsController.getContactSkillsById(contactId);
+
+            // Verificar si se encontraron skills asociadas
+            if (contactSkillsList != null && !contactSkillsList.isEmpty()) {
+                // Recorrer todas las skills recuperadas
+                for (int i = 0; i < contactSkillsList.size(); i++) {
+                    Contact_Skills contactSkills = (Contact_Skills) contactSkillsList.get(i);
+                    Skills skills = (Skills) contactSkillsList.get(i);
+
+                    // Verificar si hay suficientes GridPane y campos de texto
+                    if (i < skillsForms.size()) {
+                        GridPane gridPane = skillsForms.get(i);
+
+                        // Obtener los campos de texto correspondientes del GridPane actual
+                        TextField nameTextField = nameTextFields.get(i);
+                        ComboBox<String> valueComboBox = valueComboBoxes.get(i);
+
+                        // Cargar los datos de la habilidad en los campos de texto y ComboBox correspondientes
+                        nameTextField.setText(skills.getName());
+                        valueComboBox.setValue(String.valueOf(contactSkills.getValue()));
+                    } else {
+                        // Si hay más habilidades que GridPane disponibles, se crea un nuevo GridPane y se cargan los datos
+                        createSkillsForm();
+                        GridPane gridPane = skillsForms.get(skillsForms.size() - 1);
+
+                        // Obtener los campos de texto correspondientes del nuevo GridPane
+                        TextField nameTextField = nameTextFields.get(nameTextFields.size() - 1);
+                        ComboBox<String> valueComboBox = valueComboBoxes.get(valueComboBoxes.size() - 1);
+
+                        // Cargar los datos de la habilidad en los campos de texto y ComboBox correspondientes
+                        nameTextField.setText(skills.getName());
+                        valueComboBox.setValue(String.valueOf(contactSkills.getValue()));
+                    }
+                }
+            }
+        }
     }
 
     private void changeSceneToFormData() {
@@ -225,7 +290,7 @@ public class FormDataSkillsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de Experience.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de Customize.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 
@@ -245,7 +310,7 @@ public class FormDataSkillsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de Languages.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de Languages.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 }

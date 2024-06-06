@@ -126,7 +126,7 @@ public class LanguagesDAO implements iLanguagesDAO {
             // ==============================================================
             // Si no se actualizo ningun lenguaje, mostrar mensaje de error
             // ==============================================================
-            if (rowsAffected == 0) {
+            if (rowsAffected > 0) {
                 throw new SQLException("No se pudo actualizar el lenguaje con ID: " + id);
             }
 

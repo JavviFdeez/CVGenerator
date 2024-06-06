@@ -4,9 +4,15 @@ import javafx.fxml.Initializable;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.Contact_SkillsDAO;
 import org.JavviFdeez.model.entity.Contact_Skills;
+import org.JavviFdeez.model.entity.Skills;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Contact_SkillsController extends Contact_SkillsControllerAbstract implements Initializable {
@@ -14,12 +20,14 @@ public class Contact_SkillsController extends Contact_SkillsControllerAbstract i
     // Atributos
     // =================
     private Contact_SkillsDAO csDAO;
+    private Connection conn;
 
     // =================
     // Constructor
     // =================
     public Contact_SkillsController() {
         this.csDAO = new Contact_SkillsDAO(ConnectionMariaDB.getConnection());
+        this.conn = ConnectionMariaDB.getConnection();
     }
 
     /**
@@ -52,12 +60,12 @@ public class Contact_SkillsController extends Contact_SkillsControllerAbstract i
      * Metodo para mostrar un mensaje de actualizar una relacion entre un Contact y una Skill en la base de datos
      */
 
-    public void updateContact_Skill(int id, Contact_Skills cs) {
+    public void updateContact_Skill(Contact_Skills cs) {
         try {
             // ===========================================
             // Actualizar la relacion en la base de datos
             // ===========================================
-            csDAO.update(id, cs);
+            csDAO.update(cs.getSkill_id(), cs);
             // ======================================================
             // Si la actualizacion es exitosa, mostrar mensaje de exito.
             // ======================================================
@@ -146,6 +154,39 @@ public class Contact_SkillsController extends Contact_SkillsControllerAbstract i
             // =============================================
             System.err.println("❌ Error al consultar las relaciones: " + e.getMessage());
         }
+    }
+
+    public List<Object> getSkillsById(int contactId) throws SQLException {
+        List<Object> skillsList = new ArrayList<>();
+        String query = "SELECT cs.cskill_id, cs.skill_id, s.name, cs.value " +
+                "FROM cvv_contact_skills cs " +
+                "JOIN cvv_skills s ON cs.skill_id = s.skill_id " +
+                "WHERE cs.contact_id = ?";
+
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, contactId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Obtener los datos de cada Skill
+                    int cskill_id = resultSet.getInt("cskill_id");
+                    int skill_id = resultSet.getInt("skill_id");
+                    String name = resultSet.getString("name");
+                    int value = resultSet.getInt("value");
+
+                    // Crear un objeto Contact_Skills con los datos obtenidos
+                    Contact_Skills contactSkills = new Contact_Skills(contactId, skill_id, value);
+                    contactSkills.setCskill_id(cskill_id); // Establecer el cskill_id después de la creación
+                    skillsList.add(contactSkills);
+
+                    // Crear un objeto Skills con el nombre de la habilidad
+                    Skills skills = new Skills(name);
+                    skills.setSkill_id(skill_id); // Establecer el skill_id si es necesario
+                    skillsList.add(skills);
+                }
+            }
+        }
+
+        return skillsList;
     }
 
     @Override

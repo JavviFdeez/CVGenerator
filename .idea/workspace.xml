@@ -4,21 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="Actualización de la vista Languages.">
+    <list default="true" id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="Actualización de la vista Skills.">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_05_2024_20_10_[Changes]/AcademiesControllerAbstract.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_05_2024_20_10_[Changes]/AcademiesDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_05_2024_20_10_[Changes]/ContactDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_05_2024_20_10_[Changes]/ContactTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_05_2024_20_10_[Changes]/iContactDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_05_2024_20_10_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_05_2024_20_10__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/ExperiencesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/ExperiencesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/Contact_SkillsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/Contact_SkillsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/Contact_SkillsControllerAbstract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/Contact_SkillsControllerAbstract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/LanguagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/LanguagesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/SkillsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/SkillsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataContactController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataContactController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataCoursesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataCoursesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataExperienceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataExperienceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataLanguagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataLanguagesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataSkillsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataSkillsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/entity/Skills.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/entity/Skills.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/test/view/FormDataLanguagesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/test/view/FormDataLanguagesTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/test/view/FormDataSkillsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/test/view/FormDataSkillsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/css/FormDataSkills.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/css/FormDataSkills.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/Customize.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/Customize.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/FormDataSkills.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/FormDataSkills.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataCoursesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataCoursesController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/CoursesDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/CoursesDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/dao/Contact_SkillsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/dao/Contact_SkillsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/dao/LanguagesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/dao/LanguagesDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/entity/Contact_Skills.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/model/entity/Contact_Skills.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/ExperiencesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/ExperiencesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/LanguagesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/LanguagesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/SkillsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/SkillsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataExperienceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataExperienceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataLanguagesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataLanguagesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataSkillsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataSkillsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/Customize.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/Customize.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/FormDataSkills.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/FormDataSkills.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/LanguagesDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/LanguagesDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Skills.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/Skills.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +140,7 @@
       <recent name="org.JavviFdeez.test.view" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.FormDataSkillsTest">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.App" />
       <module name="GeneradorCurriculums" />
@@ -192,8 +208,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.FormDataSkillsTest" />
         <item itemvalue="Application.App" />
+        <item itemvalue="Application.FormDataSkillsTest" />
         <item itemvalue="Application.FormDataLanguagesTest" />
         <item itemvalue="Application.FormDataAcademiesTest" />
         <item itemvalue="Application.FormDataExperienceTest" />
@@ -308,7 +324,9 @@
       <workItem from="1717490450442" duration="12659000" />
       <workItem from="1717513101067" duration="6817000" />
       <workItem from="1717526574812" duration="1769000" />
-      <workItem from="1717568743047" duration="3855000" />
+      <workItem from="1717568743047" duration="3897000" />
+      <workItem from="1717694650495" duration="3665000" />
+      <workItem from="1717698324805" duration="2535000" />
     </task>
     <task id="LOCAL-00001" summary="Creación y configuración del proyecto">
       <option name="closed" value="true" />
@@ -654,7 +672,23 @@
       <option name="project" value="LOCAL" />
       <updated>1717528335336</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Actualización de la vista Skills.">
+      <option name="closed" value="true" />
+      <created>1717572626816</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1717572626816</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Actualización de la vista Skills.">
+      <option name="closed" value="true" />
+      <created>1717572643427</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1717572643427</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -669,7 +703,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Creación del paquete Model" />
     <MESSAGE value="Establecida la conexión con la base de datos" />
     <MESSAGE value="Actualización del POM" />
     <MESSAGE value="Actualización de los DAO, los controller y sus respectivas interfaces" />
@@ -694,7 +727,8 @@
     <MESSAGE value="Actualización de la vista academies." />
     <MESSAGE value="Actualización de la vista courses." />
     <MESSAGE value="Actualización de la vista Languages." />
-    <option name="LAST_COMMIT_MESSAGE" value="Actualización de la vista Languages." />
+    <MESSAGE value="Actualización de la vista Skills." />
+    <option name="LAST_COMMIT_MESSAGE" value="Actualización de la vista Skills." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -19,6 +19,8 @@ public class Contact_Skills {
         this.value = value;
     }
 
+    public Contact_Skills() {}
+
     // ======================
     // Getters and Setters
     // ======================

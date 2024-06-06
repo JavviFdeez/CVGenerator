@@ -16,10 +16,10 @@ public abstract class Contact_SkillsControllerAbstract {
     /**
      * Método abstracto para actualizar las habilidades de contacto.
      *
-     * @param id el ID del contacto cuyas habilidades se actualizarán
-     * @param id las nuevas habilidades del contacto
+     * @param cs el contacto cuyas habilidades se actualizarán
+     * @param cs las nuevas habilidades del contacto
      */
-    public abstract void updateContact_Skill(int id, Contact_Skills cs);
+    public abstract void updateContact_Skill(Contact_Skills cs);
 
     /**
      * Método abstracto para eliminar las habilidades de contacto.
