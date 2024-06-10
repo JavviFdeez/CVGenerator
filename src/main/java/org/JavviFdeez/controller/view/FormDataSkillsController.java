@@ -177,7 +177,7 @@ public class FormDataSkillsController implements Initializable {
         }
 
 
-        if (skillsController.getSkillsById(session.getContactId()) != null) {
+        if (contact_skillsController.getSkillsById(session.getContactId()) != null) {
             // Llamar al controlador para eliminar la experiencia
             skillsController.deleteSkills(session.getContactId());
         }
@@ -189,7 +189,7 @@ public class FormDataSkillsController implements Initializable {
 
         try {
             // Obtener todas las skills asociadas al contacto
-            List<Object> existingSkills = skillsController.getSkillsById(contactId);
+            List<Contact_Skills> existingSkills = contact_skillsController.getSkillsById(contactId);
 
             for (int i = 0; i < skillsContainer.getChildren().size(); i++) {
                 Node node = skillsContainer.getChildren().get(i);
@@ -200,35 +200,48 @@ public class FormDataSkillsController implements Initializable {
                     TextField nameTextField = nameTextFields.get(i);
                     ComboBox<String> valueComboBox = valueComboBoxes.get(i);
 
-                    // Crear un objeto skills con los datos recolectados
+                    // Crear un objeto Skills con los datos recolectados
                     Skills skills = new Skills();
-                    Contact_Skills contactSkills = new Contact_Skills();
-                    contactSkills.setContact_id(contactId);
-                    contactSkills.setValue(Integer.parseInt(valueComboBox.getValue()));
                     skills.setName(nameTextField.getText().trim());
 
                     if (i < existingSkills.size()) {
                         // Actualizar la skill existente
-                        Contact_Skills existingContactSkills = (Contact_Skills) existingSkills.get(i);
-                        contactSkills.setSkill_id(existingContactSkills.getSkill_id());
-                        contact_skillsController.updateContact_Skill(contactSkills);
-                        logInController.showAutoClosingAlert("AVISO: Skills se ha actualizado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        Contact_Skills existingContactSkills = existingSkills.get(i);
+                        int skillId = existingContactSkills.getSkill_id();
+
+                        // Actualizar la skill en la base de datos
+                        skills.setSkill_id(skillId);
                         skillsController.updateSkills(skills);
-                        changeSceneToFormData();
+
+                        // Actualizar la relación en cvv_contact_skills
+                        existingContactSkills.setValue(Integer.parseInt(valueComboBox.getValue()));
+                        contact_skillsController.updateContact_Skill(existingContactSkills);
+
+                        logInController.showAutoClosingAlert("AVISO: Skills se ha actualizado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                     } else {
-                        // Insertar nueva habilidad
+                        // Insertar nueva skill
                         skillsController.saveSkills(skills);
+
+                        // Obtener el id de la skill recién insertada
+                        int skillId = skillsController.getLastInsertedId();
+
+                        // Crear la relación en cvv_contact_skills
+                        Contact_Skills contactSkills = new Contact_Skills();
+                        contactSkills.setContact_id(contactId);
+                        contactSkills.setSkill_id(skillId);
+                        contactSkills.setValue(Integer.parseInt(valueComboBox.getValue()));
                         contact_skillsController.saveContact_Skill(contactSkills);
+
                         logInController.showAutoClosingAlert("AVISO: Skills se ha guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
-                        changeSceneToFormData();
                     }
+                    changeSceneToFormData();
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            logInController.showAutoClosingAlert("ERROR: Error al guardar los datos de Skills.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
-
 
     public void loadSkillsData() throws SQLException {
         if (skillsController != null) {
@@ -236,43 +249,47 @@ public class FormDataSkillsController implements Initializable {
             int contactId = Session.getInstance().getContactId();
 
             // Obtener todas las skills asociadas con el contactId
-            List<Object> contactSkillsList = contact_skillsController.getContactSkillsById(contactId);
+            List<Contact_Skills> contactSkillsList = contact_skillsController.getSkillsById(contactId);
 
             // Verificar si se encontraron skills asociadas
             if (contactSkillsList != null && !contactSkillsList.isEmpty()) {
                 // Recorrer todas las skills recuperadas
                 for (int i = 0; i < contactSkillsList.size(); i++) {
-                    Contact_Skills contactSkills = (Contact_Skills) contactSkillsList.get(i);
-                    Skills skills = (Skills) contactSkillsList.get(i);
+                    Contact_Skills contactSkills = contactSkillsList.get(i);
+                    Skills skills = contactSkills.getSkills();
 
-                    // Verificar si hay suficientes GridPane y campos de texto
-                    if (i < skillsForms.size()) {
-                        GridPane gridPane = skillsForms.get(i);
+                    // Verificar si skills no es null
+                    if (skills != null) {
+                        // Verificar si hay suficientes GridPane y campos de texto
+                        if (i < skillsForms.size()) {
+                            GridPane gridPane = skillsForms.get(i);
 
-                        // Obtener los campos de texto correspondientes del GridPane actual
-                        TextField nameTextField = nameTextFields.get(i);
-                        ComboBox<String> valueComboBox = valueComboBoxes.get(i);
+                            // Obtener los campos de texto correspondientes del GridPane actual
+                            TextField nameTextField = nameTextFields.get(i);
+                            ComboBox<String> valueComboBox = valueComboBoxes.get(i);
 
-                        // Cargar los datos de la habilidad en los campos de texto y ComboBox correspondientes
-                        nameTextField.setText(skills.getName());
-                        valueComboBox.setValue(String.valueOf(contactSkills.getValue()));
-                    } else {
-                        // Si hay más habilidades que GridPane disponibles, se crea un nuevo GridPane y se cargan los datos
-                        createSkillsForm();
-                        GridPane gridPane = skillsForms.get(skillsForms.size() - 1);
+                            // Cargar los datos de la habilidad en los campos de texto y ComboBox correspondientes
+                            nameTextField.setText(skills.getName());
+                            valueComboBox.setValue(String.valueOf(contactSkills.getValue()));
+                        } else {
+                            // Si hay más habilidades que GridPane disponibles, se crea un nuevo GridPane y se cargan los datos
+                            createSkillsForm();
+                            GridPane gridPane = skillsForms.get(skillsForms.size() - 1);
 
-                        // Obtener los campos de texto correspondientes del nuevo GridPane
-                        TextField nameTextField = nameTextFields.get(nameTextFields.size() - 1);
-                        ComboBox<String> valueComboBox = valueComboBoxes.get(valueComboBoxes.size() - 1);
+                            // Obtener los campos de texto correspondientes del nuevo GridPane
+                            TextField nameTextField = nameTextFields.get(nameTextFields.size() - 1);
+                            ComboBox<String> valueComboBox = valueComboBoxes.get(valueComboBoxes.size() - 1);
 
-                        // Cargar los datos de la habilidad en los campos de texto y ComboBox correspondientes
-                        nameTextField.setText(skills.getName());
-                        valueComboBox.setValue(String.valueOf(contactSkills.getValue()));
+                            // Cargar los datos de la habilidad en los campos de texto y ComboBox correspondientes
+                            nameTextField.setText(skills.getName());
+                            valueComboBox.setValue(String.valueOf(contactSkills.getValue()));
+                        }
                     }
                 }
             }
         }
     }
+
 
     private void changeSceneToFormData() {
         try {
@@ -280,13 +297,26 @@ public class FormDataSkillsController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/Customize.fxml"));
             Parent root = loader.load();
 
-            // Obtener el escenario actual desde el emailTextField
-            Stage stage = (Stage) checkLanguages.getScene().getWindow();
+            // Obtener el controlador de la nueva escena
+            CustomizeController customizeController = loader.getController();
 
-            // Establecer la nueva escena en el escenario
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            // Obtener el escenario actual desde el emailTextField
+            Scene scene = buttonSaveData.getScene();
+            if (scene != null) {
+                Stage stage = (Stage) scene.getWindow();
+                if (stage != null) {
+                    // Establecer la nueva escena en el escenario
+                    Scene newScene = new Scene(root);
+                    stage.setScene(newScene);
+                    stage.show();
+                } else {
+                    System.out.println("");
+                }
+            } else {
+                // Manejar el caso en el que la escena es null
+                System.out.println("La escena es null");
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML

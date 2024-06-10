@@ -43,6 +43,7 @@ public class Contact_SkillsDAO implements iContact_SkillsDAO {
         // Insertar la relacion en la base de datos
         // ===========================================
         try (PreparedStatement pst = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS)) {
+            pst.setInt(1, cs.getContact_id());
             pst.setInt(2, cs.getSkill_id());
             pst.setInt(3, cs.getValue());
 

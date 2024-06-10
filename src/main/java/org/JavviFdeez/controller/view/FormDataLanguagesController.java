@@ -275,8 +275,6 @@ public class FormDataLanguagesController implements Initializable {
             FormDataSkillsController formDataSkillsController = loader.getController();
             formDataSkillsController.setSkillsController(languagesController);
 
-
-
             // Obtener el escenario actual desde el emailTextField
             Stage stage = (Stage) checkCourses.getScene().getWindow();
 

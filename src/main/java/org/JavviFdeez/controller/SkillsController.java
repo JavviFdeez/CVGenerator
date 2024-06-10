@@ -70,6 +70,7 @@ public class SkillsController implements Initializable {
             // ===========================================================
             // Si la actualizacion es exitosa, mostrar mensaje de exito.
             // ===========================================================
+            System.out.println("✅ Skills actualizada exitosamente.");
         } catch (SQLException e) {
             // =============================================
             // En caso de error, mostrar mensaje de error.
@@ -157,74 +158,17 @@ public class SkillsController implements Initializable {
         }
     }
 
-    public boolean saveDataToDatabase(String name, Integer value, String name1, Integer value1, String name2, Integer value2) throws SQLException {
-        // Guardar los datos en la base de datos
-        try {
-            if (conn == null || conn.isClosed()) {
-                conn = ConnectionMariaDB.getConnection();
-            }
+    public int getLastInsertedId() throws SQLException {
+        String query = "SELECT LAST_INSERT_ID() as last_id";
 
-            // Preparar las consultas SQL para insertar los datos en ambas tablas
-            String queryCvvSkills = "INSERT INTO cvv_skills (name) VALUES (?), (?), (?)";
-            String queryContactSkills = "INSERT INTO contact_skills (value) VALUES (?), (?), (?)";
-
-            // Usar transacciones para asegurar que ambas consultas se ejecuten correctamente
-            conn.setAutoCommit(false);
-
-            try (PreparedStatement pstCvvSkills = conn.prepareStatement(queryCvvSkills);
-                 PreparedStatement pstContactSkills = conn.prepareStatement(queryContactSkills)) {
-
-                // Insertar en cvv_skills
-                pstCvvSkills.setString(1, name);
-                pstCvvSkills.setString(2, name1);
-                pstCvvSkills.setString(3, name2);
-                pstCvvSkills.executeUpdate();
-
-                // Insertar en contact_skills
-                pstContactSkills.setInt(1, value);
-                pstContactSkills.setInt(2, value1);
-                pstContactSkills.setInt(3, value2);
-
-                pstCvvSkills.executeUpdate();
-                pstContactSkills.executeUpdate();
-                return true;
-            }
-        } catch (SQLException e) {
-            throw e;
-        }
-    }
-
-    public List<Object> getSkillsById(int contactId) throws SQLException {
-        List<Object> skillsList = new ArrayList<>();
-        String query = "SELECT cs.cskill_id, cs.skill_id, s.name, cs.value " +
-                "FROM cvv_contact_skills cs " +
-                "JOIN cvv_skills s ON cs.skill_id = s.skill_id " +
-                "WHERE cs.contact_id = ?";
-
-        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setInt(1, contactId);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    // Obtener los datos de cada Skill
-                    int cskill_id = resultSet.getInt("cskill_id");
-                    int skill_id = resultSet.getInt("skill_id");
-                    String name = resultSet.getString("name");
-                    int value = resultSet.getInt("value");
-
-                    // Crear un objeto Contact_Skills con los datos obtenidos
-                    Contact_Skills contactSkills = new Contact_Skills(contactId, skill_id, value);
-                    contactSkills.setCskill_id(cskill_id); // Establecer el cskill_id después de la creación
-                    skillsList.add(contactSkills);
-
-                    // Crear un objeto Skills con el nombre de la habilidad
-                    Skills skills = new Skills(name);
-                    skills.setSkill_id(skill_id); // Establecer el skill_id si es necesario
-                    skillsList.add(skills);
-                }
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getInt("last_id");
+            } else {
+                throw new SQLException("No se pudo obtener el último ID insertado.");
             }
         }
-
-        return skillsList;
     }
 
     @Override

@@ -6,13 +6,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import org.JavviFdeez.model.entity.ColorModel;
+import org.JavviFdeez.model.entity.TemplateModel;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,27 +37,33 @@ public class PreviewController implements Initializable {
 
     private ColorModel colorModel;
 
+    private LogInController logInController;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Verificar si el modelo de color no es nulo
 
         if (colorModel != null) {
-            // Observar la propiedad de color seleccionado para actualizar la opacidad de las imágenes
-            colorModel.selectedColorProperty().addListener((observable, oldValue, newValue) -> applyOpacity(newValue));
-            System.out.println(colorModel);
-            // Establecer la opacidad inicial
-            applyOpacity(colorModel.getSelectedColor());
-
-
-
+            applyColor();
         }
         buttonSaveData.setOnAction(event -> generatePDF());
+        logInController = new LogInController();
     }
 
     public void setColorModel(ColorModel colorModel) {
         this.colorModel = colorModel;
+        applyColor();
     }
+
+    private void applyColor() {
+        if (colorModel != null) {
+            String selectedColor = colorModel.getSelectedColor();
+            System.out.println("Color aplicado: " + selectedColor);
+            applyOpacity(selectedColor);
+        }
+    }
+
 
     private void applyOpacity(String color) {
         double opacityGreen  = color.equals("#62FF00") ? 1.0 : 0.0;
@@ -73,6 +80,11 @@ public class PreviewController implements Initializable {
     }
 
 
+    public void setTemplate(TemplateModel templateModel) {
+        if (templateModel != null) {
+            String selectedTemplate = templateModel.getSelectedTemplate();
+        }
+    }
 
     private void generatePDF() {
         try (PDDocument document = new PDDocument()) {
@@ -95,20 +107,11 @@ public class PreviewController implements Initializable {
 
             // Guardar el documento PDF en la ruta especificada
             document.save(filePath);
-            showAlert("Exito","PDF generado correctamente.", Alert.AlertType.INFORMATION);
+            logInController.showAutoClosingAlert("EXITO: PDF generado correctamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
             System.out.println("PDF generado correctamente.");
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert("Error", "Error al generar el PDF.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: Error al generar el PDF.",  LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
-    }
-
-
-    private void showAlert(String title,String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

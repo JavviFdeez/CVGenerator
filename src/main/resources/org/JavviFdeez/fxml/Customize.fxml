@@ -124,7 +124,7 @@
                   <Pane layoutX="28.0" layoutY="15.0" prefHeight="14.0" prefWidth="48.0" style="-fx-background-color: #62FF00; -fx-background-radius: 2;" />
                </children>
             </Pane>
-            <Label layoutX="42.0" layoutY="268.0" prefHeight="37.0" prefWidth="196.0" style="-fx-background-color: #292828; -fx-background-radius: 0; -fx-padding: 10;" text="Green phosphorite" textFill="#62ff00">
+            <Label layoutX="42.0" layoutY="268.0" prefHeight="37.0" prefWidth="196.0" style="-fx-background-color: #292828; -fx-background-radius: 0; -fx-padding: 10;" text="Green Golf" textFill="#62ff00">
                <font>
                   <Font name="Roboto Bold" size="13.0" />
                </font>
@@ -204,7 +204,7 @@
                   <Pane layoutX="28.0" layoutY="15.0" prefHeight="14.0" prefWidth="48.0" style="-fx-background-color: #FF0049; -fx-background-radius: 2;" />
                </children>
             </Pane>
-            <Label layoutX="528.0" layoutY="267.0" prefHeight="37.0" prefWidth="196.0" style="-fx-background-color: #292828; -fx-background-radius: 0; -fx-padding: 10;" text="Pale Red" textFill="#ff0049">
+            <Label layoutX="528.0" layoutY="267.0" prefHeight="37.0" prefWidth="196.0" style="-fx-background-color: #292828; -fx-background-radius: 0; -fx-padding: 10;" text="Red Ferrari" textFill="#ff0049">
                <font>
                   <Font name="Leelawadee UI" size="13.0" />
                </font>
@@ -244,7 +244,7 @@
                   <Pane layoutX="28.0" layoutY="15.0" prefHeight="14.0" prefWidth="48.0" style="-fx-background-color: #616161; -fx-background-radius: 2;" />
                </children>
             </Pane>
-            <Label layoutX="761.0" layoutY="267.0" prefHeight="37.0" prefWidth="196.0" style="-fx-background-color: #292828; -fx-background-radius: 0; -fx-padding: 10;" text="Elegant Black" textFill="WHITE">
+            <Label layoutX="761.0" layoutY="267.0" prefHeight="37.0" prefWidth="196.0" style="-fx-background-color: #292828; -fx-background-radius: 0; -fx-padding: 10;" text="Black Mustang" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI" size="13.0" />
                </font>

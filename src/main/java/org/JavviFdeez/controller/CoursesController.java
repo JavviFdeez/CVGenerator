@@ -68,6 +68,7 @@ public class CoursesController implements Initializable {
             // ===========================================================
             // Si la actualizacion es exitosa, mostrar mensaje de exito.
             // ===========================================================
+            System.out.println("✅ Cursos actualizados exitosamente.");
         } catch (SQLException e) {
             // =============================================
             // En caso de error, mostrar mensaje de error.

@@ -231,10 +231,6 @@ public class TemplateController implements Initializable {
         dataExperience(experiencesAnchorPane);
         dataCourses(coursesAnchorPane);
         image.setPreserveRatio(false);
-        if (colorModel != null) {
-            colorModel.selectedColorProperty().addListener((observable, oldValue, newValue) -> applyColor(newValue));
-            applyColor(colorModel.getSelectedColor());
-        }
     }
 
     // ==============

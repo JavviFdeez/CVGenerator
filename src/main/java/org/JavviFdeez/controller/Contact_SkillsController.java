@@ -156,9 +156,9 @@ public class Contact_SkillsController extends Contact_SkillsControllerAbstract i
         }
     }
 
-    public List<Object> getSkillsById(int contactId) throws SQLException {
-        List<Object> skillsList = new ArrayList<>();
-        String query = "SELECT cs.cskill_id, cs.skill_id, s.name, cs.value " +
+    public List<Contact_Skills> getSkillsById(int contactId) throws SQLException {
+        List<Contact_Skills> contactSkillsList = new ArrayList<>();
+        String query = "SELECT cs.cskill_id, cs.skill_id, cs.contact_id, cs.value, s.name " +
                 "FROM cvv_contact_skills cs " +
                 "JOIN cvv_skills s ON cs.skill_id = s.skill_id " +
                 "WHERE cs.contact_id = ?";
@@ -167,26 +167,28 @@ public class Contact_SkillsController extends Contact_SkillsControllerAbstract i
             preparedStatement.setInt(1, contactId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    // Obtener los datos de cada Skill
+                    // Obtener los datos de cada Contact_Skills y Skills
                     int cskill_id = resultSet.getInt("cskill_id");
                     int skill_id = resultSet.getInt("skill_id");
-                    String name = resultSet.getString("name");
+                    int contact_id = resultSet.getInt("contact_id");
                     int value = resultSet.getInt("value");
+                    String name = resultSet.getString("name");
 
-                    // Crear un objeto Contact_Skills con los datos obtenidos
-                    Contact_Skills contactSkills = new Contact_Skills(contactId, skill_id, value);
-                    contactSkills.setCskill_id(cskill_id); // Establecer el cskill_id después de la creación
-                    skillsList.add(contactSkills);
-
-                    // Crear un objeto Skills con el nombre de la habilidad
+                    // Crear el objeto Skills
                     Skills skills = new Skills(name);
-                    skills.setSkill_id(skill_id); // Establecer el skill_id si es necesario
-                    skillsList.add(skills);
+                    skills.setSkill_id(skill_id);
+
+                    // Crear el objeto Contact_Skills y asociar el objeto Skills
+                    Contact_Skills contactSkills = new Contact_Skills(contact_id, skill_id, value);
+                    contactSkills.setCskill_id(cskill_id);
+                    contactSkills.setSkills(skills);
+
+                    contactSkillsList.add(contactSkills);
                 }
             }
         }
 
-        return skillsList;
+        return contactSkillsList;
     }
 
     @Override

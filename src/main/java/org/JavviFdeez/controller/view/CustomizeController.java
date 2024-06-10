@@ -5,11 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.JavviFdeez.controller.SkillsController;
 import org.JavviFdeez.model.entity.ColorModel;
+import org.JavviFdeez.model.entity.Session;
+import org.JavviFdeez.model.entity.TemplateModel;
 
 import java.io.IOException;
 import java.net.URL;
@@ -58,7 +61,12 @@ public class CustomizeController implements Initializable {
 
     private final ColorModel colorModel = new ColorModel();
 
+    private final TemplateModel templateModel = new TemplateModel();
+
     private PreviewController previewController;
+
+    private LogInController logInController;
+    private Session session;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -66,12 +74,15 @@ public class CustomizeController implements Initializable {
         ButtonFocus.setOnAction(event -> showCheckFocus());
         ButtonPink.setOnAction(event -> showCheckPink());
         ButtonBlack.setOnAction(event -> showCheckBlack());
+
         ButtonTemplate.setOnAction(event -> showTemplate());
         backForm.setOnMouseClicked(event -> backToFormData());
         buttonSaveData.setOnMouseClicked(event -> changeSceneToPreview());
 
+        this.logInController = new LogInController();
+        this.previewController = new PreviewController();
+        this.session = Session.getInstance();
     }
-
 
     private void showCheckGreen() {
         setColor("#62FF00");
@@ -115,18 +126,16 @@ public class CustomizeController implements Initializable {
             checkTemplate.setOpacity(0);
         } else {
             checkTemplate.setOpacity(1);
+            TemplateModel.getInstance().setSelectedTemplate("Nombre de la plantilla aquí");
         }
         isVisible = !isVisible;
     }
-
 
     private void backToFormData() {
         try {
             // Cargar la nueva escena desde el archivo FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/FormDataSkills.fxml"));
             Parent root = loader.load();
-
-            //
 
             // Obtener el escenario actual desde el emailTextField
             Stage stage = (Stage) ButtonGreen.getScene().getWindow();
@@ -138,45 +147,43 @@ public class CustomizeController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de contacto.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert( "ERROR: No se pudo cargar la pantalla de contacto.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 
-    private void showAlert(String error, String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(error);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
     private void changeSceneToPreview() {
-        try {
-            // Cargar la nueva escena desde el archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/Preview.fxml"));
-            Parent root = loader.load();
+        if (colorModel.getSelectedColor() == null || colorModel.getSelectedColor().isEmpty()) {
+            // Mostrar un mensaje de advertencia al usuario si no se ha seleccionado un color
+            logInController.showAutoClosingAlert("Por favor, seleccione un color antes de continuar.", LogInController.AlertType.WARNING, Duration.seconds(3));
+        } else if (TemplateModel.getInstance().getSelectedTemplate() == null || TemplateModel.getInstance().getSelectedTemplate().isEmpty()) {
+            // Mostrar un mensaje de advertencia al usuario si no se ha seleccionado una plantilla
+            logInController.showAutoClosingAlert("Por favor, seleccione una plantilla antes de continuar.", LogInController.AlertType.WARNING, Duration.seconds(3));
+        } else {
+            if (backForm.getScene() != null && backForm.getScene().getWindow() instanceof Stage) {
+                try {
+                    // Cargar la nueva escena desde el archivo FXML
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/fxml/Preview.fxml"));
+                    Parent root = loader.load();
 
-            previewController = loader.getController();
-            previewController.setColorModel(colorModel);
+                    // Obtener el controlador de la nueva escena
+                    PreviewController previewController = loader.getController();
+                    previewController.setColorModel(colorModel);
+                    previewController.setTemplate(templateModel);
 
-            // Obtener el controlador de la vista Preview.fxml
-            PreviewController previewController = loader.getController();
 
-            // Establecer el modelo de color en el controlador PreviewController
-            previewController.setColorModel(colorModel);
-            System.out.println(colorModel);
+                    // Obtener el escenario actual desde el emailTextField
+                    Stage stage = (Stage) checkBlue.getScene().getWindow();
 
-            // Obtener el escenario actual desde el emailTextField
-            Stage stage = (Stage) checkBlue.getScene().getWindow();
-
-            // Establecer la nueva escena en el escenario
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de Preview.", Alert.AlertType.ERROR);
+                    // Establecer la nueva escena en el escenario
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    // Manejar cualquier error de carga del archivo FXML
+                    logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de Preview.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
+                }
+            }
         }
     }
 }

@@ -1,20 +1,14 @@
 package org.JavviFdeez.model.entity;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 public class ColorModel {
-    private final StringProperty selectedColor = new SimpleStringProperty();
+    private String selectedColor;
 
     public String getSelectedColor() {
-        return selectedColor.get();
+        return selectedColor;
     }
 
     public void setSelectedColor(String selectedColor) {
-        this.selectedColor.set(selectedColor);
-    }
-
-    public StringProperty selectedColorProperty() {
-        return selectedColor;
+        this.selectedColor = selectedColor;
     }
 }
+

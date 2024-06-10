@@ -8,6 +8,7 @@ public class Contact_Skills {
     private int contact_id;
     private int skill_id;
     private int value;
+    private Skills skills;
 
     // ===============
     // Constructor
@@ -55,6 +56,13 @@ public class Contact_Skills {
     public void setValue(int value) {
         this.value = value;
     }
+    public Skills getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Skills skills) {
+        this.skills = skills;
+    }
 
     // ================
     // toString
@@ -66,6 +74,7 @@ public class Contact_Skills {
                 ", contact_id=" + contact_id +
                 ", skill_id=" + skill_id +
                 ", value=" + value +
+                ", skills=" + (skills != null ? skills.getName() : "null") +
                 '}';
     }
 }
