@@ -1,5 +1,5 @@
 #buttonSaveData {
-    -fx-background-color: #000000; /* Color inicial */
+    -fx-background-color: #000000;
     -fx-background-radius: 5;
     -fx-border-color: #a896cd;
     -fx-border-radius: 5;
@@ -17,7 +17,7 @@
 }
 
 #buttonSaveData:hover {
-    -fx-background-color: #a896cd; /* Color final */
+    -fx-background-color: #a896cd;
     -fx-background-radius: 5;
     -fx-border-color: #000000;
     -fx-border-radius: 5;
@@ -43,7 +43,7 @@
 }
 
 #ButtonGreen{
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color:  #62FF00;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
@@ -51,8 +51,7 @@
 }
 
 #ButtonGreen:hover {
-    -fx-background-color: trasparent; /* Color final */
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color:  #62FF00;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
@@ -65,7 +64,7 @@
 }
 
 #ButtonGreen:hover:pressed {
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color: #62FF00;
     -fx-background-radius: 25;
     -fx-border-radius: 5;
@@ -83,7 +82,7 @@
 }
 
 #ButtonFocus{
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color:  #008BFF;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
@@ -91,7 +90,7 @@
 }
 
 #ButtonFocus:hover {
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color:  #008BFF;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
@@ -104,7 +103,7 @@
 }
 
 #ButtonFocus:hover:pressed {
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color: #008BFF;
     -fx-background-radius: 25;
     -fx-border-radius: 5;
@@ -113,7 +112,7 @@
 }
 
 #ButtonPink{
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color:  #FF0049;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
@@ -121,7 +120,7 @@
 }
 
 #ButtonPink:hover {
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color:  #FF0049;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
@@ -134,7 +133,7 @@
 }
 
 #ButtonPink:hover:pressed {
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color: #FF0049;
     -fx-background-radius: 25;
     -fx-border-radius: 5;
@@ -143,15 +142,15 @@
 }
 
 #ButtonBlack{
-    -fx-background-color: trasparent;
-    -fx-border-color: #ffffff;
+    -fx-background-color: transparent;
+    -fx-border-color: #FFF;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
     -fx-padding: 10;
 }
 
 #ButtonBlack:hover {
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color: #ffffff;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
@@ -164,7 +163,7 @@
 }
 
 #ButtonBlack:hover:pressed {
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color: #ffffff;
     -fx-background-radius: 25;
     -fx-border-radius: 5;
@@ -174,14 +173,14 @@
 
 
 #ButtonTemplate{
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color: #ff0000;
     -fx-background-radius: 20;
     -fx-border-radius: 10;
     -fx-padding: 10;
 }
 #ButtonTemplate:hover {
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color: #ff0000;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
@@ -194,7 +193,7 @@
 }
 
 #ButtonTemplate:hover:pressed {
-    -fx-background-color: trasparent;
+    -fx-background-color: transparent;
     -fx-border-color: #ff0000;
     -fx-background-radius: 25;
     -fx-border-radius: 5;

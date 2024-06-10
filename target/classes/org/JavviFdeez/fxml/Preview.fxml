@@ -101,7 +101,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <ImageView fx:id="templateBlack" fitHeight="580.0" fitWidth="391.0" layoutX="54.0" layoutY="75.0">
+            <ImageView fx:id="templateBlack" fitHeight="580.0" fitWidth="391.0" layoutX="54.0" layoutY="75.0" opacity="0.0">
                <image>
                   <Image url="@../images/Captura%20de%20pantalla%202024-05-20%20181204.png" />
                </image>
