@@ -1,5 +1,6 @@
 package org.JavviFdeez.controller.view;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -7,17 +8,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.JavviFdeez.controller.SkillsController;
 import org.JavviFdeez.model.entity.ColorModel;
 import org.JavviFdeez.model.entity.Session;
 import org.JavviFdeez.model.entity.TemplateModel;
-
+import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 
 
 public class CustomizeController implements Initializable {
@@ -147,7 +145,7 @@ public class CustomizeController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            logInController.showAutoClosingAlert( "ERROR: No se pudo cargar la pantalla de contacto.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de contacto.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 
@@ -156,7 +154,7 @@ public class CustomizeController implements Initializable {
             // Mostrar un mensaje de advertencia al usuario si no se ha seleccionado un color
             logInController.showAutoClosingAlert("Por favor, seleccione un color antes de continuar.", LogInController.AlertType.WARNING, Duration.seconds(3));
         } else if (TemplateModel.getInstance().getSelectedTemplate() == null || TemplateModel.getInstance().getSelectedTemplate().isEmpty()) {
-            // Mostrar un mensaje de advertencia al usuario si no se ha seleccionado una plantilla
+            //Mostrar un mensaje de advertencia al usuario si no se ha seleccionado una plantilla
             logInController.showAutoClosingAlert("Por favor, seleccione una plantilla antes de continuar.", LogInController.AlertType.WARNING, Duration.seconds(3));
         } else {
             if (backForm.getScene() != null && backForm.getScene().getWindow() instanceof Stage) {

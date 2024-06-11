@@ -2,20 +2,21 @@ package org.JavviFdeez.controller.view;
 
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.JavviFdeez.model.entity.ColorModel;
+import org.JavviFdeez.model.entity.Session;
 import org.JavviFdeez.model.entity.TemplateModel;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
@@ -39,22 +40,24 @@ public class PreviewController implements Initializable {
 
     private LogInController logInController;
 
+    private Session session;
+    private TemplateController templateController;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Verificar si el modelo de color no es nulo
-
-        if (colorModel != null) {
-            applyColor();
-        }
-        buttonSaveData.setOnAction(event -> generatePDF());
+        buttonSaveData.setOnAction(event -> changeScene());
         logInController = new LogInController();
+        this.session = Session.getInstance();
+        this.templateController = new TemplateController();
+        this.session = Session.getInstance();
     }
 
     public void setColorModel(ColorModel colorModel) {
         this.colorModel = colorModel;
         applyColor();
     }
+
 
     private void applyColor() {
         if (colorModel != null) {
@@ -86,32 +89,36 @@ public class PreviewController implements Initializable {
         }
     }
 
-    private void generatePDF() {
-        try (PDDocument document = new PDDocument()) {
-            // Crear una página en el documento PDF
-            PDPage page = new PDPage();
-            document.addPage(page);
+    private void changeScene() {
+        try {
+            // Cargar la nueva escena desde el archivo FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/JavviFdeez/templatesCVV/TemplateBasic.fxml"));
+            Parent root = loader.load();
 
-            // Crear un flujo de contenido para escribir en la página
-            try (PDPageContentStream contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true)) {
-                // Aquí puedes agregar el contenido que desees en la página
-                contentStream.beginText();
-                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
-                contentStream.newLineAtOffset(100, 700);
-                contentStream.showText("Contenido de TemplateBasic.fxml");
-                contentStream.endText();
+            // Obtener el controlador de la nueva escena
+            TemplateController templateController = loader.getController();
+            templateController.setPreviewController(this);
+
+            // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
+            Scene scene = buttonSaveData.getScene();
+            if (scene != null) {
+                Stage stage = (Stage) scene.getWindow();
+                if (stage != null) {
+                    // Establecer la nueva escena en el escenario
+                    Scene newScene = new Scene(root);
+                    stage.setScene(newScene);
+                    stage.show();
+                } else {
+                    System.out.println("");
+                }
+            } else {
+                // Manejar el caso en el que la escena es null
+                System.out.println("");
             }
-
-            // Especificar la ruta donde se guardará el documento PDF
-            String filePath = "C:\\Users\\usuario\\Downloads\\TemplateBasic.pdf";
-
-            // Guardar el documento PDF en la ruta especificada
-            document.save(filePath);
-            logInController.showAutoClosingAlert("EXITO: PDF generado correctamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
-            System.out.println("PDF generado correctamente.");
         } catch (IOException e) {
             e.printStackTrace();
-            logInController.showAutoClosingAlert("ERROR: Error al generar el PDF.",  LogInController.AlertType.ERROR, Duration.seconds(1.5));
+            // Manejar cualquier error de carga del archivo FXML
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de CV.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
         }
     }
 }

@@ -5,15 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="Actualización de la vista Skills, Actualización de la vista Customize, Actualización de la vista Preview.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/CustomizeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/CustomizeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataContactController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataContactController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataLanguagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataLanguagesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/PreviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/PreviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/TemplateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/TemplateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/css/Preview.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/css/Preview.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/css/Template.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/Preview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/Preview.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/templatesCVV/TemplateBasic.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/templatesCVV/TemplateBasic.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/CustomizeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/CustomizeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataContactController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataContactController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataLanguagesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataLanguagesController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/PreviewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/PreviewController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/TemplateController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/TemplateController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/css/Customize.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/css/Customize.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/Customize.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/Customize.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/css/Preview.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/css/Preview.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/css/Template.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/css/Template.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/Preview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/Preview.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/Contact_SkillsDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/dao/Contact_SkillsDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/ColorModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/model/entity/ColorModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/templatesCVV/TemplateBasic.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/templatesCVV/TemplateBasic.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,19 +159,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FormDataAcademiesTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.FormDataAcademiesTest" />
-      <module name="GeneradorCurriculums" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.JavviFdeez.test.view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="FormDataLanguagesTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.FormDataLanguagesTest" />
       <module name="GeneradorCurriculums" />
@@ -185,13 +185,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TemplateBasicTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.JavviFdeez.test.view.TemplateBasicTest" />
+      <module name="GeneradorCurriculums" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.JavviFdeez.test.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
-        <item itemvalue="Application.FormDataSkillsTest" />
+        <item itemvalue="Application.TemplateBasicTest" />
         <item itemvalue="Application.CustomizeTest" />
+        <item itemvalue="Application.FormDataSkillsTest" />
         <item itemvalue="Application.FormDataLanguagesTest" />
-        <item itemvalue="Application.FormDataAcademiesTest" />
       </list>
     </recent_temporary>
   </component>
@@ -308,7 +321,10 @@
       <workItem from="1717698324805" duration="2703000" />
       <workItem from="1718011271336" duration="2997000" />
       <workItem from="1718018819046" duration="291000" />
-      <workItem from="1718030121655" duration="6659000" />
+      <workItem from="1718030121655" duration="13054000" />
+      <workItem from="1718098507289" duration="782000" />
+      <workItem from="1718099295712" duration="74000" />
+      <workItem from="1718099375609" duration="18822000" />
     </task>
     <task id="LOCAL-00001" summary="Creación y configuración del proyecto">
       <option name="closed" value="true" />
@@ -694,7 +710,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718038334928</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Actualización de la vista Skills, Actualización de la vista Customize, Actualización de la vista Preview.">
+      <option name="closed" value="true" />
+      <created>1718038808741</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1718038808741</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

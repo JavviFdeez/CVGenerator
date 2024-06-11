@@ -9,9 +9,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="bgColor1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="842.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.JavviFdeez.controller.view.TemplateController">
+<Pane fx:id="bgColor1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="842.0" prefWidth="595.0" stylesheets="@../css/Template.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.JavviFdeez.controller.view.TemplateController">
    <children>
-      <Pane fx:id="bgColor" layoutX="-1.0" prefHeight="855.0" prefWidth="255.0" style="-fx-background-color: gray;">
+      <Pane fx:id="bgColor" layoutX="-1.0" prefHeight="855.0" prefWidth="255.0">
          <children>
             <Label fx:id="mobile" layoutX="52.0" layoutY="317.0" prefHeight="27.0" prefWidth="204.0" text="" textFill="WHITE">
                <font>

@@ -12,17 +12,12 @@
    <children>
       <ImageView fitHeight="795.0" fitWidth="1550.0" layoutX="-6.0">
          <image>
-            <Image url="@../images/abstract-black-and-silver-backgr.png" />
+            <Image url="@../images/Sencillo%20Blanco%20y%20Claro%20Simple%20Presentación.png" />
          </image>
       </ImageView>
       <Pane opacity="0.95" prefHeight="94.0" prefWidth="1550.0" style="-fx-background-color: #404040;">
          <children>
             <Line endX="1423.0" layoutX="115.0" layoutY="96.0" startX="-115.0" stroke="#c3c1c1" strokeWidth="2.0" />
-            <ImageView fx:id="oneNoCheck" fitHeight="30.0" fitWidth="30.0" layoutX="367.0" layoutY="42.0">
-               <image>
-                  <Image url="@../images/PhNumberCircleOne.png" />
-               </image>
-            </ImageView>
             <Label layoutX="438.0" layoutY="42.0" text="Sign up" textFill="#a896cd">
                <font>
                   <Font name="Roboto Bold" size="23.0" />

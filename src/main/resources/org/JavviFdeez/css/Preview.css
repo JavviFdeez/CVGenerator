@@ -1,5 +1,5 @@
 #buttonSaveData {
-    -fx-background-color: #000000; /* Color inicial */
+    -fx-background-color: rgba(0, 0, 0, 1); /* Color inicial */
     -fx-background-radius: 5;
     -fx-border-color: #a896cd;
     -fx-border-radius: 5;
@@ -7,7 +7,7 @@
     -fx-padding: 10 20;
     -fx-font-size: 25px;
     -fx-font-family: "Roboto Bold";
-    -fx-cursor: hand; /* Cambia el cursor al pasar sobre el botón */
+    -fx-cursor: hand;
     -fx-effect: dropshadow(three-pass-box, #b6b6b6, 10, 0, 0, 0);
     -fx-translate-x: 0;
     -fx-translate-y: 0;
@@ -17,7 +17,7 @@
 }
 
 #buttonSaveData:hover {
-    -fx-background-color: #a896cd; /* Color final */
+    -fx-background-color: rgba(168, 150, 205, 1); /* Color final */
     -fx-background-radius: 5;
     -fx-border-color: #000000;
     -fx-border-radius: 5;
@@ -33,7 +33,7 @@
 }
 
 #buttonSaveData:hover:pressed {
-    -fx-background-color: #000000;
+    -fx-background-color: rgba(0, 0, 0, 1);
     -fx-text-fill: #ffffff;
     -fx-border-color: #a896cd;
     -fx-background-radius: 5;

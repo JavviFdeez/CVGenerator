@@ -74,20 +74,12 @@ public class FormDataContactController implements Initializable {
 
     private Session session;
 
-    private ContactController contactController;
-    private AcademiesController acadController;
-    private LogInController logInController;
-    private ContactDAO contactDAO;
-    private AcademiesDAO academiesDAO;
+    private ContactController contactController;private LogInController logInController;
 
 
 
     public FormDataContactController() {
         this.contactController = new ContactController();
-        this.academiesDAO = new AcademiesDAO(ConnectionMariaDB.getConnection());
-        this.acadController = new AcademiesController();
-        this.session = Session.getInstance();
-        this.contactDAO = new ContactDAO(ConnectionMariaDB.getConnection());
         this.session = Session.getInstance();
         this.logInController = new LogInController();
         this.backLogIn = new ImageView();
@@ -266,7 +258,7 @@ public class FormDataContactController implements Initializable {
                 }
             } else {
                 // Manejar el caso en el que la escena es null
-                System.out.println("La escena es null");
+                System.out.println("");
             }
         } catch (IOException e) {
             e.printStackTrace();

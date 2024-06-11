@@ -1,26 +1,42 @@
 package org.JavviFdeez.controller.view;
 
+import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
+import org.JavviFdeez.controller.*;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
 import org.JavviFdeez.model.dao.*;
 import org.JavviFdeez.model.entity.*;
-import javafx.scene.paint.Color;
-import java.io.ByteArrayInputStream;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+
+import javax.imageio.ImageIO;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -29,11 +45,6 @@ public class TemplateController implements Initializable {
     // Atributos
     // ===========
     private ContactDAO contactDAO;
-    private AcademiesDAO academiesDAO;
-    private ExperiencesDAO experiencesDAO;
-    private Contact_SkillsDAO contact_SkillsDAO;
-    private CoursesDAO coursesDAO;
-    private LanguagesDAO languagesDAO;
     private SkillsDAO skillsDAO;
 
     @FXML
@@ -142,6 +153,9 @@ public class TemplateController implements Initializable {
     private ImageView Hexagon13;
 
     @FXML
+    private Label acdemiesText;
+
+    @FXML
     private ImageView Hexagon14;
 
     @FXML
@@ -198,6 +212,8 @@ public class TemplateController implements Initializable {
     @FXML
     private AnchorPane coursesAnchorPane;
 
+    private LogInController logInController;
+
     @FXML
     private Pane bgColor1;
 
@@ -205,6 +221,15 @@ public class TemplateController implements Initializable {
     private Pane bgColor;
 
     private ColorModel colorModel;
+    private Session session;
+    private Connection conn;
+    private ContactController contactController;
+    private LanguagesController languagesController;
+    private Contact_SkillsController contact_skillsController;
+    private AcademiesController academiesController;
+    private ExperiencesController experiencesController;
+    private CoursesController coursesController;
+    private PreviewController previewController;
 
     // ==============================
     // Constructore sin argumentos
@@ -212,25 +237,39 @@ public class TemplateController implements Initializable {
     public TemplateController() {
     }
 
+    public void setPreviewController(PreviewController previewController) {
+        this.previewController = previewController;
+    }
+
     // ==============
     // Inicialización
     // ==============
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.academiesDAO = new AcademiesDAO(ConnectionMariaDB.getConnection());
-        this.experiencesDAO = new ExperiencesDAO(ConnectionMariaDB.getConnection());
-        this.contact_SkillsDAO = new Contact_SkillsDAO(ConnectionMariaDB.getConnection());
-        this.coursesDAO = new CoursesDAO(ConnectionMariaDB.getConnection());
-        this.languagesDAO = new LanguagesDAO(ConnectionMariaDB.getConnection());
+        this.colorModel = new ColorModel();
+        applyColor(colorModel.getSelectedColor());
+        Platform.runLater(() -> generatePDF());
+        this.contactController = new ContactController();
+        this.academiesController = new AcademiesController();
+        this.experiencesController = new ExperiencesController();
+        this.contact_skillsController = new Contact_SkillsController();
+        this.languagesController = new LanguagesController();
+        this.coursesController = new CoursesController();
+        this.languagesController = new LanguagesController();
         this.skillsDAO = new SkillsDAO(ConnectionMariaDB.getConnection());
         this.contactDAO = new ContactDAO(ConnectionMariaDB.getConnection());
+        this.colorModel = new ColorModel();
+        this.session = Session.getInstance();
+        this.conn = ConnectionMariaDB.getConnection();
+        this.logInController = new LogInController();
+        this.previewController = new PreviewController();
         dataContact();
-        dataLanguages();
-        dataSkills();
         dataAcademies(academiesAnchorPane);
         dataExperience(experiencesAnchorPane);
         dataCourses(coursesAnchorPane);
-        image.setPreserveRatio(false);
+        dataSkills();
+        dataLanguages();
+        generatePDF();
     }
 
     // ==============
@@ -240,113 +279,72 @@ public class TemplateController implements Initializable {
     /**
      * Método para obtener los datos del CONTACTO
      */
-    private void dataContact() {
+    public void dataContact() {
         try {
-            List<Contact> contactList = contactDAO.findAll();
+            int contactId = session.getContactId();
+            System.out.println(contactId);
 
-            // Verificar si se encontraron contactos
-            if (!contactList.isEmpty()) {
+            // Obtener el contacto por ID
+            Contact contact = contactController.getContactById(contactId);
 
-                // Obtener los datos del contacto
-                Contact contact = contactList.get(0);
+            // Verificar si se encontró el contacto
+            if (contact != null) {
                 // Obtener el nombre del contacto
-                // Verificar si el nombre no es nulo
-                if (contact.getName() != null) {
-                    System.out.println(contact.getName());
-                    // Si el nombre no es nulo, muestralo
-                    name.setText(contact.getName());
-                } else {
-                    // Si el nombre es nulo, mostrar una cadena vacía
-                    name.setText("-");
-                }
-
+                String contactName = contact.getName();
+                name.setText(contactName != null ? contactName : "-");
 
                 // Obtener los apellidos del contacto
-                // Verificar si los apellidos no son nulos
-                if (contact.getLastname() != null) {
-                    // Si los apellidos no son nulos, mostrarlos
-                    lastName.setText(contact.getLastname());
-                } else {
-                    // Si los apellidos son nulos, mostrar una cadena vacía
-                    lastName.setText("-");
-                }
-
+                String contactLastName = contact.getLastname();
+                lastName.setText(contactLastName != null ? contactLastName : "-");
 
                 // Obtener la ocupación del contacto
-                // Verificar si la ocupación no es nula
-                if (contact.getOccupation() != null) {
-                    // Si la ocupación no es nula, mostrarla
-                    occupation.setText("· " + contact.getOccupation() + " ·");
-                } else {
-                    // Si la ocupación es nula, mostrar una cadena vacía
-                    occupation.setText("-");
-                }
+                String contactOccupation = contact.getOccupation();
+                occupation.setText(contactOccupation != null ? "· " + contactOccupation + " ·" : "-");
 
                 // Obtener la ruta de la imagen del contacto
                 String imagePath = contact.getImage();
 
-                // Verificar si la ruta de la imagen no es nula
+                // Verificar si hay una ruta de imagen válida
                 if (imagePath != null && !imagePath.isEmpty()) {
-                    // Si hay una ruta de imagen válida, cargarla
                     Image profileImage = new Image(new File(imagePath).toURI().toString());
                     image.setImage(profileImage);
                 } else {
-                    // Si la ruta de la imagen es nula o vacía, cargar una imagen predeterminada desde los recursos
+                    // Si no hay una ruta de imagen válida, cargar una imagen predeterminada
                     String defaultImagePath = "/org/JavviFdeez/images/image_default.png";
                     InputStream inputStream = getClass().getResourceAsStream(defaultImagePath);
                     Image defaultImage = new Image(inputStream);
                     image.setImage(defaultImage);
                 }
 
-                // Obtener el mobil del contacto
-                // Verificar si el mobil no es nulo
-                if (contact.getMobile() != null) {
-                    // Si el mobil no es nulo, mostrarlo
-                    mobile.setText(contact.getMobile());
-                } else {
-                    // Si el mobil es nulo, mostrar una cadena vacía
-                    mobile.setText("-");
-                }
+                // Obtener el móvil del contacto
+                String contactMobile = contact.getMobile();
+                mobile.setText(contactMobile != null ? contactMobile : "-");
 
                 // Obtener el email del contacto
-                // Verificar si el email no es nulo
-                if (contact.getEmail() != null) {
-                    // Si el email no es nulo, mostrarlo
-                    email.setText(contact.getEmail());
-                } else {
-                    // Si el email es nulo, mostrar una cadena vacía
-                    email.setText("");
-                }
+                String contactEmail = contact.getEmail();
+                email.setText(contactEmail != null ? contactEmail : "");
 
-                // Obtener el linkedin del contacto
-                // Verificar si el linkedin no es nulo
-                if (contact.getLinkedin() != null) {
-                    // Si el linkedin no es nulo, mostrarlo
-                    linkedin.setText(contact.getLinkedin());
-                } else {
-                    // Si el linkedin es nulo, mostrar una cadena vacía
-                    linkedin.setText("-");
-                }
+                // Obtener el LinkedIn del contacto
+                String contactLinkedin = contact.getLinkedin();
+                linkedin.setText(contactLinkedin != null ? contactLinkedin : "-");
 
                 // Obtener la ubicación del contacto
-                // Verificar si la ubicación no es nula
-                if (contact.getLocation() != null) {
-                    // Si la ubicación no es nula, mostrarla
-                    location.setText(contact.getLocation());
-                } else {
-                    // Si la ubicación es nula, mostrar una cadena vacía
-                    location.setText("-");
-                }
+                String contactLocation = contact.getLocation();
+                location.setText(contactLocation != null ? contactLocation : "-");
 
                 // Obtener el extra del contacto
-                // Verificar si el extra no es nulo
-                if (contact.getExtra() != null) {
-                    // Si el extra no es nulo, mostrarlo
-                    extra.setText(contact.getExtra());
-                } else {
-                    // Si el extra es nulo, mostrar una cadena vacía
-                    extra.setText("-");
-                }
+                String contactExtra = contact.getExtra();
+                extra.setText(contactExtra != null ? contactExtra : "-");
+            } else {
+                // Si no se encontró el contacto, establecer valores predeterminados
+                name.setText("-");
+                lastName.setText("-");
+                occupation.setText("-");
+                mobile.setText("-");
+                email.setText("");
+                linkedin.setText("-");
+                location.setText("-");
+                extra.setText("-");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -358,43 +356,44 @@ public class TemplateController implements Initializable {
      */
     public void dataLanguages() {
         try {
-            List<Languages> languageList = languagesDAO.findAll();
-
+            int contactId = session.getContactId();
+            // Recuperar los idiomas asociados al contact_id de la sesión
+            List<Languages> languageList = languagesController.getLanguagesById(contactId);
             // Verificar si se encontraron idiomas
             if (!languageList.isEmpty()) {
-                // Obtener los datos del primer idioma de la lista
-                Languages languages = languageList.get(0);
-                // Obtener el valor del idioma español
-                Integer spanishValue = languages.getSpanish();
-                // Verificar si el valor del idioma español es nulo
-                if (spanishValue != null) {
-                    // Actualizar las imágenes de las estrellas según el valor del idioma español
-                    updateStarsSpanish(spanishValue);
-                } else {
-                    // Si el valor del idioma Español es nulo, mostrar una cadena vacía
-                    updateStarsSpanish(0);
-                }
+                // Iterar sobre la lista de idiomas
+                for (Languages languages : languageList) {
+                    // Obtener el valor del idioma español
+                    Integer spanishValue = languages.getSpanish();
+                    // Verificar si el valor del idioma español es nulo
+                    if (spanishValue != null) {
+                        // Actualizar las imágenes de las estrellas según el valor del idioma español
+                        updateStarsSpanish(spanishValue);
+                    } else {
+                        // Si el valor del idioma Español es nulo, mostrar una cadena vacía
+                        updateStarsSpanish(0);
+                    }
+                    // Obtener el valor del idioma Inglés
+                    Integer englishValue = languages.getEnglish();
+                    // Verificar si el valor del idioma Inglés es nulo
+                    if (englishValue != null) {
+                        // Actualizar las imágenes de las estrellas según el valor del idioma Inglés
+                        updateStarsEnglish(englishValue);
+                    } else {
+                        // Si el valor del idioma Inglés es nulo, mostrar una cadena vacía
+                        updateStarsEnglish(0);
+                    }
+                    // Obtener el valor del idioma Francés
+                    Integer frenchValue = languages.getFrench();
+                    // Verificar si el valor del idioma Francés es nulo
+                    if (frenchValue != null) {
+                        // Actualizar las imágenes de las estrellas según el valor del idioma Francés
+                        updateStarsFrench(frenchValue);
+                    } else {
+                        // Si el valor del idioma Francés es nulo, mostrar una cadena vacía
+                        updateStarsFrench(0);
+                    }
 
-                // Obtener el valor del idioma ingles
-                Integer englishValue = languages.getEnglish();
-                // Verificar si el valor del idioma ingles es nulo
-                if (englishValue != null) {
-                    // Actualizar las imágenes de las estrellas según el valor del idioma ingles
-                    updateStarsEnglish(englishValue);
-                } else {
-                    // Si el valor del idioma ingles es nulo, mostrar una cadena vacía
-                    updateStarsEnglish(0);
-                }
-
-                // Obtener el valor del idioma francés
-                Integer frenchValue = languages.getFrench();
-                // Verificar si el valor del idioma francés es nulo
-                if (frenchValue != null) {
-                    // Actualizar las imágenes de las estrellas según el valor del idioma francés
-                    updateStarsFrench(frenchValue);
-                } else {
-                    // Si el valor del idioma francés es nulo, mostrar una cadena vacía
-                    updateStarsFrench(0);
                 }
             }
         } catch (SQLException e) {
@@ -478,42 +477,43 @@ public class TemplateController implements Initializable {
      */
     public void dataSkills() {
         try {
-            List<Skills> skillList = skillsDAO.findAll();
-            List<Contact_Skills> contactSkillsList = contact_SkillsDAO.findAll();
+            int contactId = session.getContactId();
+            // Obtener todas las skills asociadas con el contactId
+            List<Contact_Skills> contactSkillsList = contact_skillsController.getSkillsById(contactId);
 
             // Verificar si hay habilidades disponibles
-            if (!skillList.isEmpty() && !contactSkillsList.isEmpty()) {
+            if (!contactSkillsList.isEmpty()) {
                 // Iterar sobre cada habilidad en la lista
-                // Iterar sobre todas las barras de progreso y etiquetas de habilidad
-                for (int i = 0; i < 6; i++) {
+                for (int i = 0; i < contactSkillsList.size(); i++) {
                     Label skillLabel = getSkillLabel(i);
                     ProgressBar progressBar = getProgressBar(i);
 
+                    // Obtener el skillId de la habilidad actual
+                    int skillId = contactSkillsList.get(i).getSkill_id();
+
+                    // Obtener el nombre de la habilidad utilizando el skillId
+                    String skillName = getSkillNameById(skillId);
+
                     // Verificar si el nombre de la habilidad y su valor son ambos no nulos
-                    if (skillLabel != null && progressBar != null && skillList.size() > i && contactSkillsList.size() > i) {
-                        String skillName = skillList.get(i).getName();
+                    if (skillLabel != null && progressBar != null && skillName != null) {
                         Integer skillValue = contactSkillsList.get(i).getValue();
 
-                        // Verificar si el nombre de la habilidad y su valor son ambos no nulos
-                        if (skillName != null && skillValue != null && skillValue >= 0 && skillValue <= 100) {
-                            // Si ambos son no nulos, mostrar la etiqueta y la barra de progreso correspondientes
+                        // Verificar si el valor de la habilidad es válido
+                        if (skillValue != null && skillValue >= 0 && skillValue <= 100) {
+                            // Configurar la etiqueta y la barra de progreso correspondientes
                             skillLabel.setText(skillName);
                             progressBar.setProgress(skillValue / 100.0);
                             skillLabel.setVisible(true);
                             progressBar.setVisible(true);
                         } else {
-                            // Si cualquiera de ellos es nulo, ocultar la etiqueta y la barra de progreso correspondientes
+                            // Si el valor de la habilidad no es válido, ocultar la etiqueta y la barra de progreso
                             skillLabel.setVisible(false);
                             progressBar.setVisible(false);
                         }
                     } else {
-                        // Si no hay habilidad disponible, ocultar la etiqueta y la barra de progreso correspondientes
-                        if (skillLabel != null) {
-                            skillLabel.setVisible(false);
-                        }
-                        if (progressBar != null) {
-                            progressBar.setVisible(false);
-                        }
+                        // Si no se puede obtener el nombre de la habilidad, ocultar la etiqueta y la barra de progreso
+                        skillLabel.setVisible(false);
+                        progressBar.setVisible(false);
                     }
                 }
             }
@@ -521,6 +521,15 @@ public class TemplateController implements Initializable {
             // Manejar cualquier excepción SQL mostrando un mensaje de error
             throw new RuntimeException("❌ Error al obtener las habilidades: " + e.getMessage(), e);
         }
+    }
+
+    // Método para obtener el nombre de la habilidad por su ID
+    private String getSkillNameById(int skillId) throws SQLException {
+        Skills skill = skillsDAO.findById(skillId);
+        if (skill != null) {
+            return skill.getName();
+        }
+        return null;
     }
 
     // Método para obtener la etiqueta de habilidad en la posición especificada
@@ -565,13 +574,13 @@ public class TemplateController implements Initializable {
 
     /**
      * Metodo para mostrar los datos de las academias
-     *
-     * @param anchorPane
      */
     public void dataAcademies(AnchorPane anchorPane) {
         try {
+            int contactId = session.getContactId();
             // Obtener la lista de academias desde la base de datos
-            List<Academies> academiesList = academiesDAO.findAll();
+            List<Academies> academiesList = academiesController.getAcademiesById(contactId);
+
 
             // Coordenadas iniciales para posicionar los elementos
             double yearX = 264.0;
@@ -672,8 +681,10 @@ public class TemplateController implements Initializable {
      */
     public void dataExperience(AnchorPane anchorPane) {
         try {
+            int contactId = session.getContactId();
             // Obtener la lista de academias desde la base de datos
-            List<Experiences> experienceList = experiencesDAO.findAll();
+            List<Experiences> experienceList = experiencesController.getExperienceById(contactId);
+
 
             // Ordenar la lista de experiencias por año (en orden descendente)
             //Collections.sort(experienceList, Comparator.comparing(Experiences::getYear, Comparator.reverseOrder()));
@@ -697,94 +708,98 @@ public class TemplateController implements Initializable {
             for (int i = 0; i < experienceList.size(); i++) {
                 Experiences experiences = experienceList.get(i);
 
-                    // Crear un contenedor Pane para organizar los elementos
-                    Pane experiencePane = new Pane();
+                // Crear un contenedor Pane para organizar los elementos
+                Pane experiencePane = new Pane();
 
-                    // Crear la fuente
-                    Font regularFont = new Font("Myanmar Text", 12);
+                // Crear la fuente
+                Font regularFont = new Font("Myanmar Text", 12);
 
-                    // Color del texto en negro
-                    Color textColorBlack = Color.BLACK;
-                    Color textColorGray = Color.GRAY;
+                // Color del texto en negro
+                Color textColorBlack = Color.BLACK;
+                Color textColorGray = Color.GRAY;
 
-                    // Crear y configurar el Label para el nombre (name)
-                    Label nameLabel = new Label(experiences.getName());
-                    nameLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 19));
-                    nameLabel.setTextFill(textColorBlack);
-                    nameLabel.setLayoutX(nameAndCompanyAndLocationX);
-                    nameLabel.setLayoutY(nameAndYearAndDurationY - 6.5);
+                // Crear y configurar el Label para el nombre (name)
+                Label nameLabel = new Label(experiences.getName());
+                nameLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 19));
+                nameLabel.setTextFill(textColorBlack);
+                nameLabel.setLayoutX(nameAndCompanyAndLocationX);
+                nameLabel.setLayoutY(nameAndYearAndDurationY - 6.5);
 
-                    // Crear y configurar el Label para el nombre (duration)
-                    Label durationLabel = new Label("(" + experiences.getDuration() + " meses)");
-                    durationLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 15));
-                    durationLabel.setTextFill(textColorGray);
-                    durationLabel.setLayoutX(durationX);
-                    durationLabel.setLayoutY(nameAndYearAndDurationY);
+                // Crear y configurar el Label para el nombre (duration)
+                Label durationLabel = new Label("(" + experiences.getDuration() + " meses)");
+                durationLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 15));
+                durationLabel.setTextFill(textColorGray);
+                durationLabel.setLayoutX(durationX);
+                durationLabel.setLayoutY(nameAndYearAndDurationY);
 
-                    // Crear y configurar el Label para el nombre (company)
-                    Label companyLabel = new Label(experiences.getCompany());
-                    companyLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 15));
-                    companyLabel.setTextFill(textColorBlack);
-                    companyLabel.setLayoutX(nameAndCompanyAndLocationX);
-                    companyLabel.setLayoutY(companyY);
+                // Crear y configurar el Label para el nombre (company)
+                Label companyLabel = new Label(experiences.getCompany());
+                companyLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 15));
+                companyLabel.setTextFill(textColorBlack);
+                companyLabel.setLayoutX(nameAndCompanyAndLocationX);
+                companyLabel.setLayoutY(companyY);
 
-                    // Crear y configurar el Label para el nombre (location)
-                    Label locationLabel = new Label(experiences.getLocation());
-                    locationLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 12));
-                    locationLabel.setTextFill(textColorGray);
-                    locationLabel.setLayoutX(nameAndCompanyAndLocationX + 0.5);
-                    locationLabel.setLayoutY(locationY);
+                // Crear y configurar el Label para el nombre (location)
+                Label locationLabel = new Label(experiences.getLocation());
+                locationLabel.setFont(Font.font("Myanmar Text", FontWeight.BOLD, 12));
+                locationLabel.setTextFill(textColorGray);
+                locationLabel.setLayoutX(nameAndCompanyAndLocationX + 0.5);
+                locationLabel.setLayoutY(locationY);
 
-                    // Crear y configurar el Label para el nombre (year)
-                    Label yearLabel = new Label(String.valueOf(experiences.getYear()));
-                    yearLabel.setFont(regularFont);
-                    yearLabel.setTextFill(textColorBlack);
-                    yearLabel.setLayoutX(yearX);
-                    yearLabel.setLayoutY(nameAndYearAndDurationY + 3);
+                // Crear y configurar el Label para el nombre (year)
+                Label yearLabel = new Label(String.valueOf(experiences.getYear()));
+                yearLabel.setFont(regularFont);
+                yearLabel.setTextFill(textColorBlack);
+                yearLabel.setLayoutX(yearX);
+                yearLabel.setLayoutY(nameAndYearAndDurationY + 3);
 
-                    // Crear y configurar el ImageView para el icono
-                    ImageView iconImageView = new ImageView(new Image(getClass().getResource("/org/JavviFdeez/images/Point.png").toExternalForm()));
-                    iconImageView.setFitHeight(iconSize);
-                    iconImageView.setFitWidth(iconSize);
-                    iconImageView.setLayoutX(iconX - 25);
-                    iconImageView.setLayoutY(nameAndYearAndDurationY + 7);
+                // Crear y configurar el ImageView para el icono
+                ImageView iconImageView = new ImageView(new Image(getClass().getResource("/org/JavviFdeez/images/Point.png").toExternalForm()));
+                iconImageView.setFitHeight(iconSize);
+                iconImageView.setFitWidth(iconSize);
+                iconImageView.setLayoutX(iconX - 25);
+                iconImageView.setLayoutY(nameAndYearAndDurationY + 7);
 
-                    // Crear y configurar la línea vertical
-                    if (i > 0) {
-                        Line verticalLine = new Line();
-                        verticalLine.setStartX(iconX + iconSize / 2 - 25);
-                        verticalLine.setStartY(nameAndCompanyAndLocationX - (iconSize / 2) + iconSize + 14);
-                        verticalLine.setEndX(iconX + iconSize / 2 - 25);
-                        verticalLine.setEndY(nameAndCompanyAndLocationX - (iconSize / 2) + iconSize + spacing + 33);
-                        verticalLine.setStrokeWidth(2.0);
-                        verticalLine.setStroke(Color.BLACK);
-                        experiencePane.getChildren().add(verticalLine);
-                    }
-
-                    // Añadir los elementos al contenedor Pane
-                    experiencePane.getChildren().addAll(nameLabel, durationLabel, companyLabel, locationLabel, yearLabel, iconImageView);
-
-                    // Verificar si el AnchorPane ya contiene el Pane
-                    if (!anchorPane.getChildren().contains(experiencePane)) {
-                        // Agregar el Pane solo si no está presente
-                        anchorPane.getChildren().add(experiencePane);
-                    }
-
-                    // Incrementar la posición en y para la próxima academia
-                    nameAndYearAndDurationY += iconSize + spacing;
-                    companyY += spacing * 1.6;
-                    locationY += spacing * 1.6;
+                // Crear y configurar la línea vertical
+                if (i > 0) {
+                    Line verticalLine = new Line();
+                    verticalLine.setStartX(iconX + iconSize / 2 - 25);
+                    verticalLine.setStartY(nameAndCompanyAndLocationX - (iconSize / 2) + iconSize + 14);
+                    verticalLine.setEndX(iconX + iconSize / 2 - 25);
+                    verticalLine.setEndY(nameAndCompanyAndLocationX - (iconSize / 2) + iconSize + spacing + 33);
+                    verticalLine.setStrokeWidth(2.0);
+                    verticalLine.setStroke(Color.BLACK);
+                    experiencePane.getChildren().add(verticalLine);
                 }
+
+                // Añadir los elementos al contenedor Pane
+                experiencePane.getChildren().addAll(nameLabel, durationLabel, companyLabel, locationLabel, yearLabel, iconImageView);
+
+                // Verificar si el AnchorPane ya contiene el Pane
+                if (!anchorPane.getChildren().contains(experiencePane)) {
+                    // Agregar el Pane solo si no está presente
+                    anchorPane.getChildren().add(experiencePane);
+                }
+
+                // Incrementar la posición en y para la próxima academia
+                nameAndYearAndDurationY += iconSize + spacing;
+                companyY += spacing * 1.6;
+                locationY += spacing * 1.6;
+            }
         } catch (SQLException e) {
             // Manejar cualquier excepción SQL mostrando un mensaje de error
             throw new RuntimeException("❌ Error al obtener las academias: " + e.getMessage(), e);
         }
     }
 
+    /**
+     * Metodo para mostrar los datos de los cursos
+     */
     public void dataCourses(AnchorPane anchorPane) {
         try {
+            int contactId = session.getContactId();
             // Obtener la lista de cursos desde la base de datos
-            List<Courses> coursesList = coursesDAO.findAll();
+            List<Courses> coursesList = coursesController.getCoursesById(contactId);
 
             // Coordenadas iniciales
             double nameX = 300;
@@ -835,14 +850,107 @@ public class TemplateController implements Initializable {
         }
     }
 
-    public void setColorModel(ColorModel colorModel) {
-        this.colorModel = colorModel;
+    // Método para aplicar el color al Pane
+    private void applyColor(String color) {
+        if (color != null) {
+            Color paintColor;
+            switch (color) {
+                case "#62FF00":
+                    paintColor = Color.web("#62FF00");
+                    break;
+                case "#008BFF":
+                    paintColor = Color.web("#008BFF");
+                    break;
+                case "#FF0049":
+                    paintColor = Color.web("#FF0049");
+                    break;
+                case "#616161":
+                    paintColor = Color.web("#616161");
+                    break;
+                default:
+                    // Color por defecto si la cadena de color no es reconocida
+                    paintColor = Color.TRANSPARENT;
+                    break;
+            }
+            bgColor1.setStyle("-fx-background-color: " + toHex(paintColor) + ";");
+            bgColor.setStyle("-fx-background-color: " + toHex(paintColor) + ";");
+        }
     }
 
-    private void applyColor(String color) {
-        bgColor1.setStyle("-fx-background-color: " + (color.equals("#62FF00") ? color : ""));
-        bgColor.setStyle("-fx-background-color: " + (color.equals("#008BFF") ? color : ""));
-        bgColor.setStyle("-fx-background-color: " + (color.equals("#FF0049") ? color : ""));
-        bgColor.setStyle("-fx-background-color: " + (color.equals("#616161") ? color : ""));
+    // Método para convertir un Color en formato hexadecimal
+    private String toHex(Color color) {
+        return String.format("#%02X%02X%02X",
+                (int) (color.getRed() * 255),
+                (int) (color.getGreen() * 255),
+                (int) (color.getBlue() * 255));
     }
+
+    public void generatePDF() {
+        try {
+            // Obtener la escena actual desde el nodo raíz de la vista
+            Scene scene = academiesAnchorPane.getScene();
+
+            if (scene == null) {
+                System.out.println("null");
+                return;
+            }
+            // Crear una instantánea de la escena
+            WritableImage snapshot = scene.snapshot(null);
+
+            // Guardar la imagen temporalmente
+            File tempFile = new File("temp.png");
+            ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", tempFile);
+
+            // Crear un documento PDF
+            PDDocument document = new PDDocument();
+            PDPage page = new PDPage(PDRectangle.A4);
+            document.addPage(page);
+
+            // Convertir la imagen a PDImageXObject
+            PDImageXObject pdImage = PDImageXObject.createFromFileByContent(tempFile, document);
+
+            // Obtener las dimensiones de la página A4
+            float pageWidth = PDRectangle.A4.getWidth();
+            float pageHeight = PDRectangle.A4.getHeight();
+
+            // Obtener las dimensiones de la imagen
+            float imageWidth = pdImage.getWidth();
+            float imageHeight = pdImage.getHeight();
+
+            // Calcular el escalado para ajustar la imagen a la página A4
+            float scaleX = pageWidth / imageWidth;
+            float scaleY = pageHeight / imageHeight;
+            float scale = Math.min(scaleX, scaleY);
+
+            // Calcular las nuevas dimensiones de la imagen escalada
+            float scaledWidth = imageWidth * scale;
+            float scaledHeight = imageHeight * scale;
+
+            // Calcular las posiciones de inicio para centrar la imagen
+            float startX = (pageWidth - scaledWidth) / 2;
+            float startY = (pageHeight - scaledHeight) / 2;
+
+            // Escribir la imagen en la página del PDF
+            try (PDPageContentStream contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true, true)) {
+                contentStream.drawImage(pdImage, startX, startY, scaledWidth, scaledHeight);
+                System.out.println("Imagen escrita en el documento PDF correctamente.");
+            }
+
+            // Guardar el documento PDF
+            String filePath = "C:\\Users\\usuario\\Downloads\\CV.pdf";
+            document.save(filePath);
+
+
+            logInController.showAutoClosingAlert("EXITO: PDF generado correctamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+            System.out.println("PDF generado correctamente.");
+
+            // Eliminar el archivo temporal
+            tempFile.delete();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            logInController.showAutoClosingAlert("ERROR: Error al generar el PDF.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
+        }
+    }
+
 }
