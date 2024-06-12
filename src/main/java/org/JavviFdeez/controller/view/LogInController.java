@@ -152,7 +152,7 @@ public class LogInController implements Initializable {
                 if (contactId > 0) {
                     // Cambiar a la escena de datos de contacto
                     changeSceneToFormData();
-                    showAutoClosingAlert("AVISO: Inicio de Sesión Exitoso.", AlertType.SUCCESS, Duration.seconds(1.5));
+                    showAutoClosingAlert("NOTICE: Successful Login.", AlertType.SUCCESS, Duration.seconds(1.5));
                 } else {
                     showAutoClosingAlert("ERROR: No se pudo obtener el ID de contacto de la sesión.", AlertType.ERROR, Duration.seconds(1.5));
                 }

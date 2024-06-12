@@ -195,12 +195,12 @@ public class FormDataLanguagesController implements Initializable {
                         // Actualizar language existente
                         languages.setLang_id(existingLanguages.get(i).getLang_id());
                         languagesController.updateLanguages(languages);
-                        logInController.showAutoClosingAlert("AVISO: Languages se ha actualizado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        logInController.showAutoClosingAlert("NOTICE: Languages has been successfully updated.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                         changeSceneToFormData();
                     } else {
                         // Insertar nueva language
                         languagesController.saveLanguages(languages);
-                        logInController.showAutoClosingAlert("AVISO: Languages se ha guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        logInController.showAutoClosingAlert("NOTICE: Languages has been saved successfully.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                         changeSceneToFormData();
                     }
                 }

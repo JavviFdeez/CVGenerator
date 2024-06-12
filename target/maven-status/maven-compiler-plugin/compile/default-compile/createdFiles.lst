@@ -10,7 +10,6 @@ org\JavviFdeez\controller\CoursesController.class
 org\JavviFdeez\controller\view\CustomizeController.class
 org\JavviFdeez\test\Contact_SkillsTest.class
 org\JavviFdeez\model\dao\interfaces\iCoursesDAO.class
-org\JavviFdeez\model\entity\Users.class
 org\JavviFdeez\model\entity\Academies.class
 org\JavviFdeez\test\view\LogInTest.class
 org\JavviFdeez\model\entity\Courses.class

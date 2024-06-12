@@ -272,12 +272,12 @@ public class FormDataExperienceController implements Initializable {
                         // Actualizar experiencia existente
                         experiences.setExperience_id(existingExperiences.get(i).getExperience_id());
                         experiencesController.updateExperiences(experiences);
-                        logInController.showAutoClosingAlert("AVISO: Experiencia se ha actualizado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        logInController.showAutoClosingAlert("NOTICE: Experience has been successfully updated\n.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                         changeSceneToFormData();
                     } else {
                         // Insertar nueva experiencia
                         experiencesController.saveExperiences(experiences);
-                        logInController.showAutoClosingAlert("AVISO: Experiencia se ha guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        logInController.showAutoClosingAlert("NOTICE: Experience has been saved successfully.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                         changeSceneToFormData();
                     }
                 }

@@ -153,10 +153,10 @@ public class CustomizeController implements Initializable {
     private void changeSceneToPreview() {
         if (colorModel.getSelectedColor() == null || colorModel.getSelectedColor().isEmpty()) {
             // Mostrar un mensaje de advertencia al usuario si no se ha seleccionado un color
-            logInController.showAutoClosingAlert("Por favor, seleccione un color antes de continuar.", LogInController.AlertType.WARNING, Duration.seconds(3));
+            logInController.showAutoClosingAlert("NOTICE: Please select a color before continuing.", LogInController.AlertType.WARNING, Duration.seconds(3));
         } else if (TemplateModel.getInstance().getSelectedTemplate() == null || TemplateModel.getInstance().getSelectedTemplate().isEmpty()) {
             //Mostrar un mensaje de advertencia al usuario si no se ha seleccionado una plantilla
-            logInController.showAutoClosingAlert("Por favor, seleccione una plantilla antes de continuar.", LogInController.AlertType.WARNING, Duration.seconds(3));
+            logInController.showAutoClosingAlert("NOTICE: Please select a template before continuing.", LogInController.AlertType.WARNING, Duration.seconds(3));
         } else {
             if (backForm.getScene() != null && backForm.getScene().getWindow() instanceof Stage) {
                 try {

@@ -218,7 +218,7 @@ public class FormDataContactController implements Initializable {
             if (contactController.getContactById(contactId) != null) {
                 // Si el contacto existe, actualizarlo
                 saveDataToDatabase = contactController.updateContact(contactId, contact);
-                logInController.showAutoClosingAlert("AVISO: Contacto se han guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                logInController.showAutoClosingAlert("NOTICE: Contact have been saved successfully.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                 changeSceneToFormData();
             } else {
                 // Si el contacto no existe, crear un nuevo contacto
@@ -226,7 +226,7 @@ public class FormDataContactController implements Initializable {
             }
 
             if (saveDataToDatabase) {
-                logInController.showAutoClosingAlert("AVISO: Contacto se han guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                logInController.showAutoClosingAlert("NOTICE: Contact have been saved successfully.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                 // Cambiar a la escena de academies después de guardar el contacto
                 changeSceneToFormData();
             } else {

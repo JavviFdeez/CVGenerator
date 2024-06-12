@@ -928,7 +928,7 @@ public class TemplateController implements Initializable {
             document.save(filePath);
 
 
-            logInController.showAutoClosingAlert("EXITO: PDF generado correctamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+            logInController.showAutoClosingAlert("SUCCESS: PDF generated correctly.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
             System.out.println("PDF generado correctamente.");
 
             // Eliminar el archivo temporal

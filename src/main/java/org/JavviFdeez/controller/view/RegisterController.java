@@ -112,11 +112,11 @@ public class RegisterController implements Initializable {
 
             // Guardar el contact_id en la sesión
             Session.getInstance().setContactId(contactId);
-            logInController.showAutoClosingAlert("EXITO: Usuario guardado exitosamente", LogInController.AlertType.SUCCESS,  Duration.seconds(1.5));
+            logInController.showAutoClosingAlert("SUCCESS: User saved successfully", LogInController.AlertType.SUCCESS,  Duration.seconds(1.5));
             changeSceneToLogIn();
             // Guardar el contact_id en la sesión
             Session.getInstance().setContactId(contactId);
-            logInController.showAutoClosingAlert("EXITO: Usuario guardado exitosamente", LogInController.AlertType.SUCCESS,  Duration.seconds(1.5));
+            logInController.showAutoClosingAlert("SUCCESS: User saved successfully", LogInController.AlertType.SUCCESS,  Duration.seconds(1.5));
             changeSceneToLogIn();
 
         } catch (SQLException e) {

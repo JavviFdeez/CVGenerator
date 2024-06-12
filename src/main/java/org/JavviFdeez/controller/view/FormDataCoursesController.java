@@ -207,12 +207,12 @@ public class FormDataCoursesController implements Initializable {
                         // Actualizar courses existente
                         courses.setCourse_id(existingCourses.get(i).getCourse_id());
                         coursesController.updateCourses(courses);
-                        logInController.showAutoClosingAlert("AVISO: Courses se ha actualizado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        logInController.showAutoClosingAlert("NOTICE: Courses has been successfully updated.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                         changeSceneToFormData();
                     } else {
                         // Insertar nueva experiencia
                         coursesController.saveCourses(courses);
-                        logInController.showAutoClosingAlert("AVISO: Courses se ha guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        logInController.showAutoClosingAlert("NOTICE: Courses has been saved successfully.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                         changeSceneToFormData();
                     }
                 }

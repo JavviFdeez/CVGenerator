@@ -217,7 +217,7 @@ public class FormDataSkillsController implements Initializable {
                         existingContactSkills.setValue(Integer.parseInt(valueComboBox.getValue()));
                         contact_skillsController.updateContact_Skill(existingContactSkills);
 
-                        logInController.showAutoClosingAlert("AVISO: Skills se ha actualizado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        logInController.showAutoClosingAlert("NOTICE: Skills have been successfully updated.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                     } else {
                         // Insertar nueva skill
                         skillsController.saveSkills(skills);
@@ -232,7 +232,7 @@ public class FormDataSkillsController implements Initializable {
                         contactSkills.setValue(Integer.parseInt(valueComboBox.getValue()));
                         contact_skillsController.saveContact_Skill(contactSkills);
 
-                        logInController.showAutoClosingAlert("AVISO: Skills se ha guardado exitosamente.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
+                        logInController.showAutoClosingAlert("NOTICE: Skills have been saved successfully.", LogInController.AlertType.SUCCESS, Duration.seconds(1.5));
                     }
                     changeSceneToFormData();
                 }
