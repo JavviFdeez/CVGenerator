@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.JavviFdeez.controller.ContactController;
 import org.JavviFdeez.controller.UsersController;
 import org.JavviFdeez.model.connection.ConnectionMariaDB;
@@ -41,6 +42,7 @@ public class RegisterController implements Initializable {
 
     private UsersController usersController;
     private ContactController contactController;
+    private LogInController logInController;
 
     private UsersDAO usersDAO;
 
@@ -57,6 +59,7 @@ public class RegisterController implements Initializable {
         this.usersDAO = new UsersDAO(ConnectionMariaDB.getConnection());
         this.contactController = new ContactController();
         this.conn = ConnectionMariaDB.getConnection();
+        this.logInController = new LogInController();
     }
 
     /**
@@ -109,17 +112,17 @@ public class RegisterController implements Initializable {
 
             // Guardar el contact_id en la sesión
             Session.getInstance().setContactId(contactId);
-            showAlert("Éxito", "Usuario guardado exitosamente", Alert.AlertType.INFORMATION);
+            logInController.showAutoClosingAlert("EXITO: Usuario guardado exitosamente", LogInController.AlertType.SUCCESS,  Duration.seconds(1.5));
             changeSceneToLogIn();
             // Guardar el contact_id en la sesión
             Session.getInstance().setContactId(contactId);
-            showAlert("Éxito", "Usuario guardado exitosamente", Alert.AlertType.INFORMATION);
+            logInController.showAutoClosingAlert("EXITO: Usuario guardado exitosamente", LogInController.AlertType.SUCCESS,  Duration.seconds(1.5));
             changeSceneToLogIn();
 
         } catch (SQLException e) {
-            showAlert("Error", "Error al guardar el usuario: " + e.getMessage(), Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se puede guardar el usuario: " + e.getMessage(), LogInController.AlertType.ERROR,  Duration.seconds(1.5));
         } catch (IllegalArgumentException e) {
-            showAlert("Error", "Error: " + e.getMessage(), Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: " + e.getMessage(), LogInController.AlertType.ERROR,  Duration.seconds(1.5));
         }
     }
 
@@ -144,16 +147,8 @@ public class RegisterController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de datos del formulario.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de datos del formulario.", LogInController.AlertType.ERROR,  Duration.seconds(1.5));
         }
-    }
-
-    private void showAlert(String title, String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     /**
@@ -177,7 +172,7 @@ public class RegisterController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML
-            showAlert("Error", "No se pudo cargar la pantalla de inicio de sesión.", Alert.AlertType.ERROR);
+            logInController.showAutoClosingAlert("ERROR: No se pudo cargar la pantalla de inicio de sesión.", LogInController.AlertType.ERROR,  Duration.seconds(1.5));
         }
     }
 }

@@ -857,7 +857,7 @@ public class TemplateController implements Initializable {
 
             if ("#62FF00".equals(selectedColor)) {
                 bgColor1.setStyle("-fx-background-color: #62FF00;");
-                bgColor.setStyle("-fx-background-color: gray;");
+                bgColor.setStyle("-fx-background-color: #2f2f2f;");
             } else if ("#008BFF".equals(selectedColor)) {
                 bgColor.setStyle("-fx-background-color: #008BFF;");
             } else if ("#FF0049".equals(selectedColor)) {
@@ -868,7 +868,7 @@ public class TemplateController implements Initializable {
                 bgColor.setStyle("-fx-background-color: gray;");
             }
         } else {
-            bgColor.setStyle("-fx-background-color: gray;");
+            bgColor.setStyle("-fx-background-color: #2f2f2f;");
         }
     }
 

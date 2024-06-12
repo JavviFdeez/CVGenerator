@@ -6,9 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="Actualización de la vista Template.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/CustomizeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/CustomizeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/PreviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/PreviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeneradorCurriculums-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataAcademiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataAcademiesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataContactController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataContactController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataCoursesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataCoursesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/LogInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/LogInController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/RegisterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/TemplateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/TemplateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/GeneradorCurriculums-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataAcademiesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataAcademiesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataContactController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataContactController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataCoursesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataCoursesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/LogInController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/LogInController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/RegisterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/RegisterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/TemplateController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/TemplateController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -318,23 +329,7 @@
       <workItem from="1718185556625" duration="301000" />
       <workItem from="1718185864512" duration="28000" />
       <workItem from="1718185898034" duration="4430000" />
-      <workItem from="1718210684762" duration="811000" />
-    </task>
-    <task id="LOCAL-00003" summary="Creación del paquete Model">
-      <option name="closed" value="true" />
-      <created>1714035899334</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1714035899334</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Establecida la conexión con la base de datos">
-      <option name="closed" value="true" />
-      <created>1714041173389</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1714041173389</updated>
+      <workItem from="1718210684762" duration="3818000" />
     </task>
     <task id="LOCAL-00005" summary="Actualización del POM">
       <option name="closed" value="true" />
@@ -712,7 +707,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718192540321</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Actualización de la vista Template.">
+      <option name="closed" value="true" />
+      <created>1718211516474</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1718211516475</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Actualización de la vista Template.">
+      <option name="closed" value="true" />
+      <created>1718211537354</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1718211537354</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

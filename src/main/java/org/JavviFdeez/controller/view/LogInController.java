@@ -259,7 +259,6 @@ public class LogInController implements Initializable {
         }
 
         Alert alert = new Alert(alertType);
-        alert.initStyle(StageStyle.UNDECORATED);
         alert.setHeaderText(null);
         alert.setContentText(message);
 

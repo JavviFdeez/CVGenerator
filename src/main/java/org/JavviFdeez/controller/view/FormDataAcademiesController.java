@@ -332,12 +332,22 @@ public class FormDataAcademiesController implements Initializable {
             formDataExperienceController.setAcademiesController(academiesController);
 
             // Obtener el escenario actual
-            Stage stage = (Stage) checkContact.getScene().getWindow();
+           Scene scene = checkContact.getScene();
 
-            // Establecer la nueva escena en el escenario
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            if (scene != null) {
+                Stage stage = (Stage) scene.getWindow();
+                if (stage != null) {
+                    // Establecer la nueva escena en el escenario
+                    Scene newScene = new Scene(root);
+                    stage.setScene(newScene);
+                    stage.show();
+                } else {
+                    System.out.println("");
+                }
+            } else {
+                // Manejar el caso en el que la escena es null
+                System.out.println("");
+            }
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar cualquier error de carga del archivo FXML

@@ -133,6 +133,10 @@ public class FormDataContactController implements Initializable {
                 nameTextField.setText(contact.getName());
                 LastNameTextField.setText(contact.getLastname());
                 occupationTextField.setText(contact.getOccupation());
+                locationTextField.setText(contact.getLocation());
+                linkedinTextField.setText(contact.getLinkedin());
+                extraTextField.setText(contact.getExtra());
+                imageRelativePath = contact.getImage();
                 mobileTextField.setText(contact.getMobile());
                 emailText.setText(contact.getEmail());
 

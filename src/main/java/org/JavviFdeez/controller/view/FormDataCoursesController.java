@@ -202,16 +202,6 @@ public class FormDataCoursesController implements Initializable {
                     Courses courses = new Courses();
                     courses.setContact_id(contactId);
                     courses.setName(nameTextField.getText().trim());
-                    Pattern pattern = Pattern.compile("^[0-9]*$");
-                    Matcher matcher = pattern.matcher(durationTextField.getText());
-
-                    if (matcher.matches()) {
-                        // El texto solo contiene números, continuar con la conversión a entero
-                        courses.setDuration(Integer.parseInt(durationTextField.getText().trim()));
-                    } else {
-                        logInController.showAutoClosingAlert("ERROR: Duración de Cursos debe ser un número.", LogInController.AlertType.ERROR, Duration.seconds(1.5));
-                    }
-                    courses.setDuration(Integer.parseInt(durationTextField.getText().trim()));
 
                     if (i < existingCourses.size()) {
                         // Actualizar courses existente
