@@ -5,16 +5,14 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -246,8 +244,7 @@ public class TemplateController implements Initializable {
     // ==============
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.colorModel = new ColorModel();
-        applyColor(colorModel.getSelectedColor());
+        setColorModel(colorModel);
         Platform.runLater(() -> generatePDF());
         this.contactController = new ContactController();
         this.academiesController = new AcademiesController();
@@ -282,7 +279,6 @@ public class TemplateController implements Initializable {
     public void dataContact() {
         try {
             int contactId = session.getContactId();
-            System.out.println(contactId);
 
             // Obtener el contacto por ID
             Contact contact = contactController.getContactById(contactId);
@@ -850,40 +846,33 @@ public class TemplateController implements Initializable {
         }
     }
 
-    // Método para aplicar el color al Pane
-    private void applyColor(String color) {
-        if (color != null) {
-            Color paintColor;
-            switch (color) {
-                case "#62FF00":
-                    paintColor = Color.web("#62FF00");
-                    break;
-                case "#008BFF":
-                    paintColor = Color.web("#008BFF");
-                    break;
-                case "#FF0049":
-                    paintColor = Color.web("#FF0049");
-                    break;
-                case "#616161":
-                    paintColor = Color.web("#616161");
-                    break;
-                default:
-                    // Color por defecto si la cadena de color no es reconocida
-                    paintColor = Color.TRANSPARENT;
-                    break;
+    public void setColorModel(ColorModel colorModel) {
+        this.colorModel = colorModel;
+        applyColor();
+    }
+
+    private void applyColor() {
+        if (colorModel != null) {
+            String selectedColor = colorModel.getSelectedColor();
+            System.out.println("Color aplicado: " + selectedColor);
+
+            if ("#62FF00".equals(selectedColor)) {
+                bgColor1.setStyle("-fx-background-color: #62FF00;");
+                bgColor.setStyle("-fx-background-color: gray;");
+            } else if ("#008BFF".equals(selectedColor)) {
+                bgColor.setStyle("-fx-background-color: #008BFF;");
+            } else if ("#FF0049".equals(selectedColor)) {
+                bgColor.setStyle("-fx-background-color: #FF0049;");
+            } else if ("#616161".equals(selectedColor)) {
+                bgColor.setStyle("-fx-background-color: #616161;");
+            } else {
+                bgColor.setStyle("-fx-background-color: gray;");
             }
-            bgColor1.setStyle("-fx-background-color: " + toHex(paintColor) + ";");
-            bgColor.setStyle("-fx-background-color: " + toHex(paintColor) + ";");
+        } else {
+            bgColor.setStyle("-fx-background-color: gray;");
         }
     }
 
-    // Método para convertir un Color en formato hexadecimal
-    private String toHex(Color color) {
-        return String.format("#%02X%02X%02X",
-                (int) (color.getRed() * 255),
-                (int) (color.getGreen() * 255),
-                (int) (color.getBlue() * 255));
-    }
 
     public void generatePDF() {
         try {
@@ -891,7 +880,7 @@ public class TemplateController implements Initializable {
             Scene scene = academiesAnchorPane.getScene();
 
             if (scene == null) {
-                System.out.println("null");
+                System.out.println("");
                 return;
             }
             // Crear una instantánea de la escena

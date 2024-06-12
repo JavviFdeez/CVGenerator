@@ -4,29 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="Actualización de la vista Skills, Actualización de la vista Customize, Actualización de la vista Preview.">
+    <list default="true" id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="Actualización de la vista Preview.&#10;Y Genreacion del CV">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/CustomizeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/CustomizeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataContactController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataContactController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataLanguagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/FormDataLanguagesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/PreviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/PreviewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/TemplateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/TemplateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/css/Preview.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/css/Preview.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/css/Template.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/Preview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/fxml/Preview.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/templatesCVV/TemplateBasic.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/JavviFdeez/templatesCVV/TemplateBasic.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/CustomizeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/CustomizeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataContactController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataContactController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataLanguagesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/FormDataLanguagesController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/PreviewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/PreviewController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/TemplateController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/TemplateController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/css/Preview.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/css/Preview.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/css/Template.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/css/Template.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/Preview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/fxml/Preview.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/templatesCVV/TemplateBasic.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/templatesCVV/TemplateBasic.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -324,15 +306,18 @@
       <workItem from="1718030121655" duration="13054000" />
       <workItem from="1718098507289" duration="782000" />
       <workItem from="1718099295712" duration="74000" />
-      <workItem from="1718099375609" duration="18822000" />
-    </task>
-    <task id="LOCAL-00001" summary="Creación y configuración del proyecto">
-      <option name="closed" value="true" />
-      <created>1713862799311</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1713862799311</updated>
+      <workItem from="1718099375609" duration="18871000" />
+      <workItem from="1718128885894" duration="206000" />
+      <workItem from="1718129104608" duration="74000" />
+      <workItem from="1718129197528" duration="88000" />
+      <workItem from="1718129299911" duration="54000" />
+      <workItem from="1718183611497" duration="708000" />
+      <workItem from="1718184325797" duration="804000" />
+      <workItem from="1718185159800" duration="8000" />
+      <workItem from="1718185182000" duration="3000" />
+      <workItem from="1718185556625" duration="301000" />
+      <workItem from="1718185864512" duration="28000" />
+      <workItem from="1718185898034" duration="4307000" />
     </task>
     <task id="LOCAL-00002" summary="Creación base de datos">
       <option name="closed" value="true" />
@@ -718,7 +703,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718038808741</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Actualización de la vista Preview.&#10;Y Genreacion del CV">
+      <option name="closed" value="true" />
+      <created>1718127735515</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1718127735516</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -733,7 +726,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Actualización del POM" />
     <MESSAGE value="Actualización de los DAO, los controller y sus respectivas interfaces" />
     <MESSAGE value="Verificando funcionalidad del CRUD" />
     <MESSAGE value="Verificando funcionalidad del CRUD (Expereinces y Courses)" />
@@ -758,7 +750,8 @@
     <MESSAGE value="Actualización de la vista Languages." />
     <MESSAGE value="Actualización de la vista Skills." />
     <MESSAGE value="Actualización de la vista Skills, Actualización de la vista Customize, Actualización de la vista Preview." />
-    <option name="LAST_COMMIT_MESSAGE" value="Actualización de la vista Skills, Actualización de la vista Customize, Actualización de la vista Preview." />
+    <MESSAGE value="Actualización de la vista Preview.&#10;Y Genreacion del CV" />
+    <option name="LAST_COMMIT_MESSAGE" value="Actualización de la vista Preview.&#10;Y Genreacion del CV" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
