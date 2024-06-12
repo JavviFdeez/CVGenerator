@@ -244,7 +244,6 @@ public class TemplateController implements Initializable {
     // ==============
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setColorModel(colorModel);
         Platform.runLater(() -> generatePDF());
         this.contactController = new ContactController();
         this.academiesController = new AcademiesController();
@@ -872,7 +871,6 @@ public class TemplateController implements Initializable {
             bgColor.setStyle("-fx-background-color: gray;");
         }
     }
-
 
     public void generatePDF() {
         try {

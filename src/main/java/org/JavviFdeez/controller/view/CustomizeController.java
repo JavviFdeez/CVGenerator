@@ -13,6 +13,7 @@ import org.JavviFdeez.model.entity.ColorModel;
 import org.JavviFdeez.model.entity.Session;
 import org.JavviFdeez.model.entity.TemplateModel;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -57,14 +58,13 @@ public class CustomizeController implements Initializable {
 
     private boolean isVisible = false;
 
-    private final ColorModel colorModel = new ColorModel();
-
     private final TemplateModel templateModel = new TemplateModel();
 
     private PreviewController previewController;
 
     private LogInController logInController;
     private Session session;
+    private ColorModel colorModel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -80,6 +80,7 @@ public class CustomizeController implements Initializable {
         this.logInController = new LogInController();
         this.previewController = new PreviewController();
         this.session = Session.getInstance();
+        this.colorModel = new ColorModel();
     }
 
     private void showCheckGreen() {
@@ -165,8 +166,8 @@ public class CustomizeController implements Initializable {
 
                     // Obtener el controlador de la nueva escena
                     PreviewController previewController = loader.getController();
-                    previewController.setColorModel(colorModel);
                     previewController.setTemplate(templateModel);
+                    previewController.setColorModel(this.colorModel);
 
 
                     // Obtener el escenario actual desde el emailTextField

@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="Actualización de la vista Preview.&#10;Y Genreacion del CV">
+    <list default="true" id="bced1e2b-ee4c-4c2c-9e52-002dec712906" name="Changes" comment="Actualización de la vista Template.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/CustomizeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/CustomizeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/PreviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/PreviewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/TemplateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/JavviFdeez/controller/view/TemplateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/TemplateController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/JavviFdeez/controller/view/TemplateController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -317,15 +317,8 @@
       <workItem from="1718185182000" duration="3000" />
       <workItem from="1718185556625" duration="301000" />
       <workItem from="1718185864512" duration="28000" />
-      <workItem from="1718185898034" duration="4307000" />
-    </task>
-    <task id="LOCAL-00002" summary="Creación base de datos">
-      <option name="closed" value="true" />
-      <created>1713864424409</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1713864424409</updated>
+      <workItem from="1718185898034" duration="4430000" />
+      <workItem from="1718210684762" duration="811000" />
     </task>
     <task id="LOCAL-00003" summary="Creación del paquete Model">
       <option name="closed" value="true" />
@@ -711,7 +704,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718127735516</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Actualización de la vista Template.">
+      <option name="closed" value="true" />
+      <created>1718192540320</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1718192540321</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -726,7 +727,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Actualización de los DAO, los controller y sus respectivas interfaces" />
     <MESSAGE value="Verificando funcionalidad del CRUD" />
     <MESSAGE value="Verificando funcionalidad del CRUD (Expereinces y Courses)" />
     <MESSAGE value="Verificando funcionalidad del CRUD (Skill y Languages) y creacion de 2 clases abstractas" />
@@ -751,7 +751,8 @@
     <MESSAGE value="Actualización de la vista Skills." />
     <MESSAGE value="Actualización de la vista Skills, Actualización de la vista Customize, Actualización de la vista Preview." />
     <MESSAGE value="Actualización de la vista Preview.&#10;Y Genreacion del CV" />
-    <option name="LAST_COMMIT_MESSAGE" value="Actualización de la vista Preview.&#10;Y Genreacion del CV" />
+    <MESSAGE value="Actualización de la vista Template." />
+    <option name="LAST_COMMIT_MESSAGE" value="Actualización de la vista Template." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

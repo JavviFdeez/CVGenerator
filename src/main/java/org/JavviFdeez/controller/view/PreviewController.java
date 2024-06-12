@@ -98,6 +98,7 @@ public class PreviewController implements Initializable {
             // Obtener el controlador de la nueva escena
             TemplateController templateController = loader.getController();
             templateController.setPreviewController(this);
+            templateController.setColorModel(this.colorModel);
 
             // Obtener el escenario actual desde el emailTextField (o cualquier otro nodo)
             Scene scene = buttonSaveData.getScene();
